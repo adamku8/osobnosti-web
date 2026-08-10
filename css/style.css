@@ -487,6 +487,12 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 }
 .stat-text h2 { margin-bottom: var(--s-16); }
 .stat-text p { color: var(--text-secondary); max-width: 52ch; }
+.stat-links {
+  margin-top: var(--s-24);
+  display: flex;
+  gap: var(--s-16);
+  flex-wrap: wrap;
+}
 
 /* ---------- Sekce obecně ---------- */
 .section { padding: var(--s-96) 0; }
@@ -519,6 +525,14 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   color: var(--brand-red);
   margin-bottom: var(--s-8);
 }
+.promise-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--s-8);
+}
+.promise-head .promise-index { margin-bottom: 0; }
+.promise-icon { color: rgba(50, 50, 50, 0.55); flex: 0 0 auto; }
 .promise h3 { font-size: 18px; margin-bottom: var(--s-8); text-transform: uppercase; }
 .promise ul { list-style: none; }
 .promise li {

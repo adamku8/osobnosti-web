@@ -11,10 +11,22 @@
   <link rel="stylesheet" href="css/style.css">
   <style>
     /* Doplňkové styly jen pro tuto podstránku — tokeny z style.css */
-    .jv-sketch {
-      margin-top: var(--s-40);
-      position: relative;
+    .jv-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: var(--s-64);
+      align-items: center;
     }
+    .jv-hero-grid--top { align-items: start; }
+    @media (max-width: 900px) { .jv-hero-grid { grid-template-columns: 1fr; } }
+    .jv-hero-photo { margin: var(--s-40) 0 var(--s-64); }
+    .jv-hero-photo img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .jv-sketch { position: relative; }
     .jv-sketch img { width: 100%; border-radius: 8px; }
     .jv-caption {
       font-size: 14px;
@@ -73,6 +85,125 @@
       color: #fff;
     }
     .jv-viz img { width: 100%; border-radius: 8px; }
+    .jv-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s-40);
+    }
+    @media (max-width: 800px) { .jv-stats { grid-template-columns: 1fr; } }
+    .jv-stat-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--signal-blue);
+      margin-bottom: var(--s-8);
+    }
+    .jv-stat p { color: var(--text-secondary); max-width: 30ch; }
+    .approach { border-top: 1px solid var(--border); padding-top: var(--s-16); }
+    .approach-meta {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--s-8);
+    }
+    .approach-pick {
+      display: inline-block;
+      background: var(--signal-blue);
+      color: #fff;
+      border-radius: 999px;
+      padding: 2px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: var(--s-8);
+    }
+    .jv-band {
+      background: var(--brand-red);
+      color: #fff;
+      padding: var(--s-96) 0;
+    }
+    .jv-band-eyebrow {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.85;
+      margin-bottom: var(--s-16);
+    }
+    .jv-band h2 {
+      color: #fff;
+      font-size: clamp(32px, 5vw, 48px);
+      margin-bottom: var(--s-16);
+    }
+    .jv-band p { max-width: 62ch; opacity: 0.95; }
+    .jv-toc { margin-top: var(--s-40); }
+    .jv-toc-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: var(--s-16);
+    }
+    .jv-toc-links { max-width: 560px; border-top: 1px solid var(--border); }
+    .jv-toc-links a {
+      display: flex;
+      align-items: baseline;
+      gap: var(--s-16);
+      padding: 13px 4px;
+      border-bottom: 1px solid var(--border);
+      font-size: 17px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 240ms var(--ease-ui), background 240ms var(--ease-ui);
+    }
+    .jv-toc-links a .toc-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--signal-blue);
+      min-width: 32px;
+      flex-shrink: 0;
+    }
+    .jv-toc-links a:hover { color: var(--signal-blue); }
+    .zadani {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 var(--s-64);
+      max-width: 1000px;
+    }
+    @media (max-width: 800px) { .zadani { grid-template-columns: 1fr; } }
+    .zadani-item {
+      display: flex;
+      gap: var(--s-16);
+      padding: var(--s-16) 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .zadani-item .check {
+      color: var(--brand-red);
+      font-weight: 800;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .zadani-item p { color: var(--text-secondary); font-size: 16px; }
+    .zadani-item p strong { color: var(--text); }
+    .jv-vize-areal { padding-top: var(--s-64); }
+    .jv-vize-areal .section-head { margin-bottom: var(--s-40); }
+    .jv-vize-lead {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 21px;
+      line-height: 1.45;
+      color: var(--text);
+      max-width: 56ch;
+      margin-top: var(--s-16);
+    }
     .zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-40); }
     @media (max-width: 800px) { .zones { grid-template-columns: 1fr; } }
     .zone-num {
@@ -142,15 +273,34 @@
           i celého areálu — a tady je, co jsme zjistili.
         </p>
       </div>
-      <div class="jv-sketch">
-        <img src="assets/img/javorovy/skica.jpg" alt="Skica chaty Javorový">
-        <p class="jv-caption">Ilustrační skica — chata Javorový, nejstarší chata v této části Beskyd (1895).</p>
+      <div class="jv-hero-photo">
+        <img src="assets/img/javorovy/javorovy-z-gutu.jpg" alt="Javorový vrch při pohledu od Gutů">
+        <p class="jv-caption">Javorový při pohledu od Gutů.</p>
+      </div>
+      <div class="jv-hero-grid jv-hero-grid--top">
+        <nav class="jv-toc" aria-label="Obsah stránky" style="margin-top: 0;">
+          <p class="jv-toc-label">Jak jsme se rozhodovali, co dál s Javorovým</p>
+          <div class="jv-toc-links">
+            <a href="#harmonogram"><span class="toc-num">01</span> Krok za krokem — jak vize vznikala</a>
+            <a href="#historie"><span class="toc-num">02</span> Chata od roku 1895</a>
+            <a href="#pruzkum"><span class="toc-num">03</span> Co říká průzkum</a>
+            <a href="#zjisteni"><span class="toc-num">04</span> Klíčové zjištění</a>
+            <a href="#vize"><span class="toc-num">05</span> Živý kopec po celý rok</a>
+            <a href="#zadani"><span class="toc-num">06</span> Naše vize areálu na Javorovém</a>
+            <a href="#varianty"><span class="toc-num">07</span> Tři varianty a kolik stojí</a>
+            <a href="#jak-dal"><span class="toc-num">08</span> Jak dál — vybírat budete i vy</a>
+          </div>
+        </nav>
+        <div class="jv-sketch">
+          <img src="assets/img/javorovy/skica.jpg" alt="Skica chaty Javorový">
+          <p class="jv-caption">Ilustrační skica — chata Javorový, nejstarší chata v této části Beskyd (1895).</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ================= HARMONOGRAM ================= -->
-  <section class="section">
+  <section class="section" id="harmonogram">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Jak vize vznikala</p>
@@ -181,31 +331,65 @@
     </div>
   </section>
 
-  <!-- ================= ČÍSLO A TEXT ================= -->
+  <!-- ================= PÁS TŘÍ ČÍSEL ================= -->
   <section class="stat">
     <div class="container">
-      <div class="stat-grid">
-        <div class="stat-number">81<span style="font-size:0.5em;">%</span></div>
-        <div class="stat-text">
-          <h2>Javorový je dominanta Třince.</h2>
-          <p>
-            Pro 81 % z vás je Javorový jednou z hlavních dominant města —
-            symbol srovnatelný s železárnami. Přes 90 % z vás na kopec
-            vyrazí několikrát ročně.
+      <div class="jv-stats">
+        <div class="jv-stat">
+          <div class="jv-stat-num">81&nbsp;%</div>
+          <p>z vás považuje Javorový za jednu z hlavních dominant Třince</p>
+        </div>
+        <div class="jv-stat">
+          <div class="jv-stat-num">90&nbsp;%</div>
+          <p>z vás vyrazí na kopec několikrát ročně</p>
+        </div>
+        <div class="jv-stat">
+          <div class="jv-stat-num">415</div>
+          <p>občanů se zapojilo do dotazníku o budoucnosti Javorového</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HISTORIE CHATY ================= -->
+  <section class="section" id="historie">
+    <div class="container">
+      <div class="jv-hero-grid">
+        <div class="section-head" style="margin-bottom: 0;">
+          <p class="eyebrow">Chata od roku 1895</p>
+          <h2>Nejstarší chata v této části Beskyd.</h2>
+          <p class="section-note">
+            Chata na Javorovém stojí od roku 1895 — postavil ji turistický
+            spolek Beskidenverein a je nejstarší chatou v této části Beskyd.
+            Přečkala více než sto dvacet zim, hostila generace turistů
+            z Třince i okolí a dnes patří městu. Právě k její původní
+            podobě z přelomu 19. a 20. století se chceme rekonstrukcí vrátit.
           </p>
+        </div>
+        <div class="jv-viz">
+          <img src="assets/img/javorovy/chata-1910.jpg" alt="Historická pohlednice chaty na Javorovém z roku 1910">
+          <p class="jv-caption">Chata na pohlednici z roku 1910, ještě před přístavbou verandy. Zdroj: sbírka Stanislava Kroczka, volné dílo.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================= PRŮZKUM — CHATA ================= -->
-  <section class="section">
+  <section class="section" id="pruzkum">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Co říká průzkum · chata</p>
         <h2>Chatu máme rádi. Zaslouží si víc.</h2>
+        <p class="section-note">
+          Občerstvení na chatě si dává 88 % z vás — jídlo ale hodnotíte
+          známkou 2,1 z 5 a ubytování 3 z 5. Proto chceme víc:
+        </p>
       </div>
       <div class="datarows">
+        <div class="datarow">
+          <div class="datarow-num">78&nbsp;%</div>
+          <div class="datarow-text">z vás považuje rekonstrukci chaty za důležitou</div>
+        </div>
         <div class="datarow">
           <div class="datarow-num">75&nbsp;%</div>
           <div class="datarow-text">z vás chce celkovou modernizaci chaty — hlavně hygienického zázemí</div>
@@ -259,13 +443,14 @@
   </section>
 
   <!-- ================= KLÍČOVÉ ZJIŠTĚNÍ ================= -->
-  <section class="goal-band">
+  <section class="jv-band" id="zjisteni">
     <div class="container">
-      <p class="goal-eyebrow">Klíčové zjištění</p>
-      <h2 class="goal-claim">Víc zážitků. Ne víc lidí.</h2>
-      <p class="goal-sub">
-        Pro 65 % z vás je ochrana přírody na Javorovém důležitá.
-        Většina si přeje, aby návštěvnost vrcholu zásadně nerostla —
+      <p class="jv-band-eyebrow">Klíčové zjištění</p>
+      <h2>Víc zážitků. Ne víc lidí.</h2>
+      <p>
+        Pro 65 % z vás je ochrana přírody na Javorovém důležitá
+        a 68 % nesouhlasí se zpřístupněním vrcholu pro auta.
+        Většina si přeje, aby návštěvnost zásadně nerostla —
         kvůli přírodě i unikátnímu charakteru místa. Chceme, aby kopec
         sloužil líp. Nám všem.
       </p>
@@ -273,66 +458,149 @@
   </section>
 
   <!-- ================= VIZE ================= -->
-  <section class="section">
+  <section class="section" id="vize">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Naše vize</p>
         <h2>Živý kopec. Po celý rok.</h2>
         <p class="section-note">
-          Klimatické změny rozhodly: z Javorového už nebude lyžařský areál.
-          To ale otevírá nové možnosti — sport, kulturu a komunity po celý rok.
-          Areál zůstává v rukou města a chata se vrátí k podobě, jakou měla
-          v roce 1895.
+          Mluví za to i čísla: za turistikou na kopec chodí 91 % z vás,
+          na lyžích jezdí 7 % — a největší potenciál vidíte v pěší
+          turistice (100 %) a paraglidingu (88 %). Klimatické změny rozhodly — z Javorového
+          už nebude lyžařský areál. To ale otevírá nové možnosti: sport,
+          kulturu a komunity po celý rok. Areál zůstává v rukou města
+          a chata se vrátí k podobě, jakou měla v roce 1895.
         </p>
       </div>
-      <div class="jv-viz">
+    </div>
+  </section>
+
+  <!-- ================= NAŠE VIZE AREÁLU ================= -->
+  <section class="section jv-vize-areal" id="zadani">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Naše doporučení a zadání</p>
+        <h2>Naše <span class="hl">vize</span> areálu na Javorovém.</h2>
+        <p class="jv-vize-lead">
+          Nechceme z Javorového nové Pustevny. Chceme, aby město mělo
+          chatu i areál dál ve svých rukou — a investovalo do nich.
+        </p>
+      </div>
+      <div class="zadani">
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Rekonstrukce chaty do původní podoby</strong> z přelomu 19. a 20. století — s novou terasou směrem na jih.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Oddělené místo pro konání akcí</strong> — letní scéna a menší akce na místě zbouraných chat.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Sociální zázemí a WC otevřené 24/7</strong> — nezávislé na hlavní chatě.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Zázemí pro spolky a kluby</strong>, které na kopci žijí — sklad, klubovna, přenocování.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Nové atrakce pro rodinné výlety</strong> — pro děti od 0 do 15 let.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Celoroční zázemí pro turisty a sportovce</strong> — kopec slouží v létě i v zimě.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Návštěvnost nemá rapidně růst</strong> — zachováme charakter místa.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Kladný vztah k přírodě</strong> — energie, materiály, propojení s okolím.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Respekt k územnímu plánu</strong> a technická řešení připravená na různé provozovatele.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Odpovědné nakládání s odpady</strong> — dnes často končí v lese.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Výběrové řízení na nového nájemce až po rekonstrukci</strong> — s novými podmínkami nájmu.</p>
+        </div>
+      </div>
+      <div class="jv-viz" style="margin-top: var(--s-64);">
         <img src="assets/img/javorovy/vizualizace-kania.jpg" alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
         <p class="jv-caption">Vizualizace: KANIA a.s. — studie proveditelnosti, květen 2024, varianta 2. Ukazuje záměr, ne finální podobu.</p>
       </div>
     </div>
   </section>
 
-  <!-- ================= TŘI ZÓNY ================= -->
-  <section class="section">
+  <!-- ================= TŘI VARIANTY REKONSTRUKCE ================= -->
+  <section class="section" id="varianty">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Naše vize · tři zóny</p>
-        <h2>Jeden vrchol. Tři zóny.</h2>
+        <p class="eyebrow">Studie proveditelnosti · KANIA, 2024</p>
+        <h2>Tři varianty. Jasné ceny.</h2>
+        <p class="section-note">
+          Nezačínáme na zelené louce — studie proveditelnosti spočítala
+          tři varianty, jak s chatou naložit. Ceny jsou včetně DPH.
+        </p>
       </div>
       <div class="zones">
-        <div class="zone">
-          <div class="zone-num">01</div>
-          <h3>Chata a okolí</h3>
-          <p>Citlivá rekonstrukce. Návrat k původní podobě z roku 1895,
-            terasa s výhledem do údolí, zázemí i pro neubytované.</p>
+        <div class="zone approach">
+          <div class="approach-meta">9,6 mil. Kč</div>
+          <h3>Nejnutnější údržba</h3>
+          <p>Okna a dveře, elektroinstalace, nová čistírna odpadních vod,
+            rekonstrukce střechy a podhledů. Chata přežije — ale nic víc.</p>
         </div>
-        <div class="zone">
-          <div class="zone-num">02</div>
-          <h3>Zázemí pro akce a komunity</h3>
-          <p>Na místě dvou dosluhujících chat vznikne prostor pro spolky,
-            oddíly a akce — nezávisle na hlavní chatě.</p>
+        <div class="zone approach">
+          <div class="approach-meta">15,4 mil. Kč</div>
+          <h3>Rekonstrukce s novou terasou</h3>
+          <p>Vše z údržby + jednotná fasáda a nová dřevěná terasa pro
+            70 lidí inspirovaná tou historickou. Této variantě odpovídá
+            vizualizace výše.</p>
         </div>
-        <div class="zone">
-          <div class="zone-num">03</div>
-          <h3>Mamlas plac</h3>
-          <p>Horní sjezdovka mezi lanovkou a chatou dostane nové celoroční
-            využití pro sport a setkávání.</p>
+        <div class="zone approach">
+          <div class="approach-meta">50,4 mil. Kč</div>
+          <h3>Výstavba nového objektu</h3>
+          <p>Nová budova na kamenném základu — restaurace s terasou
+            pro 100 lidí, ubytování pro 40 osob, fotovoltaika na jižní
+            střeše.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================= JAK DÁL ================= -->
-  <section class="section">
+  <section class="section" id="jak-dal">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Jak dál</p>
         <h2>Vybírat budete i vy.</h2>
+        <p class="section-note">
+          Návrh nové chaty jde získat třemi cestami. Porovnali jsme je
+          a doporučujeme zakázku třem architektům — je rychlá, dostupná
+          a jako jediná spojuje výběr z více návrhů se zapojením veřejnosti.
+        </p>
+      </div>
+      <div class="zones" style="margin-bottom: var(--s-64);">
+        <div class="zone approach">
+          <div class="approach-meta">min. 1 rok · min. 2 mil. Kč</div>
+          <h3>Architektonická soutěž</h3>
+          <p>20+ návrhů z celé republiky. Transparentní, ale drahá,
+            administrativně náročná a pomalá.</p>
+        </div>
+        <div class="zone approach">
+          <div class="approach-meta">min. 3 měsíce · cca 300 tis. Kč</div>
+          <span class="approach-pick">Naše doporučení</span>
+          <h3>Zakázka třem místním architektům</h3>
+          <p><strong>Místní architekti, kteří Beskydy znají a mají k nim
+            vztah.</strong> Tři návrhy a výběr se zapojením veřejnosti.</p>
+        </div>
+        <div class="zone approach">
+          <div class="approach-meta">min. 3 měsíce · cca 100 tis. Kč</div>
+          <h3>Studie od jednoho dodavatele</h3>
+          <p>Nejlevnější cesta — ale jediný návrh, bez výběru
+            a bez hlasu veřejnosti.</p>
+        </div>
       </div>
       <div class="steps">
         <div class="step-row">
           <div class="step-num">01</div>
-          <div class="timeline-text">Tři architekti se vztahem k Beskydům připraví tři návrhy nové chaty.</div>
+          <div class="timeline-text">Tři místní architekti se vztahem k Beskydům připraví tři návrhy nové chaty.</div>
         </div>
         <div class="step-row">
           <div class="step-num">02</div>
