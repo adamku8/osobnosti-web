@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Javorový — nová vize | Osobnosti pro Třinec</title>
+  <meta name="description" content="Vize pro Javorový: rok práce, 414 dotazníků, 14 rozhovorů a veřejná beseda. Celoroční kopec, citlivě opravená chata a zázemí pro komunity.">
+  <!-- Prototyp v1 · zatím noindex, sundáme při ostrém nasazení -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Doplňkové styly jen pro tuto podstránku — tokeny z style.css */
+    .jv-sketch {
+      margin-top: var(--s-40);
+      position: relative;
+    }
+    .jv-sketch img { width: 100%; border-radius: 8px; }
+    .jv-caption {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: var(--s-8);
+    }
+    .timeline { max-width: 820px; }
+    .timeline-row {
+      display: flex;
+      gap: var(--s-24);
+      padding: var(--s-16) 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .timeline-row:last-child { border-bottom: none; }
+    .timeline-date {
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--signal-blue);
+      min-width: 96px;
+      flex-shrink: 0;
+    }
+    .timeline-text { color: var(--text-secondary); }
+    .datarows { max-width: 820px; }
+    .datarow {
+      display: flex;
+      gap: var(--s-24);
+      padding: var(--s-16) 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .datarow:last-child { border-bottom: none; }
+    .datarow-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 32px;
+      color: var(--signal-blue);
+      min-width: 110px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .datarow-text { color: var(--text-secondary); }
+    .bars { max-width: 820px; }
+    .bar-item { margin-bottom: var(--s-24); }
+    .bar-label { margin-bottom: var(--s-8); }
+    .bar-fill {
+      background: var(--signal-blue);
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: var(--s-16);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+    }
+    .jv-viz img { width: 100%; border-radius: 8px; }
+    .zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-40); }
+    @media (max-width: 800px) { .zones { grid-template-columns: 1fr; } }
+    .zone-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 40px;
+      color: var(--signal-blue);
+      line-height: 1;
+      margin-bottom: var(--s-8);
+    }
+    .zone h3 { font-size: 18px; margin-bottom: var(--s-8); }
+    .zone p { color: var(--text-secondary); font-size: 15px; }
+    .steps { max-width: 820px; counter-reset: krok; }
+    .step-row {
+      display: flex;
+      gap: var(--s-24);
+      padding: var(--s-16) 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .step-row:last-child { border-bottom: none; }
+    .step-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--signal-blue);
+      min-width: 56px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="Osobnosti pro Třinec — úvod">
+        <img src="assets/logo.svg" alt="Osobnosti pro Třinec">
+      </a>
+      <nav class="nav" id="nav">
+        <a href="index.html">Úvod</a>
+        <a href="index.html#program">Program</a>
+        <a href="index.html#podarilo">Co se podařilo</a>
+        <a href="index.html#kandidati">Kandidáti</a>
+        <a href="index.html#kontakt">Kontakt</a>
+        <a href="podporte-nas.html">Podpořte nás</a>
+      </nav>
+      <div class="header-right">
+        <a class="btn btn-blue header-cta" href="index.html#kandidati">Chci volit</a>
+        <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-copy" style="max-width: 760px;">
+        <p class="eyebrow">Vize · Javorový</p>
+        <h1>Javorový.<br><span class="hl">Nová vize.</span></h1>
+        <p class="hero-lead">
+          Rok práce. Stovky hlasů. Jeden kopec. Z pověření zastupitelstva
+          jsme připravili podklad pro rozhodnutí o budoucnosti chaty
+          i celého areálu — a tady je, co jsme zjistili.
+        </p>
+      </div>
+      <div class="jv-sketch">
+        <img src="assets/img/javorovy/skica.jpg" alt="Skica chaty Javorový">
+        <p class="jv-caption">Ilustrační skica — chata Javorový, nejstarší chata v této části Beskyd (1895).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HARMONOGRAM ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Jak vize vznikala</p>
+        <h2>Krok za krokem.</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-date">12/2023</div>
+          <div class="timeline-text">Zastupitelstvo pověřilo tři z nás přípravou budoucnosti areálu.</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-date">01/2024</div>
+          <div class="timeline-text">Konzultace postupu s Českou komorou architektů.</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-date">2024</div>
+          <div class="timeline-text">Dotazník se 414 respondenty, 14 rozhovorů, veřejná beseda a setkání s architekty.</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-date">05/2024</div>
+          <div class="timeline-text">Studie proveditelnosti a první vizualizace chaty.</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-date">Teď</div>
+          <div class="timeline-text">Vize je na stole — tři návrhy architektů a výběr, u kterého budete i vy.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ČÍSLO A TEXT ================= -->
+  <section class="stat">
+    <div class="container">
+      <div class="stat-grid">
+        <div class="stat-number">81<span style="font-size:0.5em;">%</span></div>
+        <div class="stat-text">
+          <h2>Javorový je dominanta Třince.</h2>
+          <p>
+            Pro 81 % z vás je Javorový jednou z hlavních dominant města —
+            symbol srovnatelný s železárnami. Přes 90 % z vás na kopec
+            vyrazí několikrát ročně.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRŮZKUM — CHATA ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Co říká průzkum · chata</p>
+        <h2>Chatu máme rádi. Zaslouží si víc.</h2>
+      </div>
+      <div class="datarows">
+        <div class="datarow">
+          <div class="datarow-num">75&nbsp;%</div>
+          <div class="datarow-text">z vás chce celkovou modernizaci chaty — hlavně hygienického zázemí</div>
+        </div>
+        <div class="datarow">
+          <div class="datarow-num">80&nbsp;%</div>
+          <div class="datarow-text">očekává restauraci s regionální nabídkou nebo kavárnu s posezením</div>
+        </div>
+        <div class="datarow">
+          <div class="datarow-num">42&nbsp;%</div>
+          <div class="datarow-text">chce moderní a pohodlné ubytování</div>
+        </div>
+        <div class="datarow">
+          <div class="datarow-num">45&nbsp;%</div>
+          <div class="datarow-text">by uvítalo veřejné toalety a sprchy i pro neubytované</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRŮZKUM — KOPEC ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Co říká průzkum · celý kopec</p>
+        <h2>Co chcete na kopci?</h2>
+      </div>
+      <div class="bars">
+        <div class="bar-item">
+          <div class="bar-label">Piknikové zóny</div>
+          <div class="bar-fill" style="width:63%;">63&nbsp;%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Vyhlídková plošina</div>
+          <div class="bar-fill" style="width:56%;">56&nbsp;%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Rozšíření běžeckých tratí</div>
+          <div class="bar-fill" style="width:46%;">46&nbsp;%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Naučné stezky a dětské hřiště</div>
+          <div class="bar-fill" style="width:45%;">45&nbsp;%</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Bike park</div>
+          <div class="bar-fill" style="width:37%;">37&nbsp;%</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KLÍČOVÉ ZJIŠTĚNÍ ================= -->
+  <section class="goal-band">
+    <div class="container">
+      <p class="goal-eyebrow">Klíčové zjištění</p>
+      <h2 class="goal-claim">Víc zážitků. Ne víc lidí.</h2>
+      <p class="goal-sub">
+        Pro 65 % z vás je ochrana přírody na Javorovém důležitá.
+        Většina si přeje, aby návštěvnost vrcholu zásadně nerostla —
+        kvůli přírodě i unikátnímu charakteru místa. Chceme, aby kopec
+        sloužil líp. Nám všem.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= VIZE ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Naše vize</p>
+        <h2>Živý kopec. Po celý rok.</h2>
+        <p class="section-note">
+          Klimatické změny rozhodly: z Javorového už nebude lyžařský areál.
+          To ale otevírá nové možnosti — sport, kulturu a komunity po celý rok.
+          Areál zůstává v rukou města a chata se vrátí k podobě, jakou měla
+          v roce 1895.
+        </p>
+      </div>
+      <div class="jv-viz">
+        <img src="assets/img/javorovy/vizualizace-kania.jpg" alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
+        <p class="jv-caption">Vizualizace: KANIA a.s. — studie proveditelnosti, květen 2024, varianta 2. Ukazuje záměr, ne finální podobu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TŘI ZÓNY ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Naše vize · tři zóny</p>
+        <h2>Jeden vrchol. Tři zóny.</h2>
+      </div>
+      <div class="zones">
+        <div class="zone">
+          <div class="zone-num">01</div>
+          <h3>Chata a okolí</h3>
+          <p>Citlivá rekonstrukce. Návrat k původní podobě z roku 1895,
+            terasa s výhledem do údolí, zázemí i pro neubytované.</p>
+        </div>
+        <div class="zone">
+          <div class="zone-num">02</div>
+          <h3>Zázemí pro akce a komunity</h3>
+          <p>Na místě dvou dosluhujících chat vznikne prostor pro spolky,
+            oddíly a akce — nezávisle na hlavní chatě.</p>
+        </div>
+        <div class="zone">
+          <div class="zone-num">03</div>
+          <h3>Mamlas plac</h3>
+          <p>Horní sjezdovka mezi lanovkou a chatou dostane nové celoroční
+            využití pro sport a setkávání.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JAK DÁL ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Jak dál</p>
+        <h2>Vybírat budete i vy.</h2>
+      </div>
+      <div class="steps">
+        <div class="step-row">
+          <div class="step-num">01</div>
+          <div class="timeline-text">Tři architekti se vztahem k Beskydům připraví tři návrhy nové chaty.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">02</div>
+          <div class="timeline-text">Návrhy veřejně představíme — výstava i online galerie.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">03</div>
+          <div class="timeline-text">Občané a odborná porota pomohou vybrat vítězný návrh.</div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">04</div>
+          <div class="timeline-text">Město zajistí financování a projekt dotáhne k realizaci.</div>
+        </div>
+      </div>
+      <div class="section-cta">
+        <a class="btn btn-blue btn-lg" href="podporte-nas.html">Podpořte nás</a>
+        <a class="btn btn-secondary btn-lg" href="index.html#projekty">Další projekty</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer" id="kontakt">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Osobnosti <span>pro Třinec</span></div>
+          <p>Lokální hnutí. Lidé, kteří berou odpovědnost.<br>Politické hnutí NOVÁ GENERACE</p>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="mailto:kontakt@osobnostiprotrinec.cz">kontakt@osobnostiprotrinec.cz</a></li>
+            <li><a href="https://www.facebook.com/osobnostiprotrinec">Facebook</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Web</h4>
+          <ul>
+            <li><a href="index.html#program">Program</a></li>
+            <li><a href="index.html#kandidati">Kandidáti</a></li>
+            <li><a href="podporte-nas.html">Podpořte nás</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <span>© 2026 Politické hnutí NOVÁ GENERACE</span>
+        <!-- TODO: ustálit text disclaimeru pro placenou volební inzerci -->
+        <span>#SPOJUJEMEGENERACE · #PROTRINEC</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=5"></script>
+</body>
+</html>
