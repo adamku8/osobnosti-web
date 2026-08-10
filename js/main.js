@@ -40,20 +40,6 @@
   }, 5000);
 })();
 
-// Rotace citací kandidátů (sekce Kandidáti)
-(function () {
-  var rotator = document.getElementById('quoteRotator');
-  if (!rotator) return;
-  var slides = rotator.querySelectorAll('.quote-slide');
-  if (slides.length < 2) return;
-  var i = 0;
-  setInterval(function () {
-    slides[i].classList.remove('active');
-    i = (i + 1) % slides.length;
-    slides[i].classList.add('active');
-  }, 6000);
-})();
-
 // Slider top 9 kandidátů (jen na stránkách, kde je)
 (function () {
   var slider = document.getElementById('candSlider');
