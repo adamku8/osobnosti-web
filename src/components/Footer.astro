@@ -1,6 +1,7 @@
 ---
 const email = 'kontakt@osobnostiprotrinec.cz';
 const fb = 'https://www.facebook.com/osobnostiprotrinec';
+const ig = 'https://www.instagram.com/osobnosti_pro_trinec/';
 import { u } from '../lib/url.js';
 ---
 <footer class="site-footer" id="kontakt">
@@ -14,7 +15,8 @@ import { u } from '../lib/url.js';
         <h4>Kontakt</h4>
         <ul>
           <li><a href={`mailto:${email}`}>{email}</a></li>
-          <li><a href={fb}>Facebook</a></li>
+          <li><a href={fb} target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href={ig} target="_blank" rel="noopener">Instagram</a></li>
         </ul>
       </div>
       <div>
