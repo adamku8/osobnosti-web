@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
 ---
 <Base
   title="Javorový — nová vize | Osobnosti pro Třinec"
@@ -458,6 +459,16 @@ import Base from '../layouts/Base.astro';
     }
     /* Slider s citacemi */
     .jv-quotes { background: rgba(50,50,50,0.03); }
+    .hlasy-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: var(--s-64);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .hlasy-grid { grid-template-columns: 1fr; gap: var(--s-40); } }
+    .beseda { margin: 0; }
+    .beseda img { width: 100%; border-radius: 8px; }
+    .beseda figcaption { margin-top: var(--s-8); }
     .quote-slider { position: relative; max-width: 900px; }
     /* všechny citace leží v jedné buňce gridu → výška = nejdelší citace, nic neposkakuje */
     .quote-stage { display: grid; }
@@ -603,7 +614,7 @@ import Base from '../layouts/Base.astro';
 
   <!-- ================= COVER ================= -->
   <section class="jv-cover">
-    <img class="jv-cover-bg" src="/assets/img/javorovy/vyhled-udoli.jpg" alt="Výhled z Javorového na Třinec a údolí Olše">
+    <img class="jv-cover-bg" src={u('assets/img/javorovy/vyhled-udoli.jpg')} alt="Výhled z Javorového na Třinec a údolí Olše">
     <div class="jv-cover-tint"></div>
     <div class="jv-cover-shade"></div>
     <div class="container">
@@ -654,7 +665,7 @@ import Base from '../layouts/Base.astro';
           </p>
         </div>
         <div class="jv-viz">
-          <img src="/assets/img/javorovy/chata-1910.jpg" alt="Historická pohlednice chaty na Javorovém z roku 1910">
+          <img src={u('assets/img/javorovy/chata-1910.jpg')} alt="Historická pohlednice chaty na Javorovém z roku 1910">
           <p class="jv-caption">Chata na pohlednici z roku 1910, ještě před přístavbou verandy. Zdroj: sbírka Stanislava Kroczka, volné dílo.</p>
         </div>
       </div>
@@ -838,6 +849,7 @@ import Base from '../layouts/Base.astro';
         <p class="eyebrow">Rozhovory s aktéry</p>
         <h2>Co říkají lidé z kopce.</h2>
       </div>
+      <div class="hlasy-grid">
       <div class="quote-slider" id="quoteSlider">
         <div class="quote-stage">
         <blockquote class="quote-slide is-active">
@@ -859,6 +871,11 @@ import Base from '../layouts/Base.astro';
           <button class="quote-dot" type="button" aria-label="Citace 3"></button>
         </div>
       </div>
+      <figure class="beseda">
+        <img src={u('assets/img/javorovy/beseda-2025.jpg')} alt="Veřejná beseda s občany o budoucnosti areálu Javorový" loading="lazy">
+        <figcaption class="jv-caption">Veřejná beseda s občany o budoucnosti Javorového, leden 2025.</figcaption>
+      </figure>
+      </div>
     </div>
   </section>
 
@@ -878,7 +895,7 @@ import Base from '../layouts/Base.astro';
 
   <!-- ================= VIZE (FOTOPÁS) ================= -->
   <section class="jv-band-photo" id="vize">
-    <img class="band-bg" src="/assets/img/javorovy/javorovy-z-gutu.jpg" alt="Javorový vrch při pohledu od Gutů" loading="lazy" style="object-position: center 60%;">
+    <img class="band-bg" src={u('assets/img/javorovy/javorovy-z-gutu.jpg')} alt="Javorový vrch při pohledu od Gutů" loading="lazy" style="object-position: center 60%;">
     <div class="band-shade"></div>
     <div class="container">
       <p class="jv-band-eyebrow">Naše vize</p>
@@ -941,7 +958,7 @@ import Base from '../layouts/Base.astro';
         </div>
       </div>
       <div class="jv-viz" style="margin-top: var(--s-64);">
-        <img src="/assets/img/javorovy/vizualizace-kania.jpg" alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
+        <img src={u('assets/img/javorovy/vizualizace-kania.jpg')} alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
         <p class="jv-caption">Vizualizace: KANIA a.s. — studie proveditelnosti zpracovaná pro město, květen 2024, varianta 2. Ukazuje záměr, ne finální podobu.</p>
       </div>
     </div>
@@ -1118,7 +1135,7 @@ import Base from '../layouts/Base.astro';
 
   <!-- ================= CLOSING (FOTOPÁS) ================= -->
   <section class="jv-band-photo">
-    <img class="band-bg" src="/assets/img/javorovy/vyhled-hrebeny.jpg" alt="Výhled z Javorového na hřebeny Beskyd" loading="lazy" style="object-position: center 65%;">
+    <img class="band-bg" src={u('assets/img/javorovy/vyhled-hrebeny.jpg')} alt="Výhled z Javorového na hřebeny Beskyd" loading="lazy" style="object-position: center 65%;">
     <div class="band-shade"></div>
     <div class="container">
       <p class="jv-band-eyebrow">Javorový 2026</p>
@@ -1128,8 +1145,8 @@ import Base from '../layouts/Base.astro';
         a výběr, u kterého budete i vy.
       </p>
       <div class="section-cta" style="margin-top: var(--s-40); text-align: left;">
-        <a class="btn btn-white btn-lg" href="/podporte-nas.html">Podpořte nás</a>
-        <a class="btn btn-white btn-lg" href="/index.html#projekty">Další projekty</a>
+        <a class="btn btn-white btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
+        <a class="btn btn-white btn-lg" href={u('index.html#projekty')}>Další projekty</a>
       </div>
     </div>
   </section>

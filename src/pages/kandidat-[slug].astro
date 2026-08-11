@@ -16,8 +16,8 @@ const m = medailonky[k.detail];
 const i = kandidati.findIndex(x => x.cislo === k.cislo);
 const odkazNa = (c) =>
   c.detail && medailonky[c.detail]
-    ? `/kandidat-${c.detail}.html`
-    : `/kandidati.html#kandidat-${String(c.cislo).padStart(2, '0')}`;
+    ? u(`kandidat-${c.detail}.html`)
+    : u(`kandidati.html#kandidat-${String(c.cislo).padStart(2, '0')}`);
 const predchozi = i > 0 ? kandidati[i - 1] : null;
 const dalsi = i < kandidati.length - 1 ? kandidati[i + 1] : null;
 
@@ -26,6 +26,7 @@ const casti = k.jmeno.replace(/^(Mgr\.|Ing\.|MUDr\.|MVDr\.|Bc\.|MgA\.|DiS\.|et|M
 const prijmeni = casti.pop();
 const krestni = casti.join(' ');
 const tituly = k.jmeno.replace(`${krestni} ${prijmeni}`, '').trim();
+import { u } from '../lib/url.js';
 ---
 <Base
   title={`${k.jmeno} — Osobnosti pro Třinec`}
@@ -38,11 +39,11 @@ const tituly = k.jmeno.replace(`${krestni} ${prijmeni}`, '').trim();
   <!-- ================= HERO KANDIDÁTA ================= -->
   <section class="cand-hero">
     <div class="container">
-      <a class="back-link" href="/kandidati.html">← Všichni kandidáti</a>
+      <a class="back-link" href={u('kandidati.html')}>← Všichni kandidáti</a>
       <div class="cand-hero-grid">
         <div class="cand-hero-photo">
           {k.foto
-            ? <img src={`/assets/img/kandidati/${k.foto.replace('_c.jpg', '.jpg')}`} alt={k.jmeno}>
+            ? <img src={u(`assets/img/kandidati/${k.foto.replace('_c.jpg', '.jpg')}`)} alt={k.jmeno}>
             : <div class="slide-avatar">{k.iniciraly}</div>}
         </div>
         <div class="cand-hero-info">
@@ -51,7 +52,7 @@ const tituly = k.jmeno.replace(`${krestni} ${prijmeni}`, '').trim();
           <p class="cand-hero-role">{[tituly, `${k.vek} let`, k.profese].filter(Boolean).join(' · ')}</p>
           <p class="cand-hero-affil">
             {k.poradiSlovem.charAt(0).toUpperCase() + k.poradiSlovem.slice(1)} na kandidátce{' '}
-            <a href="/index.html">Osobnosti pro Třinec</a>
+            <a href={u('index.html')}>Osobnosti pro Třinec</a>
           </p>
           {m.citace && <blockquote class="cand-quote">„<span set:html={m.citace} />."</blockquote>}
         </div>

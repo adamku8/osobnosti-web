@@ -1,19 +1,21 @@
 ---
 const { active = '' } = Astro.props;
 
+import { u } from '../lib/url.js';
+
 const menu = [
-  { id: 'uvod',     text: 'Úvod',        href: '/index.html' },
-  { id: 'program',  text: 'Program',     href: '/program.html' },
-  { id: 'kandidati',text: 'Kandidáti',   href: '/kandidati.html' },
-  { id: 'kontakt',  text: 'Kontakt',     href: '/index.html#kontakt' },
-  { id: 'podporte', text: 'Podpořte nás',href: '/podporte-nas.html' },
+  { id: 'uvod',      text: 'Úvod',         href: u('index.html') },
+  { id: 'program',   text: 'Program',      href: u('program.html') },
+  { id: 'kandidati', text: 'Kandidáti',    href: u('kandidati.html') },
+  { id: 'kontakt',   text: 'Kontakt',      href: u('index.html#kontakt') },
+  { id: 'podporte',  text: 'Podpořte nás', href: u('podporte-nas.html') },
 ];
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 ---
 <header class="site-header">
   <div class="container">
-    <a class="logo" href="/index.html" aria-label="Osobnosti pro Třinec — úvod">
-      <img src="/assets/logo.svg" alt="Osobnosti pro Třinec">
+    <a class="logo" href={u('index.html')} aria-label="Osobnosti pro Třinec — úvod">
+      <img src={u('assets/logo.svg')} alt="Osobnosti pro Třinec">
     </a>
     <nav class="nav" id="nav">
       {menu.map(p => (

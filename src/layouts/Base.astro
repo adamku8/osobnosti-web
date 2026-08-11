@@ -16,6 +16,7 @@ const site = 'https://osobnostiprotrinec.cz';
 const canonical = `${site}/${path}`;
 const ogImage = `${site}/assets/img/og-image.jpg`;
 const GTM = 'GTM-N59NJ5Z';
+import { u } from '../lib/url.js';
 ---
 <!DOCTYPE html>
 <html lang="cs">
@@ -42,7 +43,7 @@ const GTM = 'GTM-N59NJ5Z';
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="icon" href={u('assets/logo.svg')} type="image/svg+xml">
   <slot name="head" />
 </head>
 <body class={bodyClass}>
@@ -53,6 +54,6 @@ const GTM = 'GTM-N59NJ5Z';
   <slot />
   <Footer />
 
-  <script src="/js/main.js?v=6" is:inline></script>
+  <script src={u('js/main.js?v=6')} is:inline></script>
 </body>
 </html>

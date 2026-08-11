@@ -7,6 +7,7 @@ import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 
 const naHomepage = kandidati.slice(0, 12);
+import { u } from '../lib/url.js';
 ---
 <Base
   title="Osobnosti pro Třinec — Nové vize. Nový Třinec. Osobnosti."
@@ -29,13 +30,12 @@ const naHomepage = kandidati.slice(0, 12);
           <p class="hero-lead">
             Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.
             Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují.
-            Jdeme dál — pro Třinec
-            <a href="#promise-01">aktivní</a>,
-            <a href="#promise-02">sportovní a kulturní</a>,
-            <a href="#promise-03">bezpečný a zelený</a>,
-            <a href="#promise-04">podnikavý</a>,
-            <a href="#promise-05">pečující</a>
-            a <a href="#promise-06">s lepším bydlením</a>.
+            Jdeme dál — pro Třinec <a href="#promise-01">aktivní</a>,{' '}
+            <a href="#promise-02">sportovní a kulturní</a>,{' '}
+            <a href="#promise-03">bezpečný a zelený</a>,{' '}
+            <a href="#promise-04">podnikavý</a>,{' '}
+            <a href="#promise-05">pečující</a> a{' '}
+            <a href="#promise-06">s lepším bydlením</a>.
           </p>
           <div class="hero-vote">
             <div>
@@ -50,21 +50,21 @@ const naHomepage = kandidati.slice(0, 12);
         <div class="hero-portrait">
           <div class="portrait-frame" id="heroRotator">
             <div class="portrait-slide active">
-              <img src="/assets/img/kandidati/lucie_fremrova.jpg" alt="Ing. Lucie Fremrová">
+              <img src={u('assets/img/kandidati/lucie_fremrova.jpg')} alt="Ing. Lucie Fremrová">
               <div class="portrait-caption">
                 <strong>Ing. Lucie Fremrová</strong>
                 <span>1. na kandidátce · radní, organizátorka akcí</span>
               </div>
             </div>
             <div class="portrait-slide">
-              <img src="/assets/img/kandidati/adam_kurzok.jpg" alt="Mgr. Adam Kurzok">
+              <img src={u('assets/img/kandidati/adam_kurzok.jpg')} alt="Mgr. Adam Kurzok">
               <div class="portrait-caption">
                 <strong>Mgr. Adam Kurzok</strong>
                 <span>2. na kandidátce · podnikatel v e-commerce</span>
               </div>
             </div>
             <div class="portrait-slide">
-              <img src="/assets/img/kandidati/erika_sirotova_c.jpg" alt="Mgr. et Bc. Erika Sirotová">
+              <img src={u('assets/img/kandidati/erika_sirotova_c.jpg')} alt="Mgr. et Bc. Erika Sirotová">
               <div class="portrait-caption">
                 <strong>Mgr. et Bc. Erika Sirotová</strong>
                 <span>3. na kandidátce · HR manažerka</span>
@@ -82,9 +82,9 @@ const naHomepage = kandidati.slice(0, 12);
 
     <!-- Panorama jako podlaha hera (princip 06) — rotace tří fotek -->
     <div class="panorama" id="panoRotator">
-      <img class="pano-slide active" src="/assets/img/panorama.jpg?v=2" alt="Panorama Třince pod Javorovým">
-      <img class="pano-slide" src="/assets/img/panorama-hreben.jpg" alt="Chata a rozhledna na Javorovém" loading="lazy">
-      <img class="pano-slide" src="/assets/img/panorama-zapad.jpg" alt="Západ slunce nad Beskydami" loading="lazy">
+      <img class="pano-slide active" src={u('assets/img/panorama.jpg?v=2')} alt="Panorama Třince pod Javorovým">
+      <img class="pano-slide" src={u('assets/img/panorama-hreben.jpg')} alt="Chata a rozhledna na Javorovém" loading="lazy">
+      <img class="pano-slide" src={u('assets/img/panorama-zapad.jpg')} alt="Západ slunce nad Beskydami" loading="lazy">
     </div>
   </section>
 
@@ -101,8 +101,8 @@ const naHomepage = kandidati.slice(0, 12);
             Navazujeme na 20 let dobré práce pro město.
           </p>
           <div class="stat-links">
-            <a class="btn btn-blue" href="/program.html">Náš program</a>
-            <a class="btn btn-secondary" href="/kandidati.html">Kandidáti</a>
+            <a class="btn btn-blue" href={u('program.html')}>Náš program</a>
+            <a class="btn btn-secondary" href={u('kandidati.html')}>Kandidáti</a>
           </div>
         </div>
       </div>
@@ -120,8 +120,8 @@ const naHomepage = kandidati.slice(0, 12);
         {oblasti.map(o => <OblastKarta o={o} />)}
       </div>
       <div class="section-cta stat-links" style="justify-content:center">
-        <a class="btn btn-blue btn-lg" href="/program.html">Celý program</a>
-        <a class="btn btn-secondary btn-lg" href="/assets/program-osobnosti-pro-trinec-2026.pdf" target="_blank" rel="noopener">Stáhnout PDF</a>
+        <a class="btn btn-blue btn-lg" href={u('program.html')}>Celý program</a>
+        <a class="btn btn-secondary btn-lg" href={u('assets/program-osobnosti-pro-trinec-2026.pdf')} target="_blank" rel="noopener">Stáhnout PDF</a>
       </div>
     </div>
   </section>
@@ -139,14 +139,14 @@ const naHomepage = kandidati.slice(0, 12);
         {naHomepage.map(k => <KandidatKarta k={k} />)}
       </div>
       <div class="cand-cta">
-        <a class="btn btn-primary btn-lg" href="/kandidati.html">Všech {kandidati.length} kandidátů</a>
+        <a class="btn btn-primary btn-lg" href={u('kandidati.html')}>Všech {kandidati.length} kandidátů</a>
       </div>
     </div>
   </section>
 
   <!-- ================= CLOSING ================= -->
   <section class="closing" id="podarilo">
-    <img src="/assets/img/panorama-udoli.jpg" alt="Údolí Třince z Javorového">
+    <img src={u('assets/img/panorama-udoli.jpg')} alt="Údolí Třince z Javorového">
     <div class="closing-overlay">
       <div class="container">
         <h2 class="closing-claim">S vaším hlasem <span class="hl">měníme</span> Třinec.</h2>
@@ -156,13 +156,13 @@ const naHomepage = kandidati.slice(0, 12);
           prosazovat nové nápady a vize.
         </p>
         <nav class="closing-nav" aria-label="Rozcestník">
-          <a href="/program.html">Program</a>
+          <a href={u('program.html')}>Program</a>
           <a href="#projekty">Projekty</a>
           <a href="#kandidati">Kandidáti</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
         <div class="closing-cta">
-          <a class="btn btn-blue btn-lg" href="/podporte-nas.html">Podpořte nás</a>
+          <a class="btn btn-blue btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
         </div>
       </div>
     </div>

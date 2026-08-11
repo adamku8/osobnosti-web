@@ -1,6 +1,7 @@
 ---
 const email = 'kontakt@osobnostiprotrinec.cz';
 const fb = 'https://www.facebook.com/osobnostiprotrinec';
+import { u } from '../lib/url.js';
 ---
 <footer class="site-footer" id="kontakt">
   <div class="container">
@@ -19,9 +20,9 @@ const fb = 'https://www.facebook.com/osobnostiprotrinec';
       <div>
         <h4>Web</h4>
         <ul>
-          <li><a href="/program.html">Program</a></li>
-          <li><a href="/kandidati.html">Kandidáti</a></li>
-          <li><a href="/podporte-nas.html">Podpořte nás</a></li>
+          <li><a href={u('program.html')}>Program</a></li>
+          <li><a href={u('kandidati.html')}>Kandidáti</a></li>
+          <li><a href={u('podporte-nas.html')}>Podpořte nás</a></li>
         </ul>
       </div>
     </div>

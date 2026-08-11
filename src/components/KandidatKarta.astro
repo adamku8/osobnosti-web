@@ -1,11 +1,12 @@
 ---
 const { k } = Astro.props;
-const href = k.detail ? `/kandidat-${k.detail}.html` : null;
+const href = k.detail ? u(`kandidat-${k.detail}.html`) : null;
 const Tag = href ? 'a' : 'article';
+import { u } from '../lib/url.js';
 ---
 <Tag class={`cand-card${href ? ' cand-card-link' : ''}`} href={href} id={`kandidat-${String(k.cislo).padStart(2,'0')}`}>
   {k.foto
-    ? <img class="cand-photo" src={`/assets/img/kandidati/${k.foto}`} alt={k.jmeno} loading="lazy">
+    ? <img class="cand-photo" src={u(`assets/img/kandidati/${k.foto}`)} alt={k.jmeno} loading="lazy">
     : <div class="slide-avatar">{k.iniciraly}</div>}
   <div class="slide-index">{k.cislo}.</div>
   <div class="slide-name">{k.jmeno}</div>

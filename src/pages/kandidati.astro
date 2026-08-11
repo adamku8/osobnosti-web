@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import KandidatKarta from '../components/KandidatKarta.astro';
 import { kandidati } from '../data/kandidati.js';
+import { u } from '../lib/url.js';
 ---
 <Base
   title="Kandidáti — Osobnosti pro Třinec"
@@ -28,7 +29,7 @@ import { kandidati } from '../data/kandidati.js';
         {kandidati.map(k => <KandidatKarta k={k} />)}
       </div>
       <div class="section-cta">
-        <a class="btn btn-primary btn-lg" href="/podporte-nas.html">Podpořte nás</a>
+        <a class="btn btn-primary btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
       </div>
     </div>
   </section>

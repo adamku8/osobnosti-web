@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import SekceProjekty from '../components/SekceProjekty.astro';
 import { oblasti } from '../data/oblasti.js';
+import { u } from '../lib/url.js';
 ---
 <Base
   title="Program 2026 — Osobnosti pro Třinec"
@@ -18,8 +19,8 @@ import { oblasti } from '../data/oblasti.js';
         a osm projektů, které z nich chceme postavit. Program máte i v PDF.
       </p>
       <div class="stat-links">
-        <a class="btn btn-secondary" href="/assets/program-osobnosti-pro-trinec-2026.pdf" target="_blank" rel="noopener">Stáhnout PDF</a>
-        <a class="btn btn-blue" href="/kandidati.html">Kdo to bude prosazovat</a>
+        <a class="btn btn-secondary" href={u('assets/program-osobnosti-pro-trinec-2026.pdf')} target="_blank" rel="noopener">Stáhnout PDF</a>
+        <a class="btn btn-blue" href={u('kandidati.html')}>Kdo to bude prosazovat</a>
       </div>
     </div>
   </section>
@@ -40,7 +41,7 @@ import { oblasti } from '../data/oblasti.js';
             </div>
           </div>
           <div class="area-photo">
-            <img src={`/assets/img/projekty/${o.obrazek}`} alt={`Vizualizace — ${o.vizeNazev}`} loading="lazy">
+            <img src={u(`assets/img/projekty/${o.obrazek}`)} alt={`Vizualizace — ${o.vizeNazev}`} loading="lazy">
           </div>
         </article>
       ))}
@@ -54,7 +55,7 @@ import { oblasti } from '../data/oblasti.js';
       <h2>Chcete, aby se to stalo?</h2>
       <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
       <div class="section-cta">
-        <a class="btn btn-primary btn-lg" href="/podporte-nas.html">Podpořte nás</a>
+        <a class="btn btn-primary btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
       </div>
     </div>
   </section>

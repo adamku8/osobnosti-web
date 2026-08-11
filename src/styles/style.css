@@ -6,25 +6,25 @@
 /* ---------- Fonts ---------- */
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/Montserrat-ExtraBold.ttf") format("truetype");
+  src: url("../assets/fonts/Montserrat-ExtraBold.ttf") format("truetype");
   font-weight: 800;
   font-display: swap;
 }
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  src: url("../assets/fonts/Montserrat-Bold.ttf") format("truetype");
   font-weight: 700;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/assets/fonts/Inter-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/Inter-Regular.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/assets/fonts/Inter-SemiBold.ttf") format("truetype");
+  src: url("../assets/fonts/Inter-SemiBold.ttf") format("truetype");
   font-weight: 600;
   font-display: swap;
 }

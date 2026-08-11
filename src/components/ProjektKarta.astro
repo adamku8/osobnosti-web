@@ -1,8 +1,9 @@
 ---
 const { p } = Astro.props;
+import { u } from '../lib/url.js';
 ---
 <article class="project">
-  <img src={`/assets/img/projekty/${p.obrazek}`} alt={p.alt} loading="lazy">
+  <img src={u(`assets/img/projekty/${p.obrazek}`)} alt={p.alt} loading="lazy">
   <div class="project-body">
     <div class="promise-index">{p.cislo}</div>
     <h3>{p.nazev}</h3>
