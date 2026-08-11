@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
   <!-- ================= HEADER ================= -->
   <header class="site-header">
     <div class="container">
@@ -42,8 +43,6 @@
     </div>
   </header>
 
-
-
   <!-- ================= HERO KANDIDÁTA ================= -->
   <section class="cand-hero">
     <div class="container">
@@ -53,16 +52,48 @@
           <img src="assets/img/kandidati/adam_kurzok.jpg" alt="Mgr. Adam Kurzok">
         </div>
         <div class="cand-hero-info">
-          <div class="cand-hero-index">
-            2.
-            <span class="cand-hero-list">na kandidátce <a href="index.html">Osobnosti pro Třinec</a></span>
-          </div>
+          <div class="cand-hero-index">2.</div>
           <h1>Adam<br>Kurzok</h1>
           <p class="cand-hero-role">Mgr. · 44 let · podnikatel v e-commerce</p>
+          <p class="cand-hero-affil">
+            2. na kandidátce <a href="index.html">Osobnosti pro Třinec</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <blockquote class="cand-quote">
-            „Město se dá vést poctivě, otevřeně a <span class="hl">s výsledky</span>."
-          </blockquote>
+  <!-- ================= CITACE ================= -->
+  <section class="cand-quote-band">
+    <div class="container">
+      <blockquote>
+        „Město se dá vést poctivě, otevřeně a <span class="hl">s výsledky</span>."
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ================= VIDEO MEDAILONEK ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Video medailonek</p>
+        <h2>Půl minuty se mnou.</h2>
+      </div>
+      <!--
+        TODO: nahradit placeholder vloženým videem.
+        YouTube:  <iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+                    title="Video medailonek — Adam Kurzok" frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+                    allowfullscreen></iframe>
+        Vlastní soubor: <video class="video-frame" controls preload="none"
+                    poster="assets/img/kandidati/adam_kurzok.jpg">
+                    <source src="assets/video/kurzok.mp4" type="video/mp4"></video>
+        Pro svislé video (reels/stories) přidej třídu: <div class="video-wrap is-vertical">
+      -->
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          <p>Video medailonek připravujeme</p>
         </div>
       </div>
     </div>
@@ -145,11 +176,24 @@
           <dd>Hokej</dd>
         </div>
       </dl>
-      <div class="section-cta">
-        <a class="btn btn-primary btn-lg" href="kandidati.html">Poznejte celou kandidátku</a>
-      </div>
     </div>
   </section>
+
+  <!-- ================= PŘEDCHOZÍ / DALŠÍ KANDIDÁT ================= -->
+  <nav class="cand-nav" aria-label="Další kandidáti">
+    <div class="container">
+      <a class="cand-nav-item prev" href="kandidati.html#kandidat-01">
+        <span class="cand-nav-label">← Předchozí kandidát</span>
+        <span class="cand-nav-name">1. Ing. Lucie Fremrová</span>
+        <span class="cand-nav-role">radní, organizátorka akcí</span>
+      </a>
+      <a class="cand-nav-item next" href="kandidati.html#kandidat-03">
+        <span class="cand-nav-label">Následující kandidát →</span>
+        <span class="cand-nav-name">3. Mgr. et Bc. Erika Sirotová</span>
+        <span class="cand-nav-role">HR manažerka</span>
+      </a>
+    </div>
+  </nav>
 
   <!-- ================= FOOTER ================= -->
   <footer class="site-footer" id="kontakt">
