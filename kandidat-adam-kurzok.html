@@ -79,21 +79,39 @@
         <p class="eyebrow">Video medailonek</p>
         <h2>Půl minuty se mnou.</h2>
       </div>
-      <!--
-        TODO: nahradit placeholder vloženým videem.
-        YouTube:  <iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+      <div class="video-section">
+        <!--
+          Formát 9:16 (Instagram Reels / Stories, TikTok).
+          TODO: nahradit placeholder vloženým videem — stačí vyměnit obsah .video-wrap:
+
+          Vlastní soubor (doporučeno — bez cookies třetích stran):
+            <video class="video-frame" controls playsinline preload="none"
+                   poster="assets/img/kandidati/adam_kurzok.jpg">
+              <source src="assets/video/kurzok-medailonek.mp4" type="video/mp4">
+            </video>
+
+          YouTube Shorts:
+            <iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
                     title="Video medailonek — Adam Kurzok" frameborder="0"
                     allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
                     allowfullscreen></iframe>
-        Vlastní soubor: <video class="video-frame" controls preload="none"
-                    poster="assets/img/kandidati/adam_kurzok.jpg">
-                    <source src="assets/video/kurzok.mp4" type="video/mp4"></video>
-        Pro svislé video (reels/stories) přidej třídu: <div class="video-wrap is-vertical">
-      -->
-      <div class="video-wrap">
-        <div class="video-placeholder">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-          <p>Video medailonek připravujeme</p>
+
+          Pro video na šířku (16:9) stačí u .video-wrap vyměnit třídu is-vertical za is-wide.
+        -->
+        <div class="video-wrap is-vertical">
+          <div class="video-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            <p>Připravujeme</p>
+          </div>
+        </div>
+        <div class="video-note">
+          <p>
+            Třicet vteřin bez politických frází — proč kandiduji a co chci
+            v Třinci posunout. Stejné video najdete i na našich sítích.
+          </p>
+          <div class="stat-links">
+            <a class="btn btn-blue" href="https://www.facebook.com/osobnostiprotrinec" target="_blank" rel="noopener">Sledovat na Facebooku</a>
+          </div>
         </div>
       </div>
     </div>
