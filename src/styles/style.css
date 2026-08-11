@@ -1191,3 +1191,69 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .cand-main { grid-template-columns: 1fr; gap: var(--s-40); }
   .video-wrap { max-width: 320px; }
 }
+
+/* ---------- Událost na Facebooku (Podpořte nás) ---------- */
+.udalost-section { padding-top: var(--s-40); }
+.udalost {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--s-40);
+  align-items: center;
+  padding: var(--s-40);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 240ms var(--ease-ui), box-shadow 240ms var(--ease-ui);
+}
+.udalost:hover {
+  border-color: var(--brand-red);
+  box-shadow: 0 8px 24px rgba(50, 50, 50, 0.10);
+}
+.udalost-ikona {
+  width: 128px;
+  height: 128px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--brand-red);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.udalost-ikona svg { width: 64px; height: 64px; }
+.udalost-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--signal-blue);
+  margin-bottom: var(--s-8);
+}
+.udalost-text h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  margin-bottom: var(--s-16);
+}
+.udalost-popis { color: var(--text-secondary); max-width: 48ch; margin-bottom: var(--s-8); }
+.udalost-datum {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.udalost-btn { white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .udalost {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: var(--s-24);
+    padding: var(--s-24);
+  }
+  .udalost-ikona { width: 96px; height: 96px; }
+  .udalost-ikona svg { width: 48px; height: 48px; }
+  .udalost-popis { margin-left: auto; margin-right: auto; }
+}
