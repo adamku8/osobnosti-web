@@ -64,6 +64,36 @@ body {
 
 img { max-width: 100%; display: block; }
 
+/* ---------- Odkazy (základ) ----------
+   Záměrně brzy v souboru: komponenty níže (nav, tlačítka, patička…)
+   si barvu přepíšou vlastním pravidlem. Tohle jen zajistí, že žádný
+   odkaz nespadne na výchozí modrou/fialovou prohlížeče. */
+a {
+  color: var(--signal-blue);
+  text-decoration: none;
+}
+a:visited { color: var(--signal-blue); }
+a:focus-visible {
+  outline: 2px solid var(--signal-blue);
+  outline-offset: 2px;
+}
+
+/* Textový odkaz „dál" — pod odstavcem, v duchu značky */
+.link-more {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal-blue);
+  border-bottom: 1px solid rgba(0, 59, 142, 0.25);
+  padding-bottom: 2px;
+  transition: color 240ms var(--ease-ui), border-color 240ms var(--ease-ui);
+}
+.link-more:visited { color: var(--signal-blue); }
+.link-more:hover { color: var(--brand-red); border-bottom-color: var(--brand-red); }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -1026,30 +1056,34 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   transition: border-color 240ms var(--ease-ui);
 }
 .cand-hero-affil a:hover { border-bottom-color: var(--signal-blue); }
-/* Citace vytažená do samostatného pásu */
-.cand-quote-band {
-  padding: var(--s-96) 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  margin-top: var(--s-64);
-}
-.cand-quote-band blockquote {
+/* Citace vedle hlavní fotky */
+.cand-quote {
+  margin-top: var(--s-40);
+  padding-top: var(--s-24);
+  border-top: 2px solid var(--brand-red);
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(28px, 4.2vw, 52px);
+  font-size: clamp(22px, 2.8vw, 30px);
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1.18;
   max-width: 24ch;
 }
 
-/* Video medailonek — výchozí formát 9:16 (Instagram Reels / Stories) */
-.video-section {
+/* Video medailonek vedle odpovědí — formát 9:16 (Instagram Reels / Stories) */
+.cand-main {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 340px 1fr;
   gap: var(--s-64);
-  align-items: center;
+  align-items: start;
 }
-.video-note p { color: var(--text-secondary); max-width: 42ch; margin-bottom: var(--s-24); }
+.cand-media .eyebrow { margin-bottom: var(--s-16); }
+.video-caption {
+  margin-top: var(--s-16);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.video-caption a { color: var(--signal-blue); text-decoration: none; }
+.video-caption a:hover { text-decoration: underline; }
 .video-wrap {
   width: 100%;
   aspect-ratio: 9 / 16;
@@ -1111,8 +1145,8 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 .cand-nav-role { font-size: 14px; color: var(--text-muted); }
 
 .cand-answers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--s-40);
 }
 .answer { border-top: 2px solid var(--brand-red); padding-top: var(--s-24); }
@@ -1150,11 +1184,10 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .areas { gap: var(--s-64); }
   .cand-hero-grid { grid-template-columns: 1fr; gap: var(--s-24); }
   .cand-hero-photo { max-width: 280px; }
-  .cand-answers { grid-template-columns: 1fr; gap: var(--s-24); }
   .quick-grid { grid-template-columns: repeat(2, 1fr); }
   .cand-quote-band { padding: var(--s-64) 0; margin-top: var(--s-40); }
   .cand-nav .container { grid-template-columns: 1fr; }
   .cand-nav-item.next { text-align: left; align-items: flex-start; border-left: none; border-top: 1px solid var(--border); }
-  .video-section { grid-template-columns: 1fr; gap: var(--s-24); }
+  .cand-main { grid-template-columns: 1fr; gap: var(--s-40); }
   .video-wrap { max-width: 320px; }
 }

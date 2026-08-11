@@ -379,22 +379,39 @@
     @media (max-width: 600px) { .wishes--against { grid-template-columns: 1fr; } }
     .wishes--against .wish::before { content: "×"; color: var(--brand-red); }
     .wishes--against .wish strong { color: var(--text); }
-    /* vysvětlující blok pod seznamem */
-    .note-block {
-      margin-top: var(--s-40);
-      padding-left: var(--s-24);
-      border-left: 3px solid var(--border);
-      max-width: 68ch;
+    /* datové odrážky a zdroje */
+    .jv-strip { margin: var(--s-64) 0; }
+    .jv-strip img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: center 60%;
+      border-radius: 8px;
     }
-    .note-block h4 {
-      font-family: var(--font-display);
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: 17px;
-      margin-bottom: var(--s-8);
-      color: var(--text);
+    @media (max-width: 700px) { .jv-strip img { height: 200px; } }
+    .note-facts { list-style: none; margin: var(--s-16) 0; }
+    .note-facts li {
+      position: relative;
+      padding: 10px 0 10px 22px;
+      border-bottom: 1px solid var(--border);
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text-secondary);
     }
-    .note-block p { color: var(--text-secondary); font-size: 16px; line-height: 1.6; }
+    .note-facts li:last-child { border-bottom: none; }
+    .note-facts li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--signal-blue);
+      font-weight: 700;
+    }
+    .note-facts strong { color: var(--text); }
+    .note-sources {
+      margin-top: var(--s-16);
+      font-size: 13px !important;
+      color: var(--text-muted) !important;
+    }
     /* Infografika — prstence */
     .rings {
       display: grid;
@@ -636,7 +653,8 @@
           <a href="#vize"><span class="toc-num">07</span> Živý kopec po celý rok</a>
           <a href="#zadani"><span class="toc-num">08</span> Naše vize areálu</a>
           <a href="#varianty"><span class="toc-num">09</span> Tři varianty a kolik stojí</a>
-          <a href="#jak-dal"><span class="toc-num">10</span> Jak dál</a>
+          <a href="#lyzovani"><span class="toc-num">10</span> Proč ne lyžování</a>
+          <a href="#jak-dal"><span class="toc-num">11</span> Jak dál</a>
         </div>
       </nav>
     </div>
@@ -1038,13 +1056,48 @@
           <div class="wish">obnově sjezdovek a lyžování</div>
           <div class="wish"><strong>prodeji chaty nebo její části</strong></div>
         </div>
-        <div class="note-block">
-          <h4>Proč nedává smysl Javorový pro lyžování?</h4>
-          <p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LYŽOVÁNÍ ================= -->
+  <section class="section" id="lyzovani">
+    <div class="container">
+      <div class="jv-hero-grid jv-hero-grid--top">
+        <div class="section-head" style="margin-bottom: 0;">
+          <p class="eyebrow">Lyžování</p>
+          <h2>Proč nedává smysl Javorový pro lyžování?</h2>
+          <p class="section-note">
             Z průzkumu ani z diskusí nevyplynulo, že by lidé toužili
-            na Javorovém dál lyžovat. To samozřejmě nebrání dalšímu využití
-            Mamlas placu pro nové zimní i letní aktivity.
+            na Javorovém dál lyžovat. Hlavní důvod je ale prostší:
+            sníh ubývá a Javorový je na lyžování nízko. Sjezdovky
+            začínaly v 968 metrech a měřily dohromady 1,5 kilometru —
+            lanovka dnes jezdí celoročně pro turisty a lyžování
+            v nabídce vůbec nemá.
           </p>
+          <ul class="note-facts">
+            <li><strong>2000–2018</strong> se v 78 % horských oblastí světa zkrátila
+              zimní sezona až o 43 dní a plocha sněhové pokrývky klesla až o 13 %.</li>
+            <li><strong>Lysá hora</strong>, nejvyšší hora Beskyd, zaznamenala mezi obdobími
+              1961–1990 a 1981–2010 největší absolutní úbytek sněhu v Česku —
+              v jednotlivých dnech až o 20 centimetrů.</li>
+            <li><strong>Výhled je stejný:</strong> střediskům pod 1 200 metrů má sezona
+              začínat zhruba o měsíc později a končit o jeden až tři měsíce dříve.</li>
+            <li><strong>Zasněžování to nespasí.</strong> Podle studií bude v polovině století
+              obtížné vyrobit dost technického sněhu i pod 1 800 metry.</li>
+          </ul>
+          <p class="section-note">
+            To samozřejmě nebrání dalšímu využití Mamlas placu pro nové
+            zimní i letní aktivity.
+          </p>
+          <p class="note-sources">
+            Zdroje: ČHMÚ (přehled Česko v datech), EURAC Research 2020,
+            studie z Davosu, provozovatel lanovky Javorový.
+          </p>
+        </div>
+        <div class="jv-viz">
+          <img src="assets/img/javorovy/sjezdovka-skica.jpg" alt="Kresba sjezdovky na Javorovém bez sněhu s vleky mimo provoz" loading="lazy">
+          <p class="jv-caption">Ilustrace — sjezdovka bez sněhu a vleky mimo provoz.</p>
         </div>
       </div>
     </div>
@@ -1062,6 +1115,11 @@
           a jako jediná spojuje výběr z více návrhů se zapojením veřejnosti.
         </p>
       </div>
+      <div class="jv-strip">
+        <img src="assets/img/javorovy/vrchol-javorovy.jpg" alt="Vrcholový kámen na Javorovém — 1032 m n. m." loading="lazy">
+        <p class="jv-caption">Vrchol Javorového, 1032 m n. m. Foto: Petr Štefek, Wikimedia Commons, CC BY-SA 3.0 CZ.</p>
+      </div>
+
       <h3 class="steps-title">Konkrétní kroky hned po volbách.</h3>
       <p class="jv-vize-lead" style="margin-bottom: var(--s-40);">
         Pokud budeme zvoleni, budeme prosazovat celkovou koncepci vrchu
