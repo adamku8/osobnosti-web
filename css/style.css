@@ -905,3 +905,177 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .promise { border-right: none; padding-left: 0; padding-right: 0; }
     .footer-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================
+   PODSTRÁNKY (program, kandidáti, detail kandidáta)
+   ========================================================== */
+
+.page-hero { padding: var(--s-64) 0 var(--s-40); }
+.page-hero h1 { margin-bottom: var(--s-24); }
+.page-hero .eyebrow { margin-bottom: var(--s-16); }
+.page-hero .hero-lead { margin-bottom: var(--s-24); }
+
+.back-link {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: var(--s-24);
+  transition: color 240ms var(--ease-ui);
+}
+.back-link:hover { color: var(--brand-red); }
+
+/* ---------- Program: oblasti ---------- */
+.areas { display: flex; flex-direction: column; gap: var(--s-96); }
+.area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-64);
+  align-items: center;
+}
+.area:nth-child(even) .area-photo { order: -1; }
+.area-index {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  color: var(--brand-red);
+  line-height: 1;
+  margin-bottom: var(--s-8);
+}
+.area h2 { margin-bottom: var(--s-24); }
+.area-list { list-style: none; margin-bottom: var(--s-24); }
+.area-list li {
+  color: var(--text-secondary);
+  padding-left: var(--s-24);
+  position: relative;
+  margin-bottom: var(--s-8);
+}
+.area-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 12px;
+  height: 2px;
+  background: var(--brand-red);
+}
+.area-vize {
+  border-left: 2px solid var(--signal-blue);
+  padding-left: var(--s-24);
+}
+.area-vize .eyebrow { margin-bottom: var(--s-8); }
+.area-vize .eyebrow::before { display: none; }
+.area-vize p { color: var(--text-secondary); font-size: 15px; }
+.area-photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+.section-cta-band { text-align: center; border-top: 1px solid var(--border); }
+.section-cta-band h2 { text-align: center; }
+.section-cta-band .section-note { margin: var(--s-16) auto 0; }
+
+/* ---------- Karta kandidáta jako odkaz ---------- */
+.cand-card-link { text-decoration: none; color: inherit; }
+.cand-more {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal-blue);
+  margin-top: var(--s-4);
+}
+@media (hover: hover) {
+  .cand-card-link .cand-more { opacity: 0; transition: opacity 240ms var(--ease-ui); }
+  .cand-card-link:hover .cand-more { opacity: 1; }
+}
+
+/* ---------- Detail kandidáta ---------- */
+.cand-hero { padding: var(--s-40) 0 0; }
+.cand-hero + .section { padding-top: var(--s-64); }
+.cand-hero-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--s-64);
+  align-items: center;
+}
+.cand-hero-photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--paper);
+}
+.cand-hero-index {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  color: var(--brand-red);
+  line-height: 1;
+  margin-bottom: var(--s-8);
+}
+.cand-hero-info h1 { font-size: clamp(40px, 6vw, 64px); margin-bottom: var(--s-16); }
+.cand-hero-role {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--s-24);
+}
+.cand-quote {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(20px, 2.4vw, 26px);
+  text-transform: uppercase;
+  line-height: 1.2;
+  max-width: 22ch;
+}
+
+.cand-answers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-40);
+}
+.answer { border-top: 2px solid var(--brand-red); padding-top: var(--s-24); }
+.answer h2 { font-size: 20px; margin-bottom: var(--s-16); }
+.answer p { color: var(--text-secondary); }
+
+.quick-section { border-top: 1px solid var(--border); }
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+.quick-item {
+  padding: var(--s-24);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.quick-item dt {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: var(--s-4);
+}
+.quick-item dd {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--anthracite);
+}
+
+@media (max-width: 900px) {
+  .area { grid-template-columns: 1fr; gap: var(--s-24); }
+  .area:nth-child(even) .area-photo { order: 0; }
+  .areas { gap: var(--s-64); }
+  .cand-hero-grid { grid-template-columns: 1fr; gap: var(--s-24); }
+  .cand-hero-photo { max-width: 280px; }
+  .cand-answers { grid-template-columns: 1fr; gap: var(--s-24); }
+  .quick-grid { grid-template-columns: repeat(2, 1fr); }
+}

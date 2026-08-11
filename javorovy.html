@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Javorový — nová vize | Osobnosti pro Třinec</title>
-  <meta name="description" content="Vize pro Javorový: rok práce, 414 dotazníků, 14 rozhovorů a veřejná beseda. Celoroční kopec, citlivě opravená chata a zázemí pro komunity.">
+  <meta name="description" content="Vize pro Javorový: rok práce, 415 dotazníků, rozhovory s aktéry a veřejná beseda. Celoroční kopec, citlivě opravená chata a zázemí pro komunity.">
   <!-- Prototyp v1 · zatím noindex, sundáme při ostrém nasazení -->
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
@@ -19,15 +19,73 @@
     }
     .jv-hero-grid--top { align-items: start; }
     @media (max-width: 900px) { .jv-hero-grid { grid-template-columns: 1fr; } }
-    .jv-hero-photo { margin: var(--s-40) 0 var(--s-64); }
-    .jv-hero-photo img {
-      width: 100%;
-      height: 340px;
-      object-fit: cover;
-      border-radius: 8px;
+    /* Cover — titulek na fotce (magazínová obálka) */
+    .jv-cover {
+      position: relative;
+      min-height: 640px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      /* clip-path vytvoří kontejner pro position:fixed → fotka drží na místě, stránka po ní sjíždí */
+      clip-path: inset(0);
     }
-    .jv-sketch { position: relative; }
-    .jv-sketch img { width: 100%; border-radius: 8px; }
+    .jv-cover-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center 62%;
+      z-index: 0;
+    }
+    .jv-cover-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(30,30,30,0.10) 0%, rgba(30,30,30,0.30) 40%, rgba(30,30,30,0.80) 100%),
+        linear-gradient(90deg, rgba(30,30,30,0.45) 0%, rgba(30,30,30,0.05) 70%);
+    }
+    .jv-cover .container {
+      position: relative;
+      z-index: 2;
+      padding-top: 160px;
+      padding-bottom: var(--s-64);
+    }
+    .jv-cover h1 { color: #fff; }
+    .jv-cover-eyebrow {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: var(--s-16);
+    }
+    .jv-cover-lead {
+      color: rgba(255,255,255,0.94);
+      font-size: 19px;
+      line-height: 1.55;
+      max-width: 58ch;
+      margin-top: var(--s-24);
+    }
+    @media (max-width: 900px) {
+      .jv-cover { min-height: 440px; clip-path: none; }
+      .jv-cover .container { padding-top: 100px; }
+      /* na mobilu fixed pozadí trhá (iOS), vracíme klasické */
+      .jv-cover-bg { position: absolute; width: 100%; height: 100%; }
+    }
+    .jv-toc-section { padding-top: var(--s-64); padding-bottom: var(--s-40); }
+    .jv-toc-2col {
+      max-width: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--s-64);
+      border-top: none;
+    }
+    .jv-toc-2col a { border-top: 1px solid var(--border); border-bottom: none; }
+    @media (max-width: 800px) { .jv-toc-2col { grid-template-columns: 1fr; } }
     .jv-caption {
       font-size: 14px;
       color: var(--text-muted);
@@ -85,12 +143,28 @@
       color: #fff;
     }
     .jv-viz img { width: 100%; border-radius: 8px; }
+    /* Historie jako vložený „archivní" blok v obsahu */
+    .jv-history-clip {
+      background: #f7f3ec;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: var(--s-40);
+    }
+    .jv-history-clip .jv-viz img { border: 1px solid var(--border); }
+    #historie.section { padding-top: 0; }
+    /* Nadpis nad kroky */
+    .steps-title { font-size: 24px; margin-bottom: var(--s-40); }
     .jv-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: var(--s-40);
     }
-    @media (max-width: 800px) { .jv-stats { grid-template-columns: 1fr; } }
+    .stat .section-head { margin-bottom: var(--s-40); }
+    @media (max-width: 800px) {
+      .jv-stats { gap: var(--s-16); }
+      .jv-stat-num { font-size: 40px; }
+      .jv-stat p { font-size: 14px; }
+    }
     .jv-stat-num {
       font-family: var(--font-display);
       font-weight: 800;
@@ -140,6 +214,234 @@
       margin-bottom: var(--s-16);
     }
     .jv-band p { max-width: 62ch; opacity: 0.95; }
+    /* Horizontální timeline a kroky (DTP sloupce) */
+    .timeline-h {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--s-40);
+    }
+    @media (max-width: 900px) {
+      .timeline-h { grid-template-columns: 1fr 1fr; }
+      .timeline-h .tl-col:last-child { grid-column: 1 / -1; }
+    }
+    .tl-col { border-top: 1px solid var(--border); padding-top: var(--s-16); }
+    .tl-date {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--signal-blue);
+      margin-bottom: var(--s-8);
+    }
+    .tl-col p { font-size: 15px; color: var(--text-secondary); }
+    .steps-h {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-40);
+    }
+    @media (max-width: 900px) { .steps-h { grid-template-columns: 1fr 1fr; } }
+    .steps-h .step-col { border-top: 1px solid var(--border); padding-top: var(--s-16); }
+    .steps-h .step-num-h {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--signal-blue);
+      margin-bottom: var(--s-8);
+    }
+    .steps-h p { font-size: 15px; color: var(--text-secondary); }
+    /* Průzkum ve dvou sloupcích */
+    .jv-pruzkum-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-64) var(--s-96);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .jv-pruzkum-grid { grid-template-columns: 1fr; } }
+    .jv-col-label {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 18px;
+      margin-bottom: var(--s-24);
+    }
+    /* Pás s fotkou na pozadí */
+    .jv-band-photo {
+      position: relative;
+      padding: 120px 0;
+      color: #fff;
+      overflow: hidden;
+    }
+    .jv-band-photo .band-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .jv-band-photo .band-shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(35,35,35,0.88) 0%, rgba(35,35,35,0.72) 55%, rgba(35,35,35,0.5) 100%);
+    }
+    .jv-band-photo .container { position: relative; z-index: 2; }
+    .jv-band-photo h2 { color: #fff; font-size: clamp(32px, 5vw, 48px); margin-bottom: var(--s-16); }
+    .jv-band-photo p { max-width: 58ch; opacity: 0.95; }
+    .btn-white {
+      background: var(--paper);
+      color: var(--anthracite);
+    }
+    .btn-white:hover { background: rgba(255,255,255,0.86); }
+    /* Doporučení — červený box */
+    .rec-box {
+      background: var(--brand-red);
+      color: #fff;
+      padding: var(--s-64);
+      margin-top: var(--s-64);
+    }
+    @media (max-width: 700px) { .rec-box { padding: var(--s-40) var(--s-24); } }
+    .rec-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.85;
+      margin-bottom: var(--s-24);
+    }
+    .rec-claim {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: clamp(30px, 4.2vw, 46px);
+      line-height: 1.0;
+      color: #fff;
+      margin-bottom: var(--s-8);
+    }
+    .rec-sub {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(18px, 2vw, 24px);
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: var(--s-24);
+    }
+    .rec-text {
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 68ch;
+      color: rgba(255,255,255,0.95);
+    }
+    .rec-text + .rec-text { margin-top: var(--s-16); }
+    /* Co dnes chybí */
+    .wishes-block { margin-top: var(--s-64); }
+    .wishes-head {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: clamp(20px, 2.2vw, 26px);
+      margin-bottom: var(--s-24);
+      max-width: 34ch;
+    }
+    .wishes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 var(--s-64);
+    }
+    @media (max-width: 900px) { .wishes { grid-template-columns: 1fr 1fr; gap: 0 var(--s-40); } }
+    @media (max-width: 600px) { .wishes { grid-template-columns: 1fr; } }
+    .wish {
+      position: relative;
+      padding: 13px 0 13px 28px;
+      border-bottom: 1px solid var(--border);
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+    .wish::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--signal-blue);
+    }
+    /* Infografika — prstence */
+    .rings {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--s-40);
+    }
+    @media (max-width: 900px) { .rings { grid-template-columns: 1fr 1fr; gap: var(--s-40) var(--s-24); } }
+    .ring { text-align: center; margin: 0; }
+    .ring-wrap {
+      position: relative;
+      width: 168px;
+      max-width: 100%;
+      margin: 0 auto var(--s-16);
+    }
+    .ring-wrap svg { width: 100%; height: auto; display: block; transform: rotate(-90deg); }
+    .ring-track { fill: none; stroke: rgba(50,50,50,0.10); stroke-width: 9; }
+    .ring-fill {
+      fill: none;
+      stroke: var(--signal-blue);
+      stroke-width: 9;
+      stroke-linecap: butt;
+    }
+    .ring-num {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 34px;
+      color: var(--signal-blue);
+      letter-spacing: -0.01em;
+    }
+    .ring figcaption {
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--text-secondary);
+      max-width: 24ch;
+      margin: 0 auto;
+    }
+    /* Slider s citacemi */
+    .jv-quotes { background: rgba(50,50,50,0.03); }
+    .quote-slider { position: relative; max-width: 900px; }
+    .quote-slide {
+      display: none;
+      margin: 0;
+      animation: quoteIn 360ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .quote-slide.is-active { display: block; }
+    @keyframes quoteIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .quote-slide p {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 2.6vw, 32px);
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: var(--s-16);
+    }
+    .quote-slide footer {
+      font-size: 15px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+    .quote-nav { display: flex; gap: var(--s-8); margin-top: var(--s-40); }
+    .quote-dot {
+      width: 40px;
+      height: 4px;
+      border: none;
+      padding: 0;
+      background: rgba(50,50,50,0.16);
+      cursor: pointer;
+      transition: background 240ms var(--ease-ui);
+    }
+    .quote-dot.is-active { background: var(--brand-red); }
+    .quote-dot:hover { background: rgba(50,50,50,0.36); }
+    .quote-dot.is-active:hover { background: var(--brand-red); }
     .jv-toc { margin-top: var(--s-40); }
     .jv-toc-label {
       font-family: var(--font-display);
@@ -253,7 +555,7 @@
         <a href="podporte-nas.html">Podpořte nás</a>
       </nav>
       <div class="header-right">
-        <a class="btn btn-blue header-cta" href="index.html#kandidati">Chci volit</a>
+        <a class="btn btn-blue header-cta" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit</a>
         <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
@@ -261,41 +563,39 @@
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
-  <section class="hero">
+  <!-- ================= COVER ================= -->
+  <section class="jv-cover">
+    <img class="jv-cover-bg" src="assets/img/javorovy/cover-javorovy.jpg" alt="Javorový vrch při pohledu od Gutů">
+    <div class="jv-cover-shade"></div>
     <div class="container">
-      <div class="hero-copy" style="max-width: 760px;">
-        <p class="eyebrow">Vize · Javorový</p>
-        <h1>Javorový.<br><span class="hl">Nová vize.</span></h1>
-        <p class="hero-lead">
-          Rok práce. Stovky hlasů. Jeden kopec. Z pověření zastupitelstva
-          jsme připravili podklad pro rozhodnutí o budoucnosti chaty
-          i celého areálu — a tady je, co jsme zjistili.
-        </p>
-      </div>
-      <div class="jv-hero-photo">
-        <img src="assets/img/javorovy/javorovy-z-gutu.jpg" alt="Javorový vrch při pohledu od Gutů">
-        <p class="jv-caption">Javorový při pohledu od Gutů.</p>
-      </div>
-      <div class="jv-hero-grid jv-hero-grid--top">
-        <nav class="jv-toc" aria-label="Obsah stránky" style="margin-top: 0;">
-          <p class="jv-toc-label">Jak jsme se rozhodovali, co dál s Javorovým</p>
-          <div class="jv-toc-links">
-            <a href="#harmonogram"><span class="toc-num">01</span> Krok za krokem — jak vize vznikala</a>
-            <a href="#historie"><span class="toc-num">02</span> Chata od roku 1895</a>
-            <a href="#pruzkum"><span class="toc-num">03</span> Co říká průzkum</a>
-            <a href="#zjisteni"><span class="toc-num">04</span> Klíčové zjištění</a>
-            <a href="#vize"><span class="toc-num">05</span> Živý kopec po celý rok</a>
-            <a href="#zadani"><span class="toc-num">06</span> Naše vize areálu na Javorovém</a>
-            <a href="#varianty"><span class="toc-num">07</span> Tři varianty a kolik stojí</a>
-            <a href="#jak-dal"><span class="toc-num">08</span> Jak dál — vybírat budete i vy</a>
-          </div>
-        </nav>
-        <div class="jv-sketch">
-          <img src="assets/img/javorovy/skica.jpg" alt="Skica chaty Javorový">
-          <p class="jv-caption">Ilustrační skica — chata Javorový, nejstarší chata v této části Beskyd (1895).</p>
+      <p class="jv-cover-eyebrow">Vize · Javorový</p>
+      <h1>Javorový.<br><span class="hl">Nová vize.</span></h1>
+      <p class="jv-cover-lead">
+        Rok práce. Stovky hlasů. Jeden kopec. Z pověření zastupitelstva
+        jsme připravili podklad pro rozhodnutí o budoucnosti chaty
+        i celého areálu — a tady je, co jsme zjistili.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= OBSAH ================= -->
+  <section class="section jv-toc-section">
+    <div class="container">
+      <nav class="jv-toc" aria-label="Obsah stránky" style="margin-top: 0;">
+        <p class="jv-toc-label">Jak jsme se rozhodovali, co dál s Javorovým</p>
+        <div class="jv-toc-links jv-toc-2col">
+          <a href="#harmonogram"><span class="toc-num">01</span> Krok za krokem</a>
+          <a href="#historie"><span class="toc-num">02</span> Chata od roku 1895</a>
+          <a href="#pruzkum"><span class="toc-num">03</span> Co říká průzkum</a>
+          <a href="#ctyri-cisla"><span class="toc-num">04</span> Čtyři čísla, která nás vedla</a>
+          <a href="#hlasy"><span class="toc-num">05</span> Co říkají lidé z kopce</a>
+          <a href="#zjisteni"><span class="toc-num">06</span> Klíčové zjištění</a>
+          <a href="#vize"><span class="toc-num">07</span> Živý kopec po celý rok</a>
+          <a href="#zadani"><span class="toc-num">08</span> Naše vize areálu</a>
+          <a href="#varianty"><span class="toc-num">09</span> Tři varianty a kolik stojí</a>
+          <a href="#jak-dal"><span class="toc-num">10</span> Jak dál</a>
         </div>
-      </div>
+      </nav>
     </div>
   </section>
 
@@ -306,26 +606,26 @@
         <p class="eyebrow">Jak vize vznikala</p>
         <h2>Krok za krokem.</h2>
       </div>
-      <div class="timeline">
-        <div class="timeline-row">
-          <div class="timeline-date">12/2023</div>
-          <div class="timeline-text">Zastupitelstvo pověřilo tři z nás přípravou budoucnosti areálu.</div>
+      <div class="timeline-h">
+        <div class="tl-col">
+          <div class="tl-date">12/2023</div>
+          <p>Zastupitelstvo pověřilo tři z nás přípravou budoucnosti areálu.</p>
         </div>
-        <div class="timeline-row">
-          <div class="timeline-date">01/2024</div>
-          <div class="timeline-text">Konzultace postupu s Českou komorou architektů.</div>
+        <div class="tl-col">
+          <div class="tl-date">01/2024</div>
+          <p>Konzultace postupu s Českou komorou architektů.</p>
         </div>
-        <div class="timeline-row">
-          <div class="timeline-date">2024</div>
-          <div class="timeline-text">Dotazník se 414 respondenty, 14 rozhovorů, veřejná beseda a setkání s architekty.</div>
+        <div class="tl-col">
+          <div class="tl-date">2024</div>
+          <p>415 dotazníků, 14 rozhovorů, veřejná beseda i setkání s architekty.</p>
         </div>
-        <div class="timeline-row">
-          <div class="timeline-date">05/2024</div>
-          <div class="timeline-text">Studie proveditelnosti a první vizualizace chaty.</div>
+        <div class="tl-col">
+          <div class="tl-date">05/2024</div>
+          <p>Studie proveditelnosti a první vizualizace chaty.</p>
         </div>
-        <div class="timeline-row">
-          <div class="timeline-date">Teď</div>
-          <div class="timeline-text">Vize je na stole — tři návrhy architektů a výběr, u kterého budete i vy.</div>
+        <div class="tl-col">
+          <div class="tl-date">Teď</div>
+          <p>Vize je na stole — tři návrhy architektů a výběr i s vámi.</p>
         </div>
       </div>
     </div>
@@ -334,6 +634,10 @@
   <!-- ================= PÁS TŘÍ ČÍSEL ================= -->
   <section class="stat">
     <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Co ukázal průzkum</p>
+        <h2>Javorový v číslech.</h2>
+      </div>
       <div class="jv-stats">
         <div class="jv-stat">
           <div class="jv-stat-num">81&nbsp;%</div>
@@ -354,7 +658,7 @@
   <!-- ================= HISTORIE CHATY ================= -->
   <section class="section" id="historie">
     <div class="container">
-      <div class="jv-hero-grid">
+      <div class="jv-hero-grid jv-history-clip">
         <div class="section-head" style="margin-bottom: 0;">
           <p class="eyebrow">Chata od roku 1895</p>
           <h2>Nejstarší chata v této části Beskyd.</h2>
@@ -378,18 +682,16 @@
   <section class="section" id="pruzkum">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Co říká průzkum · chata</p>
+        <p class="eyebrow">Co říká průzkum</p>
         <h2>Chatu máme rádi. Zaslouží si víc.</h2>
         <p class="section-note">
           Občerstvení na chatě si dává 88 % z vás — jídlo ale hodnotíte
           známkou 2,1 z 5 a ubytování 3 z 5. Proto chceme víc:
         </p>
       </div>
+      <div class="jv-pruzkum-grid">
       <div class="datarows">
-        <div class="datarow">
-          <div class="datarow-num">78&nbsp;%</div>
-          <div class="datarow-text">z vás považuje rekonstrukci chaty za důležitou</div>
-        </div>
+        <p class="jv-col-label">Chata</p>
         <div class="datarow">
           <div class="datarow-num">75&nbsp;%</div>
           <div class="datarow-text">z vás chce celkovou modernizaci chaty — hlavně hygienického zázemí</div>
@@ -407,17 +709,8 @@
           <div class="datarow-text">by uvítalo veřejné toalety a sprchy i pro neubytované</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ================= PRŮZKUM — KOPEC ================= -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Co říká průzkum · celý kopec</p>
-        <h2>Co chcete na kopci?</h2>
-      </div>
       <div class="bars">
+        <p class="jv-col-label">Co chcete na kopci?</p>
         <div class="bar-item">
           <div class="bar-label">Piknikové zóny</div>
           <div class="bar-fill" style="width:63%;">63&nbsp;%</div>
@@ -439,6 +732,92 @@
           <div class="bar-fill" style="width:37%;">37&nbsp;%</div>
         </div>
       </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INFOGRAFIKA — ČTYŘI ČÍSLA ================= -->
+  <section class="section" id="ctyri-cisla">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Průzkum v číslech</p>
+        <h2>Čtyři čísla, která nás vedla.</h2>
+      </div>
+      <div class="rings">
+        <figure class="ring">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-track" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52"
+                      stroke-dasharray="326.7" stroke-dashoffset="71.9"/>
+            </svg>
+            <span class="ring-num">78&nbsp;%</span>
+          </div>
+          <figcaption>považuje rekonstrukci chaty za důležitou</figcaption>
+        </figure>
+        <figure class="ring">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-track" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52"
+                      stroke-dasharray="326.7" stroke-dashoffset="104.5"/>
+            </svg>
+            <span class="ring-num">68&nbsp;%</span>
+          </div>
+          <figcaption>nesouhlasí se zpřístupněním vrcholu pro auta</figcaption>
+        </figure>
+        <figure class="ring">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-track" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52"
+                      stroke-dasharray="326.7" stroke-dashoffset="0"/>
+            </svg>
+            <span class="ring-num">100&nbsp;%</span>
+          </div>
+          <figcaption>vidí největší potenciál v pěší turistice</figcaption>
+        </figure>
+        <figure class="ring">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-track" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52"
+                      stroke-dasharray="326.7" stroke-dashoffset="39.2"/>
+            </svg>
+            <span class="ring-num">88&nbsp;%</span>
+          </div>
+          <figcaption>a hned po ní v paraglidingu</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CITACE (SLIDER) ================= -->
+  <section class="section jv-quotes" id="hlasy">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Rozhovory s aktéry</p>
+        <h2>Co říkají lidé z kopce.</h2>
+      </div>
+      <div class="quote-slider" id="quoteSlider">
+        <blockquote class="quote-slide is-active">
+          <p>„Hlavní náplní práce je úklid odpadu po turistech."</p>
+          <footer>Člen týmu chaty Javorový</footer>
+        </blockquote>
+        <blockquote class="quote-slide">
+          <p>„Lanovka je provozuschopná maximálně 10 let. Nová dvousedačka bude stát cca 60 milionů korun, budeme žádat o dotaci."</p>
+          <footer>Zástupce společnosti BYTOSLAN</footer>
+        </blockquote>
+        <blockquote class="quote-slide">
+          <p>„Pravidelné akce v podobě grilování by mohly přispět k příjemné atmosféře."</p>
+          <footer>Místní turistka</footer>
+        </blockquote>
+        <div class="quote-nav" id="quoteNav">
+          <button class="quote-dot is-active" type="button" aria-label="Citace 1"></button>
+          <button class="quote-dot" type="button" aria-label="Citace 2"></button>
+          <button class="quote-dot" type="button" aria-label="Citace 3"></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -448,8 +827,7 @@
       <p class="jv-band-eyebrow">Klíčové zjištění</p>
       <h2>Víc zážitků. Ne víc lidí.</h2>
       <p>
-        Pro 65 % z vás je ochrana přírody na Javorovém důležitá
-        a 68 % nesouhlasí se zpřístupněním vrcholu pro auta.
+        Pro 65 % z vás je ochrana přírody na Javorovém důležitá.
         Většina si přeje, aby návštěvnost zásadně nerostla —
         kvůli přírodě i unikátnímu charakteru místa. Chceme, aby kopec
         sloužil líp. Nám všem.
@@ -457,21 +835,21 @@
     </div>
   </section>
 
-  <!-- ================= VIZE ================= -->
-  <section class="section" id="vize">
+  <!-- ================= VIZE (FOTOPÁS) ================= -->
+  <section class="jv-band-photo" id="vize">
+    <img class="band-bg" src="assets/img/javorovy/vyhled-udoli.jpg" alt="Výhled z Javorového na Třinec a údolí Olše" loading="lazy">
+    <div class="band-shade"></div>
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Naše vize</p>
-        <h2>Živý kopec. Po celý rok.</h2>
-        <p class="section-note">
-          Mluví za to i čísla: za turistikou na kopec chodí 91 % z vás,
-          na lyžích jezdí 7 % — a největší potenciál vidíte v pěší
-          turistice (100 %) a paraglidingu (88 %). Klimatické změny rozhodly — z Javorového
-          už nebude lyžařský areál. To ale otevírá nové možnosti: sport,
-          kulturu a komunity po celý rok. Areál zůstává v rukou města
-          a chata se vrátí k podobě, jakou měla v roce 1895.
-        </p>
-      </div>
+      <p class="jv-band-eyebrow">Naše vize</p>
+      <h2>Živý kopec. Po celý rok.</h2>
+      <p>
+        Mluví za to i čísla: za turistikou na kopec chodí 91 % z vás,
+        na lyžích jezdí 7 %. Klimatické změny
+        rozhodly — z Javorového už nebude lyžařský areál. To ale otevírá
+        nové možnosti: sport, kulturu a komunity po celý rok. Areál
+        zůstává v rukou města a chata se vrátí k podobě, jakou měla
+        v roce 1895.
+      </p>
     </div>
   </section>
 
@@ -523,7 +901,7 @@
       </div>
       <div class="jv-viz" style="margin-top: var(--s-64);">
         <img src="assets/img/javorovy/vizualizace-kania.jpg" alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
-        <p class="jv-caption">Vizualizace: KANIA a.s. — studie proveditelnosti, květen 2024, varianta 2. Ukazuje záměr, ne finální podobu.</p>
+        <p class="jv-caption">Vizualizace: KANIA a.s. — studie proveditelnosti zpracovaná pro město, květen 2024, varianta 2. Ukazuje záměr, ne finální podobu.</p>
       </div>
     </div>
   </section>
@@ -541,24 +919,61 @@
       </div>
       <div class="zones">
         <div class="zone approach">
-          <div class="approach-meta">9,6 mil. Kč</div>
+          <div class="approach-meta">Varianta A · 9,6 mil. Kč</div>
           <h3>Nejnutnější údržba</h3>
           <p>Okna a dveře, elektroinstalace, nová čistírna odpadních vod,
             rekonstrukce střechy a podhledů. Chata přežije — ale nic víc.</p>
         </div>
         <div class="zone approach">
-          <div class="approach-meta">15,4 mil. Kč</div>
+          <div class="approach-meta">Varianta B · 15,4 mil. Kč</div>
+          <span class="approach-pick">Naše doporučení</span>
           <h3>Rekonstrukce s novou terasou</h3>
           <p>Vše z údržby + jednotná fasáda a nová dřevěná terasa pro
             70 lidí inspirovaná tou historickou. Této variantě odpovídá
             vizualizace výše.</p>
         </div>
         <div class="zone approach">
-          <div class="approach-meta">50,4 mil. Kč</div>
+          <div class="approach-meta">Varianta C · 50,4 mil. Kč</div>
           <h3>Výstavba nového objektu</h3>
           <p>Nová budova na kamenném základu — restaurace s terasou
             pro 100 lidí, ubytování pro 40 osob, fotovoltaika na jižní
             střeše.</p>
+        </div>
+      </div>
+
+      <!-- Doporučení hnutí -->
+      <div class="rec-box">
+        <p class="rec-label">Doporučení Osobností pro Třinec</p>
+        <h3 class="rec-claim">Město by mělo jít cestou B.</h3>
+        <p class="rec-sub">Rekonstrukce chaty s novou terasou.</p>
+        <p class="rec-text">
+          Chatu ani vrch neprodávat — ale investovat do rekonstrukce.
+          A nejen do samotné chaty, hlavně do jejího okolí a zázemí tak,
+          aby byl Javorový místem pro setkávání i akce. Samozřejmě
+          v režimu ochrany přírody a udržitelnosti.
+        </p>
+        <p class="rec-text">
+          Bez vazby na lyžování a sjezdovky — ty bychom nájemci chaty
+          vyjmuli ze smlouvy a postupně našli nové využití těchto prostorů.
+        </p>
+      </div>
+
+      <!-- Co dnes chybí -->
+      <div class="wishes-block">
+        <h3 class="wishes-head">Co bychom rádi, aby kolem Javorového existovalo — a dnes není?</h3>
+        <div class="wishes">
+          <div class="wish">zázemí pro spolky i sportovce</div>
+          <div class="wish">přespání v útulně pro turisty</div>
+          <div class="wish">komorní divadlo či recitál</div>
+          <div class="wish">oběd na terase chaty s vyhlídkou</div>
+          <div class="wish">naučná stezka pro mládež s výstupem</div>
+          <div class="wish">časomíra pro výstupy a sportovce</div>
+          <div class="wish">více tras nahoru pro kočárky</div>
+          <div class="wish">více odpočívadel pro výstupy</div>
+          <div class="wish">lepší možnosti parkování pod vrchem</div>
+          <div class="wish">nové dětské prvky v areálu</div>
+          <div class="wish">sociální zázemí 24/7</div>
+          <div class="wish">nové nápady pro Mamlas plac</div>
         </div>
       </div>
     </div>
@@ -576,48 +991,42 @@
           a jako jediná spojuje výběr z více návrhů se zapojením veřejnosti.
         </p>
       </div>
-      <div class="zones" style="margin-bottom: var(--s-64);">
-        <div class="zone approach">
-          <div class="approach-meta">min. 1 rok · min. 2 mil. Kč</div>
-          <h3>Architektonická soutěž</h3>
-          <p>20+ návrhů z celé republiky. Transparentní, ale drahá,
-            administrativně náročná a pomalá.</p>
+      <h3 class="steps-title">Co tedy navrhujeme dál?</h3>
+      <div class="steps-h">
+        <div class="step-col">
+          <div class="step-num-h">01</div>
+          <p>Tři místní architekti se vztahem k Beskydům připraví tři návrhy nové chaty.</p>
         </div>
-        <div class="zone approach">
-          <div class="approach-meta">min. 3 měsíce · cca 300 tis. Kč</div>
-          <span class="approach-pick">Naše doporučení</span>
-          <h3>Zakázka třem místním architektům</h3>
-          <p><strong>Místní architekti, kteří Beskydy znají a mají k nim
-            vztah.</strong> Tři návrhy a výběr se zapojením veřejnosti.</p>
+        <div class="step-col">
+          <div class="step-num-h">02</div>
+          <p>Návrhy veřejně představíme — výstava i online galerie.</p>
         </div>
-        <div class="zone approach">
-          <div class="approach-meta">min. 3 měsíce · cca 100 tis. Kč</div>
-          <h3>Studie od jednoho dodavatele</h3>
-          <p>Nejlevnější cesta — ale jediný návrh, bez výběru
-            a bez hlasu veřejnosti.</p>
+        <div class="step-col">
+          <div class="step-num-h">03</div>
+          <p>Občané a odborná porota pomohou vybrat vítězný návrh.</p>
+        </div>
+        <div class="step-col">
+          <div class="step-num-h">04</div>
+          <p>Město zajistí financování a projekt dotáhne k realizaci.</p>
         </div>
       </div>
-      <div class="steps">
-        <div class="step-row">
-          <div class="step-num">01</div>
-          <div class="timeline-text">Tři místní architekti se vztahem k Beskydům připraví tři návrhy nové chaty.</div>
-        </div>
-        <div class="step-row">
-          <div class="step-num">02</div>
-          <div class="timeline-text">Návrhy veřejně představíme — výstava i online galerie.</div>
-        </div>
-        <div class="step-row">
-          <div class="step-num">03</div>
-          <div class="timeline-text">Občané a odborná porota pomohou vybrat vítězný návrh.</div>
-        </div>
-        <div class="step-row">
-          <div class="step-num">04</div>
-          <div class="timeline-text">Město zajistí financování a projekt dotáhne k realizaci.</div>
-        </div>
-      </div>
-      <div class="section-cta">
-        <a class="btn btn-blue btn-lg" href="podporte-nas.html">Podpořte nás</a>
-        <a class="btn btn-secondary btn-lg" href="index.html#projekty">Další projekty</a>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING (FOTOPÁS) ================= -->
+  <section class="jv-band-photo">
+    <img class="band-bg" src="assets/img/javorovy/vyhled-hrebeny.jpg" alt="Výhled z Javorového na hřebeny Beskyd" loading="lazy" style="object-position: center 65%;">
+    <div class="band-shade"></div>
+    <div class="container">
+      <p class="jv-band-eyebrow">Javorový 2026</p>
+      <h2>Náš kopec si zaslouží dalších sto let.</h2>
+      <p>
+        Vize je na stole. Teď je na řadě zadání pro architekty —
+        a výběr, u kterého budete i vy.
+      </p>
+      <div class="section-cta" style="margin-top: var(--s-40); text-align: left;">
+        <a class="btn btn-white btn-lg" href="podporte-nas.html">Podpořte nás</a>
+        <a class="btn btn-white btn-lg" href="index.html#projekty">Další projekty</a>
       </div>
     </div>
   </section>
@@ -655,5 +1064,30 @@
   </footer>
 
   <script src="js/main.js?v=5"></script>
+  <script>
+    // Slider s citacemi — automatické střídání, pauza při najetí myší
+    (function () {
+      var slider = document.getElementById('quoteSlider');
+      if (!slider) return;
+      var slides = slider.querySelectorAll('.quote-slide');
+      var dots = slider.querySelectorAll('.quote-dot');
+      var i = 0, timer = null;
+
+      function show(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
+        dots.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
+      }
+      function start() { timer = setInterval(function () { show(i + 1); }, 7000); }
+      function stop() { clearInterval(timer); }
+
+      dots.forEach(function (d, k) {
+        d.addEventListener('click', function () { stop(); show(k); start(); });
+      });
+      slider.addEventListener('mouseenter', stop);
+      slider.addEventListener('mouseleave', start);
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+    })();
+  </script>
 </body>
 </html>

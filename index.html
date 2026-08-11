@@ -5,8 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Osobnosti pro Třinec — Nové vize. Nový Třinec. Osobnosti.</title>
   <meta name="description" content="Lokální občanské hnutí Osobnosti pro Třinec. Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují. Komunální volby 9.–10. října 2026.">
-  <!-- Prototyp v1 · zatím noindex, sundáme při ostrém nasazení -->
-  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://osobnostiprotrinec.cz/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Osobnosti pro Třinec">
+  <meta property="og:locale" content="cs_CZ">
+  <meta property="og:url" content="https://osobnostiprotrinec.cz/">
+  <meta property="og:title" content="Osobnosti pro Třinec — Nové vize. Nový Třinec. Osobnosti.">
+  <meta property="og:description" content="Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují. Program, projekty a kandidáti pro komunální volby 9.–10. října 2026.">
+  <meta property="og:image" content="https://osobnostiprotrinec.cz/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -20,14 +29,13 @@
       </a>
       <nav class="nav" id="nav">
         <a href="#uvod" class="active">Úvod</a>
-        <a href="#program">Program</a>
-        <a href="#podarilo">Co se podařilo</a>
-        <a href="#kandidati">Kandidáti</a>
+        <a href="program.html">Program</a>
+        <a href="kandidati.html">Kandidáti</a>
         <a href="#kontakt">Kontakt</a>
         <a href="podporte-nas.html">Podpořte nás</a>
       </nav>
       <div class="header-right">
-        <a class="btn btn-blue header-cta" href="#uvod">Chci volit</a>
+        <a class="btn btn-blue header-cta" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit</a>
         <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
@@ -63,7 +71,7 @@
               <div class="hero-date">9.–10. října 2026</div>
             </div>
             <!-- TODO: volební číslo bude známé po losování -->
-            <a class="btn btn-blue" href="#kandidati">Chci volit!</a>
+            <a class="btn btn-blue" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit!</a>
           </div>
         </div>
 
@@ -121,8 +129,8 @@
             Navazujeme na 20 let dobré práce pro město.
           </p>
           <div class="stat-links">
-            <a class="btn btn-blue" href="#program">Náš program</a>
-            <a class="btn btn-secondary" href="#kandidati">Kandidáti</a>
+            <a class="btn btn-blue" href="program.html">Náš program</a>
+            <a class="btn btn-secondary" href="kandidati.html">Kandidáti</a>
           </div>
         </div>
       </div>
@@ -225,8 +233,9 @@
           <div class="promise-vize">Vize · Rodiny do Třince</div>
         </article>
       </div>
-      <div class="section-cta">
-        <a class="btn btn-secondary btn-lg" href="assets/program-osobnosti-pro-trinec-2026.pdf" target="_blank" rel="noopener">Stáhnout program (PDF)</a>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href="program.html">Celý program</a>
+        <a class="btn btn-secondary btn-lg" href="assets/program-osobnosti-pro-trinec-2026.pdf" target="_blank" rel="noopener">Stáhnout PDF</a>
       </div>
     </div>
   </section>
@@ -416,8 +425,7 @@
         </article>
       </div>
       <div class="cand-cta">
-        <!-- TODO: odkaz na podstránku se všemi kandidáty -->
-        <a class="btn btn-primary btn-lg" href="#">Všech 27 kandidátů</a>
+        <a class="btn btn-primary btn-lg" href="kandidati.html">Všech 27 kandidátů</a>
       </div>
     </div>
   </section>
@@ -434,7 +442,7 @@
           prosazovat nové nápady a vize.
         </p>
         <nav class="closing-nav" aria-label="Rozcestník">
-          <a href="#program">Program</a>
+          <a href="program.html">Program</a>
           <a href="#projekty">Projekty</a>
           <a href="#kandidati">Kandidáti</a>
           <a href="#kontakt">Kontakt</a>
@@ -464,7 +472,7 @@
         <div>
           <h4>Web</h4>
           <ul>
-            <li><a href="#program">Program</a></li>
+            <li><a href="program.html">Program</a></li>
             <li><a href="#kandidati">Kandidáti</a></li>
             <li><a href="podporte-nas.html">Podpořte nás</a></li>
           </ul>
@@ -472,7 +480,7 @@
       </div>
       <div class="footer-legal">
         <span>© 2026 Politické hnutí NOVÁ GENERACE</span>
-        <!-- TODO: ustálit text disclaimeru pro placenou volební inzerci -->
+        <span>Zadavatel i zpracovatel: politické hnutí NOVÁ GENERACE</span>
         <span>#SPOJUJEMEGENERACE · #PROTRINEC</span>
       </div>
     </div>
