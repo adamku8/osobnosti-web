@@ -1257,3 +1257,10 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .udalost-ikona svg { width: 48px; height: 48px; }
   .udalost-popis { margin-left: auto; margin-right: auto; }
 }
+
+/* ---------- Kampaňová deska na homepage ---------- */
+.deska { padding: var(--s-40) 0 var(--s-64); }
+.deska img { width: 100%; height: auto; }
+@media (max-width: 900px) {
+  .deska { padding: var(--s-24) 0 var(--s-40); }
+}

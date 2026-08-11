@@ -48,6 +48,8 @@ Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežij
 
 Nebudeme slibovat, že vrátíme rok 2005. Budeme dělat to, co dává smysl v roce 2026.
 
+**0. Aktivní jednotlivci — ti to vždy zachrání.** Živé město nedělá radnice. Dělají ho lidé, kteří se rozhodnou něco uspořádat: trenér, kapelník, farář, holka, co dá dohromady swap, chlap, co obnoví průvod v Gutech. Úloha města je jediná — najít je, nebrzdit je a podpořit je. Přesně proto má smysl participativní rozpočet: peníze jdou za lidmi, kteří už něco dělají.
+
 **1. Příměstské části jako místa, kde se žije.** Guty, Karpentná, Oldřichovice, Nebory — tam dnes komunitní život reálně funguje. Chceme pro něj místa a peníze: opravené kulturáky, hřiště, podporu spolků. [DOPLNIT konkrétní závazky z programu]
 
 **2. Klub pro mladé? Trh rozhodne — město pomůže.** Město nemá provozovat diskotéku. Může ale nabídnout prostor, zjednodušit podmínky a nechat vzniknout to, co si mladí sami řeknou. Když bude poptávka, podnik vznikne. Naše role je nestát v cestě — a umět pomoct s prostorem. [DOPLNIT — je konkrétní prostor ve hře?]
@@ -59,6 +61,8 @@ Nebudeme slibovat, že vrátíme rok 2005. Budeme dělat to, co dává smysl v r
 **5. Trisia jako motor.** [DOPLNIT — co konkrétně: dramaturgie pro mladší publikum? večerní program? spolupráce se školami?]
 
 **6. Centrum pro aktivní seniory.** Živé město není jen město mladých. Senioři jsou dnes nejaktivnější generace v Třinci — a zaslouží si důstojné zázemí. [DOPLNIT konkrétní záměr — místo, forma]
+
+**7. Místa, kde se akce dají dělat.** Akce potřebují prostor, ne razítko. Chceme, aby TGM [OVĚŘIT — náměstí TGM? areál ZŠ TGM?] fungovalo jako přirozené místo pro městské akce. Aby Javorový nebyl jen sjezdovka, ale prostor pro události svého typu — závody, festivaly pod horou, akce venku. A aby Třinec měl letní scénu: pódium, na které v létě dosáhne kapela, divadlo i škola. [DOPLNIT — kde: park, náměstí, amfiteátr?]
 
 ## Živo je tam, kde jsou lidi
 
@@ -101,6 +105,7 @@ Odkazy: [obyvatelstvo.cz/Třinec](https://obyvatelstvo.cz/cz/mesto/trinec) · [�
 3. **Peníze do kultury v rozpočtu** — vytáhnu ze složky `Rozpočet města`, řekni, mám-li.
 4. **Řešení 1–6** — u každého chybí konkrétní závazek (co, kde, do kdy). Bez toho je to podle brand voice moc obecné („více bezpečných přechodů" problém).
 5. **Trisia** — bod je zatím prázdný, potřebuju zadání.
+5b. **„TGM"** — upřesnit, co přesně myslíš (náměstí TGM / areál ZŠ TGM / jiné). **Javorový + letní scéna** — mají-li konkrétní podobu (kde, s kým), doplnit; zatím obecně.
 6. **Titulková varianta:** „Je v Třinci mrtvo, nebo živo?" vs. „V Třinci není mrtvo. Je jinak živo." — druhá je asertivnější, první líp klikací.
 7. **Vizuál k článku:** nabízí se přímo infografika `OPT-infografika-mladi-15-35-v1.1.png` — je hotová a on-brand.
 
