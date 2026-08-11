@@ -1264,3 +1264,24 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 @media (max-width: 900px) {
   .deska { padding: var(--s-24) 0 var(--s-40); }
 }
+
+/* ---------- Navštívené odkazy nesmí přebít barvu komponent ----------
+   Globální `a:visited` je specifičtější než třídy tlačítek a karet,
+   takže by jinak přebarvilo text (modrý nápis na modrém tlačítku). */
+.btn-primary:visited,
+.btn-blue:visited,
+.btn-white:visited { color: var(--paper); }
+.btn-secondary:visited { color: var(--anthracite); }
+
+.nav a:visited { color: var(--text-secondary); }
+.nav a.active:visited { color: var(--anthracite); }
+.site-footer a:visited { color: rgba(255, 255, 255, 0.72); }
+.site-footer a:visited:hover { color: #ffffff; }
+
+.cand-card-link:visited,
+.udalost:visited,
+.support-card:visited,
+.cand-nav-item:visited { color: var(--text); }
+.hero-lead a:visited { color: var(--text); }
+.closing-nav a:visited { color: var(--anthracite); }
+.back-link:visited { color: var(--text-muted); }
