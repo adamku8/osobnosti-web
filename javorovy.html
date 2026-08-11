@@ -36,8 +36,19 @@
       width: 100vw;
       height: 100vh;
       object-fit: cover;
-      object-position: center 62%;
+      object-position: center center;
       z-index: 0;
+      /* kolorování: potlačíme původní barevnost, ať sedne modrý nádech */
+      filter: saturate(0.45) contrast(1.08) brightness(0.94);
+    }
+    /* kolorování — modrý nádech přes fotku (duotón) */
+    .jv-cover-tint {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: var(--signal-blue);
+      mix-blend-mode: color;
+      opacity: 0.72;
     }
     .jv-cover-shade {
       position: absolute;
@@ -363,6 +374,27 @@
       font-weight: 800;
       color: var(--signal-blue);
     }
+    /* proti čemu budeme bojovat — červené × místo modrého + */
+    .wishes--against { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 600px) { .wishes--against { grid-template-columns: 1fr; } }
+    .wishes--against .wish::before { content: "×"; color: var(--brand-red); }
+    .wishes--against .wish strong { color: var(--text); }
+    /* vysvětlující blok pod seznamem */
+    .note-block {
+      margin-top: var(--s-40);
+      padding-left: var(--s-24);
+      border-left: 3px solid var(--border);
+      max-width: 68ch;
+    }
+    .note-block h4 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 17px;
+      margin-bottom: var(--s-8);
+      color: var(--text);
+    }
+    .note-block p { color: var(--text-secondary); font-size: 16px; line-height: 1.6; }
     /* Infografika — prstence */
     .rings {
       display: grid;
@@ -407,13 +439,24 @@
     /* Slider s citacemi */
     .jv-quotes { background: rgba(50,50,50,0.03); }
     .quote-slider { position: relative; max-width: 900px; }
+    /* všechny citace leží v jedné buňce gridu → výška = nejdelší citace, nic neposkakuje */
+    .quote-stage { display: grid; }
     .quote-slide {
-      display: none;
+      grid-area: 1 / 1;
       margin: 0;
-      animation: quoteIn 360ms cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 360ms cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 360ms cubic-bezier(0.4, 0, 0.2, 1),
+                  visibility 0s linear 360ms;
     }
-    .quote-slide.is-active { display: block; }
-    @keyframes quoteIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .quote-slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      transition-delay: 0s;
+    }
     .quote-slide p {
       font-family: var(--font-display);
       font-weight: 700;
@@ -565,10 +608,10 @@
 
   <!-- ================= COVER ================= -->
   <section class="jv-cover">
-    <img class="jv-cover-bg" src="assets/img/javorovy/cover-javorovy.jpg" alt="Javorový vrch při pohledu od Gutů">
+    <img class="jv-cover-bg" src="assets/img/javorovy/vyhled-udoli.jpg" alt="Výhled z Javorového na Třinec a údolí Olše">
+    <div class="jv-cover-tint"></div>
     <div class="jv-cover-shade"></div>
     <div class="container">
-      <p class="jv-cover-eyebrow">Vize · Javorový</p>
       <h1>Javorový.<br><span class="hl">Nová vize.</span></h1>
       <p class="jv-cover-lead">
         Rok práce. Stovky hlasů. Jeden kopec. Z pověření zastupitelstva
@@ -584,8 +627,8 @@
       <nav class="jv-toc" aria-label="Obsah stránky" style="margin-top: 0;">
         <p class="jv-toc-label">Jak jsme se rozhodovali, co dál s Javorovým</p>
         <div class="jv-toc-links jv-toc-2col">
-          <a href="#harmonogram"><span class="toc-num">01</span> Krok za krokem</a>
-          <a href="#historie"><span class="toc-num">02</span> Chata od roku 1895</a>
+          <a href="#historie"><span class="toc-num">01</span> Historie chaty</a>
+          <a href="#harmonogram"><span class="toc-num">02</span> Krok za krokem</a>
           <a href="#pruzkum"><span class="toc-num">03</span> Co říká průzkum</a>
           <a href="#ctyri-cisla"><span class="toc-num">04</span> Čtyři čísla, která nás vedla</a>
           <a href="#hlasy"><span class="toc-num">05</span> Co říkají lidé z kopce</a>
@@ -596,6 +639,29 @@
           <a href="#jak-dal"><span class="toc-num">10</span> Jak dál</a>
         </div>
       </nav>
+    </div>
+  </section>
+
+  <!-- ================= HISTORIE CHATY ================= -->
+  <section class="section" id="historie">
+    <div class="container">
+      <div class="jv-hero-grid jv-history-clip">
+        <div class="section-head" style="margin-bottom: 0;">
+          <p class="eyebrow">Historie chaty</p>
+          <h2>Nejstarší chata v této části Beskyd.</h2>
+          <p class="section-note">
+            Chata na Javorovém stojí od roku 1895 — postavil ji turistický
+            spolek Beskidenverein a je nejstarší chatou v této části Beskyd.
+            Přečkala více než sto dvacet zim, hostila generace turistů
+            z Třince i okolí a dnes patří městu. Právě k její původní
+            podobě z přelomu 19. a 20. století se chceme rekonstrukcí vrátit.
+          </p>
+        </div>
+        <div class="jv-viz">
+          <img src="assets/img/javorovy/chata-1910.jpg" alt="Historická pohlednice chaty na Javorovém z roku 1910">
+          <p class="jv-caption">Chata na pohlednici z roku 1910, ještě před přístavbou verandy. Zdroj: sbírka Stanislava Kroczka, volné dílo.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -650,29 +716,6 @@
         <div class="jv-stat">
           <div class="jv-stat-num">415</div>
           <p>občanů se zapojilo do dotazníku o budoucnosti Javorového</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= HISTORIE CHATY ================= -->
-  <section class="section" id="historie">
-    <div class="container">
-      <div class="jv-hero-grid jv-history-clip">
-        <div class="section-head" style="margin-bottom: 0;">
-          <p class="eyebrow">Chata od roku 1895</p>
-          <h2>Nejstarší chata v této části Beskyd.</h2>
-          <p class="section-note">
-            Chata na Javorovém stojí od roku 1895 — postavil ji turistický
-            spolek Beskidenverein a je nejstarší chatou v této části Beskyd.
-            Přečkala více než sto dvacet zim, hostila generace turistů
-            z Třince i okolí a dnes patří městu. Právě k její původní
-            podobě z přelomu 19. a 20. století se chceme rekonstrukcí vrátit.
-          </p>
-        </div>
-        <div class="jv-viz">
-          <img src="assets/img/javorovy/chata-1910.jpg" alt="Historická pohlednice chaty na Javorovém z roku 1910">
-          <p class="jv-caption">Chata na pohlednici z roku 1910, ještě před přístavbou verandy. Zdroj: sbírka Stanislava Kroczka, volné dílo.</p>
         </div>
       </div>
     </div>
@@ -800,6 +843,7 @@
         <h2>Co říkají lidé z kopce.</h2>
       </div>
       <div class="quote-slider" id="quoteSlider">
+        <div class="quote-stage">
         <blockquote class="quote-slide is-active">
           <p>„Hlavní náplní práce je úklid odpadu po turistech."</p>
           <footer>Člen týmu chaty Javorový</footer>
@@ -812,6 +856,7 @@
           <p>„Pravidelné akce v podobě grilování by mohly přispět k příjemné atmosféře."</p>
           <footer>Místní turistka</footer>
         </blockquote>
+        </div>
         <div class="quote-nav" id="quoteNav">
           <button class="quote-dot is-active" type="button" aria-label="Citace 1"></button>
           <button class="quote-dot" type="button" aria-label="Citace 2"></button>
@@ -837,7 +882,7 @@
 
   <!-- ================= VIZE (FOTOPÁS) ================= -->
   <section class="jv-band-photo" id="vize">
-    <img class="band-bg" src="assets/img/javorovy/vyhled-udoli.jpg" alt="Výhled z Javorového na Třinec a údolí Olše" loading="lazy">
+    <img class="band-bg" src="assets/img/javorovy/javorovy-z-gutu.jpg" alt="Javorový vrch při pohledu od Gutů" loading="lazy" style="object-position: center 60%;">
     <div class="band-shade"></div>
     <div class="container">
       <p class="jv-band-eyebrow">Naše vize</p>
@@ -956,11 +1001,18 @@
           Bez vazby na lyžování a sjezdovky — ty bychom nájemci chaty
           vyjmuli ze smlouvy a postupně našli nové využití těchto prostorů.
         </p>
+        <p class="rec-text">
+          Spolu s dalšími aktéry — krajem, Lesy ČR i poskytovateli dotací —
+          budeme pokračovat v diskusi, co dál s lanovkou na Javorový.
+          Nebránili bychom se jejímu převodu na město a hlavně lepšímu
+          využití celého objektu dolní stanice, například jako komunitního
+          centra nebo místa pro akce.
+        </p>
       </div>
 
       <!-- Co dnes chybí -->
       <div class="wishes-block">
-        <h3 class="wishes-head">Co bychom rádi, aby kolem Javorového existovalo — a dnes není?</h3>
+        <h3 class="wishes-head">Co na Javorovém chybí?</h3>
         <div class="wishes">
           <div class="wish">zázemí pro spolky i sportovce</div>
           <div class="wish">přespání v útulně pro turisty</div>
@@ -974,6 +1026,25 @@
           <div class="wish">nové dětské prvky v areálu</div>
           <div class="wish">sociální zázemí 24/7</div>
           <div class="wish">nové nápady pro Mamlas plac</div>
+        </div>
+      </div>
+
+      <!-- Proti čemu budeme bojovat -->
+      <div class="wishes-block">
+        <h3 class="wishes-head">Proti čemu budeme bojovat?</h3>
+        <div class="wishes wishes--against">
+          <div class="wish">více autům na Javorový</div>
+          <div class="wish">zásadnímu zvednutí turistického ruchu</div>
+          <div class="wish">obnově sjezdovek a lyžování</div>
+          <div class="wish"><strong>prodeji chaty nebo její části</strong></div>
+        </div>
+        <div class="note-block">
+          <h4>Proč nedává smysl Javorový pro lyžování?</h4>
+          <p>
+            Z průzkumu ani z diskusí nevyplynulo, že by lidé toužili
+            na Javorovém dál lyžovat. To samozřejmě nebrání dalšímu využití
+            Mamlas placu pro nové zimní i letní aktivity.
+          </p>
         </div>
       </div>
     </div>
@@ -991,7 +1062,12 @@
           a jako jediná spojuje výběr z více návrhů se zapojením veřejnosti.
         </p>
       </div>
-      <h3 class="steps-title">Co tedy navrhujeme dál?</h3>
+      <h3 class="steps-title">Konkrétní kroky hned po volbách.</h3>
+      <p class="jv-vize-lead" style="margin-bottom: var(--s-40);">
+        Pokud budeme zvoleni, budeme prosazovat celkovou koncepci vrchu
+        i areálu Javorový. Jako první věc začneme spolupracovat s architekty
+        a dál zapojovat veřejnost do diskuse.
+      </p>
       <div class="steps-h">
         <div class="step-col">
           <div class="step-num-h">01</div>
