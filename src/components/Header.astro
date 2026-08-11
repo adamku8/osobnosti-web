@@ -1,0 +1,30 @@
+---
+const { active = '' } = Astro.props;
+
+const menu = [
+  { id: 'uvod',     text: 'Úvod',        href: '/index.html' },
+  { id: 'program',  text: 'Program',     href: '/program.html' },
+  { id: 'kandidati',text: 'Kandidáti',   href: '/kandidati.html' },
+  { id: 'kontakt',  text: 'Kontakt',     href: '/index.html#kontakt' },
+  { id: 'podporte', text: 'Podpořte nás',href: '/podporte-nas.html' },
+];
+const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
+---
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="/index.html" aria-label="Osobnosti pro Třinec — úvod">
+      <img src="/assets/logo.svg" alt="Osobnosti pro Třinec">
+    </a>
+    <nav class="nav" id="nav">
+      {menu.map(p => (
+        <a href={p.href} class={active === p.id ? 'active' : undefined}>{p.text}</a>
+      ))}
+    </nav>
+    <div class="header-right">
+      <a class="btn btn-blue header-cta" href={udalostFB} target="_blank" rel="noopener">Chci volit</a>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>

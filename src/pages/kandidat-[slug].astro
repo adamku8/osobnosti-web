@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+import { kandidati } from '../data/kandidati.js';
+import { medailonky } from '../data/medailonky.js';
+
+export function getStaticPaths() {
+  return kandidati
+    .filter(k => k.detail && medailonky[k.detail])
+    .map(k => ({ params: { slug: k.detail }, props: { k } }));
+}
+
+const { k } = Astro.props;
+const m = medailonky[k.detail];
+
+// sousedé v listině — prev/next
+const i = kandidati.findIndex(x => x.cislo === k.cislo);
+const odkazNa = (c) =>
+  c.detail && medailonky[c.detail]
+    ? `/kandidat-${c.detail}.html`
+    : `/kandidati.html#kandidat-${String(c.cislo).padStart(2, '0')}`;
+const predchozi = i > 0 ? kandidati[i - 1] : null;
+const dalsi = i < kandidati.length - 1 ? kandidati[i + 1] : null;
+
+// jméno rozdělené na křestní / příjmení pro dvouřádkový nadpis
+const casti = k.jmeno.replace(/^(Mgr\.|Ing\.|MUDr\.|MVDr\.|Bc\.|MgA\.|DiS\.|et|MSc\.,?|Mgr|,)\s*/g, '').trim().split(' ');
+const prijmeni = casti.pop();
+const krestni = casti.join(' ');
+const tituly = k.jmeno.replace(`${krestni} ${prijmeni}`, '').trim();
+---
+<Base
+  title={`${k.jmeno} — Osobnosti pro Třinec`}
+  description={`${k.jmeno}, ${k.poradiSlovem} na kandidátce Osobnosti pro Třinec. ${k.profese}. Proč kandiduje a co chce v Třinci posunout.`}
+  path={`kandidat-${k.detail}.html`}
+  ogType="profile"
+  active="kandidati"
+>
+
+  <!-- ================= HERO KANDIDÁTA ================= -->
+  <section class="cand-hero">
+    <div class="container">
+      <a class="back-link" href="/kandidati.html">← Všichni kandidáti</a>
+      <div class="cand-hero-grid">
+        <div class="cand-hero-photo">
+          {k.foto
+            ? <img src={`/assets/img/kandidati/${k.foto.replace('_c.jpg', '.jpg')}`} alt={k.jmeno}>
+            : <div class="slide-avatar">{k.iniciraly}</div>}
+        </div>
+        <div class="cand-hero-info">
+          <div class="cand-hero-index">{k.cislo}.</div>
+          <h1>{krestni}<br>{prijmeni}</h1>
+          <p class="cand-hero-role">{[tituly, `${k.vek} let`, k.profese].filter(Boolean).join(' · ')}</p>
+          <p class="cand-hero-affil">
+            {k.poradiSlovem.charAt(0).toUpperCase() + k.poradiSlovem.slice(1)} na kandidátce{' '}
+            <a href="/index.html">Osobnosti pro Třinec</a>
+          </p>
+          {m.citace && <blockquote class="cand-quote">„<span set:html={m.citace} />."</blockquote>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIDEO + ODPOVĚDI ================= -->
+  <section class="section">
+    <div class="container cand-main">
+
+      <div class="cand-media">
+        <p class="eyebrow">Video medailonek</p>
+        <div class="video-wrap is-vertical">
+          {m.video?.typ === 'soubor' && (
+            <video class="video-frame" controls playsinline preload="none"
+                   poster={k.foto ? `/assets/img/kandidati/${k.foto}` : undefined}>
+              <source src={m.video.src} type="video/mp4">
+            </video>
+          )}
+          {m.video?.typ === 'youtube' && (
+            <iframe class="video-frame" src={`https://www.youtube-nocookie.com/embed/${m.video.id}`}
+                    title={`Video medailonek — ${k.jmeno}`} frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+                    allowfullscreen></iframe>
+          )}
+          {!m.video && (
+            <div class="video-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+              <p>Připravujeme</p>
+            </div>
+          )}
+        </div>
+        <p class="video-caption">
+          Třicet vteřin bez politických frází. Stejné video najdete
+          i na <a href="https://www.facebook.com/osobnostiprotrinec" target="_blank" rel="noopener">našich sítích</a>.
+        </p>
+      </div>
+
+      <div class="cand-answers">
+        {m.odpovedi.map(o => (
+          <article class="answer">
+            <h2>{o.nadpis}</h2>
+            <p>{o.text}</p>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= RYCHLÉ OTÁZKY ================= -->
+  {m.rychleOtazky?.length > 0 && (
+    <section class="section quick-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Rychlé otázky</p>
+          <h2>Devět otázek, devět odpovědí.</h2>
+        </div>
+        <dl class="quick-grid">
+          {m.rychleOtazky.map(q => (
+            <div class="quick-item">
+              <dt>{q.otazka}</dt>
+              <dd>{q.odpoved}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <!-- ================= PŘEDCHOZÍ / DALŠÍ ================= -->
+  <nav class="cand-nav" aria-label="Další kandidáti">
+    <div class="container">
+      {predchozi && (
+        <a class="cand-nav-item prev" href={odkazNa(predchozi)}>
+          <span class="cand-nav-label">← Předchozí kandidát</span>
+          <span class="cand-nav-name">{predchozi.cislo}. {predchozi.jmeno}</span>
+          <span class="cand-nav-role">{predchozi.profese}</span>
+        </a>
+      )}
+      {dalsi && (
+        <a class="cand-nav-item next" href={odkazNa(dalsi)}>
+          <span class="cand-nav-label">Následující kandidát →</span>
+          <span class="cand-nav-name">{dalsi.cislo}. {dalsi.jmeno}</span>
+          <span class="cand-nav-role">{dalsi.profese}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+</Base>

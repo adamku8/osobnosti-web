@@ -1,0 +1,22 @@
+---
+import ProjektKarta from './ProjektKarta.astro';
+import { projekty } from '../data/projekty.js';
+const { cta } = Astro.props;
+---
+<section class="section" id="projekty">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Vize 2026</p>
+      <h2>Osm konkrétních projektů.</h2>
+      <p class="section-note">Vizualizace jsou ilustrační — ukazují záměr, ne finální podobu.</p>
+    </div>
+    <div class="projects">
+      {projekty.map(p => <ProjektKarta p={p} />)}
+    </div>
+    {cta && (
+      <div class="section-cta">
+        <a class="btn btn-primary btn-lg" href={cta.href}>{cta.text}</a>
+      </div>
+    )}
+  </div>
+</section>

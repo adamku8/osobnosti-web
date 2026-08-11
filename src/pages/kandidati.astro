@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import KandidatKarta from '../components/KandidatKarta.astro';
+import { kandidati } from '../data/kandidati.js';
+---
+<Base
+  title="Kandidáti — Osobnosti pro Třinec"
+  description="Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují. Kompletní kandidátní listina pro komunální volby 9.–10. října 2026."
+  path="kandidati.html"
+  active="kandidati"
+>
+  <style is:inline>.cand-card { scroll-margin-top: 140px; }</style>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Kandidáti 2026</p>
+      <h1>Sedmadvacet <span class="hl">osobností</span>.</h1>
+      <p class="hero-lead">
+        Doktoři, učitelé, podnikatelé, sportovci i současní zastupitelé.
+        Lidé, kteří v Třinci doopravdy žijí a pracují — a berou za město odpovědnost.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cand-grid">
+        {kandidati.map(k => <KandidatKarta k={k} />)}
+      </div>
+      <div class="section-cta">
+        <a class="btn btn-primary btn-lg" href="/podporte-nas.html">Podpořte nás</a>
+      </div>
+    </div>
+  </section>
+</Base>

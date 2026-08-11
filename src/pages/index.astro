@@ -1,0 +1,171 @@
+---
+import Base from '../layouts/Base.astro';
+import OblastKarta from '../components/OblastKarta.astro';
+import KandidatKarta from '../components/KandidatKarta.astro';
+import SekceProjekty from '../components/SekceProjekty.astro';
+import { oblasti } from '../data/oblasti.js';
+import { kandidati } from '../data/kandidati.js';
+
+const naHomepage = kandidati.slice(0, 12);
+---
+<Base
+  title="Osobnosti pro Třinec — Nové vize. Nový Třinec. Osobnosti."
+  description="Lokální občanské hnutí Osobnosti pro Třinec. Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují. Komunální volby 9.–10. října 2026."
+  path=""
+  active="uvod"
+>
+
+  <!-- ================= HERO (A2) ================= -->
+  <section class="hero" id="uvod">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Komunální volby · Třinec · 2026</p>
+          <h1>
+            Nové vize.<br>
+            Nový Třinec.<br>
+            <span class="hl">Osobnosti</span>
+          </h1>
+          <p class="hero-lead">
+            Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.
+            Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují.
+            Jdeme dál — pro Třinec
+            <a href="#promise-01">aktivní</a>,
+            <a href="#promise-02">sportovní a kulturní</a>,
+            <a href="#promise-03">bezpečný a zelený</a>,
+            <a href="#promise-04">podnikavý</a>,
+            <a href="#promise-05">pečující</a>
+            a <a href="#promise-06">s lepším bydlením</a>.
+          </p>
+          <div class="hero-vote">
+            <div>
+              <div class="hero-date-label">Volby do zastupitelstva</div>
+              <div class="hero-date">9.–10. října 2026</div>
+            </div>
+            <!-- TODO: volební číslo bude známé po losování -->
+            <a class="btn btn-blue" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit!</a>
+          </div>
+        </div>
+
+        <div class="hero-portrait">
+          <div class="portrait-frame" id="heroRotator">
+            <div class="portrait-slide active">
+              <img src="/assets/img/kandidati/lucie_fremrova.jpg" alt="Ing. Lucie Fremrová">
+              <div class="portrait-caption">
+                <strong>Ing. Lucie Fremrová</strong>
+                <span>1. na kandidátce · radní, organizátorka akcí</span>
+              </div>
+            </div>
+            <div class="portrait-slide">
+              <img src="/assets/img/kandidati/adam_kurzok.jpg" alt="Mgr. Adam Kurzok">
+              <div class="portrait-caption">
+                <strong>Mgr. Adam Kurzok</strong>
+                <span>2. na kandidátce · podnikatel v e-commerce</span>
+              </div>
+            </div>
+            <div class="portrait-slide">
+              <img src="/assets/img/kandidati/erika_sirotova_c.jpg" alt="Mgr. et Bc. Erika Sirotová">
+              <div class="portrait-caption">
+                <strong>Mgr. et Bc. Erika Sirotová</strong>
+                <span>3. na kandidátce · HR manažerka</span>
+              </div>
+            </div>
+          </div>
+          <div class="vote-circle" aria-label="Volte číslo">
+            <span class="vote-label">Volte č.</span>
+            <!-- TODO: číslo po losování -->
+            <span class="vote-number">·</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panorama jako podlaha hera (princip 06) — rotace tří fotek -->
+    <div class="panorama" id="panoRotator">
+      <img class="pano-slide active" src="/assets/img/panorama.jpg?v=2" alt="Panorama Třince pod Javorovým">
+      <img class="pano-slide" src="/assets/img/panorama-hreben.jpg" alt="Chata a rozhledna na Javorovém" loading="lazy">
+      <img class="pano-slide" src="/assets/img/panorama-zapad.jpg" alt="Západ slunce nad Beskydami" loading="lazy">
+    </div>
+  </section>
+
+  <!-- ================= ČÍSLO A TEXT ================= -->
+  <section class="stat">
+    <div class="container">
+      <div class="stat-grid">
+        <div class="stat-number">27</div>
+        <div class="stat-text">
+          <h2>Sedmadvacet osobností. Jeden Třinec.</h2>
+          <p>
+            Naše kandidátka spojuje generace, profese a pohledy.
+            Lidé z Třince, ne z Prahy. Pracujeme, nestěžujeme si.
+            Navazujeme na 20 let dobré práce pro město.
+          </p>
+          <div class="stat-links">
+            <a class="btn btn-blue" href="/program.html">Náš program</a>
+            <a class="btn btn-secondary" href="/kandidati.html">Kandidáti</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROGRAM — MŘÍŽKA OBLASTÍ ================= -->
+  <section class="section" id="program">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Program 2026</p>
+        <h2>Šest oblastí. Konkrétní závazky.</h2>
+      </div>
+      <div class="promises">
+        {oblasti.map(o => <OblastKarta o={o} />)}
+      </div>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href="/program.html">Celý program</a>
+        <a class="btn btn-secondary btn-lg" href="/assets/program-osobnosti-pro-trinec-2026.pdf" target="_blank" rel="noopener">Stáhnout PDF</a>
+      </div>
+    </div>
+  </section>
+
+  <SekceProjekty cta={{ href: '#kandidati', text: 'Poznejte naše kandidáty' }} />
+
+  <!-- ================= KANDIDÁTI ================= -->
+  <section class="section" id="kandidati">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Kandidáti</p>
+        <h2>Lidé, kteří <span class="kw-blue">spojují</span> generace.</h2>
+      </div>
+      <div class="cand-grid">
+        {naHomepage.map(k => <KandidatKarta k={k} />)}
+      </div>
+      <div class="cand-cta">
+        <a class="btn btn-primary btn-lg" href="/kandidati.html">Všech {kandidati.length} kandidátů</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING ================= -->
+  <section class="closing" id="podarilo">
+    <img src="/assets/img/panorama-udoli.jpg" alt="Údolí Třince z Javorového">
+    <div class="closing-overlay">
+      <div class="container">
+        <h2 class="closing-claim">S vaším hlasem <span class="hl">měníme</span> Třinec.</h2>
+        <p class="closing-text">
+          Již 20 let zastáváme hodnoty jako poctivost, odbornost a dobrou
+          správu pro naše město, na které chceme navazovat — a zároveň
+          prosazovat nové nápady a vize.
+        </p>
+        <nav class="closing-nav" aria-label="Rozcestník">
+          <a href="/program.html">Program</a>
+          <a href="#projekty">Projekty</a>
+          <a href="#kandidati">Kandidáti</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+        <div class="closing-cta">
+          <a class="btn btn-blue btn-lg" href="/podporte-nas.html">Podpořte nás</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

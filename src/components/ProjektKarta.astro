@@ -1,0 +1,12 @@
+---
+const { p } = Astro.props;
+---
+<article class="project">
+  <img src={`/assets/img/projekty/${p.obrazek}`} alt={p.alt} loading="lazy">
+  <div class="project-body">
+    <div class="promise-index">{p.cislo}</div>
+    <h3>{p.nazev}</h3>
+    <p>{p.text}</p>
+    {p.odkaz && <a class="people-more" href={`/${p.odkaz.href}`}>{p.odkaz.text}</a>}
+  </div>
+</article>

@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import SekceProjekty from '../components/SekceProjekty.astro';
+import { oblasti } from '../data/oblasti.js';
+---
+<Base
+  title="Program 2026 — Osobnosti pro Třinec"
+  description="Šest oblastí a konkrétní závazky pro Třinec: bydlení, sport a kultura, doprava a zeleň, podnikání, péče a aktivní město. Komunální volby 9.–10. října 2026."
+  path="program.html"
+  active="program"
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Program 2026</p>
+      <h1>Šest oblastí.<br><span class="hl">Konkrétní</span> závazky.</h1>
+      <p class="hero-lead">
+        Žádné obecné fráze. Šest oblastí, u každé konkrétní závazky —
+        a osm projektů, které z nich chceme postavit. Program máte i v PDF.
+      </p>
+      <div class="stat-links">
+        <a class="btn btn-secondary" href="/assets/program-osobnosti-pro-trinec-2026.pdf" target="_blank" rel="noopener">Stáhnout PDF</a>
+        <a class="btn btn-blue" href="/kandidati.html">Kdo to bude prosazovat</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container areas">
+      {oblasti.map(o => (
+        <article class="area" id={`oblast-${o.cislo}`}>
+          <div class="area-body">
+            <div class="area-index">{o.cislo}</div>
+            <h2>{o.nazev}</h2>
+            <ul class="area-list">
+              {o.body.map(b => <li>{b}</li>)}
+            </ul>
+            <div class="area-vize">
+              <p class="eyebrow">Vize · {o.vizeNazev}</p>
+              <p>{o.vizeText}</p>
+            </div>
+          </div>
+          <div class="area-photo">
+            <img src={`/assets/img/projekty/${o.obrazek}`} alt={`Vizualizace — ${o.vizeNazev}`} loading="lazy">
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <SekceProjekty />
+
+  <section class="section section-cta-band">
+    <div class="container">
+      <h2>Chcete, aby se to stalo?</h2>
+      <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
+      <div class="section-cta">
+        <a class="btn btn-primary btn-lg" href="/podporte-nas.html">Podpořte nás</a>
+      </div>
+    </div>
+  </section>
+</Base>

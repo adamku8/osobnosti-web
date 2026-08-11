@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Javorový — nová vize | Osobnosti pro Třinec</title>
-  <meta name="description" content="Vize pro Javorový: rok práce, 415 dotazníků, rozhovory s aktéry a veřejná beseda. Celoroční kopec, citlivě opravená chata a zázemí pro komunity.">
-  <!-- Prototyp v1 · zatím noindex, sundáme při ostrém nasazení -->
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Javorový — nová vize | Osobnosti pro Třinec"
+  description="Rok práce, stovky hlasů, jeden kopec. Co dál s Javorovým — průzkum, historie chaty a konkrétní kroky po volbách."
+  path="javorovy.html"
+  active=""
+>
+  <style is:inline>
     /* Doplňkové styly jen pro tuto podstránku — tokeny z style.css */
     .jv-hero-grid {
       display: grid;
@@ -374,21 +372,26 @@
       font-weight: 800;
       color: var(--signal-blue);
     }
+    /* celý blok „Proti čemu budeme bojovat" v jedné ploše */
+    .against-block {
+      background: rgba(50, 50, 50, 0.04);
+      padding: var(--s-64);
+      border-top: 3px solid var(--brand-red);
+    }
+    @media (max-width: 700px) { .against-block { padding: var(--s-40) var(--s-24); } }
+    .against-block .wish { border-bottom-color: rgba(50, 50, 50, 0.12); }
+    .against-block .note-block {
+      background: var(--paper);
+      padding: var(--s-24);
+      border-left: 3px solid var(--brand-red);
+    }
     /* proti čemu budeme bojovat — červené × místo modrého + */
     .wishes--against { grid-template-columns: repeat(2, 1fr); }
     @media (max-width: 600px) { .wishes--against { grid-template-columns: 1fr; } }
     .wishes--against .wish::before { content: "×"; color: var(--brand-red); }
     .wishes--against .wish strong { color: var(--text); }
     /* datové odrážky a zdroje */
-    .jv-strip { margin: var(--s-64) 0; }
-    .jv-strip img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      object-position: center 60%;
-      border-radius: 8px;
-    }
-    @media (max-width: 700px) { .jv-strip img { height: 200px; } }
+    .lyz-body { max-width: 900px; }
     .note-facts { list-style: none; margin: var(--s-16) 0; }
     .note-facts li {
       position: relative;
@@ -596,36 +599,11 @@
       flex-shrink: 0;
       line-height: 1;
     }
-  </style>
-</head>
-<body>
-
-  <!-- ================= HEADER ================= -->
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="index.html" aria-label="Osobnosti pro Třinec — úvod">
-        <img src="assets/logo.svg" alt="Osobnosti pro Třinec">
-      </a>
-      <nav class="nav" id="nav">
-        <a href="index.html">Úvod</a>
-        <a href="index.html#program">Program</a>
-        <a href="index.html#podarilo">Co se podařilo</a>
-        <a href="index.html#kandidati">Kandidáti</a>
-        <a href="index.html#kontakt">Kontakt</a>
-        <a href="podporte-nas.html">Podpořte nás</a>
-      </nav>
-      <div class="header-right">
-        <a class="btn btn-blue header-cta" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit</a>
-        <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
+    </style>
 
   <!-- ================= COVER ================= -->
   <section class="jv-cover">
-    <img class="jv-cover-bg" src="assets/img/javorovy/vyhled-udoli.jpg" alt="Výhled z Javorového na Třinec a údolí Olše">
+    <img class="jv-cover-bg" src="/assets/img/javorovy/vyhled-udoli.jpg" alt="Výhled z Javorového na Třinec a údolí Olše">
     <div class="jv-cover-tint"></div>
     <div class="jv-cover-shade"></div>
     <div class="container">
@@ -676,7 +654,7 @@
           </p>
         </div>
         <div class="jv-viz">
-          <img src="assets/img/javorovy/chata-1910.jpg" alt="Historická pohlednice chaty na Javorovém z roku 1910">
+          <img src="/assets/img/javorovy/chata-1910.jpg" alt="Historická pohlednice chaty na Javorovém z roku 1910">
           <p class="jv-caption">Chata na pohlednici z roku 1910, ještě před přístavbou verandy. Zdroj: sbírka Stanislava Kroczka, volné dílo.</p>
         </div>
       </div>
@@ -900,7 +878,7 @@
 
   <!-- ================= VIZE (FOTOPÁS) ================= -->
   <section class="jv-band-photo" id="vize">
-    <img class="band-bg" src="assets/img/javorovy/javorovy-z-gutu.jpg" alt="Javorový vrch při pohledu od Gutů" loading="lazy" style="object-position: center 60%;">
+    <img class="band-bg" src="/assets/img/javorovy/javorovy-z-gutu.jpg" alt="Javorový vrch při pohledu od Gutů" loading="lazy" style="object-position: center 60%;">
     <div class="band-shade"></div>
     <div class="container">
       <p class="jv-band-eyebrow">Naše vize</p>
@@ -963,7 +941,7 @@
         </div>
       </div>
       <div class="jv-viz" style="margin-top: var(--s-64);">
-        <img src="assets/img/javorovy/vizualizace-kania.jpg" alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
+        <img src="/assets/img/javorovy/vizualizace-kania.jpg" alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
         <p class="jv-caption">Vizualizace: KANIA a.s. — studie proveditelnosti zpracovaná pro město, květen 2024, varianta 2. Ukazuje záměr, ne finální podobu.</p>
       </div>
     </div>
@@ -1048,7 +1026,7 @@
       </div>
 
       <!-- Proti čemu budeme bojovat -->
-      <div class="wishes-block">
+      <div class="wishes-block against-block">
         <h3 class="wishes-head">Proti čemu budeme bojovat?</h3>
         <div class="wishes wishes--against">
           <div class="wish">více autům na Javorový</div>
@@ -1063,7 +1041,7 @@
   <!-- ================= LYŽOVÁNÍ ================= -->
   <section class="section" id="lyzovani">
     <div class="container">
-      <div class="jv-hero-grid jv-hero-grid--top">
+      <div class="lyz-body">
         <div class="section-head" style="margin-bottom: 0;">
           <p class="eyebrow">Lyžování</p>
           <h2>Proč nedává smysl Javorový pro lyžování?</h2>
@@ -1095,10 +1073,6 @@
             studie z Davosu, provozovatel lanovky Javorový.
           </p>
         </div>
-        <div class="jv-viz">
-          <img src="assets/img/javorovy/sjezdovka-skica.jpg" alt="Kresba sjezdovky na Javorovém bez sněhu s vleky mimo provoz" loading="lazy">
-          <p class="jv-caption">Ilustrace — sjezdovka bez sněhu a vleky mimo provoz.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1115,11 +1089,6 @@
           a jako jediná spojuje výběr z více návrhů se zapojením veřejnosti.
         </p>
       </div>
-      <div class="jv-strip">
-        <img src="assets/img/javorovy/vrchol-javorovy.jpg" alt="Vrcholový kámen na Javorovém — 1032 m n. m." loading="lazy">
-        <p class="jv-caption">Vrchol Javorového, 1032 m n. m. Foto: Petr Štefek, Wikimedia Commons, CC BY-SA 3.0 CZ.</p>
-      </div>
-
       <h3 class="steps-title">Konkrétní kroky hned po volbách.</h3>
       <p class="jv-vize-lead" style="margin-bottom: var(--s-40);">
         Pokud budeme zvoleni, budeme prosazovat celkovou koncepci vrchu
@@ -1149,7 +1118,7 @@
 
   <!-- ================= CLOSING (FOTOPÁS) ================= -->
   <section class="jv-band-photo">
-    <img class="band-bg" src="assets/img/javorovy/vyhled-hrebeny.jpg" alt="Výhled z Javorového na hřebeny Beskyd" loading="lazy" style="object-position: center 65%;">
+    <img class="band-bg" src="/assets/img/javorovy/vyhled-hrebeny.jpg" alt="Výhled z Javorového na hřebeny Beskyd" loading="lazy" style="object-position: center 65%;">
     <div class="band-shade"></div>
     <div class="container">
       <p class="jv-band-eyebrow">Javorový 2026</p>
@@ -1159,69 +1128,9 @@
         a výběr, u kterého budete i vy.
       </p>
       <div class="section-cta" style="margin-top: var(--s-40); text-align: left;">
-        <a class="btn btn-white btn-lg" href="podporte-nas.html">Podpořte nás</a>
-        <a class="btn btn-white btn-lg" href="index.html#projekty">Další projekty</a>
+        <a class="btn btn-white btn-lg" href="/podporte-nas.html">Podpořte nás</a>
+        <a class="btn btn-white btn-lg" href="/index.html#projekty">Další projekty</a>
       </div>
     </div>
   </section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="site-footer" id="kontakt">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">Osobnosti <span>pro Třinec</span></div>
-          <p>Lokální hnutí. Lidé, kteří berou odpovědnost.<br>Politické hnutí NOVÁ GENERACE</p>
-        </div>
-        <div>
-          <h4>Kontakt</h4>
-          <ul>
-            <li><a href="mailto:kontakt@osobnostiprotrinec.cz">kontakt@osobnostiprotrinec.cz</a></li>
-            <li><a href="https://www.facebook.com/osobnostiprotrinec">Facebook</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Web</h4>
-          <ul>
-            <li><a href="index.html#program">Program</a></li>
-            <li><a href="index.html#kandidati">Kandidáti</a></li>
-            <li><a href="podporte-nas.html">Podpořte nás</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-legal">
-        <span>© 2026 Politické hnutí NOVÁ GENERACE</span>
-        <!-- TODO: ustálit text disclaimeru pro placenou volební inzerci -->
-        <span>#SPOJUJEMEGENERACE · #PROTRINEC</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js?v=5"></script>
-  <script>
-    // Slider s citacemi — automatické střídání, pauza při najetí myší
-    (function () {
-      var slider = document.getElementById('quoteSlider');
-      if (!slider) return;
-      var slides = slider.querySelectorAll('.quote-slide');
-      var dots = slider.querySelectorAll('.quote-dot');
-      var i = 0, timer = null;
-
-      function show(n) {
-        i = (n + slides.length) % slides.length;
-        slides.forEach(function (s, k) { s.classList.toggle('is-active', k === i); });
-        dots.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
-      }
-      function start() { timer = setInterval(function () { show(i + 1); }, 7000); }
-      function stop() { clearInterval(timer); }
-
-      dots.forEach(function (d, k) {
-        d.addEventListener('click', function () { stop(); show(k); start(); });
-      });
-      slider.addEventListener('mouseenter', stop);
-      slider.addEventListener('mouseleave', start);
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
-    })();
-  </script>
-</body>
-</html>
+</Base>

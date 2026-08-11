@@ -1,48 +1,12 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Podpořte nás — Osobnosti pro Třinec</title>
-  <meta name="description" content="Podpořte hnutí Osobnosti pro Třinec — sledujte nás, přijďte na akce, přispějte na kampaň. Komunální volby 9.–10. října 2026.">
-  <link rel="canonical" href="https://osobnostiprotrinec.cz/podporte-nas.html">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Osobnosti pro Třinec">
-  <meta property="og:locale" content="cs_CZ">
-  <meta property="og:url" content="https://osobnostiprotrinec.cz/podporte-nas.html">
-  <meta property="og:title" content="Podpořte nás — Osobnosti pro Třinec">
-  <meta property="og:description" content="Sledujte nás, přijďte na akce, přispějte na kampaň. Komunální volby v Třinci 9.–10. října 2026.">
-  <meta property="og:image" content="https://osobnostiprotrinec.cz/assets/img/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-  <!-- ================= HEADER ================= -->
-  <header class="site-header">
-    <div class="container">
-      <a class="logo" href="index.html" aria-label="Osobnosti pro Třinec — úvod">
-        <img src="assets/logo.svg" alt="Osobnosti pro Třinec">
-      </a>
-      <nav class="nav" id="nav">
-        <a href="index.html">Úvod</a>
-        <a href="program.html">Program</a>
-        <a href="kandidati.html">Kandidáti</a>
-        <a href="index.html#kontakt">Kontakt</a>
-        <a href="podporte-nas.html" class="active">Podpořte nás</a>
-      </nav>
-      <div class="header-right">
-        <a class="btn btn-blue header-cta" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit</a>
-        <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Podpořte nás — Osobnosti pro Třinec"
+  description="Podpořte hnutí Osobnosti pro Třinec — sledujte nás, přijďte na akce, přispějte na kampaň. Komunální volby 9.–10. října 2026."
+  path="podporte-nas.html"
+  active="podporte"
+>
   <!-- ================= INTRO ================= -->
   <section class="hero">
     <div class="container">
@@ -157,39 +121,4 @@
       </div>
     </div>
   </section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="site-footer" id="kontakt">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="footer-logo">Osobnosti <span>pro Třinec</span></div>
-          <p>Lokální hnutí. Lidé, kteří berou odpovědnost.<br>Politické hnutí NOVÁ GENERACE</p>
-        </div>
-        <div>
-          <h4>Kontakt</h4>
-          <ul>
-            <li><a href="mailto:kontakt@osobnostiprotrinec.cz">kontakt@osobnostiprotrinec.cz</a></li>
-            <li><a href="https://www.facebook.com/osobnostiprotrinec">Facebook</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>Web</h4>
-          <ul>
-            <li><a href="program.html">Program</a></li>
-            <li><a href="kandidati.html">Kandidáti</a></li>
-            <li><a href="podporte-nas.html">Podpořte nás</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-legal">
-        <span>© 2026 Politické hnutí NOVÁ GENERACE</span>
-        <span>Zadavatel i zpracovatel: politické hnutí NOVÁ GENERACE</span>
-        <span>#SPOJUJEMEGENERACE · #PROTRINEC</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js?v=6"></script>
-</body>
-</html>
+</Base>

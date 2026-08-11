@@ -1,0 +1,12 @@
+---
+const { o } = Astro.props;
+---
+<article class="promise" id={`promise-${o.cislo}`}>
+  <svg class="promise-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <div class="promise-head">
+    <div class="promise-index">{o.cislo}</div>
+    <svg class="promise-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={o.ikona} />
+  </div>
+  <h3>{o.nazev}</h3>
+  <ul>{o.body.map(b => <li>{b}</li>)}</ul>
+</article>
