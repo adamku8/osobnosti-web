@@ -176,7 +176,7 @@ export const kandidati = [
     "jmeno": "Ing. Michal Niemiec",
     "vek": 40,
     "profese": "podnikatel",
-    "foto": null,
+    "foto": "michal_niemiec_c.jpg",
     "iniciraly": "MN",
     "detail": null,
     "poradiSlovem": "osmnáctý"
@@ -216,7 +216,7 @@ export const kandidati = [
     "jmeno": "Lenka Palicová",
     "vek": 42,
     "profese": "grafička, organizátorka akcí",
-    "foto": null,
+    "foto": "lenka_palicova_c.jpg",
     "iniciraly": "LP",
     "detail": null,
     "poradiSlovem": "dvaadvacátá"
@@ -266,7 +266,7 @@ export const kandidati = [
     "jmeno": "Rudolf Rucki",
     "vek": 67,
     "profese": "majitel cyklosalonu",
-    "foto": null,
+    "foto": "rudolf_rucki_c.jpg",
     "iniciraly": "RR",
     "detail": null,
     "poradiSlovem": "sedmadvacátý"
