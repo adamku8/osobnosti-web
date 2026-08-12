@@ -226,7 +226,7 @@ export const kandidati = [
     "jmeno": "Libor Žárský",
     "vek": 52,
     "profese": "podnikatel",
-    "foto": null,
+    "foto": "libor_zarsky_c.jpg",
     "iniciraly": "LŽ",
     "detail": "libor-zarsky",
     "poradiSlovem": "třiadvacátý"
