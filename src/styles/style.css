@@ -661,10 +661,16 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   }
   .cand-card:hover .slide-meta { opacity: 1; transform: translateY(0); }
   .cand-card:hover .cand-photo,
-  .cand-card:hover .slide-avatar {
-    transform: scale(1.05);
-    border-color: var(--brand-red);
-  }
+  .cand-card:hover .slide-avatar { transform: scale(1.05); }
+  .cand-card-link:hover .cand-photo,
+  .cand-card-link:hover .slide-avatar { box-shadow: 0 0 0 6px rgba(255, 45, 45, 0.18); }
+}
+
+/* Kandidát s hotovým medailonkem — červený kruh kolem fotky */
+.cand-card-link .cand-photo,
+.cand-card-link .slide-avatar {
+  border-color: var(--brand-red);
+  border-width: 3px;
 }
 .people-strip-footer { margin-top: var(--s-24); text-align: right; }
 .mini {
@@ -1295,4 +1301,20 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 }
 @media (max-width: 900px) {
   .cand-main.no-video .cand-answers { grid-template-columns: 1fr; gap: var(--s-24); }
+}
+
+/* Legenda k červenému kruhu na přehledu kandidátů */
+.legenda {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.legenda-kruh {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid var(--brand-red);
+  flex: 0 0 auto;
 }
