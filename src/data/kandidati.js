@@ -146,7 +146,7 @@ export const kandidati = [
     "jmeno": "Patrik Čavoj",
     "vek": 43,
     "profese": "kondiční trenér",
-    "foto": null,
+    "foto": "patrik_cavoj_c.jpg",
     "iniciraly": "PČ",
     "detail": null,
     "poradiSlovem": "patnáctý"
