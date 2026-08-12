@@ -1285,3 +1285,14 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 .hero-lead a:visited { color: var(--text); }
 .closing-nav a:visited { color: var(--anthracite); }
 .back-link:visited { color: var(--text-muted); }
+
+/* Medailonek bez videa — odpovědi zaberou celou šířku ve třech sloupcích */
+.cand-main.no-video { grid-template-columns: 1fr; }
+.cand-main.no-video .cand-answers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-40);
+}
+@media (max-width: 900px) {
+  .cand-main.no-video .cand-answers { grid-template-columns: 1fr; gap: var(--s-24); }
+}

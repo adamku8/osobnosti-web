@@ -60,37 +60,36 @@ import { u } from '../lib/url.js';
     </div>
   </section>
 
-  <!-- ================= VIDEO + ODPOVĚDI ================= -->
+  <!-- ================= VIDEO + ODPOVĚDI =================
+       Video se zobrazí jen tehdy, když je v medailonky.js vyplněné.
+       Bez videa se sekce nezobrazuje vůbec (žádné „připravujeme")
+       a odpovědi se rozloží do tří sloupců. -->
   <section class="section">
-    <div class="container cand-main">
+    <div class:list={['container', 'cand-main', !m.video && 'no-video']}>
 
-      <div class="cand-media">
-        <p class="eyebrow">Video medailonek</p>
-        <div class="video-wrap is-vertical">
-          {m.video?.typ === 'soubor' && (
-            <video class="video-frame" controls playsinline preload="none"
-                   poster={k.foto ? `/assets/img/kandidati/${k.foto}` : undefined}>
-              <source src={m.video.src} type="video/mp4">
-            </video>
-          )}
-          {m.video?.typ === 'youtube' && (
-            <iframe class="video-frame" src={`https://www.youtube-nocookie.com/embed/${m.video.id}`}
-                    title={`Video medailonek — ${k.jmeno}`} frameborder="0"
-                    allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
-                    allowfullscreen></iframe>
-          )}
-          {!m.video && (
-            <div class="video-placeholder">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-              <p>Připravujeme</p>
-            </div>
-          )}
+      {m.video && (
+        <div class="cand-media">
+          <p class="eyebrow">Video medailonek</p>
+          <div class="video-wrap is-vertical">
+            {m.video.typ === 'soubor' && (
+              <video class="video-frame" controls playsinline preload="none"
+                     poster={k.foto ? u(`assets/img/kandidati/${k.foto}`) : undefined}>
+                <source src={m.video.src} type="video/mp4">
+              </video>
+            )}
+            {m.video.typ === 'youtube' && (
+              <iframe class="video-frame" src={`https://www.youtube-nocookie.com/embed/${m.video.id}`}
+                      title={`Video medailonek — ${k.jmeno}`} frameborder="0"
+                      allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+                      allowfullscreen></iframe>
+            )}
+          </div>
+          <p class="video-caption">
+            Třicet vteřin bez politických frází. Stejné video najdete
+            i na <a href="https://www.facebook.com/osobnostiprotrinec" target="_blank" rel="noopener">našich sítích</a>.
+          </p>
         </div>
-        <p class="video-caption">
-          Třicet vteřin bez politických frází. Stejné video najdete
-          i na <a href="https://www.facebook.com/osobnostiprotrinec" target="_blank" rel="noopener">našich sítích</a>.
-        </p>
-      </div>
+      )}
 
       <div class="cand-answers">
         {m.odpovedi.map(o => (
