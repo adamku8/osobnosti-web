@@ -88,7 +88,7 @@ export const kandidati = [
     "profese": "projektant interiérů",
     "foto": null,
     "iniciraly": "DS",
-    "detail": null,
+    "detail": "david-szkandera",
     "poradiSlovem": "devátý"
   },
   {
@@ -108,7 +108,7 @@ export const kandidati = [
     "profese": "advokát",
     "foto": null,
     "iniciraly": "AT",
-    "detail": null,
+    "detail": "adam-tomoszek",
     "poradiSlovem": "jedenáctý"
   },
   {
@@ -118,7 +118,7 @@ export const kandidati = [
     "profese": "učitel",
     "foto": null,
     "iniciraly": "JŠ",
-    "detail": null,
+    "detail": "jakub-stvrtna",
     "poradiSlovem": "dvanáctý"
   },
   {
@@ -198,7 +198,7 @@ export const kandidati = [
     "profese": "chilliman v PochutnejSi",
     "foto": null,
     "iniciraly": "TN",
-    "detail": null,
+    "detail": "tomas-novy",
     "poradiSlovem": "dvacátý"
   },
   {
@@ -228,7 +228,7 @@ export const kandidati = [
     "profese": "podnikatel",
     "foto": null,
     "iniciraly": "LŽ",
-    "detail": null,
+    "detail": "libor-zarsky",
     "poradiSlovem": "třiadvacátý"
   },
   {
