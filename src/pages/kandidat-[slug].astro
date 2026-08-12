@@ -42,8 +42,9 @@ import { u } from '../lib/url.js';
       <a class="back-link" href={u('kandidati.html')}>← Všichni kandidáti</a>
       <div class="cand-hero-grid">
         <div class="cand-hero-photo">
+          {/* čtvercový ořez (_c) je dělaný přímo do kruhu — portrét na výšku by se ořízl náhodně */}
           {k.foto
-            ? <img src={u(`assets/img/kandidati/${k.foto.replace('_c.jpg', '.jpg')}`)} alt={k.jmeno}>
+            ? <img src={u(`assets/img/kandidati/${k.foto}`)} alt={k.jmeno}>
             : <div class="slide-avatar">{k.iniciraly}</div>}
         </div>
         <div class="cand-hero-info">
