@@ -1,9 +1,14 @@
 import { defineConfig } from 'astro/config';
 
-// Web běží na ostré doméně osobnostiprotrinec.cz (GitHub Pages + public/CNAME).
-// Náhled v podadresáři adamku8.github.io/osobnosti-web: BASE_PATH=/osobnosti-web
+import { LIVE } from './src/lib/site.js';
+
+// Zatím běžíme na náhledové subdoméně. Náhled se schovává před vyhledávači
+// (robots.txt + meta noindex) — řídí se to podle toho, jestli site === LIVE.
+//
+// PŘEPNUTÍ NA OSTROU DOMÉNU: změň výchozí hodnotu site na LIVE
+//   a v public/CNAME přepiš subdoménu na osobnostiprotrinec.cz.
+const site = process.env.SITE ?? 'https://new.osobnostiprotrinec.cz';
 const base = process.env.BASE_PATH ?? '/';
-const site = base === '/' ? 'https://osobnostiprotrinec.cz' : 'https://adamku8.github.io';
 
 export default defineConfig({
   site,

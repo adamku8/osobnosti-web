@@ -11,7 +11,37 @@ npm run dev     # náhled na http://localhost:4321
 npm run build   # výsledek do dist/
 ```
 
-Push do `main` spustí GitHub Actions, které web postaví a nasadí na Pages.
+## Větve a nasazení
+
+| Větev | K čemu | Co se stane po pushi |
+|---|---|---|
+| `staging` | pracovní verze, sem edituje tým | ověří se, že build projde (`check.yml`) |
+| `main` | to, co je venku | build + nasazení na GitHub Pages (`deploy.yml`) |
+
+Změny jdou vždy na `staging`, odtud se po kontrole mergují do `main`.
+Návod pro netechnické editory: [NAVOD-editace-webu.md](NAVOD-editace-webu.md).
+
+## Domény
+
+Web zatím běží na náhledové subdoméně `new.osobnostiprotrinec.cz`. Dokud se
+`site` nerovná ostré doméně, build se chová jako náhled: `robots.txt` zakáže
+indexaci, stránky dostanou `meta noindex` a nespustí se GTM (aby náhled nekazil
+měření ostrého webu).
+
+Přepnutí na ostrou doménu `osobnostiprotrinec.cz` = tři kroky:
+
+1. `src/lib/site.js` — zkontroluj, že `LIVE` sedí na ostrou doménu
+2. `astro.config.mjs` — výchozí hodnotu `site` změň na `LIVE`
+3. `public/CNAME` — přepiš na `osobnostiprotrinec.cz`
+
+a v DNS přesměruj doménu na GitHub Pages (4 A záznamy na apex, `www` jako CNAME
+na `adamku8.github.io`). **MX a SPF záznamy nech být** — na doméně běží pošta.
+
+Otestovat ostrou variantu lokálně, bez commitu:
+
+```bash
+SITE=https://osobnostiprotrinec.cz npm run build
+```
 
 ## Kde co měnit
 
