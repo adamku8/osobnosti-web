@@ -1,0 +1,81 @@
+---
+// SKRYTÁ plná verze stránky Program (interní kontrola, viz src/lib/rezim.js).
+import Base from '../../layouts/Base.astro';
+import { oblasti } from '../../data/oblasti.js';
+import { projekty } from '../../data/projekty.js';
+import { u } from '../../lib/url.js';
+
+// vize navázané na oblast — pořadí drží oblasti.js
+const vizeProOblast = o => o.projekty.map(s => projekty.find(p => p.slug === s)).filter(Boolean);
+const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
+---
+<Base
+  title="Program 2026 (náhled) — Osobnosti pro Třinec"
+  description="Interní náhled kompletního programu."
+  path="nahled-k7x2m9/program.html"
+  active="program"
+  noindex={true}
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Interní náhled · Program 2026</p>
+      <h1>Čtyři oblasti.<br><span class="hl">Konkrétní</span> závazky.</h1>
+      <p class="hero-lead">
+        Žádné obecné fráze. Čtyři oblasti, u každé konkrétní závazky —
+        a projekty, které z nich chceme postavit. Program máte i v PDF.
+      </p>
+      <div class="stat-links">
+        <a class="btn btn-primary" href={u('nahled-k7x2m9/program-osobnosti-pro-trinec-2026.pdf')} target="_blank" rel="noopener">Stáhnout PDF</a>
+        <a class="btn btn-secondary" href={u('nahled-k7x2m9/kandidati.html')}>Kdo to bude prosazovat</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="areas">
+    {oblasti.map(o => (
+      <section class="area" id={`oblast-${o.cislo}`}>
+        <div class="container area-grid">
+          <div class="area-photo">
+            <img
+              src={u(`assets/img/projekty/${o.obrazek}`)}
+              alt={`Vizualizace — ${vizeProOblast(o)[0]?.nazev ?? o.nazev}`}
+              loading="lazy">
+          </div>
+          <div class="area-body">
+            <h2><span class="hl">{o.klic}</span> Třinec.</h2>
+            <p class="area-podnadpis">{o.podnadpis}</p>
+            <ul class="area-list">
+              {o.body.map(b => <li>{b}</li>)}
+            </ul>
+            <details class="area-vize">
+              <summary>Zjistěte více<span class="area-vize-plus" aria-hidden="true">+</span></summary>
+              <div class="vize-grid">
+                {vizeProOblast(o).map(p => (
+                  <article class="vize-karta">
+                    <img src={u(`assets/img/projekty/${p.obrazek}`)} alt={p.alt} loading="lazy">
+                    <div class="vize-body">
+                      <p class="eyebrow">Vize · {p.nazev}</p>
+                      <p>{p.text}</p>
+                      {p.odkaz && <a class="people-more" href={u('nahled-k7x2m9/' + p.odkaz.href)}>{p.odkaz.text}</a>}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <section class="section section-cta-band">
+    <div class="container">
+      <h2><span class="hl">Srdcem</span> pro Třinec.</h2>
+      <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-secondary btn-lg" href={u('nahled-k7x2m9.html')}>← Zpět na rozcestník náhledu</a>
+        <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>
+      </div>
+    </div>
+  </section>
+</Base>

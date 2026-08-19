@@ -1,6 +1,6 @@
 ---
-const { k } = Astro.props;
-const href = k.detail ? u(`kandidat-${k.detail}.html`) : null;
+const { k, detailPrefix = '' } = Astro.props;
+const href = k.detail ? u(`${detailPrefix}kandidat-${k.detail}.html`) : null;
 const Tag = href ? 'a' : 'article';
 import { u } from '../lib/url.js';
 ---

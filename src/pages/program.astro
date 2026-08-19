@@ -1,61 +1,50 @@
 ---
+// TEASER verze programu (srpen 2026): veřejně jen čtyři oblasti (bez závazků,
+// vizí a PDF) + poznámka, že kompletní program zveřejníme v září.
+// Plný program: src/pages/nahled-k7x2m9/program.astro (viz src/lib/rezim.js).
 import Base from '../layouts/Base.astro';
-import SekceProjekty from '../components/SekceProjekty.astro';
 import { oblasti } from '../data/oblasti.js';
 import { u } from '../lib/url.js';
+
+const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 ---
 <Base
   title="Program 2026 — Osobnosti pro Třinec"
-  description="Šest oblastí a konkrétní závazky pro Třinec: bydlení, sport a kultura, doprava a zeleň, podnikání, péče a aktivní město. Komunální volby 9.–10. října 2026."
+  description="Program hnutí Osobnosti pro Třinec stavíme na čtyřech oblastech: moderní a bezpečné město, sport a kultura, práce a podnikání, sociální péče a zdraví. Kompletní program zveřejníme v září."
   path="program.html"
   active="program"
 >
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow">Program 2026</p>
-      <h1>Šest oblastí.<br><span class="hl">Konkrétní</span> závazky.</h1>
+      <h1>Čtyři oblasti.<br>Jeden <span class="hl">Třinec</span>.</h1>
       <p class="hero-lead">
-        Žádné obecné fráze. Šest oblastí, u každé konkrétní závazky —
-        a osm projektů, které z nich chceme postavit. Program máte i v PDF.
+        Program stavíme na čtyřech oblastech, ve kterých chceme Třinec posunout.
+        Konkrétní závazky a projekty právě dolaďujeme.
       </p>
-      <div class="stat-links">
-        <a class="btn btn-secondary" href={u('assets/program-osobnosti-pro-trinec-2026.pdf')} target="_blank" rel="noopener">Stáhnout PDF</a>
-        <a class="btn btn-blue" href={u('kandidati.html')}>Kdo to bude prosazovat</a>
-      </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="container areas">
-      {oblasti.map(o => (
-        <article class="area" id={`oblast-${o.cislo}`}>
-          <div class="area-body">
-            <div class="area-index">{o.cislo}</div>
-            <h2>{o.nazev}</h2>
-            <ul class="area-list">
-              {o.body.map(b => <li>{b}</li>)}
-            </ul>
-            <div class="area-vize">
-              <p class="eyebrow">Vize · {o.vizeNazev}</p>
-              <p>{o.vizeText}</p>
-            </div>
-          </div>
-          <div class="area-photo">
-            <img src={u(`assets/img/projekty/${o.obrazek}`)} alt={`Vizualizace — ${o.vizeNazev}`} loading="lazy">
-          </div>
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <SekceProjekty />
-
-  <section class="section section-cta-band">
     <div class="container">
-      <h2>Chcete, aby se to stalo?</h2>
-      <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
-      <div class="section-cta">
+      <div class="promises">
+        {oblasti.map(o => (
+          <article class="promise" id={`promise-${o.cislo}`}>
+            <div class="promise-head">
+              <div class="promise-index">{o.cislo}</div>
+              <svg class="promise-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={o.ikona} />
+            </div>
+            <h3>{o.nazev}</h3>
+            <p class="promise-podnadpis">{o.podnadpis}</p>
+          </article>
+        ))}
+      </div>
+      <p class="section-note" style="text-align:center; margin-top:2rem">
+        <strong>Kompletní program s konkrétními závazky zveřejníme v září.</strong>
+      </p>
+      <div class="section-cta stat-links" style="justify-content:center">
         <a class="btn btn-primary btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
+        <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>
       </div>
     </div>
   </section>

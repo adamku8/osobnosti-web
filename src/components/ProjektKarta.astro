@@ -8,6 +8,6 @@ import { u } from '../lib/url.js';
     <div class="promise-index">{p.cislo}</div>
     <h3>{p.nazev}</h3>
     <p>{p.text}</p>
-    {p.odkaz && <a class="people-more" href={`/${p.odkaz.href}`}>{p.odkaz.text}</a>}
+    {p.odkaz && <a class="people-more" href={u(p.odkaz.href)}>{p.odkaz.text}</a>}
   </div>
 </article>

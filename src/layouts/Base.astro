@@ -10,6 +10,7 @@ const {
   ogType = 'website',
   active = '',            // zvýrazněná položka v menu
   bodyClass = '',
+  noindex = false,        // vynucený noindex i na ostré doméně (skryté stránky)
 } = Astro.props;
 
 import { isLive } from '../lib/site.js';
@@ -36,7 +37,7 @@ import { u } from '../lib/url.js';
   )}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {!live && <meta name="robots" content="noindex, nofollow">}
+  {(!live || noindex) && <meta name="robots" content="noindex, nofollow">}
   <title>{title}</title>
   <meta name="description" content={description}>
   <link rel="canonical" href={canonical}>

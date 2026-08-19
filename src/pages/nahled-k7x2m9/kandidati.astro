@@ -1,0 +1,42 @@
+---
+// SKRYTÁ plná verze stránky Kandidáti (interní kontrola, viz src/lib/rezim.js).
+import Base from '../../layouts/Base.astro';
+import KandidatKarta from '../../components/KandidatKarta.astro';
+import { kandidati } from '../../data/kandidati.js';
+import { u } from '../../lib/url.js';
+---
+<Base
+  title="Kandidáti (náhled) — Osobnosti pro Třinec"
+  description="Interní náhled kompletní kandidátní listiny."
+  path="nahled-k7x2m9/kandidati.html"
+  active="kandidati"
+  noindex={true}
+>
+  <style is:inline>.cand-card { scroll-margin-top: 140px; }</style>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Interní náhled · Kandidáti 2026</p>
+      <h1>Sedmadvacet <span class="hl">osobností</span>.</h1>
+      <p class="hero-lead">
+        Doktoři, učitelé, podnikatelé, sportovci i současní zastupitelé.
+        Lidé, kteří v Třinci doopravdy žijí a pracují — a berou za město odpovědnost.
+      </p>
+      <p class="legenda">
+        <span class="legenda-kruh" aria-hidden="true"></span>
+        Kandidáti s červeným kruhem mají medailonek — klikněte na ně.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cand-grid">
+        {kandidati.map(k => <KandidatKarta k={k} detailPrefix="nahled-k7x2m9/" />)}
+      </div>
+      <div class="section-cta">
+        <a class="btn btn-secondary btn-lg" href={u('nahled-k7x2m9.html')}>← Zpět na rozcestník náhledu</a>
+      </div>
+    </div>
+  </section>
+</Base>

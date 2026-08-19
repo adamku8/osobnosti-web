@@ -1,7 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import { kandidati } from '../data/kandidati.js';
-import { medailonky } from '../data/medailonky.js';
+import Base from '../../layouts/Base.astro';
+import { kandidati } from '../../data/kandidati.js';
+import { medailonky } from '../../data/medailonky.js';
 
 export function getStaticPaths() {
   return kandidati
@@ -16,8 +16,8 @@ const m = medailonky[k.detail];
 const i = kandidati.findIndex(x => x.cislo === k.cislo);
 const odkazNa = (c) =>
   c.detail && medailonky[c.detail]
-    ? u(`kandidat-${c.detail}.html`)
-    : u(`kandidati.html#kandidat-${String(c.cislo).padStart(2, '0')}`);
+    ? u(`nahled-k7x2m9/kandidat-${c.detail}.html`)
+    : u(`nahled-k7x2m9/kandidati.html#kandidat-${String(c.cislo).padStart(2, '0')}`);
 const predchozi = i > 0 ? kandidati[i - 1] : null;
 const dalsi = i < kandidati.length - 1 ? kandidati[i + 1] : null;
 
@@ -26,12 +26,13 @@ const casti = k.jmeno.replace(/^(Mgr\.|Ing\.|MUDr\.|MVDr\.|Bc\.|MgA\.|DiS\.|et|M
 const prijmeni = casti.pop();
 const krestni = casti.join(' ');
 const tituly = k.jmeno.replace(`${krestni} ${prijmeni}`, '').trim();
-import { u } from '../lib/url.js';
+import { u } from '../../lib/url.js';
 ---
 <Base
   title={`${k.jmeno} — Osobnosti pro Třinec`}
   description={`${k.jmeno}, ${k.poradiSlovem} na kandidátce Osobnosti pro Třinec. ${k.profese}. Proč kandiduje a co chce v Třinci posunout.`}
-  path={`kandidat-${k.detail}.html`}
+  path={`nahled-k7x2m9/kandidat-${k.detail}.html`}
+  noindex={true}
   ogType="profile"
   active="kandidati"
 >
@@ -39,7 +40,7 @@ import { u } from '../lib/url.js';
   <!-- ================= HERO KANDIDÁTA ================= -->
   <section class="cand-hero">
     <div class="container">
-      <a class="back-link" href={u('kandidati.html')}>← Všichni kandidáti</a>
+      <a class="back-link" href={u('nahled-k7x2m9/kandidati.html')}>← Všichni kandidáti</a>
       <div class="cand-hero-grid">
         <div class="cand-hero-photo">
           {/* čtvercový ořez (_c) je dělaný přímo do kruhu — portrét na výšku by se ořízl náhodně */}
