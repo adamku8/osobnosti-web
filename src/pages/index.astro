@@ -18,66 +18,37 @@ import { u } from '../lib/url.js';
   active="uvod"
 >
 
-  <!-- ================= HERO (A2) ================= -->
-  <section class="hero" id="uvod">
+  <!-- ================= HERO — billboard ================= -->
+  <section class="hero hero-bb" id="uvod">
     <div class="container">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Komunální volby · Třinec · 2026</p>
-          <h1>
-            Nové vize.<br>
-            Nový Třinec.<br>
-            <span class="hl">Osobnosti</span>
-          </h1>
-          <p class="hero-lead">
-            Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.
-            Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují.
-            Jdeme dál — pro Třinec <a href="#promise-01">moderní a bezpečný</a>,{' '}
-            <a href="#promise-02">sportovní a kulturní</a>,{' '}
-            <a href="#promise-03">podnikavý</a> a{' '}
-            <a href="#promise-04">pečující</a>.
-          </p>
-          <div class="hero-vote">
-            <div>
-              <div class="hero-date-label">Volby do zastupitelstva</div>
-              <div class="hero-date">9.–10. října 2026</div>
-            </div>
-            <a class="btn btn-blue" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit!</a>
-          </div>
-        </div>
+      <p class="eyebrow">Komunální volby · Třinec · 2026</p>
 
-        <div class="hero-portrait">
-          <div class="portrait-frame" id="heroRotator">
-            <div class="portrait-slide active">
-              <img src={u('assets/img/kandidati/lucie_fremrova.jpg')} alt="Ing. Lucie Fremrová">
-              <div class="portrait-caption">
-                <strong>Ing. Lucie Fremrová</strong>
-                <span>1. na kandidátce · radní, organizátorka akcí</span>
-              </div>
-            </div>
-            <div class="portrait-slide">
-              <img src={u('assets/img/kandidati/adam_kurzok.jpg')} alt="Mgr. Adam Kurzok">
-              <div class="portrait-caption">
-                <strong>Mgr. Adam Kurzok</strong>
-                <span>2. na kandidátce · podnikatel v e-commerce</span>
-              </div>
-            </div>
-            <div class="portrait-slide">
-              <img src={u('assets/img/kandidati/erika_sirotova_c.jpg')} alt="Mgr. et Bc. Erika Sirotová">
-              <div class="portrait-caption">
-                <strong>Mgr. et Bc. Erika Sirotová</strong>
-                <span>3. na kandidátce · HR manažerka</span>
-              </div>
-            </div>
+      {/* Claim nese sám billboard, H1 zůstává jen pro čtečky a vyhledávače. */}
+      <h1 class="sr-only">Osobnosti pro nový Třinec — komunální volby 9.–10. října 2026</h1>
+
+      <picture class="hero-billboard">
+        <source media="(max-width: 700px)" srcset={u('assets/img/hero-billboard-1200.jpg')}>
+        <img
+          src={u('assets/img/hero-billboard.jpg')}
+          alt="Kandidáti hnutí Osobnosti pro Třinec s heslem „Osobnosti pro… Nový Třinec!“"
+          width="2400" height="1276" fetchpriority="high">
+      </picture>
+
+      <div class="hero-below">
+        <p class="hero-lead">
+          Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.
+          Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují.
+          Jdeme dál — pro Třinec <a href="#promise-01">moderní a bezpečný</a>,{' '}
+          <a href="#promise-02">sportovní a kulturní</a>,{' '}
+          <a href="#promise-03">podnikavý</a> a{' '}
+          <a href="#promise-04">pečující</a>.
+        </p>
+        <div class="hero-vote">
+          <div>
+            <div class="hero-date-label">Volby do zastupitelstva</div>
+            <div class="hero-date">9.–10. října 2026</div>
           </div>
-          {/* Kolečko „Volte č." se vrátí, až bude po losování známé volební číslo —
-              stačí smazat `false &&` níže a doplnit číslo. */}
-          {false && (
-            <div class="vote-circle" aria-label="Volte číslo">
-              <span class="vote-label">Volte č.</span>
-              <span class="vote-number">?</span>
-            </div>
-          )}
+          <a class="btn btn-blue" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit!</a>
         </div>
       </div>
     </div>
