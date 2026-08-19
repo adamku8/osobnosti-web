@@ -1,28 +1,31 @@
 ---
+// TEASER verze kandidátky (srpen 2026): veřejně jen první trojka s fotkami
+// (bez prokliku na medailonky), zbytek listiny jako anonymní sloty.
+// Plná listina: src/pages/nahled-k7x2m9/kandidati.astro (viz src/lib/rezim.js).
 import Base from '../layouts/Base.astro';
 import KandidatKarta from '../components/KandidatKarta.astro';
 import { kandidati } from '../data/kandidati.js';
 import { u } from '../lib/url.js';
+
+// první trojka bez prokliku na medailonek
+const trojka = kandidati.slice(0, 3).map(k => ({ ...k, detail: null }));
+// zbytek listiny — jen čísla, beze jmen
+const skryti = kandidati.slice(3);
 ---
 <Base
   title="Kandidáti — Osobnosti pro Třinec"
-  description="Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují. Kompletní kandidátní listina pro komunální volby 9.–10. října 2026."
+  description="Kandidátku hnutí Osobnosti pro Třinec vede Lucie Fremrová, Adam Kurzok a Erika Sirotová. Další osobnosti postupně představíme. Komunální volby 9.–10. října 2026."
   path="kandidati.html"
   active="kandidati"
 >
-  <style is:inline>.cand-card { scroll-margin-top: 140px; }</style>
-
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow">Kandidáti 2026</p>
-      <h1>Sedmadvacet <span class="hl">osobností</span>.</h1>
+      <h1>Vedeme <span class="hl">trojkou osobností</span>.</h1>
       <p class="hero-lead">
         Doktoři, učitelé, podnikatelé, sportovci i současní zastupitelé.
-        Lidé, kteří v Třinci doopravdy žijí a pracují — a berou za město odpovědnost.
-      </p>
-      <p class="legenda">
-        <span class="legenda-kruh" aria-hidden="true"></span>
-        Kandidáti s červeným kruhem mají medailonek — klikněte na ně.
+        Tady je první trojka naší kandidátky — další osobnosti
+        postupně představíme.
       </p>
     </div>
   </section>
@@ -30,7 +33,15 @@ import { u } from '../lib/url.js';
   <section class="section">
     <div class="container">
       <div class="cand-grid">
-        {kandidati.map(k => <KandidatKarta k={k} />)}
+        {trojka.map(k => <KandidatKarta k={k} />)}
+        {skryti.map(k => (
+          <article class="cand-card" aria-label={`Kandidát číslo ${k.cislo} — představíme brzy`}>
+            <div class="slide-avatar" aria-hidden="true">?</div>
+            <div class="slide-index">{k.cislo}.</div>
+            <div class="slide-name">Již brzy</div>
+            <div class="slide-meta">osobnost postupně představíme</div>
+          </article>
+        ))}
       </div>
       <div class="section-cta">
         <a class="btn btn-primary btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>

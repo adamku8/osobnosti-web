@@ -1,11 +1,12 @@
 ---
-import Base from '../layouts/Base.astro';
-import { u } from '../lib/url.js';
+import Base from '../../layouts/Base.astro';
+import { u } from '../../lib/url.js';
 ---
 <Base
   title="Javorový — nová vize | Osobnosti pro Třinec"
   description="Rok práce, stovky hlasů, jeden kopec. Co dál s Javorovým — průzkum, historie chaty a konkrétní kroky po volbách."
-  path="javorovy.html"
+  path="nahled-k7x2m9/javorovy.html"
+  noindex={true}
   active=""
 >
   <style is:inline>
@@ -393,6 +394,13 @@ import { u } from '../lib/url.js';
     .wishes--against .wish strong { color: var(--text); }
     /* datové odrážky a zdroje */
     .lyz-body { max-width: 900px; }
+    .lyz-podnadpis {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: clamp(20px, 2.2vw, 26px);
+      margin: var(--s-64) 0 var(--s-16);
+    }
     .note-facts { list-style: none; margin: var(--s-16) 0; }
     .note-facts li {
       position: relative;
@@ -660,8 +668,9 @@ import { u } from '../lib/url.js';
             Chata na Javorovém stojí od roku 1895 — postavil ji turistický
             spolek Beskidenverein a je nejstarší chatou v této části Beskyd.
             Přečkala více než sto dvacet zim, hostila generace turistů
-            z Třince i okolí a dnes patří městu. Právě k její původní
-            podobě z přelomu 19. a 20. století se chceme rekonstrukcí vrátit.
+            z Třince i okolí a dnes patří městu. Níže se dočtete, jak jsme
+            se v diskusi s občany dopracovali k návrhu, který z historie
+            chaty udělá i její budoucnost.
           </p>
         </div>
         <div class="jv-viz">
@@ -1071,23 +1080,44 @@ import { u } from '../lib/url.js';
             v nabídce vůbec nemá.
           </p>
           <ul class="note-facts">
+            <li><strong>Nejde o to, že by méně pršelo.</strong> Srážek je pořád dost —
+              se zvyšující se teplotou jich ale čím dál větší část padá jako déšť
+              místo sněhu a stoupá hranice, nad kterou se sníh vůbec udrží.</li>
+            <li><strong>Lysá hora</strong>, nejvyšší hora Beskyd, měří sníh přes sto let.
+              Za sezonu tam napadne v průměru 516 cm nového sněhu — v zimě 2013/14
+              to bylo jen 200 cm, nejméně za celou historii měření.</li>
+            <li><strong>Ubývá i to, co leží.</strong> Mezi obdobími 1961–1990 a 1981–2010
+              zaznamenala Lysá hora největší absolutní úbytek sněhu v Česku —
+              v jednotlivých dnech až o 20 centimetrů.</li>
             <li><strong>2000–2018</strong> se v 78 % horských oblastí světa zkrátila
               zimní sezona až o 43 dní a plocha sněhové pokrývky klesla až o 13 %.</li>
-            <li><strong>Lysá hora</strong>, nejvyšší hora Beskyd, zaznamenala mezi obdobími
-              1961–1990 a 1981–2010 největší absolutní úbytek sněhu v Česku —
-              v jednotlivých dnech až o 20 centimetrů.</li>
             <li><strong>Výhled je stejný:</strong> střediskům pod 1 200 metrů má sezona
               začínat zhruba o měsíc později a končit o jeden až tři měsíce dříve.</li>
             <li><strong>Zasněžování to nespasí.</strong> Podle studií bude v polovině století
               obtížné vyrobit dost technického sněhu i pod 1 800 metry.</li>
           </ul>
+
+          <h3 class="lyz-podnadpis">A konkurence mezitím ujela.</h3>
           <p class="section-note">
-            To samozřejmě nebrání dalšímu využití Mamlas placu pro nové
-            zimní i letní aktivity.
+            Zatímco se na Javorovém nelyžuje, okolní střediska do sebe
+            investovala stovky milionů. Javorový by s nimi soutěžil
+            se třemi starými vleky a 1,5 kilometrem sjezdovek.
           </p>
+          <ul class="note-facts">
+            <li><strong>Bílá</strong> (zhruba 45 km) — v roce 2023 nová šestisedačka
+              s vyhřívanou bublinou za 147 milionů korun, sněžná děla i „snowfactory",
+              která vyrobí sníh i nad nulou. Zasněžují všechny sjezdovky.</li>
+            <li><strong>Mosty u Jablunkova</strong> (zhruba 20 km) — od roku 2019 nová
+              čtyřsedačková lanovka, 2,4 km zasněžovaných sjezdovek a celoroční
+              bobová dráha.</li>
+            <li><strong>Wisła a polské Beskydy</strong> (zhruba 30 km) — desítky vleků
+              a několik čtyřsedaček, plošné zasněžování i osvětlení sjezdovek.</li>
+          </ul>
+
           <p class="note-sources">
-            Zdroje: ČHMÚ (přehled Česko v datech), EURAC Research 2020,
-            studie z Davosu, provozovatel lanovky Javorový.
+            Zdroje: ČHMÚ (přehled Česko v datech), Lysá hora — meteorologická stanice,
+            EURAC Research 2020, studie z Davosu, msstavby.cz, SNOW.cz,
+            provozovatel lanovky Javorový.
           </p>
         </div>
       </div>
