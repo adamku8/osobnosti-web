@@ -82,33 +82,36 @@ import Base from '../layouts/Base.astro';
         <h2>Meetingy a akce</h2>
         <p class="section-note">
           Přijďte si popovídat — o programu, o městě, o čemkoli.
-          Termíny průběžně doplňujeme, všechny akce najdete i na{' '}
+          Termíny průběžně doplňujeme a zveřejňujeme na{' '}
           <a href="https://www.facebook.com/osobnostiprotrinec/events" target="_blank" rel="noopener">Facebooku</a>.
         </p>
       </div>
-      <!-- TODO: doplnit reálné termíny akcí -->
-      <div class="event-list">
-        <article class="event">
-          <div class="event-date">
-            <span class="event-day">—</span>
-            <span class="event-month">brzy</span>
-          </div>
-          <div class="event-body">
-            <h3>Setkání s kandidáty</h3>
-            <p>Termín a místo doplníme. Sledujte Facebook.</p>
-          </div>
-        </article>
-        <article class="event">
-          <div class="event-date">
-            <span class="event-day">—</span>
-            <span class="event-month">brzy</span>
-          </div>
-          <div class="event-body">
-            <h3>Debata o programu</h3>
-            <p>Termín a místo doplníme. Sledujte Facebook.</p>
-          </div>
-        </article>
-      </div>
+      {/* Placeholder termíny skryté do doby, než budou známé reálné akce —
+          stačí smazat `false &&` a doplnit datum, místo a popis. */}
+      {false && (
+        <div class="event-list">
+          <article class="event">
+            <div class="event-date">
+              <span class="event-day">—</span>
+              <span class="event-month">brzy</span>
+            </div>
+            <div class="event-body">
+              <h3>Setkání s kandidáty</h3>
+              <p>Termín a místo doplníme. Sledujte Facebook.</p>
+            </div>
+          </article>
+          <article class="event">
+            <div class="event-date">
+              <span class="event-day">—</span>
+              <span class="event-month">brzy</span>
+            </div>
+            <div class="event-body">
+              <h3>Debata o programu</h3>
+              <p>Termín a místo doplníme. Sledujte Facebook.</p>
+            </div>
+          </article>
+        </div>
+      )}
       <div class="section-cta">
         <a class="btn btn-secondary btn-lg" href="https://www.facebook.com/osobnostiprotrinec/events" target="_blank" rel="noopener">Všechny akce na Facebooku</a>
       </div>

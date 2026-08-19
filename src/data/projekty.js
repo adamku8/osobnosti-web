@@ -1,28 +1,34 @@
-// Generováno z původního HTML — jediný zdroj pravdy pro web.
+// Jediný zdroj pravdy pro projekty (vize). Pořadí odpovídá oblastem v oblasti.js.
+// Projekt „Centrum aktivních seniorů" byl zrušen — zůstává jen jako závazek
+// v oblasti Zdravý Třinec („otevřeme Centrum pro aktivní seniory na Smetanově").
 export const projekty = [
   {
     "cislo": "01",
-    "nazev": "Nová letní scéna",
-    "obrazek": "letni-scena.jpg",
-    "alt": "Vizualizace nové letní scény",
-    "text": "Otevřená scéna pod širým nebem nabídne koncerty, divadlo, filmové večery i akce pro rodiny. Třinec ožije i v létě — přirozeně, společně a bez bariér. Místo vyberete vy."
-  },
-  {
-    "cislo": "02",
-    "nazev": "Nové outdoor centrum",
-    "obrazek": "outdoor-centrum.jpg",
-    "alt": "Vizualizace nového outdoor centra",
-    "text": "Mezi bazénem a lesoparkem vznikne outdoor centrum s horolezeckou stěnou a atrakcemi pro malé i velké. Areál STARS se přirozeně rozšíří jako centrum volného času."
-  },
-  {
-    "cislo": "03",
+    "slug": "propojene-mesto",
     "nazev": "Propojené město",
     "obrazek": "propojene-mesto.jpg",
     "alt": "Vizualizace propojeného města",
     "text": "Citlivě propojíme lesopark s dalšími částmi města chodníky a bezpečnou infrastrukturou pro pěší. Prvním projektem může být spojení lesoparku a SPŠ na Kanadě."
   },
   {
+    "cislo": "02",
+    "slug": "letni-scena",
+    "nazev": "Nová letní scéna",
+    "obrazek": "letni-scena.jpg",
+    "alt": "Vizualizace nové letní scény",
+    "text": "Otevřená scéna pod širým nebem nabídne koncerty, divadlo, filmové večery i akce pro rodiny. Třinec ožije i v létě — přirozeně, společně a bez bariér. Místo vyberete vy."
+  },
+  {
+    "cislo": "03",
+    "slug": "outdoor-centrum",
+    "nazev": "Nové outdoor centrum",
+    "obrazek": "outdoor-centrum.jpg",
+    "alt": "Vizualizace nového outdoor centra",
+    "text": "Mezi bazénem a lesoparkem vznikne outdoor centrum s horolezeckou stěnou a atrakcemi pro malé i velké. Areál STARS se přirozeně rozšíří jako centrum volného času."
+  },
+  {
     "cislo": "04",
+    "slug": "hriste-knihovna",
     "nazev": "Dětské hřiště u knihovny",
     "obrazek": "hriste-knihovna.jpg",
     "alt": "Vizualizace dětského hřiště u knihovny",
@@ -30,6 +36,7 @@ export const projekty = [
   },
   {
     "cislo": "05",
+    "slug": "javorovy",
     "nazev": "Javorový 2.0",
     "obrazek": "javorovy.jpg",
     "alt": "Vizualizace Javorový 2.0",
@@ -41,20 +48,15 @@ export const projekty = [
   },
   {
     "cislo": "06",
-    "nazev": "Centrum aktivních seniorů",
-    "obrazek": "centrum-senioru.jpg",
-    "alt": "Vizualizace centra aktivních seniorů",
-    "text": "Na Smetanově otevřeme centrum, kde se senioři potkají, vzdělají i zasportují. Aktivní stáří v Třinci — mezi lidmi, ne doma o samotě."
+    "slug": "coworking",
+    "nazev": "Coworking i kanceláře",
+    "obrazek": "coworking.jpg",
+    "alt": "Vizualizace coworkingu a startovacích kanceláří",
+    "text": "Práce se mění — víc lidí podniká, pracuje na dálku nebo obojí kombinuje. Podpoříme podnikavost přímo v Třinci: coworking, startovací kanceláře a moderní prostory."
   },
   {
     "cislo": "07",
-    "nazev": "Coworking i kanceláře",
-    "obrazek": "coworking.jpg",
-    "alt": "Vizualizace coworkingu a office house",
-    "text": "Práce se mění — víc lidí podniká, pracuje na dálku nebo obojí kombinuje. Podpoříme podnikavost přímo v Třinci: coworking, startovací kanceláře pro nové firmy a moderní prostory, ve kterých se dobré nápady potkávají."
-  },
-  {
-    "cislo": "08",
+    "slug": "dps",
     "nazev": "Moderní dům s pečovatelskou službou",
     "obrazek": "dps.jpg",
     "alt": "Vizualizace moderního domu s pečovatelskou službou",

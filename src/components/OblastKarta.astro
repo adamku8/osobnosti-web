@@ -8,5 +8,6 @@ const { o } = Astro.props;
     <svg class="promise-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={o.ikona} />
   </div>
   <h3>{o.nazev}</h3>
+  <p class="promise-podnadpis">{o.podnadpis}</p>
   <ul>{o.body.map(b => <li>{b}</li>)}</ul>
 </article>

@@ -6,7 +6,9 @@ import SekceProjekty from '../components/SekceProjekty.astro';
 import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 
-const naHomepage = kandidati.slice(0, 12);
+// na homepage ukazujeme jen kandidáty, kteří už mají fotku — kompletní
+// listina (včetně těch bez fotky) zůstává na /kandidati.html
+const naHomepage = kandidati.filter(k => k.foto).slice(0, 12);
 import { u } from '../lib/url.js';
 ---
 <Base
@@ -71,11 +73,14 @@ import { u } from '../lib/url.js';
               </div>
             </div>
           </div>
-          <div class="vote-circle" aria-label="Volte číslo">
-            <span class="vote-label">Volte č.</span>
-            <!-- TODO: číslo po losování -->
-            <span class="vote-number">·</span>
-          </div>
+          {/* Kolečko „Volte č." se vrátí, až bude po losování známé volební číslo —
+              stačí smazat `false &&` níže a doplnit číslo. */}
+          {false && (
+            <div class="vote-circle" aria-label="Volte číslo">
+              <span class="vote-label">Volte č.</span>
+              <span class="vote-number">?</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -122,7 +127,7 @@ import { u } from '../lib/url.js';
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Program 2026</p>
-        <h2>Šest oblastí. Konkrétní závazky.</h2>
+        <h2>Čtyři oblasti. Konkrétní závazky.</h2>
       </div>
       <div class="promises">
         {oblasti.map(o => <OblastKarta o={o} />)}
