@@ -1,0 +1,781 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+
+// DRAFT — před publikací: 1) doplnit [DOPLNIT] bloky, 2) přepnout draft na false.
+const draft = true;
+
+const obsah = [
+  { id: 'widle',     num: '01', title: 'Widle se nevrátí' },
+  { id: 'proc',      num: '02', title: 'Utekli? Chyba lávky' },
+  { id: 'porodnost', num: '03', title: 'Kolik dětí se rodilo' },
+  { id: 'alkohol',   num: '04', title: 'Přestalo se pít' },
+  { id: 'prestavba', num: '05', title: 'Město se přestavělo' },
+  { id: 'zivo',      num: '06', title: 'Jinak živo' },
+  { id: 'snaha',     num: '07', title: 'Co jsme zkusili my' },
+  { id: 'reseni',    num: '08', title: 'Co s tím chceme dělat' },
+];
+---
+<Base
+  title="Je v Třinci mrtvo, nebo živo? | Osobnosti pro Třinec"
+  description="Za 24 let ubylo v Třinci 4 700 mladých. Neutekli — z velké části se nenarodili. Co to znamená pro večerní ulice a co s tím chceme dělat."
+  path="blog-je-v-trinci-mrtvo-nebo-zivo.html"
+  active=""
+  noindex={draft}
+>
+  <style is:inline>
+    /* ==========================================================
+       Sazba článku — standardní „content grid" longformu.
+       Parametry z změřených computed styles živých článků
+       Guardianu, Atlanticu, Verge a Respektu (srpen 2026):
+         · sloupec 620–790 px, míra 60–78 znaků → bereme horní okraj
+           pásma: 800 px / 20 px ≈ 72 znaků (Smashing 20,4 px, Atlantic 22 px);
+           strop je ~78 znaků na řádek — šířku zvyšuj jen spolu s písmem
+         · písmo 17–22 px, řádkování 1,4–1,5
+         · zarovnání vlevo — do bloku sází 0 ze 6
+         · bez automatického dělení slov — 0 ze 6
+         · žádný trvalý boční sloupec vedle textu — 0 ze 6
+       JEDNA čtecí hrana: text, data, tabulky i grafy mají shodnou šířku.
+       Sloupec prolomí jedině fotka přes celou šířku — to je zavedená
+       výjimka, kterou oko čte jako záměr, ne jako uskočení.
+       ========================================================== */
+
+    /* --- Content grid ---------------------------------------- */
+    .art {
+      display: grid;
+      grid-template-columns:
+        [full-start] minmax(var(--s-24), 1fr)
+        [wide-start] minmax(0, 120px)
+        [text-start] min(800px, 100% - 48px) [text-end]
+        minmax(0, 120px) [wide-end]
+        minmax(var(--s-24), 1fr) [full-end];
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .art > *     { grid-column: text-start / text-end; }
+    .art > .wide { grid-column: wide-start / wide-end; }
+    .art > .full { grid-column: full-start / full-end; }
+
+    .art-section {
+      padding: var(--s-64) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    /* --- Cover ------------------------------------------------ */
+    .art-cover {
+      position: relative;
+      min-height: 560px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .art-cover-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 60%;
+      filter: saturate(0.5) contrast(1.06);
+    }
+    .art-cover-shade {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(20,24,32,0.30) 0%, rgba(20,24,32,0.46) 45%, rgba(20,24,32,0.90) 100%),
+        linear-gradient(90deg, rgba(20,24,32,0.55) 0%, rgba(20,24,32,0.05) 70%);
+    }
+    .art-cover .container { position: relative; z-index: 2; padding-top: 150px; padding-bottom: var(--s-40); }
+    .art-cover h1 { color: #fff; max-width: 15ch; }
+    .art-cover-kicker {
+      font-family: var(--font-display); font-weight: 700; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.80); margin-bottom: var(--s-16);
+      padding-bottom: var(--s-8); border-bottom: 1px solid rgba(255,255,255,0.25);
+      display: inline-block;
+    }
+    .art-cover-lead {
+      color: rgba(255,255,255,0.94); font-size: 20px; line-height: 1.5;
+      max-width: 52ch; margin-top: var(--s-24);
+    }
+    .art-cover-meta { margin-top: var(--s-16); font-size: 13px; letter-spacing: 0.04em; color: rgba(255,255,255,0.65); }
+
+    /* --- Text ------------------------------------------------- */
+    .art p {
+      font-size: 20px;
+      line-height: 1.6;   /* delší řádek chce víc vedení */
+      color: var(--text-secondary);
+      margin-bottom: var(--s-24);
+    }
+
+    /* Blokové zarovnání — jen hlavní odstavce a jen tam, kde je míra
+       dost dlouhá. Bez dělení slov by v češtině vznikaly řeky, proto
+       je hyphens:auto podmínkou, ne ozdobou (stránka má lang="cs").
+       Krátké texty (popisky, poznámky, tabulky, body programu)
+       zůstávají vlevo — na 40–50 znacích blok rozhazuje mezery. */
+    .art > p,
+    .art > .art-lead {
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphenate-limit-chars: 6 3 3;  /* dělit slova od 6 znaků, min. 3+3 */
+      text-wrap: pretty;             /* hlídá osamocené slovo na konci */
+    }
+    .art p:last-child { margin-bottom: 0; }
+    .art p strong { color: var(--text); font-weight: 600; }
+    .art h2 { margin-bottom: var(--s-24); font-size: clamp(26px, 3vw, 34px); }
+    .art-lead { font-size: 24px !important; line-height: 1.45 !important; color: var(--text) !important; }
+    .art-dropcap::first-letter {
+      float: left; font-family: var(--font-display); font-weight: 800;
+      font-size: 72px; line-height: 0.78; margin: 8px 12px 0 0; color: var(--anthracite);
+    }
+    .art-kicker {
+      display: flex; align-items: baseline; gap: var(--s-16);
+      margin-bottom: var(--s-16) !important; padding-bottom: var(--s-8);
+      border-bottom: 1px solid var(--anthracite);
+      font-family: var(--font-display); font-weight: 600; font-size: 12px !important;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted) !important;
+      line-height: 1.2 !important;
+    }
+    .art-kicker span { font-weight: 800; color: var(--signal-blue); letter-spacing: 0.1em; }
+    .art-sub {
+      font-family: var(--font-display); font-weight: 600; font-size: 15px;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--text);
+      margin: var(--s-40) 0 var(--s-8) !important;
+    }
+
+    /* --- Poznámka redakce ------------------------------------- */
+    .art-note {
+      border-left: 2px solid var(--signal-blue);
+      padding-left: var(--s-24);
+      margin: var(--s-40) 0;
+    }
+    .art-note-label {
+      font-family: var(--font-display); font-weight: 700; font-size: 11px !important;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--signal-blue) !important;
+      margin-bottom: var(--s-8) !important;
+    }
+    .art-note p { font-size: 15px !important; line-height: 1.5 !important; color: var(--text-muted) !important; margin-bottom: var(--s-8); }
+
+    /* --- Datová tabulka --------------------------------------- */
+    .dtab { width: 100%; border-collapse: collapse; margin: var(--s-40) 0; }
+    .dtab td { border-bottom: 1px solid var(--border); padding: 11px 0; vertical-align: baseline; }
+    .dtab tr:last-child td { border-bottom: none; }
+    .dtab .n {
+      font-family: var(--font-display); font-weight: 800; font-size: 20px; line-height: 1.15;
+      color: var(--signal-blue); white-space: nowrap; padding-right: var(--s-24); width: 1%;
+    }
+    .dtab .t { font-size: 15px; line-height: 1.45; color: var(--text-secondary); }
+    .dtab caption {
+      caption-side: top; text-align: left;
+      font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      color: var(--text); padding-bottom: var(--s-8);
+      border-bottom: 1px solid var(--anthracite);
+    }
+    .dtab caption b { color: var(--text-muted); font-weight: 400; }
+
+    /* --- Klíčová čísla ---------------------------------------- */
+    .art-facts {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-16);
+      margin: var(--s-40) 0; padding: var(--s-24) 0;
+      border-top: 1px solid var(--anthracite); border-bottom: 1px solid var(--border);
+    }
+    .art-fact-n { font-family: var(--font-display); font-weight: 800; font-size: 23px; color: var(--signal-blue); line-height: 1; }
+    .art-fact-t { font-size: 13px; line-height: 1.4; color: var(--text-muted); margin-top: var(--s-8); }
+
+    /* --- Pull quote ------------------------------------------- */
+    .art-pull { margin: var(--s-64) 0; padding: var(--s-24) 0; border-top: 2px solid var(--anthracite); border-bottom: 1px solid var(--border); }
+    .art-pull p {
+      font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+      font-size: clamp(22px, 2.2vw, 29px); line-height: 1.06; color: var(--text);
+      margin: 0 !important;
+    }
+    .art-pull span { color: var(--signal-blue); }
+
+    /* --- Velké číslo ------------------------------------------ */
+    .art-band {
+      display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--s-40);
+      align-items: center; padding: var(--s-40) 0;
+      border-top: 2px solid var(--anthracite); border-bottom: 2px solid var(--anthracite);
+    }
+    .art-bignum {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(56px, 7vw, 92px); line-height: 0.84;
+      color: var(--brand-red); letter-spacing: -0.03em; white-space: nowrap;
+    }
+    .art-band h2 { font-size: 22px !important; margin-bottom: var(--s-8); }
+    .art-band p { font-size: 15px !important; color: var(--text-muted) !important; margin: 0 !important; }
+
+    /* --- Sloupcový graf --------------------------------------- */
+    .art-bars { display: flex; align-items: flex-end; gap: var(--s-40); margin: var(--s-40) 0; }
+    .art-barcol { display: flex; flex-direction: column; align-items: flex-start; }
+    .art-barnum { font-family: var(--font-display); font-weight: 800; font-size: 26px; color: var(--signal-blue); margin-bottom: var(--s-4); white-space: nowrap; }
+    .art-bar { width: 112px; background: var(--signal-blue); }
+    .art-bar--a { height: 140px; }
+    .art-bar--b { height: 84px; }
+    .art-baryear { font-family: var(--font-display); font-weight: 600; font-size: 16px; margin-top: var(--s-8); padding-top: var(--s-4); border-top: 1px solid var(--border); width: 112px; }
+    .art-barnote { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .art-delta { align-self: flex-end; padding-bottom: 54px; font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; white-space: nowrap; }
+    .art-delta small { display: block; font-weight: 600; font-size: 12px; color: var(--text-muted); margin-top: var(--s-4); white-space: normal; max-width: 16ch; }
+
+    /* --- Obrázky ---------------------------------------------- */
+    .art-fig { margin: var(--s-40) 0; }
+    .art-fig img { width: 100%; height: auto; display: block; }
+    .art-cap { font-size: 13px; line-height: 1.45; color: var(--text-muted); margin-top: var(--s-8); }
+
+    /* --- Štítky akcí ------------------------------------------ */
+    .art-tags { display: flex; flex-wrap: wrap; gap: var(--s-8); margin: var(--s-24) 0 var(--s-40); }
+    .art-tag { border: 1px solid var(--border); border-radius: 999px; padding: 7px 16px; font-size: 14px; color: var(--text-muted); }
+    .art-tag b { color: var(--text); font-weight: 600; }
+
+    /* --- Body programu ---------------------------------------- */
+    .art-steps { margin: var(--s-40) 0; border-top: 1px solid var(--anthracite); }
+    .art-step { display: grid; grid-template-columns: 44px 1fr; column-gap: var(--s-24); padding: var(--s-24) 0; border-bottom: 1px solid var(--border); }
+    .art-step-num { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--signal-blue); line-height: 1.6; }
+    .art-step h3 { font-size: 18px; margin-bottom: var(--s-8); }
+    .art-step p { font-size: 16px !important; line-height: 1.5 !important; margin: 0 !important; }
+
+    /* --- Co už běží (promise rows) ----------------------------- */
+    .art-done { margin-top: var(--s-40); border-top: 1px solid var(--anthracite); }
+    .art-done-row { display: grid; grid-template-columns: 44px 1fr; column-gap: var(--s-24); padding: var(--s-24) 0; border-bottom: 1px solid var(--border); }
+    .art-check { width: 26px; height: 26px; background: var(--brand-red); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 16px; margin-top: 4px; }
+    .art-done-row h3 { font-size: 18px; margin-bottom: var(--s-8); }
+    .art-done-row p { font-size: 16px !important; line-height: 1.5 !important; margin: 0 !important; }
+
+    /* --- Obsah ------------------------------------------------ */
+    .art-toc { padding: var(--s-40) 0 0; }
+    .art-toc-list { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: var(--s-24); border-top: 1px solid var(--anthracite); }
+    .art-toc-list a {
+      display: block; padding: var(--s-16) 0; border-bottom: 1px solid var(--border);
+      text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--text);
+      transition: color 240ms var(--ease-ui);
+    }
+    .art-toc-list a:hover { color: var(--brand-red); }
+    .art-toc-list .tn { display: block; font-size: 11px; color: var(--signal-blue); letter-spacing: 0.1em; margin-bottom: 2px; }
+
+    /* --- Kolofon ---------------------------------------------- */
+    .art-colophon { padding: var(--s-40) 0 var(--s-64); border-top: 2px solid var(--anthracite); }
+    .art-colophon-cols { columns: 2; column-gap: var(--s-40); }
+    .art-colophon p { font-size: 13px !important; line-height: 1.55 !important; color: var(--text-muted) !important; margin-bottom: var(--s-16); break-inside: avoid; }
+    .art-colophon a { color: var(--signal-blue); text-decoration: none; }
+    .art-colophon a:hover { text-decoration: underline; }
+
+    /* --- Draft box -------------------------------------------- */
+    .draft-note { border: 1px dashed #b58900; background: #fffdf5; padding: var(--s-16) var(--s-24); margin-bottom: var(--s-40); font-size: 14px; line-height: 1.55; color: #6b5400; }
+    .draft-note ul { margin: var(--s-4) 0 0 var(--s-24); }
+
+    /* ================= Responsivita ================= */
+    @media (max-width: 900px) {
+      .art-facts { grid-template-columns: repeat(2, 1fr); }
+      .art-toc-list { grid-template-columns: 1fr 1fr; }
+      .art-band { grid-template-columns: 1fr; row-gap: var(--s-16); }
+      .art-colophon-cols { columns: 1; }
+      .art-cover { min-height: 440px; }
+      .art-cover .container { padding-top: 110px; }
+    }
+    @media (max-width: 560px) {
+      .art-toc-list { grid-template-columns: 1fr; }
+      .art-facts { grid-template-columns: 1fr; gap: var(--s-16); }
+      .art-bars { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-16); align-items: end; }
+      .art-bar, .art-baryear { width: 100%; }
+      .art-delta { grid-column: 1 / 3; order: 3; align-self: start; padding: var(--s-16) 0 0; border-top: 1px solid var(--border); }
+      .art-delta small { max-width: none; }
+      .art-step { grid-template-columns: 32px 1fr; column-gap: var(--s-16); }
+      .art p { font-size: 17px; }
+    }
+    /* Na úzké obrazovce má řádek jen ~40 znaků — blok by roztrhal mezery.
+       Pod 700 px se proto vracíme k zarovnání vlevo. */
+    @media (max-width: 700px) {
+      .art > p,
+      .art > .art-lead { text-align: left; hyphens: manual; }
+    }
+  </style>
+
+  <!-- ================= COVER ================= -->
+  <section class="art-cover">
+    <img class="art-cover-bg" src={u('assets/img/blog/ai-vecerni-ulice.jpg')} alt="Prázdná večerní ulice menšího města pod Beskydami">
+    <div class="art-cover-shade"></div>
+    <div class="container">
+      <p class="art-cover-kicker">Blog · Osobnosti pro Třinec</p>
+      <h1>Je v Třinci mrtvo,<br><span class="hl">nebo živo?</span></h1>
+      <p class="art-cover-lead">
+        Večerní Třinec už nevypadá jako před dvaceti lety. Čísla ale říkají
+        něco jiného než povídání u piva. Mladí neutekli — hlavně se nenarodili.
+        A město mezitím žije jinak, než jsme bývali zvyklí.
+      </p>
+      <p class="art-cover-meta">Adam Křenek · srpen 2026 · čtení na 6 minut</p>
+    </div>
+  </section>
+
+  <!-- ================= OBSAH ================= -->
+  <section class="art art-toc">
+    {draft && (
+      <div class="draft-note">
+        <strong>PRACOVNÍ VERZE — před publikací přepnout <code>draft</code> na false.</strong>
+        <ul>
+          <li>Doplnit konkrétní závazky u bodů 2, 6 a 7 (příměstské části, Trisia, centrum pro seniory).</li>
+          <li>Ověřit názvy podniků (Relax, Čarodějky, Widle) a doplnit osobní vzpomínku.</li>
+          <li>Ověřit aktuální čísla participativního rozpočtu za ročník 2026.</li>
+          <li>Upřesnit, co je myšleno „TGM" — náměstí T. G. Masaryka, nebo areál ZŠ TGM.</li>
+          <li>Celostátní řada narozených pochází z Wikipedie — dohledat primární zdroj ČSÚ.</li>
+        </ul>
+      </div>
+    )}
+    <nav class="art-toc-list" aria-label="Obsah článku">
+      {obsah.map(s => (
+        <a href={`#${s.id}`}><span class="tn">{s.num}</span>{s.title}</a>
+      ))}
+    </nav>
+  </section>
+
+  <!-- ================= 01 · WIDLE ================= -->
+  <section class="art art-section" id="widle">
+    <p class="art-kicker"><span>01</span>Začnu smutnou zprávou</p>
+    <h2>Widle se nevrátí.</h2>
+    <p class="art-lead art-dropcap">
+      Časy, kdy nám bylo dvacet a chodili jsme večer po Třinci od Relaxu
+      přes Čarodějky do Widlí, se už nevrátí. Alespoň ne v dohledné době.
+    </p>
+    <p>
+      Není to pocit. Jsou to čísla. V roce 2001 žilo v Třinci zhruba{' '}
+      <strong>11 800 lidí mezi 15 a 35 lety</strong>. Na konci roku 2025
+      jich bylo <strong>7 079</strong>. Za čtyřiadvacet let ubylo{' '}
+      <strong>4 700 mladých</strong> — čtyřicet procent. Skoro každý druhý.
+    </p>
+    <p>
+      Hospody té doby žily z jedné jednoduché věci: bylo nás hodně.
+      Žádný podnik nepřežije, když mu zmizí polovina zákazníků.
+    </p>
+    <p>
+      Otázka je, kam se poděli. A tam se obvyklá odpověď mýlí.
+    </p>
+
+
+    <div class="art-band">
+      <div class="art-bignum">−40&nbsp;%</div>
+      <div>
+        <h2>Mladých je o dvě pětiny míň</h2>
+        <p>Třinečanů ve věku 15–35 let bylo v roce 2001 zhruba 11 800. Na konci roku 2025 jich bylo 7 079.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 · UTEKLI? ================= -->
+  <section class="art art-section" id="proc">
+    <p class="art-kicker"><span>02</span>Proč jich je míň</p>
+    <h2>Utekli? Chyba lávky. Nenarodili se.</h2>
+    <p>
+      „Mladí z Třince utíkají" — to slyšíme pořád. Jenže data říkají
+      něco jiného. Dá se to spočítat úplně jednoduše.
+    </p>
+    <p>
+      Rozdíl je <strong>necelých devět set lidí za dvacet ročníků</strong> —
+      a to včetně těch, kdo se nedožili. Žádný exodus.
+    </p>
+    <p>
+      Chybějící čtyři tisícovky mladých se nikam neodstěhovaly.
+      {' '}<strong>Ony se nenarodily.</strong>
+    </p>
+
+    <div class="art-pull">
+      <p>
+        V letech 1991–2010 se v Třinci narodilo <span>7 969 dětí</span>.
+        Dnes tu žije <span>7 079</span> lidí právě těch ročníků.
+      </p>
+    </div>
+
+    <figure class="art-fig">
+      <img src={u('assets/img/blog/ai-hriste.jpg')} alt="Prázdné dětské hřiště mezi panelovými domy na podzim" style="max-height: 420px; object-fit: cover;">
+      <figcaption class="art-cap">Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní místo v Třinci.</figcaption>
+    </figure>
+
+    <table class="dtab">
+      <caption>Rozklad — <b>kam se poděli chybějící mladí</b></caption>
+      <tbody>
+        <tr><td class="n">≈ 4 000</td><td class="t">se jich už nenarodilo — slabé ročníky devadesátých let. To je 85 % celého úbytku.</td></tr>
+        <tr><td class="n">≈ 700</td><td class="t">čistý odchod z města za 24 let — asi třicet mladých ročně, tedy 15 % úbytku</td></tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <!-- ================= 03 · PORODNOST ================= -->
+  <section class="art art-section" id="porodnost">
+    <p class="art-kicker"><span>03</span>Kolik dětí se rodilo</p>
+    <h2>V roce 1980 se tu narodilo dvakrát tolik dětí co v roce 2004.</h2>
+    <p>
+      Vrchol přišel v roce 1980 — <strong>693 narozených dětí</strong>.
+      Dno v roce 2004 — <strong>305 dětí</strong>. Propad o šestapadesát
+      procent. Silné ročníky se prostě přestaly rodit.
+    </p>
+    <p>
+      A teď to podstatné: <strong>Třinec v tom není výjimka</strong>.
+      Porodnost tu mezi generacemi klesla o 35 procent, v celé republice
+      o 34. Rozdíl jednoho procentního bodu — Třinec kopíruje stejnou křivku.
+    </p>
+    <p>
+      Odcházelo se? Ano. Záporné saldo stěhování mělo město ve dvaadvaceti
+      z dvaceti čtyř let — dohromady ale jen 2 585 lidí, asi sto ročně.
+      Takže ne: Třinec neselhal. Zestárnul přesně tak, jak zestárla celá
+      země. S tím žádná radnice zpětně nic neudělá. Dopředu ano.
+    </p>
+
+
+    <div class="art-note">
+      <p class="art-note-label">Poctivě k číslům</p>
+      <p>
+        Pevné číslo je jen to za rok 2025. Údaj za rok 2001 je kvalifikovaný
+        odhad ze sčítání lidu — ČSÚ tehdy věkové skupiny za jednotlivá města
+        nezveřejňoval. „15–35" je ve skutečnosti 15–34 let.
+      </p>
+      <p>
+        A sedm set je <em>čistý</em> odchod: odešlo jich víc, část nahradili
+        přistěhovalí. Nízká porodnost je navíc zčásti důsledkem toho, že
+        mladé rodiny odcházely už dřív — ta dvě čísla nejdou oddělit.
+      </p>
+    </div>
+
+    <figure class="art-fig">
+      <img src={u('assets/img/blog/infografika-mladi.jpg')} alt="Infografika: úbytek mladých 15–35 let v Třinci mezi lety 2001 a 2025">
+      <figcaption class="art-cap">Celý příběh v jednom obrázku. Ke stažení a sdílení.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 04 · ALKOHOL ================= -->
+  <section class="art art-section" id="alkohol">
+    <p class="art-kicker"><span>04</span>Druhá změna</p>
+    <h2>Od covidu se navíc přestalo pít.</h2>
+    <p>Druhá věc, která změnila večerní ulice: pije se míň. V celé zemi.</p>
+    <p>
+      Spotřeba alkoholu v Česku vrcholila v roce 2019 na{' '}
+      <strong>173 litrech na osobu ročně</strong>. V roce 2024 klesla na{' '}
+      <strong>156 litrů</strong> — nejméně za celé sledované období.
+      Pivo je na historickém minimu. A nejvíc ubrali právě mladí: pro
+      generaci dnešních dvacátníků už alkohol není hlavní program večera.
+      Sociologové mluví o generační změně, ne o výkyvu.
+    </p>
+    <p>
+      Není to třinecká specialita. Podívejte se na Stodolní v Ostravě —
+      ulici, kam jezdil pařit celý kraj. Dnes tam zejí prázdné výlohy
+      a zavřené bary. Když nestačí poptávka ani v třísettisícovém městě,
+      v třiatřicetitisícovém to nezachrání žádné úřední rozhodnutí.
+    </p>
+
+  </section>
+
+  <!-- ================= 05 · PŘESTAVBA ================= -->
+  <section class="art art-section" id="prestavba">
+    <p class="art-kicker"><span>05</span>Co se s městem stalo</p>
+    <h2>Třinec se nevylidnil. Přestavěl se.</h2>
+    <p>
+      Zatím to zní jako příběh o mizení. Není. Obyvatel ubylo od roku 2001
+      o čtrnáct procent — z 38 953 na 33 523. To samo o sobě nezní
+      dramaticky. Dramatická je <strong>změna uvnitř</strong>.
+    </p>
+    <p>
+      Dětí do čtrnácti let ubylo o třicet procent. Seniorů nad
+      pětašedesát let naopak <strong>přibylo o sedmačtyřicet procent</strong> —
+      z 5 238 na 7 698. Každý čtvrtý Třinečan je dnes senior. V roce 2001
+      to byl každý sedmý. Průměrný věk ve městě je pětačtyřicet let.
+    </p>
+    <p>
+      Nejsilnější ročníky jsou dnes lidé mezi pětačtyřiceti a
+      čtyřiašedesáti lety — je jich skoro deset tisíc. Dětí do čtyř let je
+      1 350. Tahle přestavba tedy zdaleka neskončila.
+    </p>
+    <p>
+      Takové město nepotřebuje jen klub pro mladé. Potřebuje obojí — a
+      hlavně potřebuje, aby spolu ty generace mluvily.
+    </p>
+
+  </section>
+
+  <!-- ================= 06 · JINAK ŽIVO ================= -->
+  <section class="art art-section" id="zivo">
+    <p class="art-kicker"><span>06</span>A teď ta dobrá zpráva</p>
+    <h2>Takže mrtvo? Ne. Jen <span class="hl">jinak živo</span>.</h2>
+    <p>
+      Tady se povídání u piva a realita rozcházejí podruhé. Město totiž
+      nežije míň. Žije <strong>jinak</strong> — přes den, venku, s rodinami,
+      napříč generacemi.
+    </p>
+    <p>
+      A není to dojem. Spočítali jsme to: od ledna do 10. srpna 2026 se
+      v Třinci konalo <strong>150 kulturně-společenských akcí</strong>, tedy
+      jednadvacet měsíčně — <strong>nová akce každý den a půl</strong>.
+      A to bez sportu, hokeje, pravidelných kurzů i běžného programu kina
+      Kosmos.
+    </p>
+
+    <figure class="full art-fig">
+      <img src={u('assets/img/blog/ai-komunitni-akce.jpg')} alt="Komunitní letní akce pod Beskydami, lidé více generací pohromadě" style="max-height: 480px; object-fit: cover;">
+      <figcaption class="art-cap" style="max-width: 1152px; margin: var(--s-8) auto 0; padding: 0 var(--s-24);">
+        Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní akci v Třinci.
+      </figcaption>
+    </figure>
+
+    <p>
+      Největší pořadatel je <strong>Trisia se 61 akcemi</strong> — čtyři
+      z deseti. Knihovna má pětatřicet. Ale pozor na to třetí místo:
+      čtyřiačtyřicet akcí uspořádali lidé a podniky mimo instituce.
+      Samotný klub <strong>U Matesa jich má patnáct</strong> — víc než
+      leckterá městská organizace.
+    </p>
+
+    <p class="art-sub">Co se letos v Třinci dělo</p>
+    <div class="art-tags">
+      <span class="art-tag"><b>Hutnický den</b> — 8 koncertů, 28 atrakcí</span>
+      <span class="art-tag"><b>ČteFesTí</b> — asi 20 pořadů za týden</span>
+      <span class="art-tag"><b>Festyn Majowy na Osůvce</b> — 1. ročník</span>
+      <span class="art-tag"><b>120 let polské školy</b> v Oldřichovicích</span>
+      <span class="art-tag"><b>Třinecké kulturní léto</b> — 3 večery zdarma</span>
+      <span class="art-tag"><b>INVENT ARENA</b></span>
+      <span class="art-tag"><b>6 swapů a blešáků</b></span>
+      <span class="art-tag"><b>Starlight Party</b> na Karpentné</span>
+    </div>
+
+    <p>
+      <strong>Festyn Majowy na Osůvce</strong> je první ročník — uspořádala
+      ho tři třinecká kola PZKO, bez rozpočtu radnice. <strong>Swapů</strong>{' '}
+      proběhlo šest; před pár lety takový formát v Třinci neexistoval.
+      To není město, kde se nic neděje. Je to město, kde se děje něco
+      jiného než dřív.
+    </p>
+
+    <div class="art-note">
+      <p class="art-note-label">150 je podlaha, ne strop</p>
+      <p>
+        Nezapočítali jsme akce bez události na Facebooku — jako dožínky
+        v Gutech. Nedohledali jsme ani zhruba patnáct letních akcí
+        z participativního rozpočtu: jejich seznam není nikde veřejně
+        k mání. Město žije tak decentralizovaně, že to jeho vlastní
+        kalendáře nestíhají zachytit.
+      </p>
+    </div>
+
+    <table class="dtab">
+      <caption>Akce — <b>leden až 10. srpna 2026</b></caption>
+      <tbody>
+        <tr><td class="n">~21</td><td class="t">kulturně-společenských akcí měsíčně — 150 za sedm a půl měsíce</td></tr>
+        <tr><td class="n">33</td><td class="t">divadelních představení — nejsilnější kategorie. Hudba 25, besedy a dílny 24, komunitní akce 20.</td></tr>
+        <tr><td class="n">0</td><td class="t">divadelních titulů v červenci a srpnu — sezóna končí v červnu, kultura se stěhuje ven</td></tr>
+      </tbody>
+    </table>
+
+    <figure class="art-fig">
+      <img src={u('assets/img/blog/infografika-akce.jpg')} alt="Infografika: 147 kulturně-společenských akcí v Třinci od ledna do července 2026, průměrně 21 měsíčně">
+      <figcaption class="art-cap">Ke stažení a sdílení.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 07 · CO JSME ZKUSILI MY ================= -->
+  <section class="art art-section" id="snaha">
+    <p class="art-kicker"><span>07</span>Začínáme prací, ne sliby</p>
+    <h2>Co jsme se s tím snažili udělat my?</h2>
+    <p>
+      Tři věci, které už běží. Ne proto, abychom se chlubili — ale protože
+      slibům se líp věří, když za nimi je vidět práce.
+    </p>
+
+    <div class="art-done">
+      <div class="art-done-row">
+        <div class="art-check">✓</div>
+        <div>
+          <h3>Participativní rozpočet.</h3>
+          <p>
+            Od roku 2024 si Třinečané sami navrhují a hlasováním vybírají
+            akce, které město zaplatí. Sešlo se 22 projektů, deset dostalo
+            podporu — od dílen v Karpentné po lampionový průvod v Gutech.
+            Peníze jdou za lidmi, kteří už něco dělají.
+          </p>
+        </div>
+      </div>
+      <div class="art-done-row">
+        <div class="art-check">✓</div>
+        <div>
+          <h3>Lepší interpreti na koncertech celý rok.</h3>
+          <p>
+            Podpořili jsme navýšení rozpočtu na akce přes Trisiu —
+            největšího pořadatele ve městě, čtyři z deseti akcí. Výsledek:
+            na koncerty jezdí silnější jména, a to po celý rok.
+            [DOPLNIT částku a rok]
+          </p>
+        </div>
+      </div>
+      <div class="art-done-row">
+        <div class="art-check">✓</div>
+        <div>
+          <h3>Rekonstrukce TGM — nové místo pro akce.</h3>
+          <p>
+            Aby akce měly kde být. Z TGM má vzniknout přirozené místo pro
+            městské akce pod širým nebem. [DOPLNIT stav a termín]
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 08 · CO S TÍM ================= -->
+  <section class="art art-section" id="reseni">
+    <p class="art-kicker"><span>08</span>Co s tím chceme dělat</p>
+    <h2>Nevrátíme rok 2005. Postavíme rok 2026.</h2>
+    <p>
+      Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu —
+      vycházejí přímo z čísel výše.
+    </p>
+
+    <div class="art-steps">
+      <div class="art-step">
+        <div class="art-step-num">01</div>
+        <div>
+          <h3>Aktivní jednotlivci. Ti to vždy zachrání.</h3>
+          <p>
+            Živé město nedělá radnice. Dělají ho lidé, kteří něco uspořádají:
+            trenér, kapelník, farář, holka, co dá dohromady swap, chlap, co
+            obnoví průvod v Gutech. Úloha města je najít je a nebrzdit je.
+          </p>
+        </div>
+      </div>
+      <div class="art-step">
+        <div class="art-step-num">02</div>
+        <div>
+          <h3>Příměstské části jako místa, kde se žije.</h3>
+          <p>
+            Guty, Karpentná, Oldřichovice, Nebory — tam dnes komunitní život
+            reálně funguje. Chceme pro něj místa a peníze: opravené kulturáky,
+            hřiště, podporu spolků. [DOPLNIT konkrétní závazky z programu]
+          </p>
+        </div>
+      </div>
+      <div class="art-step">
+        <div class="art-step-num">03</div>
+        <div>
+          <h3>Klub pro mladé? Město připraví hřiště, ne scénář.</h3>
+          <p>
+            Město nemá provozovat diskotéku. Může nabídnout prostor,
+            zjednodušit podmínky a nechat vzniknout to, co si mladí sami
+            řeknou — klub, skatepark, zkušebnu.
+          </p>
+        </div>
+      </div>
+      <div class="art-step">
+        <div class="art-step-num">04</div>
+        <div>
+          <h3>Všude je blíž.</h3>
+          <p>
+            Z Třince je kousek do Ostravy, do Beskyd i za hranice. To není
+            prohra, to je výhoda. Chceme dopravu, která to umí i večer —
+            spoje, po kterých se dá vrátit z koncertu.
+          </p>
+        </div>
+      </div>
+      <div class="art-step">
+        <div class="art-step-num">05</div>
+        <div>
+          <h3>Trisia jako motor.</h3>
+          <p>
+            Trisia není doplněk kulturního života — je to jeho páteř.
+            Otázka tedy nezní, jestli ji
+            podporovat, ale kam ji posunout. Chceme dramaturgii, která vedle
+            stálého publika osloví i lidi kolem třicítky.
+            [DOPLNIT konkrétní závazek]
+          </p>
+        </div>
+      </div>
+      <div class="art-step">
+        <div class="art-step-num">06</div>
+        <div>
+          <h3>Centrum pro aktivní seniory.</h3>
+          <p>
+            Seniorů je dnes v Třinci skoro čtvrtina města — a jsou aktivní:
+            Mozková posilovna, jazykové kurzy v knihovně, Senioři za volantem.
+            Tyhle programy běží roztroušeně po institucích. Chceme pro ně
+            jedno důstojné zázemí. [DOPLNIT místo a formu]
+          </p>
+        </div>
+      </div>
+      <div class="art-step">
+        <div class="art-step-num">07</div>
+        <div>
+          <h3>Místa, kde se akce dají dělat.</h3>
+          <p>
+            Akce potřebují prostor, ne razítko. Rekonstrukce TGM je první
+            krok — chceme k tomu, aby ani Javorový nebyl jen sjezdovka.
+            A hlavně: aby Třinec měl <strong>letní scénu</strong>.
+            V červenci a srpnu se tu nehraje ani jedno divadlo — sezóna končí
+            v červnu a kultura se stěhuje ven. Jenže ven nemá kam. Pódium,
+            na které dosáhne kapela, divadlo i škola, je nejlevnější způsob,
+            jak z prázdných měsíců udělat plné.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-24); align-items: start;">
+      <figure class="art-fig" style="margin: 0;">
+        <img src={u('assets/img/blog/namesti-tgm.jpg')} alt="Náměstí T. G. Masaryka v Třinci s kašnou" style="aspect-ratio: 16/9; object-fit: cover;">
+        <figcaption class="art-cap">Náměstí T. G. Masaryka. Foto: Ondřej Žváček, Wikimedia Commons, CC BY 2.5.</figcaption>
+      </figure>
+      <figure class="art-fig" style="margin: 0;">
+        <img src={u('assets/img/blog/ai-letni-scena.jpg')} alt="Letní scéna pod kopcem, lidé sedí v trávě a poslouchají kapelu" style="aspect-ratio: 16/9; object-fit: cover;">
+        <figcaption class="art-cap">Jak by mohla vypadat letní scéna. Ilustrace vygenerovaná AI.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ================= ZÁVĚR ================= -->
+  <section class="closing">
+    <img src={u('assets/img/panorama.jpg')} alt="Panorama Třince a Beskyd">
+    <div class="closing-overlay">
+      <div class="container">
+        <h2 class="closing-claim">Živo je tam, kde jsou lidi.</h2>
+        <div class="closing-text" style="max-width: 54ch;">
+          <p>
+            Třinec není mrtvý. Je jiný, než byl v roce 2005 — menší, starší
+            a střízlivější. Přesně jako celá země. Sto padesát akcí za sedm
+            měsíců není město, které usnulo.
+          </p>
+          <p style="margin-top: var(--s-16);">
+            Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde
+            bude dobře těm, kdo tady jsou dnes: dětem, rodinám, mladým
+            i seniorům. My jsme pro to druhé.
+          </p>
+        </div>
+        <div class="closing-cta" style="margin-top: var(--s-24);">
+          <a class="btn btn-primary" href={u('program.html')}>Náš program</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KOLOFON ================= -->
+  <section class="art art-colophon">
+    <p class="art-note-label">Odkud čísla bereme</p>
+    <div class="art-colophon-cols">
+      <p>
+        <strong>Demografie.</strong> Český statistický úřad — sčítání lidu
+        2001 a tabulka „Věkové složení obyvatelstva v obcích
+        Moravskoslezského kraje" k 31. 12. 2025. Porodnost a stěhování:
+        časové řady ČSÚ 1966–2024 pro Třinec i pro celou ČR. Hodnota za rok
+        2001 je kvalifikovaný odhad, ostatní čísla jsou tvrdá.
+      </p>
+      <p>
+        <strong>Akce.</strong> Vlastní přehled sestavený z kalendářů TRISIA,
+        Městské knihovny Třinec, WERK ARENY, PZKO a skupiny Třinec Žije,
+        stav k 10. 8. 2026. Bez sportu, pravidelných kurzů a běžného
+        programu kina.
+      </p>
+      <p>
+        <strong>Ostatní.</strong> Spotřeba alkoholu: ČSÚ, statistika
+        spotřeby potravin 2015–2024. Participativní rozpočet:{' '}
+        <a href="https://www.trinecko.cz/" target="_blank" rel="noopener">trinecko.cz</a>{' '}
+        a <a href="https://fajnytrinec.cz/participativni-rozpocet/2025" target="_blank" rel="noopener">fajnytrinec.cz</a>.
+        Stodolní: reportáže Deníku N, Seznam Zpráv a Českého rozhlasu
+        z let 2024–2025.
+      </p>
+      <p>
+        <strong>Obrázky.</strong> Ilustrace označené jako AI byly
+        vygenerovány umělou inteligencí a nezobrazují konkrétní místa ani
+        osoby v Třinci. Fotografie náměstí T. G. Masaryka: Ondřej Žváček,
+        Wikimedia Commons, licence CC BY 2.5.
+      </p>
+      <p>#SPOJUJEMEGENERACE · #PROTRINEC</p>
+    </div>
+  </section>
+</Base>
