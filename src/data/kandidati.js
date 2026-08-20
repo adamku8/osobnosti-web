@@ -42,7 +42,7 @@ export const kandidati = [
     "jmeno": "MUDr. Marek Štěrba",
     "vek": 35,
     "profese": "praktický lékař",
-    "foto": null,
+    "foto": "marek_sterba_c.jpg",
     "iniciraly": "MŠ",
     "dotaznik": true,
     "detail": null,
@@ -54,7 +54,7 @@ export const kandidati = [
     "jmeno": "Mgr. Martina Wolna",
     "vek": 52,
     "profese": "ředitelka knihovny",
-    "foto": null,
+    "foto": "martina_wolna_c.jpg",
     "iniciraly": "MW",
     "detail": null,
     "poradiSlovem": "pátá"
@@ -155,7 +155,7 @@ export const kandidati = [
     "jmeno": "Bc. Aron Chmielewski",
     "vek": 35,
     "profese": "hokejista",
-    "foto": null,
+    "foto": "aron_chmielewski_c.jpg",
     "iniciraly": "AC",
     "detail": null,
     "poradiSlovem": "čtrnáctý"
