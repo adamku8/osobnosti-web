@@ -5,6 +5,14 @@ import { u } from '../lib/url.js';
 // DRAFT — před publikací: 1) doplnit [DOPLNIT] bloky, 2) přepnout draft na false.
 const draft = true;
 
+// Instagram reels k odstavci o TANCUJ.CZ a TRAYTO (sekce 06).
+// Vyplň URL ve tvaru https://www.instagram.com/reel/XXXXXXXX/ — dokud je pole
+// prázdné, blok se nerenderuje a na web se nic nepropíše.
+const reels = [
+  // { url: 'https://www.instagram.com/reel/…/', kdo: 'TANCUJ.CZ' },
+  // { url: 'https://www.instagram.com/reel/…/', kdo: 'TRAYTO' },
+];
+
 const obsah = [
   { id: 'widle',     num: '01', title: 'Widle se nevrátí' },
   { id: 'proc',      num: '02', title: 'Utekli? Chyba lávky' },
@@ -213,6 +221,17 @@ const obsah = [
     .art-delta { align-self: flex-end; padding-bottom: 54px; font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; white-space: nowrap; }
     .art-delta small { display: block; font-weight: 600; font-size: 12px; color: var(--text-muted); margin-top: var(--s-4); white-space: normal; max-width: 16ch; }
 
+    /* --- Instagram reels -------------------------------------- */
+    .art-reels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-24);
+      margin: var(--s-40) 0;
+      align-items: start;
+    }
+    .art-reels blockquote.instagram-media { margin: 0 !important; min-width: 0 !important; width: 100% !important; }
+    @media (max-width: 700px) { .art-reels { grid-template-columns: 1fr; } }
+
     /* --- Obrázky ---------------------------------------------- */
     .art-fig { margin: var(--s-40) 0; }
     .art-fig img { width: 100%; height: auto; display: block; }
@@ -315,6 +334,7 @@ const obsah = [
           <li>Upřesnit, co je myšleno „TGM" — náměstí T. G. Masaryka, nebo areál ZŠ TGM.</li>
           <li>Celostátní řada narozených pochází z Wikipedie — dohledat primární zdroj ČSÚ.</li>
           <li>TANCUJ.CZ a TRAYTO — ověřit přesné názvy a doplnit ke každému jednu konkrétní akci; web se nepodařilo dohledat.</li>
+          <li>Vložit 2 reels z Instagramu (pole <code>reels</code> v hlavičce souboru) — potřebuju od Adama URL obou reels.</li>
         </ul>
       </div>
     )}
@@ -524,6 +544,21 @@ const obsah = [
       a večery, které nevznikly v žádné kanceláři. Přesně tohle máme na
       mysli, když říkáme, že mladí si poradí.
     </p>
+
+    {reels.length > 0 && (
+      <div class="art-reels">
+        {reels.map(r => (
+          <blockquote
+            class="instagram-media"
+            data-instgrm-permalink={r.url}
+            data-instgrm-version="14"
+            data-instgrm-captioned>
+            <a href={r.url}>Reels — {r.kdo}</a>
+          </blockquote>
+        ))}
+        <script async src="https://www.instagram.com/embed.js" is:inline></script>
+      </div>
+    )}
 
     <p class="art-sub">Co se letos v Třinci dělo</p>
     <div class="art-tags">
