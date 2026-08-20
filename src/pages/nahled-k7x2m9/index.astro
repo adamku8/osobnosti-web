@@ -44,6 +44,9 @@ const sMedailonkem = kandidati.filter(k => k.detail && medailonky[k.detail]);
         <h2>Medailonky kandidátů</h2>
       </div>
       <ul class="area-list">
+        <li><a href={u('nahled-k7x2m9/medailonky-prehled.html')}>Přehled medailonků a fotek — kontrolní tabulka (všech 27)</a></li>
+      </ul>
+      <ul class="area-list">
         {sMedailonkem.map(k => (
           <li><a href={u(`nahled-k7x2m9/kandidat-${k.detail}.html`)}>{k.cislo}. {k.jmeno} — {k.profese}</a></li>
         ))}
