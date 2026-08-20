@@ -4,11 +4,9 @@
 // Stránka není nikde prolinkovaná (kromě rozcestníku náhledu), má noindex.
 import Base from '../../layouts/Base.astro';
 import { kandidati } from '../../data/kandidati.js';
-import { medailonky } from '../../data/medailonky.js';
 import { u } from '../../lib/url.js';
 
 const slugOf = (k) => k.detail ?? k.detailPriprava ?? null;
-const maStranku = (k) => Boolean(slugOf(k) && medailonky[slugOf(k)]);
 // „Hotov" = vyplněný dotazník je ve složce na Google Disku (pole "dotaznik").
 const maDotaznik = (k) => Boolean(k.dotaznik);
 
@@ -72,9 +70,7 @@ const pocetFoto = kandidati.filter(k => k.foto).length;
                 <td class="stav">
                   {maDotaznik(k)
                     ? <a class="stav-ano" href={u(`nahled-k7x2m9/kandidat-${slugOf(k)}.html`)}>✓ hotov</a>
-                    : maStranku(k)
-                      ? <span class="stav-ne">— chybí dotazník (<a href={u(`nahled-k7x2m9/kandidat-${slugOf(k)}.html`)}>stránka na webu</a>)</span>
-                      : <span class="stav-ne">— chybí</span>}
+                    : <span class="stav-ne">— chybí</span>}
                 </td>
                 <td class="stav">
                   {k.foto
