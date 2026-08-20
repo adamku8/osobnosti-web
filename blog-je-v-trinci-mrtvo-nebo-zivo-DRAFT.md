@@ -1,115 +1,175 @@
 # Je v Třinci mrtvo, nebo živo?
 
-> **DRAFT v0.1 · 2026-08-11 · blog pro osobnostiprotrinec.cz**
-> Značky `[OVĚŘIT]` a `[DOPLNIT]` = místa k dopracování. Poznámky pro redakci a zdroje jsou na konci souboru.
+> **DRAFT v0.5 · 2026-08-14 · textový zdroj přegenerovaný z webové verze**
+> Zdroj pravdy: `WEB/src/pages/blog-je-v-trinci-mrtvo-nebo-zivo.astro`. Tento soubor byl 14. 8. znovu
+> vygenerován z buildu — předchozí kopie se (patrně při přejmenování složky projektu) vrátila na v0.1.
 
 ---
 
-**Perex:** Večerní Třinec už nevypadá jako před dvaceti lety. Ale čísla říkají něco jiného, než co se povídá u piva. Mladí neutekli — hlavně se nenarodili. A město mezitím žije jinak, než jsme bývali zvyklí.
+**Perex:** Večerní Třinec už nevypadá jako před dvaceti lety. Čísla ale říkají něco jiného než povídání u piva. Mladí neutekli — hlavně se nenarodili. A město mezitím žije jinak, než jsme bývali zvyklí.
+
+*Adam Křenek · srpen 2026 · čtení na 6 minut*
 
 ---
 
-## Začnu smutnou zprávou
+## 01 · Widle se nevrátí.
 
 Časy, kdy nám bylo dvacet a chodili jsme večer po Třinci od Relaxu přes Čarodějky do Widlí, se už nevrátí. Alespoň ne v dohledné době.
 
-Není to pocit. Jsou to čísla. V roce 2001 žilo v Třinci zhruba **11 800 lidí mezi 15 a 35 lety**. Dnes jich je **7 079**. Za čtyřiadvacet let ubylo **4 700 mladých — čtyřicet procent**. Skoro každý druhý.
+Není to pocit. Jsou to čísla. V roce 2001 žilo v Třinci zhruba 11 800 lidí mezi 15 a 35 lety. Na konci roku 2025 jich bylo 7 079. Za čtyřiadvacet let ubylo 4 700 mladých — čtyřicet procent. Skoro každý druhý.
 
-Hospody a kluby té doby žily z jedné jednoduché věci: bylo nás hodně. Dnes je nás o skoro pět tisíc míň. Žádný podnik na světě nepřežije, když mu zmizí polovina zákazníků.
+Hospody té doby žily z jedné jednoduché věci: bylo nás hodně. Žádný podnik nepřežije, když mu zmizí polovina zákazníků.
 
-## Utekli? Chyba lávky. Nenarodili se.
+Otázka je, kam se poděli. A tam se obvyklá odpověď mýlí.
 
-„Mladí z Třince utíkají" — to slyšíme pořád. Jenže data říkají něco jiného.
+Třinečanů ve věku 15–35 let bylo v roce 2001 zhruba 11 800. Na konci roku 2025 jich bylo 7 079.
 
-Z těch 4 700 chybějících mladých se zhruba **4 000 vůbec nenarodilo**. Slabé ročníky devadesátých let. V Třinci se v letech 1971–86 rodilo průměrně **612 dětí ročně**. V letech 1991–2010 už jen **398**. Pokles o 35 procent — a úplně stejný proběhl v celé republice (ze 157 tisíc na 104 tisíc dětí ročně).
+## 02 · Utekli? Chyba lávky. Nenarodili se.
 
-Čistý odchod z města? Zhruba **700 lidí za 24 let**. To je asi 30 mladých ročně. Není to nula a nemáme to přehlížet. Ale hlavní příběh to není.
+„Mladí z Třince utíkají" — to slyšíme pořád. Jenže data říkají něco jiného. Dá se to spočítat úplně jednoduše.
 
-Třinec se nevylidnil. Třinec — stejně jako celá země — má prostě méně dětí. To je fakt, se kterým žádná radnice nic nenadělá zpětně. Nadělá s tím něco dopředu.
+Rozdíl je necelých devět set lidí za dvacet ročníků — a to včetně těch, kdo se nedožili. Žádný exodus.
 
-## A od covidu se navíc přestalo pít
+Chybějící čtyři tisícovky mladých se nikam neodstěhovaly. Ony se nenarodily.
+
+V letech 1991–2010 se v Třinci narodilo 7 969 dětí. Dnes tu žije 7 079 lidí právě těch ročníků.
+
+*(Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní místo v Třinci.)*
+
+**Rozklad — kam se poděli chybějící mladí**
+
+| | |
+|---|---|
+| ≈ 4 000 | se jich už nenarodilo — slabé ročníky devadesátých let. To je 85 % celého úbytku. |
+| ≈ 700 | čistý odchod z města za 24 let — asi třicet mladých ročně, tedy 15 % úbytku |
+
+## 03 · V roce 1980 se tu narodilo dvakrát tolik dětí co v roce 2004.
+
+Vrchol přišel v roce 1980 — 693 narozených dětí. Dno v roce 2004 — 305 dětí. Propad o šestapadesát procent. Silné ročníky se prostě přestaly rodit.
+
+A teď to podstatné: Třinec v tom není výjimka. Porodnost tu mezi generacemi klesla o 35 procent, v celé republice o 34. Rozdíl jednoho procentního bodu — Třinec kopíruje stejnou křivku.
+
+Odcházelo se? Ano. Záporné saldo stěhování mělo město ve dvaadvaceti z dvaceti čtyř let — dohromady ale jen 2 585 lidí, asi sto ročně. Takže ne: Třinec neselhal. Zestárnul přesně tak, jak zestárla celá země. S tím žádná radnice zpětně nic neudělá. Dopředu ano.
+
+Poctivě k číslům
+
+Pevné číslo je jen to za rok 2025. Údaj za rok 2001 je kvalifikovaný odhad ze sčítání lidu — ČSÚ tehdy věkové skupiny za jednotlivá města nezveřejňoval. „15–35" je ve skutečnosti 15–34 let.
+
+A sedm set je čistý odchod: odešlo jich víc, část nahradili přistěhovalí. Nízká porodnost je navíc zčásti důsledkem toho, že mladé rodiny odcházely už dřív — ta dvě čísla nejdou oddělit.
+
+*(Celý příběh v jednom obrázku. Ke stažení a sdílení.)*
+
+## 04 · Od covidu se navíc přestalo pít.
 
 Druhá věc, která změnila večerní ulice: pije se míň. V celé zemi.
 
-Spotřeba alkoholu v Česku vrcholila v roce 2019 na **173 litrech na osobu ročně**. V roce 2024 klesla na **156 litrů** — nejméně za celé sledované období. Pivo je na historickém minimu. A nejvíc ubrali právě mladí: pro generaci dnešních dvacátníků už alkohol není hlavní program večera. Sociologové mluví o generační změně, ne o výkyvu.
+Spotřeba alkoholu v Česku vrcholila v roce 2019 na 173 litrech na osobu ročně. V roce 2024 klesla na 156 litrů — nejméně za celé sledované období. Pivo je na historickém minimu. A nejvíc ubrali právě mladí: pro generaci dnešních dvacátníků už alkohol není hlavní program večera. Sociologové mluví o generační změně, ne o výkyvu.
 
 Není to třinecká specialita. Podívejte se na Stodolní v Ostravě — ulici, kam jezdil pařit celý kraj. Dnes tam zejí prázdné výlohy a zavřené bary. Když nestačí poptávka ani v třísettisícovém městě, v třiatřicetitisícovém to nezachrání žádné úřední rozhodnutí.
 
-## Takže mrtvo? Ne. Jen jinak živo.
+## 05 · Třinec se nevylidnil. Přestavěl se.
 
-Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežije míň. Žije **jinak** — přes den, venku, s rodinami, napříč generacemi.
+Zatím to zní jako příběh o mizení. Není. Obyvatel ubylo od roku 2001 o čtrnáct procent — z 38 953 na 33 523. To samo o sobě nezní dramaticky. Dramatická je změna uvnitř.
 
-- **Participativní rozpočet.** Od roku 2024 si Třinečané sami navrhují a hlasováním vybírají akce, které město zaplatí. Loni se sešlo 22 projektů, deset jich dostalo podporu — od komunitních akcí v centru po dílny v Karpentné a lampionový průvod v Gutech. [OVĚŘIT aktuální čísla ročníku 2026]
-- **[DOPLNIT] Kolik akcí se v Třinci reálně koná** — kalendář města, Trisia, knihovna, sportoviště. Adamův odhad „20 akcí za měsíc" podložit výčtem z kalendáře akcí. 
-- **[DOPLNIT] Peníze do kultury a volného času** — kolik dává rozpočet města dnes vs. před X lety (podklad: složka `Rozpočet města`).
-- **[DOPLNIT] 1–2 konkrétní příklady akcí, kde bylo narváno** (jméno, místo, návštěvnost) — ať to není abstraktní.
+Dětí do čtrnácti let ubylo o třicet procent. Seniorů nad pětašedesát let naopak přibylo o sedmačtyřicet procent — z 5 238 na 7 698. Každý čtvrtý Třinečan je dnes senior. V roce 2001 to byl každý sedmý. Průměrný věk ve městě je pětačtyřicet let.
 
-## Co s tím chceme dělat
+Nejsilnější ročníky jsou dnes lidé mezi pětačtyřiceti a čtyřiašedesáti lety — je jich skoro deset tisíc. Dětí do čtyř let je 1 350. Tahle přestavba tedy zdaleka neskončila.
 
-Nebudeme slibovat, že vrátíme rok 2005. Budeme dělat to, co dává smysl v roce 2026.
+Takové město nepotřebuje jen klub pro mladé. Potřebuje obojí — a hlavně potřebuje, aby spolu ty generace mluvily.
 
-**0. Aktivní jednotlivci — ti to vždy zachrání.** Živé město nedělá radnice. Dělají ho lidé, kteří se rozhodnou něco uspořádat: trenér, kapelník, farář, holka, co dá dohromady swap, chlap, co obnoví průvod v Gutech. Úloha města je jediná — najít je, nebrzdit je a podpořit je. Přesně proto má smysl participativní rozpočet: peníze jdou za lidmi, kteří už něco dělají.
+## 06 · Takže mrtvo? Ne. Jen jinak živo.
 
-**1. Příměstské části jako místa, kde se žije.** Guty, Karpentná, Oldřichovice, Nebory — tam dnes komunitní život reálně funguje. Chceme pro něj místa a peníze: opravené kulturáky, hřiště, podporu spolků. [DOPLNIT konkrétní závazky z programu]
+Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežije míň. Žije jinak — přes den, venku, s rodinami, napříč generacemi.
 
-**2. Klub pro mladé? Trh rozhodne — město pomůže.** Město nemá provozovat diskotéku. Může ale nabídnout prostor, zjednodušit podmínky a nechat vzniknout to, co si mladí sami řeknou. Když bude poptávka, podnik vznikne. Naše role je nestát v cestě — a umět pomoct s prostorem. [DOPLNIT — je konkrétní prostor ve hře?]
+A není to dojem. Spočítali jsme to: od ledna do 10. srpna 2026 se v Třinci konalo 150 kulturně-společenských akcí, tedy jednadvacet měsíčně — nová akce každý den a půl. A to bez sportu, hokeje, pravidelných kurzů i běžného programu kina Kosmos.
 
-**3. Všude je blíž.** Z Třince je kousek do Ostravy, do Beskyd i za hranice. To není prohra, to je výhoda. Chceme dopravu, která to umí i večer — spoje, po kterých se dá vrátit z koncertu. [OVĚŘIT stav večerních/nočních spojů]
+*(Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní akci v Třinci.)*
 
-**4. Mladí si poradí. Město má připravit hřiště, ne psát scénář.** Skatepark, zkušebna, prostor pro komunitní akce, jednoduchá pravidla pro pořádání vlastních akcí. Mladí nepotřebují program od úředníků — potřebují, aby jim město neházelo klacky pod nohy. [DOPLNIT konkrétní bod z programu]
+Největší pořadatel je Trisia se 61 akcemi — čtyři z deseti. Knihovna má pětatřicet. Ale pozor na to třetí místo: čtyřiačtyřicet akcí uspořádali lidé a podniky mimo instituce. Samotný klub U Matesa jich má patnáct — víc než leckterá městská organizace.
 
-**5. Trisia jako motor.** [DOPLNIT — co konkrétně: dramaturgie pro mladší publikum? večerní program? spolupráce se školami?]
+A svoje akce si rozjíždějí i mladí sami. Na Třinecku je dělají třeba TANCUJ.CZ a TRAYTO — party a večery, které nevznikly v žádné kanceláři. Přesně tohle máme na mysli, když říkáme, že mladí si poradí.
 
-**6. Centrum pro aktivní seniory.** Živé město není jen město mladých. Senioři jsou dnes nejaktivnější generace v Třinci — a zaslouží si důstojné zázemí. [DOPLNIT konkrétní záměr — místo, forma]
+Co se letos v Třinci dělo
 
-**7. Místa, kde se akce dají dělat.** Akce potřebují prostor, ne razítko. Chceme, aby TGM [OVĚŘIT — náměstí TGM? areál ZŠ TGM?] fungovalo jako přirozené místo pro městské akce. Aby Javorový nebyl jen sjezdovka, ale prostor pro události svého typu — závody, festivaly pod horou, akce venku. A aby Třinec měl letní scénu: pódium, na které v létě dosáhne kapela, divadlo i škola. [DOPLNIT — kde: park, náměstí, amfiteátr?]
+Festyn Majowy na Osůvce je první ročník — uspořádala ho tři třinecká kola PZKO, bez rozpočtu radnice. Swapů proběhlo šest; před pár lety takový formát v Třinci neexistoval. To není město, kde se nic neděje. Je to město, kde se děje něco jiného než dřív.
 
-## Živo je tam, kde jsou lidi
+150 je podlaha, ne strop
 
-Třinec není mrtvý. Je jiný, než byl v roce 2005 — menší, starší a střízlivější. Přesně jako celá země.
+Nezapočítali jsme akce bez události na Facebooku — jako dožínky v Gutech. Nedohledali jsme ani zhruba patnáct letních akcí z participativního rozpočtu: jejich seznam není nikde veřejně k mání. Město žije tak decentralizovaně, že to jeho vlastní kalendáře nestíhají zachytit.
+
+*(Ke stažení a sdílení.)*
+
+**Akce — leden až 10. srpna 2026**
+
+| | |
+|---|---|
+| ~21 | kulturně-společenských akcí měsíčně — 150 za sedm a půl měsíce |
+| 33 | divadelních představení — nejsilnější kategorie. Hudba 25, besedy a dílny 24, komunitní akce 20. |
+| 0 | divadelních titulů v červenci a srpnu — sezóna končí v červnu, kultura se stěhuje ven |
+
+## 07 · Co jsme se s tím snažili udělat my?
+
+Tři věci, které už běží. Ne proto, abychom se chlubili — ale protože slibům se líp věří, když za nimi je vidět práce.
+
+**Participativní rozpočet.**
+
+Od roku 2024 si Třinečané sami navrhují a hlasováním vybírají akce, které město zaplatí. Sešlo se 22 projektů, deset dostalo podporu — od dílen v Karpentné po lampionový průvod v Gutech. Peníze jdou za lidmi, kteří už něco dělají.
+
+**Lepší interpreti na koncertech celý rok.**
+
+Podpořili jsme navýšení rozpočtu na akce přes Trisiu — největšího pořadatele ve městě, čtyři z deseti akcí. Výsledek: na koncerty jezdí silnější jména, a to po celý rok. [DOPLNIT částku a rok]
+
+**Rekonstrukce TGM — nové místo pro akce.**
+
+Aby akce měly kde být. Z TGM má vzniknout přirozené místo pro městské akce pod širým nebem. [DOPLNIT stav a termín]
+
+## 08 · Nevrátíme rok 2005. Postavíme rok 2026.
+
+Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu — vycházejí přímo z čísel výše.
+
+**Aktivní jednotlivci. Ti to vždy zachrání.**
+
+Živé město nedělá radnice. Dělají ho lidé, kteří něco uspořádají: trenér, kapelník, farář, holka, co dá dohromady swap, chlap, co obnoví průvod v Gutech. Úloha města je najít je a nebrzdit je.
+
+**Příměstské části jako místa, kde se žije.**
+
+Guty, Karpentná, Oldřichovice, Nebory — tam dnes komunitní život reálně funguje. Chceme pro něj místa a peníze: opravené kulturáky, hřiště, podporu spolků. [DOPLNIT konkrétní závazky z programu]
+
+**Klub pro mladé? Město připraví hřiště, ne scénář.**
+
+Město nemá provozovat diskotéku. Může nabídnout prostor, zjednodušit podmínky a nechat vzniknout to, co si mladí sami řeknou — klub, skatepark, zkušebnu.
+
+**Všude je blíž.**
+
+Z Třince je kousek do Ostravy, do Beskyd i za hranice. To není prohra, to je výhoda. Chceme dopravu, která to umí i večer — spoje, po kterých se dá vrátit z koncertu.
+
+**Trisia jako motor.**
+
+Trisia není doplněk kulturního života — je to jeho páteř. Otázka tedy nezní, jestli ji podporovat, ale kam ji posunout. Chceme dramaturgii, která vedle stálého publika osloví i lidi kolem třicítky. [DOPLNIT konkrétní závazek]
+
+**Centrum pro aktivní seniory.**
+
+Seniorů je dnes v Třinci skoro čtvrtina města — a jsou aktivní: Mozková posilovna, jazykové kurzy v knihovně, Senioři za volantem. Tyhle programy běží roztroušeně po institucích. Chceme pro ně jedno důstojné zázemí. [DOPLNIT místo a formu]
+
+**Místa, kde se akce dají dělat.**
+
+Akce potřebují prostor, ne razítko. Rekonstrukce TGM je první krok — chceme k tomu, aby ani Javorový nebyl jen sjezdovka. A hlavně: aby Třinec měl letní scénu. V červenci a srpnu se tu nehraje ani jedno divadlo — sezóna končí v červnu a kultura se stěhuje ven. Jenže ven nemá kam. Pódium, na které dosáhne kapela, divadlo i škola, je nejlevnější způsob, jak z prázdných měsíců udělat plné.
+
+*(Náměstí T. G. Masaryka. Foto: Ondřej Žváček, Wikimedia Commons, CC BY 2.5.)*
+
+*(Jak by mohla vypadat letní scéna. Ilustrace vygenerovaná AI.)*
+
+## Závěr — Živo je tam, kde jsou lidi.
+
+Třinec není mrtvý. Je jiný, než byl v roce 2005 — menší, starší a střízlivější. Přesně jako celá země. Sto padesát akcí za sedm měsíců není město, které usnulo.
 
 Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dobře těm, kdo tady jsou dnes: dětem, rodinám, mladým i seniorům. My jsme pro to druhé.
-
-*S vaším hlasem měníme Třinec.*
 
 `#SPOJUJEMEGENERACE #PROTRINEC`
 
 ---
----
 
-## POZNÁMKY PRO REDAKCI (do publikace smazat)
+## POZNÁMKY (v0.5)
 
-### Ověřená čísla a zdroje
-
-| Tvrzení | Číslo | Zdroj |
-|---|---|---|
-| Mladí 15–35 v Třinci 2001 | ≈ 11 800 (kvalif. odhad ze SLDB) | ČSÚ / interní infografika `OPT-infografika-mladi-15-35-v1.1` |
-| Mladí 15–35 v Třinci 2025 | 7 079 (k 31. 12. 2025) | ČSÚ, věkové složení obcí |
-| Úbytek | −4 700 / −40 % | dtto |
-| Z toho „nenarodili se" | ≈ 4 000 | dtto (slabé ročníky 90. let) |
-| Z toho čistý odchod | ≈ 700 za 24 let | dtto |
-| Porodnost Třinec | 612/rok (1971–86) → 398 (1991–2010), −35 % | ČSÚ, bilance obyvatel |
-| Porodnost ČR | 157 tis./rok (1966–86) → 104 tis. (1991–2010), −34 % | ČSÚ |
-| Obyvatel Třince celkem | 33 852 (31. 12. 2024); rok 2024: −414 (přirozený −153, migrace −261) | ČSÚ via obyvatelstvo.cz |
-| Spotřeba alkoholu ČR | max 173,4 l/os. (2019) → 156 l (2024) | ČSÚ (viz Kurzy.cz, Ekonomický deník) |
-| Pivo | 133,2 → 130,5 l/os. (2023→2024), historické minimum | ČSÚ |
-| Participativní rozpočet Třinec | od 2024; 300 tis. Kč; 22 návrhů, 10 × 30 tis. Kč | trinecko.cz, fajnytrinec.cz |
-| Stodolní úpadek | zavřené bary, odliv | Deník N, Seznam Zprávy, iRozhlas (2024–25) |
-
-Odkazy: [obyvatelstvo.cz/Třinec](https://obyvatelstvo.cz/cz/mesto/trinec) · [ČSÚ — demografie měst MSK](https://csu.gov.cz/docs/107815/d0c0433e-502e-4595-6f04-c00850c80cd1/csu_mesta24_moravskoslezsky_kraj.pdf?version=1.0) · [Kurzy.cz — spotřeba alkoholu](https://zpravy.kurzy.cz/846065-od-rekordni-spotreby-ke-stridmosti-statisticka-data-ilustruji-promenu-vztahu-ceske-spolecnosti-ke/) · [Ekonomický deník — mladí pijí méně](https://ekonomickydenik.cz/mladi-piji-mene-vyrobci-mluvi-o-katastrofe-vyber-dane-z-lihu-klesa/) · [Deník N — Stodolní](https://denikn.cz/1789163/kdysi-legendarni-ostravska-stodolni-opustene-bary-a-malo-lidi-posledni-ranu-ji-muze-zasadit-developer/) · [Seznam Zprávy — Stodolní](https://www.seznamzpravy.cz/clanek/domaci-zivot-v-cesku-bylo-to-divoke-ale-uz-je-to-pryc-slavna-stodolni-zaziva-strmy-pad-250202) · [Třinec — participativní rozpočet](https://www.trinecko.cz/vybrali-jste-nejlepsi-projekty-ktere-vas-budou-v-lete-bavit/d-58731) · [fajnytrinec.cz](https://fajnytrinec.cz/participativni-rozpocet/2025)
-
-### K doplnění od Adama / týmu
-
-1. **Relax, Čarodějky, Widle** — sedí názvy a pořadí? Přidat 1 osobní větu-vzpomínku (dodá autenticitu).
-2. **„20 akcí za měsíc"** — podložit kalendářem akcí města / Trisia, jinak formulaci změkčit.
-3. **Peníze do kultury v rozpočtu** — vytáhnu ze složky `Rozpočet města`, řekni, mám-li.
-4. **Řešení 1–6** — u každého chybí konkrétní závazek (co, kde, do kdy). Bez toho je to podle brand voice moc obecné („více bezpečných přechodů" problém).
-5. **Trisia** — bod je zatím prázdný, potřebuju zadání.
-5b. **„TGM"** — upřesnit, co přesně myslíš (náměstí TGM / areál ZŠ TGM / jiné). **Javorový + letní scéna** — mají-li konkrétní podobu (kde, s kým), doplnit; zatím obecně.
-6. **Titulková varianta:** „Je v Třinci mrtvo, nebo živo?" vs. „V Třinci není mrtvo. Je jinak živo." — druhá je asertivnější, první líp klikací.
-7. **Vizuál k článku:** nabízí se přímo infografika `OPT-infografika-mladi-15-35-v1.1.png` — je hotová a on-brand.
-
-### Brand check (v0.1)
-
-✅ Krátké věty, aktivní rod, konkrétní čísla, žádný útok, navazujeme-neresetujeme, closing claim + oficiální hashtagy.
-⚠️ Řešení zatím obecná (viz bod 4) — před publikací dotáhnout konkréty, jinak neprojde pravidlem 03.
+- Body s `[DOPLNIT]` viz žlutý draft box na stránce (částka Trisia, stav TGM, závazky, TANCUJ.CZ + TRAYTO ověřit).
+- Zdroje dat: viz kolofon článku + `analyzy/trinec-zije-akce-brezen-srpen-2026.md` a session „Demografické statistiky Třince 2000–2025".
