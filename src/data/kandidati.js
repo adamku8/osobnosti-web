@@ -2,6 +2,8 @@
 // Přidání medailonku: doplň "detail": "jmeno-prijmeni" a vytvoř záznam v medailonky.js
 // "detailPriprava": stránka medailonku se vygeneruje (v /nahled-k7x2m9/), ale karta
 // v listině kandidátů na ni zatím NEODKAZUJE. Po schválení přejmenuj na "detail".
+// "dotaznik": true = vyplněný dotazník je ve složce na Google Disku (OPT KANDIDÁTI)
+// — jediný zdroj pravdy pro stav „medailonek hotov" v /nahled-k7x2m9/medailonky-prehled.
 export const kandidati = [
   {
     "cislo": 1,
@@ -30,6 +32,7 @@ export const kandidati = [
     "profese": "HR manažerka",
     "foto": "erika_sirotova_c.jpg",
     "iniciraly": null,
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "erika-sirotova",
     "poradiSlovem": "třetí"
@@ -41,6 +44,7 @@ export const kandidati = [
     "profese": "praktický lékař",
     "foto": null,
     "iniciraly": "MŠ",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "marek-sterba",
     "poradiSlovem": "čtvrtý"
@@ -62,6 +66,7 @@ export const kandidati = [
     "profese": "lékař — spondylochirurg",
     "foto": null,
     "iniciraly": "MM",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "marek-miskej",
     "poradiSlovem": "šestý"
@@ -73,6 +78,7 @@ export const kandidati = [
     "profese": "ředitelka kina",
     "foto": null,
     "iniciraly": "RE",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "regina-eichler",
     "poradiSlovem": "sedmá"
@@ -94,6 +100,7 @@ export const kandidati = [
     "profese": "projektant interiérů",
     "foto": null,
     "iniciraly": "DS",
+    "dotaznik": true,
     "detail": "david-szkandera",
     "poradiSlovem": "devátý"
   },
@@ -104,6 +111,7 @@ export const kandidati = [
     "profese": "edukátorka v kultuře",
     "foto": null,
     "iniciraly": "VC",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "veronika-chmelarova",
     "poradiSlovem": "desátá"
@@ -115,6 +123,7 @@ export const kandidati = [
     "profese": "advokát",
     "foto": null,
     "iniciraly": "AT",
+    "dotaznik": true,
     "detail": "adam-tomoszek",
     "poradiSlovem": "jedenáctý"
   },
@@ -125,6 +134,7 @@ export const kandidati = [
     "profese": "učitel",
     "foto": null,
     "iniciraly": "JŠ",
+    "dotaznik": true,
     "detail": "jakub-stvrtna",
     "poradiSlovem": "dvanáctý"
   },
@@ -135,6 +145,7 @@ export const kandidati = [
     "profese": "učitelka, výchovná poradkyně",
     "foto": null,
     "iniciraly": "MV",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "miroslava-vapenikova",
     "poradiSlovem": "třináctá"
@@ -156,6 +167,7 @@ export const kandidati = [
     "profese": "kondiční trenér",
     "foto": "patrik_cavoj_c.jpg",
     "iniciraly": "PČ",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "patrik-cavoj",
     "poradiSlovem": "patnáctý"
@@ -177,6 +189,7 @@ export const kandidati = [
     "profese": "stavební technik",
     "foto": null,
     "iniciraly": "MF",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "michal-figura",
     "poradiSlovem": "sedmnáctý"
@@ -188,6 +201,7 @@ export const kandidati = [
     "profese": "podnikatel",
     "foto": "michal_niemiec_c.jpg",
     "iniciraly": "MN",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "michal-niemiec",
     "poradiSlovem": "osmnáctý"
@@ -199,6 +213,7 @@ export const kandidati = [
     "profese": "velitel hasičské stanice Třinec",
     "foto": null,
     "iniciraly": "BS",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "bohdan-sikora",
     "poradiSlovem": "devatenáctý"
@@ -210,6 +225,7 @@ export const kandidati = [
     "profese": "chilliman v PochutnejSi",
     "foto": null,
     "iniciraly": "TN",
+    "dotaznik": true,
     "detail": "tomas-novy",
     "poradiSlovem": "dvacátý"
   },
@@ -220,6 +236,7 @@ export const kandidati = [
     "profese": "trenér atletiky",
     "foto": null,
     "iniciraly": "SS",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "stanislav-sajdok",
     "poradiSlovem": "jedenadvacátý"
@@ -231,6 +248,7 @@ export const kandidati = [
     "profese": "grafička, organizátorka akcí",
     "foto": "lenka_palicova_c.jpg",
     "iniciraly": "LP",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "lenka-palicova",
     "poradiSlovem": "dvaadvacátá"
@@ -242,6 +260,7 @@ export const kandidati = [
     "profese": "podnikatel",
     "foto": "libor_zarsky_c.jpg",
     "iniciraly": "LŽ",
+    "dotaznik": true,
     "detail": "libor-zarsky",
     "poradiSlovem": "třiadvacátý"
   },
@@ -252,6 +271,7 @@ export const kandidati = [
     "profese": "podnikatel ve stavebnictví",
     "foto": null,
     "iniciraly": "RK",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "roman-kotlar",
     "poradiSlovem": "čtyřiadvacátý"
@@ -263,6 +283,7 @@ export const kandidati = [
     "profese": "lékař — neurochirurg",
     "foto": null,
     "iniciraly": "JS",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "juraj-serafin",
     "poradiSlovem": "pětadvacátý"
@@ -274,6 +295,7 @@ export const kandidati = [
     "profese": "veterinární lékař",
     "foto": null,
     "iniciraly": "JN",
+    "dotaznik": true,
     "detail": null,
     "detailPriprava": "jakub-nowak",
     "poradiSlovem": "šestadvacátý"

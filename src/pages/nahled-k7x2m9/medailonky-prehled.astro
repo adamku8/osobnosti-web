@@ -8,9 +8,11 @@ import { medailonky } from '../../data/medailonky.js';
 import { u } from '../../lib/url.js';
 
 const slugOf = (k) => k.detail ?? k.detailPriprava ?? null;
-const maMedailonek = (k) => Boolean(slugOf(k) && medailonky[slugOf(k)]);
+const maStranku = (k) => Boolean(slugOf(k) && medailonky[slugOf(k)]);
+// „Hotov" = vyplněný dotazník je ve složce na Google Disku (pole "dotaznik").
+const maDotaznik = (k) => Boolean(k.dotaznik);
 
-const pocetProfil = kandidati.filter(maMedailonek).length;
+const pocetHotovo = kandidati.filter(maDotaznik).length;
 const pocetFoto = kandidati.filter(k => k.foto).length;
 ---
 <Base
@@ -36,9 +38,10 @@ const pocetFoto = kandidati.filter(k => k.foto).length;
       <p class="eyebrow">Interní přehled — nesdílet</p>
       <h1>Medailonky a fotky <span class="hl">kandidátů</span>.</h1>
       <p class="hero-lead">
-        Kontrolní tabulka: kdo už má připravený medailonek a kdo má na webu
-        fotku. Medailonky zatím <strong>nejsou prolinkované</strong> z veřejné
-        stránky Kandidáti — odkazy níže vedou do skrytého náhledu.
+        Kontrolní tabulka: medailonek je <strong>hotov</strong>, když je vyplněný
+        dotazník ve složce na Disku. Nové medailonky zatím <strong>nejsou
+        prolinkované</strong> z veřejné stránky Kandidáti — odkazy níže vedou
+        do skrytého náhledu.
       </p>
     </div>
   </section>
@@ -46,7 +49,7 @@ const pocetFoto = kandidati.filter(k => k.foto).length;
   <section class="section">
     <div class="container">
       <p class="prehled-souhrn">
-        Medailonek: <strong>{pocetProfil} z {kandidati.length}</strong> ·
+        Medailonek hotov: <strong>{pocetHotovo} z {kandidati.length}</strong> ·
         Fotka: <strong>{pocetFoto} z {kandidati.length}</strong>
       </p>
       <div class="prehled-wrap">
@@ -67,9 +70,11 @@ const pocetFoto = kandidati.filter(k => k.foto).length;
                 <td>{k.jmeno}</td>
                 <td>{k.profese}</td>
                 <td class="stav">
-                  {maMedailonek(k)
-                    ? <a class="stav-ano" href={u(`nahled-k7x2m9/kandidat-${slugOf(k)}.html`)}>✓ má{k.detail ? '' : ' (v přípravě)'}</a>
-                    : <span class="stav-ne">— chybí</span>}
+                  {maDotaznik(k)
+                    ? <a class="stav-ano" href={u(`nahled-k7x2m9/kandidat-${slugOf(k)}.html`)}>✓ hotov</a>
+                    : maStranku(k)
+                      ? <span class="stav-ne">— chybí dotazník (<a href={u(`nahled-k7x2m9/kandidat-${slugOf(k)}.html`)}>stránka na webu</a>)</span>
+                      : <span class="stav-ne">— chybí</span>}
                 </td>
                 <td class="stav">
                   {k.foto
