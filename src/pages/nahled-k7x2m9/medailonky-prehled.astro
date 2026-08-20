@@ -1,0 +1,89 @@
+---
+// SKRYTÝ PŘEHLED MEDAILONKŮ — interní kontrolní tabulka pro tým.
+// Ukazuje, kdo z kandidátky má/nemá medailonek a kdo má/nemá fotku.
+// Stránka není nikde prolinkovaná (kromě rozcestníku náhledu), má noindex.
+import Base from '../../layouts/Base.astro';
+import { kandidati } from '../../data/kandidati.js';
+import { medailonky } from '../../data/medailonky.js';
+import { u } from '../../lib/url.js';
+
+const slugOf = (k) => k.detail ?? k.detailPriprava ?? null;
+const maMedailonek = (k) => Boolean(slugOf(k) && medailonky[slugOf(k)]);
+
+const pocetProfil = kandidati.filter(maMedailonek).length;
+const pocetFoto = kandidati.filter(k => k.foto).length;
+---
+<Base
+  title="Přehled medailonků — interní"
+  description="Interní přehled: kdo z kandidátů má medailonek a fotku."
+  path="nahled-k7x2m9/medailonky-prehled.html"
+  noindex={true}
+>
+  <style is:inline>
+    .prehled-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .prehled-table th, .prehled-table td { padding: 0.55rem 0.75rem; text-align: left; border-bottom: 1px solid rgba(50,50,50,0.15); }
+    .prehled-table th { font-weight: 700; }
+    .prehled-table .num { text-align: right; width: 2.5rem; color: rgba(50,50,50,0.6); }
+    .prehled-table .stav { white-space: nowrap; }
+    .stav-ano { color: #003B8E; font-weight: 600; }
+    .stav-ne { color: rgba(50,50,50,0.45); }
+    .prehled-wrap { overflow-x: auto; }
+    .prehled-souhrn { margin: 0 0 1.5rem; }
+  </style>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Interní přehled — nesdílet</p>
+      <h1>Medailonky a fotky <span class="hl">kandidátů</span>.</h1>
+      <p class="hero-lead">
+        Kontrolní tabulka: kdo už má připravený medailonek a kdo má na webu
+        fotku. Medailonky zatím <strong>nejsou prolinkované</strong> z veřejné
+        stránky Kandidáti — odkazy níže vedou do skrytého náhledu.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="prehled-souhrn">
+        Medailonek: <strong>{pocetProfil} z {kandidati.length}</strong> ·
+        Fotka: <strong>{pocetFoto} z {kandidati.length}</strong>
+      </p>
+      <div class="prehled-wrap">
+        <table class="prehled-table">
+          <thead>
+            <tr>
+              <th class="num">č.</th>
+              <th>Kandidát</th>
+              <th>Profese</th>
+              <th>Medailonek</th>
+              <th>Fotka</th>
+            </tr>
+          </thead>
+          <tbody>
+            {kandidati.map(k => (
+              <tr>
+                <td class="num">{k.cislo}.</td>
+                <td>{k.jmeno}</td>
+                <td>{k.profese}</td>
+                <td class="stav">
+                  {maMedailonek(k)
+                    ? <a class="stav-ano" href={u(`nahled-k7x2m9/kandidat-${slugOf(k)}.html`)}>✓ má{k.detail ? '' : ' (v přípravě)'}</a>
+                    : <span class="stav-ne">— chybí</span>}
+                </td>
+                <td class="stav">
+                  {k.foto
+                    ? <span class="stav-ano">✓ má</span>
+                    : <span class="stav-ne">— chybí</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="section-cta">
+        <a class="btn btn-secondary btn-lg" href={u('nahled-k7x2m9.html')}>← Zpět na rozcestník náhledu</a>
+      </div>
+    </div>
+  </section>
+</Base>

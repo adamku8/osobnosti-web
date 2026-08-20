@@ -3,20 +3,26 @@ import Base from '../../layouts/Base.astro';
 import { kandidati } from '../../data/kandidati.js';
 import { medailonky } from '../../data/medailonky.js';
 
+// Stránka vzniká pro "detail" (prolinkované z listiny) i "detailPriprava"
+// (vygenerované, ale z listiny zatím neodkazované — viz kandidati.js).
+const slugKandidata = (k) => k.detail ?? k.detailPriprava ?? null;
+
 export function getStaticPaths() {
+  const slugOf = (k) => k.detail ?? k.detailPriprava ?? null;
   return kandidati
-    .filter(k => k.detail && medailonky[k.detail])
-    .map(k => ({ params: { slug: k.detail }, props: { k } }));
+    .filter(k => slugOf(k) && medailonky[slugOf(k)])
+    .map(k => ({ params: { slug: slugOf(k) }, props: { k } }));
 }
 
 const { k } = Astro.props;
-const m = medailonky[k.detail];
+const slug = slugKandidata(k);
+const m = medailonky[slug];
 
 // sousedé v listině — prev/next
 const i = kandidati.findIndex(x => x.cislo === k.cislo);
 const odkazNa = (c) =>
-  c.detail && medailonky[c.detail]
-    ? u(`nahled-k7x2m9/kandidat-${c.detail}.html`)
+  slugKandidata(c) && medailonky[slugKandidata(c)]
+    ? u(`nahled-k7x2m9/kandidat-${slugKandidata(c)}.html`)
     : u(`nahled-k7x2m9/kandidati.html#kandidat-${String(c.cislo).padStart(2, '0')}`);
 const predchozi = i > 0 ? kandidati[i - 1] : null;
 const dalsi = i < kandidati.length - 1 ? kandidati[i + 1] : null;
@@ -31,7 +37,7 @@ import { u } from '../../lib/url.js';
 <Base
   title={`${k.jmeno} — Osobnosti pro Třinec`}
   description={`${k.jmeno}, ${k.poradiSlovem} na kandidátce Osobnosti pro Třinec. ${k.profese}. Proč kandiduje a co chce v Třinci posunout.`}
-  path={`nahled-k7x2m9/kandidat-${k.detail}.html`}
+  path={`nahled-k7x2m9/kandidat-${slug}.html`}
   noindex={true}
   ogType="profile"
   active="kandidati"

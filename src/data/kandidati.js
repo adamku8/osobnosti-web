@@ -1,5 +1,7 @@
 // Kandidátní listina — jediný zdroj pravdy.
 // Přidání medailonku: doplň "detail": "jmeno-prijmeni" a vytvoř záznam v medailonky.js
+// "detailPriprava": stránka medailonku se vygeneruje (v /nahled-k7x2m9/), ale karta
+// v listině kandidátů na ni zatím NEODKAZUJE. Po schválení přejmenuj na "detail".
 export const kandidati = [
   {
     "cislo": 1,
@@ -29,6 +31,7 @@ export const kandidati = [
     "foto": "erika_sirotova_c.jpg",
     "iniciraly": null,
     "detail": null,
+    "detailPriprava": "erika-sirotova",
     "poradiSlovem": "třetí"
   },
   {
@@ -39,6 +42,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "MŠ",
     "detail": null,
+    "detailPriprava": "marek-sterba",
     "poradiSlovem": "čtvrtý"
   },
   {
@@ -59,6 +63,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "MM",
     "detail": null,
+    "detailPriprava": "marek-miskej",
     "poradiSlovem": "šestý"
   },
   {
@@ -69,6 +74,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "RE",
     "detail": null,
+    "detailPriprava": "regina-eichler",
     "poradiSlovem": "sedmá"
   },
   {
@@ -99,6 +105,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "VC",
     "detail": null,
+    "detailPriprava": "veronika-chmelarova",
     "poradiSlovem": "desátá"
   },
   {
@@ -129,6 +136,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "MV",
     "detail": null,
+    "detailPriprava": "miroslava-vapenikova",
     "poradiSlovem": "třináctá"
   },
   {
@@ -149,6 +157,7 @@ export const kandidati = [
     "foto": "patrik_cavoj_c.jpg",
     "iniciraly": "PČ",
     "detail": null,
+    "detailPriprava": "patrik-cavoj",
     "poradiSlovem": "patnáctý"
   },
   {
@@ -169,6 +178,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "MF",
     "detail": null,
+    "detailPriprava": "michal-figura",
     "poradiSlovem": "sedmnáctý"
   },
   {
@@ -179,6 +189,7 @@ export const kandidati = [
     "foto": "michal_niemiec_c.jpg",
     "iniciraly": "MN",
     "detail": null,
+    "detailPriprava": "michal-niemiec",
     "poradiSlovem": "osmnáctý"
   },
   {
@@ -189,6 +200,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "BS",
     "detail": null,
+    "detailPriprava": "bohdan-sikora",
     "poradiSlovem": "devatenáctý"
   },
   {
@@ -209,6 +221,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "SS",
     "detail": null,
+    "detailPriprava": "stanislav-sajdok",
     "poradiSlovem": "jedenadvacátý"
   },
   {
@@ -219,6 +232,7 @@ export const kandidati = [
     "foto": "lenka_palicova_c.jpg",
     "iniciraly": "LP",
     "detail": null,
+    "detailPriprava": "lenka-palicova",
     "poradiSlovem": "dvaadvacátá"
   },
   {
@@ -239,6 +253,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "RK",
     "detail": null,
+    "detailPriprava": "roman-kotlar",
     "poradiSlovem": "čtyřiadvacátý"
   },
   {
@@ -249,6 +264,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "JS",
     "detail": null,
+    "detailPriprava": "juraj-serafin",
     "poradiSlovem": "pětadvacátý"
   },
   {
@@ -259,6 +275,7 @@ export const kandidati = [
     "foto": null,
     "iniciraly": "JN",
     "detail": null,
+    "detailPriprava": "jakub-nowak",
     "poradiSlovem": "šestadvacátý"
   },
   {
