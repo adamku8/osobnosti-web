@@ -29,7 +29,7 @@ export const oblasti = [
       "zajistíme více <strong>míst pro setkávání</strong> v příměstských částech",
       "rozšíříme <strong>participativní rozpočet</strong> na komunitní akce",
       "přispějeme <strong>1 000 Kč na kroužky</strong> a dětské tábory",
-      "zpřístupníme <strong>hřiště u škol</strong> i školek, kde to bude možné"
+      "zpřístupníme <strong>hřiště u škol</strong> i školek"
     ],
     "obrazek": "letni-scena-kresba.png",
     "projekty": ["letni-scena", "outdoor-centrum", "hriste-knihovna", "javorovy"],
