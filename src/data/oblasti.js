@@ -5,8 +5,8 @@
 export const oblasti = [
   {
     "cislo": "01",
-    "klic": "Nový",
-    "nazev": "Nový Třinec.",
+    "klic": "Moderní",
+    "nazev": "Moderní Třinec.",
     "podnadpis": "Moderní a bezpečné město",
     "body": [
       "aktivně podpoříme výstavbu <strong>nových bytů</strong>",
