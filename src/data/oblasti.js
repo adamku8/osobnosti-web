@@ -12,7 +12,7 @@ export const oblasti = [
       "aktivně podpoříme výstavbu <strong>nových bytů</strong>",
       "postavíme nové <strong>přechody, chodníky a cyklostezky</strong>",
       "vysadíme <strong>stromy a zeleň</strong>, která ochladí ulice",
-      "posílíme <strong>městskou policii</strong>",
+      "posílíme <strong>městskou policii</strong> pro větší bezpečnost",
       "revitalizujeme <strong>sídliště i veřejný prostor</strong>"
     ],
     "obrazek": "propojene-mesto-kresba.png",
@@ -29,7 +29,7 @@ export const oblasti = [
       "zajistíme více <strong>míst pro setkávání</strong> v příměstských částech",
       "rozšíříme <strong>participativní rozpočet</strong> na komunitní akce",
       "přispějeme <strong>1 000 Kč na kroužky</strong> a dětské tábory",
-      "otevřeme <strong>hřiště u škol</strong> i školek"
+      "zpřístupníme <strong>hřiště u škol</strong> i školek, kde to bude možné"
     ],
     "obrazek": "letni-scena-kresba.png",
     "projekty": ["letni-scena", "outdoor-centrum", "hriste-knihovna", "javorovy"],
