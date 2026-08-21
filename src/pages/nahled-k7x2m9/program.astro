@@ -45,7 +45,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
             <h2><span class="hl">{o.klic}</span> Třinec.</h2>
             <p class="area-podnadpis">{o.podnadpis}</p>
             <ul class="area-list">
-              {o.body.map(b => <li>{b}</li>)}
+              {o.body.map(b => <li set:html={b} />)}
             </ul>
             <details class="area-vize">
               <summary>Zjistěte více<span class="area-vize-plus" aria-hidden="true">+</span></summary>
