@@ -9,5 +9,5 @@ const { o } = Astro.props;
   </div>
   <h3>{o.nazev}</h3>
   <p class="promise-podnadpis">{o.podnadpis}</p>
-  <ul>{o.body.map(b => <li>{b}</li>)}</ul>
+  <ul>{o.body.map(b => <li set:html={b} />)}</ul>
 </article>

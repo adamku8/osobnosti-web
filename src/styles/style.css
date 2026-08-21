@@ -1042,6 +1042,9 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   margin-bottom: 14px;
   line-height: 1.4;
 }
+/* Inter má nahrané jen váhy 400/600 — strong mapujeme na reálný SemiBold,
+   ať prohlížeč nesyntetizuje falešný bold. */
+.area-list li strong { font-weight: 600; }
 .area-list li::before {
   content: "";
   position: absolute;

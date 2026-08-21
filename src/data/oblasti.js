@@ -1,6 +1,7 @@
 // Jediný zdroj pravdy pro programové oblasti.
 // Struktura dle rozvržení „Čtyři oblasti" (srpen 2026): klíčové slovo v červeném
 // boxu + „Třinec.", podnadpis, pět závazků a projekty (vize) navázané na oblast.
+// Závazky v `body` obsahují <strong> kolem jádrového předmětu — vykreslovat přes set:html.
 export const oblasti = [
   {
     "cislo": "01",
@@ -8,11 +9,11 @@ export const oblasti = [
     "nazev": "Nový Třinec.",
     "podnadpis": "Moderní a bezpečné město",
     "body": [
-      "aktivně podpoříme výstavbu nových bytů",
-      "postavíme nové přechody, chodníky a cyklostezky",
-      "vysadíme stromy a zeleň, která ochladí ulice",
-      "posílíme městskou policii",
-      "revitalizujeme sídliště i veřejný prostor"
+      "aktivně podpoříme výstavbu <strong>nových bytů</strong>",
+      "postavíme nové <strong>přechody, chodníky a cyklostezky</strong>",
+      "vysadíme <strong>stromy a zeleň</strong>, která ochladí ulice",
+      "posílíme <strong>městskou policii</strong>",
+      "revitalizujeme <strong>sídliště i veřejný prostor</strong>"
     ],
     "obrazek": "propojene-mesto.jpg",
     "projekty": ["propojene-mesto"],
@@ -24,11 +25,11 @@ export const oblasti = [
     "nazev": "Akční Třinec.",
     "podnadpis": "Sport a kultura",
     "body": [
-      "podpoříme místní spolky a aktivní komunity",
-      "zajistíme více míst pro setkávání v příměstských částech",
-      "rozšíříme participativní rozpočet na komunitní akce",
-      "přispějeme 1 000 Kč na kroužky a dětské tábory",
-      "otevřeme hřiště u škol i školek"
+      "podpoříme místní <strong>spolky a aktivní komunity</strong>",
+      "zajistíme více <strong>míst pro setkávání</strong> v příměstských částech",
+      "rozšíříme <strong>participativní rozpočet</strong> na komunitní akce",
+      "přispějeme <strong>1 000 Kč na kroužky</strong> a dětské tábory",
+      "otevřeme <strong>hřiště u škol</strong> i školek"
     ],
     "obrazek": "letni-scena.jpg",
     "projekty": ["letni-scena", "outdoor-centrum", "hriste-knihovna", "javorovy"],
@@ -40,11 +41,11 @@ export const oblasti = [
     "nazev": "Odvážný Třinec.",
     "podnadpis": "Práce a podnikání",
     "body": [
-      "podpoříme začínající podnikatele — „Podnikej v Třinci“",
-      "propojíme podnikatele v Třinci prostřednictvím pravidelných akcí",
-      "budeme rozšiřovat prostory pro coworking i podnikatele",
-      "zajistíme vstřícný a otevřený magistrát",
-      "budeme podporovat rozvoj digitálních dovedností"
+      "podpoříme <strong>začínající podnikatele</strong> — „Podnikej v Třinci“",
+      "<strong>propojíme podnikatele</strong> v Třinci prostřednictvím pravidelných akcí",
+      "budeme rozšiřovat <strong>prostory pro coworking</strong> i podnikatele",
+      "zajistíme <strong>vstřícný a otevřený magistrát</strong>",
+      "budeme podporovat rozvoj <strong>digitálních dovedností</strong>"
     ],
     "obrazek": "coworking.jpg",
     "projekty": ["coworking"],
@@ -56,11 +57,11 @@ export const oblasti = [
     "nazev": "Zdravý Třinec.",
     "podnadpis": "Sociální péče a zdraví",
     "body": [
-      "zajistíme více míst v domech s pečovatelskou službou",
-      "podpoříme dostupnou zdravotní i psychologickou péči",
-      "pomůžeme rodinám pečujícím o své blízké",
-      "otevřeme Centrum pro aktivní seniory na Smetanově",
-      "podpoříme duševní zdraví mládeže"
+      "zajistíme více míst v <strong>domech s pečovatelskou službou</strong>",
+      "podpoříme dostupnou <strong>zdravotní i psychologickou péči</strong>",
+      "pomůžeme <strong>rodinám</strong> pečujícím o své blízké",
+      "otevřeme <strong>Centrum pro aktivní seniory</strong> na Smetanově",
+      "podpoříme <strong>duševní zdraví mládeže</strong>"
     ],
     "obrazek": "dps.jpg",
     "projekty": ["dps"],
