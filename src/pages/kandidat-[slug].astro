@@ -1,0 +1,153 @@
+---
+// VEŘEJNÁ stránka medailonku kandidáta. Které medailonky se generují
+// (a odkazují z listiny), řídí src/lib/verejne.js.
+import Base from '../layouts/Base.astro';
+import { kandidati } from '../data/kandidati.js';
+import { medailonky } from '../data/medailonky.js';
+import { verejnySlug } from '../lib/verejne.js';
+
+const slugKandidata = verejnySlug;
+
+export function getStaticPaths() {
+  const slugOf = verejnySlug;
+  return kandidati
+    .filter(k => slugOf(k) && medailonky[slugOf(k)])
+    .map(k => ({ params: { slug: slugOf(k) }, props: { k } }));
+}
+
+const { k } = Astro.props;
+const slug = slugKandidata(k);
+const m = medailonky[slug];
+
+// sousedé v listině — prev/next
+const i = kandidati.findIndex(x => x.cislo === k.cislo);
+const odkazNa = (c) =>
+  slugKandidata(c) && medailonky[slugKandidata(c)]
+    ? u(`kandidat-${slugKandidata(c)}.html`)
+    : u(`kandidati.html#kandidat-${String(c.cislo).padStart(2, '0')}`);
+const predchozi = i > 0 ? kandidati[i - 1] : null;
+const dalsi = i < kandidati.length - 1 ? kandidati[i + 1] : null;
+
+// jméno rozdělené na křestní / příjmení pro dvouřádkový nadpis
+const casti = k.jmeno.replace(/^(Mgr\.|Ing\.|MUDr\.|MVDr\.|Bc\.|MgA\.|DiS\.|et|MSc\.,?|Mgr|,)\s*/g, '').trim().split(' ');
+const prijmeni = casti.pop();
+const krestni = casti.join(' ');
+const tituly = k.jmeno.replace(`${krestni} ${prijmeni}`, '').trim();
+import { u } from '../lib/url.js';
+---
+<Base
+  title={`${k.jmeno} — Osobnosti pro Třinec`}
+  description={`${k.jmeno}, ${k.poradiSlovem} na kandidátce Osobnosti pro Třinec. ${k.profese}. Proč kandiduje a co chce v Třinci posunout.`}
+  path={`kandidat-${slug}.html`}
+  ogType="profile"
+  active="kandidati"
+>
+
+  <!-- ================= HERO KANDIDÁTA ================= -->
+  <section class="cand-hero">
+    <div class="container">
+      <a class="back-link" href={u('kandidati.html')}>← Všichni kandidáti</a>
+      <div class="cand-hero-grid">
+        <div class="cand-hero-photo">
+          {/* čtvercový ořez (_c) je dělaný přímo do kruhu — portrét na výšku by se ořízl náhodně */}
+          {k.foto
+            ? <img src={u(`assets/img/kandidati/${k.foto}`)} alt={k.jmeno}>
+            : <div class="slide-avatar">{k.iniciraly}</div>}
+        </div>
+        <div class="cand-hero-info">
+          <div class="cand-hero-index">{k.cislo}.</div>
+          <h1>{krestni}<br>{prijmeni}</h1>
+          <p class="cand-hero-role">{[tituly, `${k.vek} let`, k.profese].filter(Boolean).join(' · ')}</p>
+          <p class="cand-hero-affil">
+            {k.poradiSlovem.charAt(0).toUpperCase() + k.poradiSlovem.slice(1)} na kandidátce{' '}
+            <a href={u('index.html')}>Osobnosti pro Třinec</a>
+          </p>
+          {m.citace && <blockquote class="cand-quote">„<span set:html={m.citace} />."</blockquote>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIDEO + ODPOVĚDI =================
+       Video se zobrazí jen tehdy, když je v medailonky.js vyplněné.
+       Bez videa se sekce nezobrazuje vůbec (žádné „připravujeme")
+       a odpovědi se rozloží do tří sloupců. -->
+  <section class="section">
+    <div class:list={['container', 'cand-main', !m.video && 'no-video']}>
+
+      {m.video && (
+        <div class="cand-media">
+          <p class="eyebrow">Video medailonek</p>
+          <div class="video-wrap is-vertical">
+            {m.video.typ === 'soubor' && (
+              <video class="video-frame" controls playsinline preload="none"
+                     poster={k.foto ? u(`assets/img/kandidati/${k.foto}`) : undefined}>
+                <source src={m.video.src} type="video/mp4">
+              </video>
+            )}
+            {m.video.typ === 'youtube' && (
+              <iframe class="video-frame" src={`https://www.youtube-nocookie.com/embed/${m.video.id}`}
+                      title={`Video medailonek — ${k.jmeno}`} frameborder="0"
+                      allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+                      allowfullscreen></iframe>
+            )}
+          </div>
+          <p class="video-caption">
+            Třicet vteřin bez politických frází. Stejné video najdete
+            i na <a href="https://www.facebook.com/osobnostiprotrinec" target="_blank" rel="noopener">našich sítích</a>.
+          </p>
+        </div>
+      )}
+
+      <div class="cand-answers">
+        {m.odpovedi.map(o => (
+          <article class="answer">
+            <h2>{o.nadpis}</h2>
+            <p>{o.text}</p>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= RYCHLÉ OTÁZKY ================= -->
+  {m.rychleOtazky?.length > 0 && (
+    <section class="section quick-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Rychlé otázky</p>
+          <h2>Devět otázek, devět odpovědí.</h2>
+        </div>
+        <dl class="quick-grid">
+          {m.rychleOtazky.map(q => (
+            <div class="quick-item">
+              <dt>{q.otazka}</dt>
+              <dd>{q.odpoved}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  <!-- ================= PŘEDCHOZÍ / DALŠÍ ================= -->
+  <nav class="cand-nav" aria-label="Další kandidáti">
+    <div class="container">
+      {predchozi && (
+        <a class="cand-nav-item prev" href={odkazNa(predchozi)}>
+          <span class="cand-nav-label">← Předchozí kandidát</span>
+          <span class="cand-nav-name">{predchozi.cislo}. {predchozi.jmeno}</span>
+          <span class="cand-nav-role">{predchozi.profese}</span>
+        </a>
+      )}
+      {dalsi && (
+        <a class="cand-nav-item next" href={odkazNa(dalsi)}>
+          <span class="cand-nav-label">Následující kandidát →</span>
+          <span class="cand-nav-name">{dalsi.cislo}. {dalsi.jmeno}</span>
+          <span class="cand-nav-role">{dalsi.profese}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+</Base>
