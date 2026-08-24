@@ -6,12 +6,11 @@
 // potvrdit dotyčným.
 export const medailonky = {
   'adam-kurzok': {
-    citace: 'Město se dá vést poctivě, otevřeně a <span class="hl">s výsledky</span>',
-    // TODO: potvrdit finální znění s kandidátem
+    citace: 'Buď můžete mluvit jen o problémech, nebo <span class="hl">mít vizi</span>',
     odpovedi: [
       {
         nadpis: 'Proč kandiduji',
-        text: 'Dvacet let pomáhám českým firmám prodávat do celého světa. A přitom vidím, jak šikovní lidé z Třince odcházejí jinam, protože tady nenajdou práci ani bydlení. Chci, aby měli důvod zůstat. Město se dá vést poctivě, otevřeně a s výsledky — a u toho chci být.',
+        text: 'Buď můžete mluvit jen o problémech, nebo mít vizi. Naše město má obrovský potenciál. Záleží ale na tom, kolik aktivních a pracovitých lidí sem přijde nebo tady zůstane. A já chci, aby měli důvod zůstat. Na to se nedá čekat — tyhle podmínky měníme každodenní prací.',
       },
       {
         nadpis: 'Co chci posunout',
