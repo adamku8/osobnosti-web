@@ -17,7 +17,7 @@ export const fotobanka = {
   4:  [nej(web('marek_sterba_c.jpg'))],
   5:  [nej(web('martina_wolna_c.jpg'))],
   6:  [nej(drive('miskej.jpg')), raw('17-miskej-2.jpg')],
-  7:  [],
+  7:  [nej(web('regina_eichler_c.jpg')), drive('eichler.jpg'), raw('04-eichler-szpyrcova-2.jpg')],
   8:  [nej(drive('antoniadis.jpg')), raw('antoniadis.jpg')],
   9:  [nej(drive('szkandera.jpg')), raw('szkandera.jpg')],
   10: [nej(web('veronika_chmelarova_c.jpg')), raw('chmelarova.jpg')],
@@ -43,7 +43,7 @@ export const fotobanka = {
 
 // Poznámka, která se vypíše u karty kandidáta.
 export const poznamky = {
-  7:  'Fotka chybí úplně — není ani v jedné složce na Drive.',
+  7:  'Na Drive je pod jménem Szpyrcová — je to stejná osoba. Soubory jsem přejmenoval na eichler, u originálu z profi série jsem původní jméno nechal v názvu.',
   10: 'Jediný podklad je snímek celé postavy z 24. 8. Ořízl jsem ho na čtverec podle fotostylu (oči 38 %, hlava 58 %), pozadí ale zůstalo — vlevo je vidět obraz na zdi. Na odmazání pozadí to chce projet stejnou pipeline jako zbytek série.',
   11: 'Upravená verze vznikla ze snímku celé postavy v sále — hlava je měkká. Doporučuji přefotit.',
   17: 'Originály jsou tmavé u cihlové zdi, ořez upravené verze je nejslabší z celé série. Doporučuji přefotit.',
@@ -52,7 +52,6 @@ export const poznamky = {
   27: 'ZMĚNA: přepnuto na upravenou verzi z Drive. Původní (druhá v řadě) měla silný červený nádech a tvrdý výraz. Starý soubor jsem nemazal.',
 };
 
-// Fotky lidí, kteří na aktuální kandidátce nejsou.
-export const mimoListinu = [
-  { jmeno: 'Szpyrcová', varianty: [drive('szpyrcova.jpg'), raw('04-szpyrcova-2.jpg')] },
-];
+// Fotky lidí, kteří na aktuální kandidátce nejsou. (Teď nikdo — Szpyrcová
+// z Drive je Regina Eichler, viz kandidát 7.)
+export const mimoListinu = [];
