@@ -1,39 +1,58 @@
 ---
-// TEASER verze kandidátky (srpen 2026): veřejně jen první trojka s fotkami
-// (bez prokliku na medailonky), zbytek listiny jako anonymní sloty.
-// Plná listina: src/pages/nahled-k7x2m9/kandidati.astro (viz src/lib/rezim.js).
+// VEŘEJNÁ kandidátka. Má dva režimy, přepínač je PLNA_KANDIDATKA v src/lib/verejne.js:
+//   false → TEASER (srpen 2026): první trojka s fotkami, zbytek jako anonymní sloty
+//   true  → plná listina 27 osobností s fotkami a prokliky na veřejné medailonky
+// Plnou verzi je vždy vidět v náhledu: /nahled-k7x2m9/kandidati.html
 import Base from '../layouts/Base.astro';
 import KandidatKarta from '../components/KandidatKarta.astro';
 import { kandidati } from '../data/kandidati.js';
+import { medailonky } from '../data/medailonky.js';
+import { PLNA_KANDIDATKA, verejnySlug } from '../lib/verejne.js';
 import { u } from '../lib/url.js';
 
-// první trojka bez prokliku na medailonek
-const trojka = kandidati.slice(0, 3).map(k => ({ ...k, detail: null }));
-// zbytek listiny — jen čísla, beze jmen
-const skryti = kandidati.slice(3);
+// karta odkazuje na medailonek jen tehdy, když je veřejný a existuje
+const sOdkazem = (k) => {
+  const slug = verejnySlug(k);
+  return { ...k, detail: slug && medailonky[slug] ? slug : null };
+};
+
+const listina = PLNA_KANDIDATKA ? kandidati.map(sOdkazem) : kandidati.slice(0, 3).map(sOdkazem);
+const skryti  = PLNA_KANDIDATKA ? [] : kandidati.slice(3);
+const pocetMedailonku = listina.filter(k => k.detail).length;
 ---
 <Base
   title="Kandidáti — Osobnosti pro Třinec"
-  description="Kandidátku hnutí Osobnosti pro Třinec vede Lucie Fremrová, Adam Kurzok a Erika Sirotová. Další osobnosti postupně představíme. Komunální volby 9.–10. října 2026."
+  description={PLNA_KANDIDATKA
+    ? 'Kompletní kandidátka hnutí Osobnosti pro Třinec pro komunální volby 2026. Sedmadvacet osobností — doktoři, učitelé, podnikatelé, sportovci i současní zastupitelé.'
+    : 'Kandidátku hnutí Osobnosti pro Třinec vede Lucie Fremrová, Adam Kurzok a Erika Sirotová. Další osobnosti postupně představíme. Komunální volby 9.–10. října 2026.'}
   path="kandidati.html"
   active="kandidati"
 >
+  <style is:inline>.cand-card { scroll-margin-top: 140px; }</style>
+
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow">Kandidáti 2026</p>
       <h1>Sedmadvacet <span class="hl">osobností</span>.</h1>
       <p class="hero-lead">
         Doktoři, učitelé, podnikatelé, sportovci i současní zastupitelé.
-        Tady je první trojka naší kandidátky — další osobnosti
-        postupně představíme.
+        {PLNA_KANDIDATKA
+          ? 'Lidé, kteří v Třinci doopravdy žijí a pracují — a berou za město odpovědnost.'
+          : 'Tady je první trojka naší kandidátky — další osobnosti postupně představíme.'}
       </p>
+      {pocetMedailonku > 0 && (
+        <p class="legenda">
+          <span class="legenda-kruh" aria-hidden="true"></span>
+          Kandidáti s červeným kruhem mají medailonek — klikněte na ně.
+        </p>
+      )}
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <div class="cand-grid">
-        {trojka.map(k => <KandidatKarta k={k} />)}
+        {listina.map(k => <KandidatKarta k={k} />)}
         {skryti.map(k => (
           <article class="cand-card" aria-label={`Kandidát číslo ${k.cislo} — představíme brzy`}>
             <div class="slide-avatar" aria-hidden="true">?</div>

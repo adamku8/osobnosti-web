@@ -1,0 +1,135 @@
+---
+// SKRYTÁ fotobanka kandidátů — všechny fotky, které máme, pohromadě.
+// Interní výběrová stránka: u každého kandidáta jsou vedle sebe všechny
+// varianty a jedna je označená jako doporučená. Data: src/data/fotobanka.js.
+import Base from '../../layouts/Base.astro';
+import { kandidati } from '../../data/kandidati.js';
+import { fotobanka, poznamky, mimoListinu } from '../../data/fotobanka.js';
+import { u } from '../../lib/url.js';
+
+const popisZdroje = {
+  web:   'nasazeno na webu',   // sada v public/assets/img/kandidati/
+  drive: 'upravená série (Drive)',
+  raw:   'neupravený originál',
+};
+
+const radky = kandidati.map(k => ({ k, varianty: fotobanka[k.cislo] ?? [] }));
+const pocetFotek = radky.reduce((s, r) => s + r.varianty.length, 0)
+  + mimoListinu.reduce((s, m) => s + m.varianty.length, 0);
+const bezFotky = radky.filter(r => r.varianty.length === 0);
+const kZpracovani = radky.filter(r => r.varianty.some(v => v.nej && v.zdroj === 'raw'));
+---
+<Base
+  title="Fotobanka kandidátů (náhled) — Osobnosti pro Třinec"
+  description="Interní přehled všech fotek kandidátů."
+  path="nahled-k7x2m9/fotky.html"
+  noindex={true}
+>
+  <style is:inline>
+    .fb-sum { display:flex; flex-wrap:wrap; gap:.75rem; margin:1.25rem 0 0; padding:0; list-style:none; }
+    .fb-sum li { border:1px solid rgba(50,50,50,.18); border-radius:2px; padding:.55rem .8rem;
+                 font-size:.82rem; letter-spacing:.02em; }
+    .fb-sum b { font-size:1.1rem; }
+    .fb-row { border-top:1px solid rgba(50,50,50,.14); padding:1.6rem 0; }
+    .fb-head { display:flex; align-items:baseline; gap:.65rem; flex-wrap:wrap; margin-bottom:.9rem; }
+    .fb-num { font-family:Montserrat,sans-serif; font-weight:800; font-size:1.5rem; min-width:2.2rem; }
+    .fb-name { font-family:Montserrat,sans-serif; font-weight:700; font-size:1.05rem; }
+    .fb-role { font-size:.85rem; color:rgba(50,50,50,.7); }
+    .fb-note { font-size:.85rem; line-height:1.5; margin:.1rem 0 .9rem;
+               border-left:3px solid rgba(50,50,50,.25); padding-left:.7rem; color:rgba(50,50,50,.85); }
+    .fb-note.warn { border-left-color:#FF2D2D; }
+    .fb-grid { display:flex; flex-wrap:wrap; gap:1rem; }
+    .fb-item { width:180px; }
+    .fb-item img { width:180px; height:180px; object-fit:cover; object-position:top center;
+                   background:#fff; border:1px solid rgba(50,50,50,.16); display:block; }
+    .fb-item.is-nej img { border:2px solid #FF2D2D; }
+    .fb-cap { font-size:.72rem; line-height:1.35; margin-top:.35rem; color:rgba(50,50,50,.75);
+              display:block; word-break:break-all; }
+    .fb-tag { display:inline-block; font-family:Montserrat,sans-serif; font-weight:700;
+              font-size:.62rem; letter-spacing:.09em; text-transform:uppercase; margin-top:.3rem; }
+    .fb-item.is-nej .fb-tag { color:#FF2D2D; }
+    .fb-empty { font-size:.9rem; color:rgba(50,50,50,.7); font-style:italic; }
+    @media (max-width:520px){ .fb-item, .fb-item img { width:140px; } .fb-item img { height:140px; } }
+  </style>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Interní náhled — nesdílet</p>
+      <h1>Fotobanka <span class="hl">kandidátů</span>.</h1>
+      <p class="hero-lead">
+        Všechno, co k dnešku máme: fotky nasazené na webu, jednotná upravená série
+        z Drive a neupravené originály. U každého kandidáta je červeně orámovaná
+        varianta, kterou doporučuji použít — a která je teď zároveň nasazená na webu.
+      </p>
+      <ul class="fb-sum">
+        <li><b>{pocetFotek}</b> fotek celkem</li>
+        <li><b>{27 - bezFotky.length}</b> z 27 kandidátů má fotku</li>
+        <li><b>{bezFotky.length}</b> bez fotky</li>
+        <li><b>{kZpracovani.length}</b> ke zpracování</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {radky.map(({ k, varianty }) => (
+        <div class="fb-row" id={`f-${String(k.cislo).padStart(2,'0')}`}>
+          <div class="fb-head">
+            <span class="fb-num">{k.cislo}.</span>
+            <span class="fb-name">{k.jmeno}</span>
+            <span class="fb-role">{k.profese}</span>
+            <span class="fb-role">{k.foto ? `· na webu: ${k.foto}` : '· na webu: iniciály'}</span>
+          </div>
+          {poznamky[k.cislo] && (
+            <p class:list={['fb-note', varianty.length === 0 && 'warn']}>{poznamky[k.cislo]}</p>
+          )}
+          {varianty.length === 0
+            ? <p class="fb-empty">Žádná fotka.</p>
+            : (
+              <div class="fb-grid">
+                {varianty.map(v => (
+                  <figure class:list={['fb-item', v.nej && 'is-nej']}>
+                    <a href={u(v.src)} target="_blank" rel="noopener">
+                      <img src={u(v.src)} alt={`${k.jmeno} — ${popisZdroje[v.zdroj]}`} loading="lazy">
+                    </a>
+                    <figcaption>
+                      <span class="fb-tag">{v.nej ? 'Doporučeno' : popisZdroje[v.zdroj]}</span>
+                      <span class="fb-cap">{[v.nej && popisZdroje[v.zdroj], v.src.split('/').pop()].filter(Boolean).join(' · ')}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
+        </div>
+      ))}
+
+      {mimoListinu.map(m => (
+        <div class="fb-row">
+          <div class="fb-head">
+            <span class="fb-num">—</span>
+            <span class="fb-name">{m.jmeno}</span>
+            <span class="fb-role">není na aktuální kandidátce</span>
+          </div>
+          <p class="fb-note">Fotka na Drive zůstala, ale jméno na listině 2026 není. Ověřit, jestli je to omyl.</p>
+          <div class="fb-grid">
+            {m.varianty.map(v => (
+              <figure class="fb-item">
+                <a href={u(v.src)} target="_blank" rel="noopener">
+                  <img src={u(v.src)} alt={`${m.jmeno} — ${popisZdroje[v.zdroj]}`} loading="lazy">
+                </a>
+                <figcaption>
+                  <span class="fb-tag">{popisZdroje[v.zdroj]}</span>
+                  <span class="fb-cap">{v.src.split('/').pop()}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="section-cta">
+        <a class="btn btn-secondary btn-lg" href={u('nahled-k7x2m9.html')}>← Zpět na rozcestník náhledu</a>
+      </div>
+    </div>
+  </section>
+</Base>
