@@ -76,7 +76,7 @@ export const kandidati = [
     "jmeno": "Bc. Regina Eichler",
     "vek": 52,
     "profese": "ředitelka kina",
-    "foto": null,
+    "foto": "regina_eichler_c.jpg",
     "iniciraly": "RE",
     "dotaznik": true,
     "detail": null,
