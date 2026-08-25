@@ -187,25 +187,22 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 }
 .btn-secondary:hover { background: var(--anthracite); color: var(--paper); }
 
-/* ---------- Vote banner (volební číslo) ---------- */
-.vote-banner {
-  background: var(--signal-blue);
-  padding: var(--s-24) 0;
+/* ---------- Vote callout (volební číslo — modrý květ) ---------- */
+.vote-callout {
+  padding: var(--s-64) 0;
+  border-top: 1px solid var(--border);
 }
-.vote-banner .container {
+.vote-callout .container {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-40);
 }
-.vote-banner span {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--paper);
-}
-.vote-banner strong {
-  font-weight: 800;
+.vote-callout h2 { margin: 0; }
+.vote-flower {
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
 }
 
 /* ---------- Header ---------- */
@@ -996,6 +993,9 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .promises { grid-template-columns: 1fr; border-left: none; border-top: none; }
   .promise { border-right: none; padding-left: 0; padding-right: 0; }
     .footer-grid { grid-template-columns: 1fr; }
+
+  .vote-callout .container { flex-direction: column; text-align: center; gap: var(--s-24); }
+  .vote-flower { width: 128px; height: 128px; }
 }
 
 /* ==========================================================
