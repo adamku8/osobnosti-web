@@ -18,7 +18,7 @@ export const medailonky = {
       },
       {
         nadpis: 'Když zrovna nepracuji',
-        text: 'S rodinou jezdíme na výlety, kde zase hledám inspiraci pro to, jak by mohly vypadat naše ulice nebo dětská hřiště. Jinak rád hraju basketbal a sleduju seriály.',
+        text: 'Rád si zahraju basketbal, pustím seriál a dám si dobré jídlo s pořádnou kávou. S rodinou pak jezdíme na výlety — a i tam pořád hledám inspiraci, jak by mohly vypadat naše ulice nebo dětská hřiště.',
       },
     ],
     rychleOtazky: [
