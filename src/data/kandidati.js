@@ -280,7 +280,7 @@ export const kandidati = [
     "cislo": 25,
     "jmeno": "MUDr. Juraj Serafin",
     "vek": 55,
-    "profese": "lékař — neurochirurg",
+    "profese": "lékař — neurolog",
     "foto": "juraj_serafin_c.jpg",
     "iniciraly": "JS",
     "dotaznik": true,
