@@ -1,7 +1,8 @@
 ---
 // VEŘEJNÁ kandidátka. Má dva režimy, přepínač je PLNA_KANDIDATKA v src/lib/verejne.js:
 //   false → TEASER (srpen 2026): první trojka s fotkami, zbytek jako anonymní sloty
-//   true  → plná listina 27 osobností s fotkami a prokliky na veřejné medailonky
+//   true  → plná listina 27 osobností s fotkami; prokliky na medailonky řídí REZIM_MEDAILONKU
+//            ('zadne' = karty bez odkazu, legenda k červenému kruhu se sama skryje)
 // Plnou verzi je vždy vidět v náhledu: /nahled-k7x2m9/kandidati.html
 import Base from '../layouts/Base.astro';
 import KandidatKarta from '../components/KandidatKarta.astro';
