@@ -230,23 +230,14 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   transition: height 240ms var(--ease-ui);
 }
 
-/* CTA v hlavičce se ukáže až po odrolování */
 .header-cta {
-  opacity: 0;
-  transform: translateY(-4px);
-  pointer-events: none;
-  transition: opacity 240ms var(--ease-ui), transform 240ms var(--ease-ui), background-color 240ms var(--ease-ui);
+  transition: background-color 240ms var(--ease-ui);
 }
 
 /* Zmenšená hlavička po odrolování */
 .site-header.scrolled .container { height: 72px; }
 .site-header.scrolled .logo img { height: 42px; }
 .site-header.scrolled .nav a { font-size: 12px; }
-.site-header.scrolled .header-cta {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
 
 .nav {
   display: flex;
