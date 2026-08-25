@@ -223,7 +223,7 @@ export const kandidati = [
     "jmeno": "DiS. Tomáš Nový",
     "vek": 46,
     "profese": "chilliman v PochutnejSi",
-    "foto": null,
+    "foto": "tomas_novy_c.jpg",
     "iniciraly": "TN",
     "dotaznik": true,
     "detail": "tomas-novy",

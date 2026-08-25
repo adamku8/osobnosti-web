@@ -30,7 +30,7 @@ export const fotobanka = {
   17: [nej(drive('figura.jpg')), raw('figura01.jpg'), raw('figura02.jpg')],
   18: [nej(web('michal_niemiec_c.jpg')), drive('niemiec.jpg'), raw('niemiec.jpg')],
   19: [nej(drive('sikora.jpg')), raw('06-sikora-2.jpg')],
-  20: [],
+  20: [nej(web('tomas_novy_c.jpg')), drive('novy.jpg')],
   21: [nej(drive('sajdok.jpg')), raw('29-sajdok-2.jpg'), raw('sajdok.jpg')],
   22: [nej(web('lenka_palicova_c.jpg')), drive('palicova.jpg'), raw('palicova.jpg')],
   23: [nej(web('libor_zarsky_c.jpg')), drive('zarsky.jpg'), raw('zarsky.jpg')],
@@ -47,7 +47,7 @@ export const poznamky = {
   10: 'Jediný podklad je snímek celé postavy z 24. 8. Ořízl jsem ho na čtverec podle fotostylu (oči 38 %, hlava 58 %), pozadí ale zůstalo — vlevo je vidět obraz na zdi. Na odmazání pozadí to chce projet stejnou pipeline jako zbytek série.',
   11: 'Upravená verze vznikla ze snímku celé postavy v sále — hlava je měkká. Doporučuji přefotit.',
   17: 'Originály jsou tmavé u cihlové zdi, ořez upravené verze je nejslabší z celé série. Doporučuji přefotit.',
-  20: 'Fotka chybí úplně — není ani v jedné složce na Drive.',
+  20: 'Doplněno 25. 8. 2026 z ~/Downloads/Novy.jpg. Jediný v sadě s kšiltovkou a v tričku.',
   22: 'Webová a upravená verze jsou skoro shodné; webová má teplejší tón pleti.',
   27: 'ZMĚNA: přepnuto na upravenou verzi z Drive. Původní (druhá v řadě) měla silný červený nádech a tvrdý výraz. Starý soubor jsem nemazal.',
 };
