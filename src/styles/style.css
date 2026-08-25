@@ -149,6 +149,9 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   padding: 0 0.18em;
   margin-left: -0.18em;
 }
+/* Drží interpunkci hned za .hl pohromadě — jinak inline-block boxu
+   následuje zalomovací bod a znaménko (např. tečka) spadne samo na další řádek. */
+.hl-nowrap { white-space: nowrap; }
 
 /* Modré klíčové slovo (sekce Lidé) */
 .kw-blue { color: var(--signal-blue); }
@@ -166,6 +169,7 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   text-decoration: none;
   border-radius: 999px;
   padding: 14px 28px;
+  white-space: nowrap;
   transition: background-color 240ms var(--ease-ui), color 240ms var(--ease-ui);
   cursor: pointer;
   border: none;
@@ -228,6 +232,7 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 }
 
 .header-cta {
+  flex-shrink: 0;
   transition: background-color 240ms var(--ease-ui);
 }
 
@@ -996,6 +1001,14 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 
   .vote-callout .container { flex-direction: column; text-align: center; gap: var(--s-24); }
   .vote-flower { width: 128px; height: 128px; }
+}
+
+/* Velmi úzké telefony (~360px a méně) — hlavička se jinak nevejde na jeden řádek
+   a tlačítko "Volte č. 3" se zalomí na dva řádky (rozbije tvar pilulky). */
+@media (max-width: 380px) {
+  .logo img { height: 44px; }
+  .header-right { gap: var(--s-8); }
+  .header-right .btn { padding: 8px 14px; font-size: 11px; }
 }
 
 /* ==========================================================
