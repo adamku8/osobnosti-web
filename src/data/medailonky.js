@@ -10,15 +10,15 @@ export const medailonky = {
     odpovedi: [
       {
         nadpis: 'Proč kandiduji',
-        text: 'Buď můžete mluvit jen o problémech, nebo mít vizi. Naše město má obrovský potenciál. Záleží ale na tom, kolik aktivních a pracovitých lidí sem přijde nebo tady zůstane. A já chci, aby měli důvod zůstat. Na to se nedá čekat — tyhle podmínky měníme každodenní prací.',
+        text: 'Můžeme mluvit o problémech, nebo pracovat s vizí. Naše město má obrovský potenciál. To je ale podmíněno tím, kolik aktivních a pracovitých lidí sem přijde nebo tady zůstane. A já chci, aby měli důvod zůstat — to mě motivuje věnovat městu a jeho budoucnosti svůj čas i energii.',
       },
       {
         nadpis: 'Co chci posunout',
-        text: 'Podnikavost. Chci, aby v Třinci vznikl coworking a startovací kanceláře pro nové firmy — místo, kde se potkají lidé pracující na dálku, začínající podnikatelé i freelanceři. Dnes kvůli tomu jezdí do Ostravy. Stačí prostor, rozumný nájem a trocha odvahy města.',
+        text: 'Chci nasvítit nová témata, na která zatím nebyl čas — podporu podnikavosti, strategické plánování nebo odolnost města vůči klimatickým změnám. Moje priority směřují do veřejného prostoru: tam, kde se potkáváme, kde si hrají naše děti a kde se můžou bezpečně pohybovat.',
       },
       {
         nadpis: 'Když zrovna nepracuji',
-        text: 'Pomáhám do Třince dostat Lavičku Václava Havla. A když nejsem v práci, potkáte mě na kole cestou na Javorový nebo s kávou v centru — často s mikrofonem, protože natáčím podcast s lidmi, kteří něco dokázali.',
+        text: 'S rodinou jezdíme na výlety, kde zase hledám inspiraci pro to, jak by mohly vypadat naše ulice nebo dětská hřiště. Jinak rád hraju basketbal a sleduju seriály.',
       },
     ],
     rychleOtazky: [
