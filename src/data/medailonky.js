@@ -6,7 +6,7 @@
 // potvrdit dotyčným.
 export const medailonky = {
   'adam-kurzok': {
-    citace: 'Buď můžete mluvit jen o problémech, nebo <span class="hl">mít vizi</span>',
+    citace: 'Jedni mluví o problémech, druzí <span class="hl">mají vizi</span>',
     odpovedi: [
       {
         nadpis: 'Proč kandiduji',
