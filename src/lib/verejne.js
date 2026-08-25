@@ -3,14 +3,15 @@
 
 // false = teaser (jen první trojka, zbytek jako „Již brzy")
 // true  = plná listina 27 osobností s fotkami + veřejné medailonky
-export const PLNA_KANDIDATKA = false;
+export const PLNA_KANDIDATKA = true;
 
-// Které medailonky smí ven, až se PLNA_KANDIDATKA přepne na true:
+// Které medailonky smí ven:
+//   'zadne'     → žádné. Karty jsou bez prokliku, veřejné stránky medailonků se ani negenerují.
 //   'schvalene' → jen ty s "detail" v kandidati.js (potvrzené kandidátem)
 //   'vse'       → i ty s "detailPriprava" (hotové, ale zatím nepotvrzené)
-export const REZIM_MEDAILONKU = 'schvalene';
+export const REZIM_MEDAILONKU = 'zadne';
 
 export const verejnySlug = (k) => {
-  if (!PLNA_KANDIDATKA) return null;
+  if (!PLNA_KANDIDATKA || REZIM_MEDAILONKU === 'zadne') return null;
   return REZIM_MEDAILONKU === 'vse' ? (k.detail ?? k.detailPriprava ?? null) : (k.detail ?? null);
 };
