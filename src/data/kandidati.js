@@ -29,7 +29,7 @@ export const kandidati = [
     "cislo": 3,
     "jmeno": "Mgr. et Bc. Erika Sirotová",
     "vek": 43,
-    "profese": "HR manažerka",
+    "profese": "Personální manažerka",
     "foto": "erika_sirotova_c.jpg",
     "iniciraly": null,
     "dotaznik": true,
