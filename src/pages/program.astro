@@ -1,6 +1,6 @@
 ---
-// TEASER verze programu (srpen 2026): veřejně jen čtyři oblasti (bez závazků,
-// vizí a PDF) + poznámka, že kompletní program zveřejníme v září.
+// TEASER verze programu (srpen 2026): veřejně jen čtyři oblasti — kresba, název,
+// podnadpis a dvě věty z `teaser` v oblasti.js. Žádné závazky, vize ani PDF.
 // Plný program: src/pages/nahled-k7x2m9/program.astro (viz src/lib/rezim.js).
 import Base from '../layouts/Base.astro';
 import { oblasti } from '../data/oblasti.js';
@@ -10,7 +10,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 ---
 <Base
   title="Program 2026 — Osobnosti pro Třinec"
-  description="Program hnutí Osobnosti pro Třinec stavíme na čtyřech oblastech: moderní a bezpečné město, sport a kultura, práce a podnikání, sociální péče a zdraví. Kompletní program zveřejníme v září."
+  description="Program hnutí Osobnosti pro Třinec stavíme na čtyřech oblastech: moderní a bezpečné město, sport a kultura, práce a podnikání, sociální péče a zdraví. Kompletní program zveřejníme postupně v září."
   path="program.html"
   active="program"
 >
@@ -19,32 +19,41 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       <p class="eyebrow">Program 2026</p>
       <h1>Čtyři oblasti.<br>Jeden <span class="hl">Třinec</span>.</h1>
       <p class="hero-lead">
-        Program stavíme na čtyřech oblastech, ve kterých chceme Třinec posunout.
-        Konkrétní závazky a projekty právě dolaďujeme.
+        Na těchto čtyřech oblastech stavíme program pro další čtyři roky.
+        Konkrétní závazky a projekty k nim přidáme postupně v září.
       </p>
     </div>
   </section>
 
-  <section class="section">
+  <div class="areas areas-teaser">
+    {oblasti.map(o => (
+      <section class="area" id={`oblast-${o.cislo}`}>
+        <div class="container area-grid">
+          <div class="area-photo">
+            <img src={u(`assets/img/projekty/${o.obrazek}`)} alt={`Kresba k oblasti ${o.nazev}`} loading="lazy">
+          </div>
+          <div class="area-body">
+            <p class="eyebrow">Oblast {o.cislo}</p>
+            <h2><span class="hl">{o.klic}</span> Třinec.</h2>
+            <p class="area-podnadpis">{o.podnadpis}</p>
+            <p class="area-teaser">{o.teaser}</p>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <section class="section section-zaver">
     <div class="container">
-      <div class="promises">
-        {oblasti.map(o => (
-          <article class="promise" id={`promise-${o.cislo}`}>
-            <div class="promise-head">
-              <div class="promise-index">{o.cislo}</div>
-              <svg class="promise-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={o.ikona} />
-            </div>
-            <h3>{o.nazev}</h3>
-            <p class="promise-podnadpis">{o.podnadpis}</p>
-          </article>
-        ))}
-      </div>
-      <p class="section-note" style="text-align:center; margin-top:2rem">
-        <strong>Kompletní program s konkrétními závazky zveřejníme v září.</strong>
+      <p class="eyebrow">Co bude dál</p>
+      <h2>Program zveřejníme postupně v září.</h2>
+      <p class="hero-lead">
+        Ke každé oblasti přidáme konkrétní závazky a projekty, které z nich chceme postavit.
+        Do té doby si můžete projít lidi, kteří je budou prosazovat.
       </p>
-      <div class="section-cta stat-links" style="justify-content:center">
-        <a class="btn btn-primary btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
-        <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>
+      <div class="section-cta stat-links" style="justify-content:flex-start">
+        <a class="btn btn-primary btn-lg" href={u('kandidati.html')}>Naše kandidátka</a>
+        <a class="btn btn-secondary btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
       </div>
     </div>
   </section>

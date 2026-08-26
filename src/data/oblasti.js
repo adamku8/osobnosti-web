@@ -2,12 +2,14 @@
 // Struktura dle rozvržení „Čtyři oblasti" (srpen 2026): klíčové slovo v červeném
 // boxu + „Třinec.", podnadpis, pět závazků a projekty (vize) navázané na oblast.
 // Závazky v `body` obsahují <strong> kolem jádrového předmětu — vykreslovat přes set:html.
+// `teaser` = dvě věty pro veřejnou teaser stránku /program.html (bez konkrétních závazků).
 export const oblasti = [
   {
     "cislo": "01",
     "klic": "Moderní",
     "nazev": "Moderní Třinec.",
     "podnadpis": "Moderní a bezpečné město",
+    "teaser": "Aby se v Třinci dobře bydlelo a bezpečně chodilo. Zaměřujeme se na byty, chodníky, zeleň a pořádek na sídlištích.",
     "body": [
       "aktivně podpoříme výstavbu <strong>nových bytů</strong>",
       "postavíme nové <strong>přechody, chodníky a cyklostezky</strong>",
@@ -24,6 +26,7 @@ export const oblasti = [
     "klic": "Akční",
     "nazev": "Akční Třinec.",
     "podnadpis": "Sport a kultura",
+    "teaser": "Třinec drží spolky, sport a lidé, kteří něco dělají. Chceme jim uvolnit ruce a otevřít víc míst k setkávání.",
     "body": [
       "podpoříme místní <strong>spolky a aktivní komunity</strong>",
       "zajistíme více <strong>míst pro setkávání</strong> v příměstských částech",
@@ -40,6 +43,7 @@ export const oblasti = [
     "klic": "Odvážný",
     "nazev": "Odvážný Třinec.",
     "podnadpis": "Práce a podnikání",
+    "teaser": "Práce a podnikání drží město naživu. Podpoříme ty, kdo v Třinci začínají, a propojíme ty, kdo už podnikají.",
     "body": [
       "podpoříme <strong>začínající podnikatele</strong> — „Podnikej v Třinci“",
       "<strong>propojíme podnikatele</strong> v Třinci prostřednictvím pravidelných akcí",
@@ -56,6 +60,7 @@ export const oblasti = [
     "klic": "Zdravý",
     "nazev": "Zdravý Třinec.",
     "podnadpis": "Sociální péče a zdraví",
+    "teaser": "Péče musí být po ruce, když ji člověk potřebuje. Řešíme místa v pečovatelských domech, dostupnost lékařů i podporu rodin.",
     "body": [
       "zajistíme více míst v <strong>domech s pečovatelskou službou</strong>",
       "podpoříme dostupnou <strong>zdravotní i psychologickou péči</strong>",

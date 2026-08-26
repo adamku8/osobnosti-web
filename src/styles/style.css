@@ -1080,6 +1080,22 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   background: var(--brand-red);
 }
 
+/* teaser text u oblasti (veřejná /program.html) */
+.area-teaser {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(50, 50, 50, 0.72);
+  max-width: 46ch;
+}
+
+/* teaser oblasti: text je krátký, ať nevisí u horní hrany vedle vysoké kresby */
+.areas-teaser .area-grid { align-items: center; }
+
+/* závěr teaser stránky */
+.section-zaver { border-top: 1px solid var(--border); }
+.section-zaver h2 { margin-bottom: var(--s-16); }
+.section-zaver .section-cta { margin-top: var(--s-40); }
+
 /* rozbalovací vize u oblasti */
 .area-vize > summary {
   display: inline-flex;
