@@ -56,7 +56,9 @@ export const kandidati = [
     "profese": "ředitelka knihovny",
     "foto": "martina_wolna_c.jpg",
     "iniciraly": "MW",
+    "dotaznik": true,
     "detail": null,
+    "detailPriprava": "martina-wolna",
     "poradiSlovem": "pátá"
   },
   {

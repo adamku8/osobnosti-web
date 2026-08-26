@@ -640,4 +640,33 @@ export const medailonky = {
     ],
     video: null,
   },
+  'martina-wolna': {
+    citace: 'Plán rozvoje kultury založený na <span class="hl">datech, ne na pocitech</span>',
+    odpovedi: [
+      {
+        nadpis: 'Proč kandiduji',
+        text: 'V zastupitelstvu pracuji už mnoho let a poslední čtyři roky jsem se v kulturní komisi intenzivně věnovala kultuře, která má v Třinci nevyužitý potenciál. Chci na tu práci navázat a prosadit její profesionální řízení. Kandiduji proto, aby se kultura stala prioritou rozvoje města a tvořila vstřícné prostředí pro nás všechny.',
+      },
+      {
+        nadpis: 'Co chci posunout',
+        text: 'V knihovně denně vidím, jakou sílu mají aktivní lidé. Chci prosadit plán rozvoje kultury založený na datech, ne na pocitech — jen tak dokážeme finance rozdělovat efektivně. Kultura a vzdělávání pro mě nejsou jen zábavou, ale pilířem naší svobody, otevřenosti a odolnosti.',
+      },
+      {
+        nadpis: 'Když zrovna nepracuji',
+        text: 'Už tři roky si užívám roli babičky. Každou neděli mě potkáte v horách, ale málokdo mi věří, že jsem taky kavárenský povaleč a miluju lenošení na gauči. Kdybych nepracovala s lidmi a kulturou, naplno bych zachraňovala zvířata a celou Zeměkouli.',
+      },
+    ],
+    rychleOtazky: [
+      { otazka: 'Třinec za čtyři roky', odpoved: 'Spolupracující' },
+      { otazka: 'Inspirace pro Třinec', odpoved: 'Tábor a Krnov' },
+      { otazka: 'Nejoblíbenější místo', odpoved: 'Javorový' },
+      { otazka: 'Hory, nebo město?', odpoved: 'Hory a pak město' },
+      { otazka: 'Pes, nebo kočka?', odpoved: 'Kočka, hodně koček' },
+      { otazka: 'Léto, nebo zima?', odpoved: 'Vždy to aktuální' },
+      { otazka: 'Kolo, nebo běh?', odpoved: 'Chůze a gym' },
+      { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
+      { otazka: 'Hokej, nebo fotbal?', odpoved: 'Tanec' },
+    ],
+    video: null,
+  },
 };
