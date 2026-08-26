@@ -27,12 +27,10 @@ const odkazNa = (c) =>
 const predchozi = i > 0 ? kandidati[i - 1] : null;
 const dalsi = i < kandidati.length - 1 ? kandidati[i + 1] : null;
 
-// jméno rozdělené na křestní / příjmení pro dvouřádkový nadpis
-const casti = k.jmeno.replace(/^(Mgr\.|Ing\.|MUDr\.|MVDr\.|Bc\.|MgA\.|DiS\.|et|MSc\.,?|Mgr|,)\s*/g, '').trim().split(' ');
-const prijmeni = casti.pop();
-const krestni = casti.join(' ');
-const tituly = k.jmeno.replace(`${krestni} ${prijmeni}`, '').trim();
+// jméno rozdělené na tituly / křestní / příjmení pro dvouřádkový nadpis
+const { tituly, krestni, prijmeni } = rozdelJmeno(k.jmeno);
 import { u } from '../../lib/url.js';
+import { rozdelJmeno } from '../../lib/jmeno.js';
 ---
 <Base
   title={`${k.jmeno} — Osobnosti pro Třinec`}
