@@ -24,7 +24,7 @@ const pocetMedailonku = listina.filter(k => k.detail).length;
 <Base
   title="Kandidáti — Osobnosti pro Třinec"
   description={PLNA_KANDIDATKA
-    ? 'Kompletní kandidátka hnutí Osobnosti pro Třinec pro komunální volby 2026. Sedmadvacet osobností — doktoři, učitelé, podnikatelé, sportovci i současní zastupitelé.'
+    ? 'Kompletní kandidátka hnutí Osobnosti pro Třinec pro komunální volby 2026. Sedmadvacet osobností — lékaři, učitelé, podnikatelé, sportovci i současní zastupitelé.'
     : 'Kandidátku hnutí Osobnosti pro Třinec vede Lucie Fremrová, Adam Kurzok a Erika Sirotová. Další osobnosti postupně představíme. Komunální volby 9.–10. října 2026.'}
   path="kandidati.html"
   active="kandidati"
@@ -36,10 +36,10 @@ const pocetMedailonku = listina.filter(k => k.detail).length;
       <p class="eyebrow">Kandidáti 2026</p>
       <h1>Sedmadvacet <span class="hl">osobností</span>.</h1>
       <p class="hero-lead">
-        Doktoři, učitelé, podnikatelé, sportovci i současní zastupitelé.
+        Lékaři, učitelé, podnikatelé, sportovci i současní zastupitelé.
         {PLNA_KANDIDATKA
-          ? 'Lidé, kteří v Třinci doopravdy žijí a pracují — a berou za město odpovědnost.'
-          : 'Tady je první trojka naší kandidátky — další osobnosti postupně představíme.'}
+          ? ' Lidé, kteří v Třinci doopravdy žijí a pracují — a berou za město odpovědnost.'
+          : ' Tady je první trojka naší kandidátky — další osobnosti postupně představíme.'}
       </p>
       {pocetMedailonku > 0 && (
         <p class="legenda">
