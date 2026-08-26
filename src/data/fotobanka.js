@@ -18,7 +18,7 @@ export const fotobanka = {
   5:  [nej(web('martina_wolna_c.jpg'))],
   6:  [nej(drive('miskej.jpg')), raw('17-miskej-2.jpg')],
   7:  [nej(web('regina_eichler_c.jpg')), drive('eichler.jpg'), raw('04-eichler-szpyrcova-2.jpg')],
-  8:  [nej(drive('antoniadis.jpg')), raw('antoniadis.jpg')],
+  8:  [nej(web('thanasis_antoniadis_c.jpg')), drive('antoniadis-2026.jpg'), drive('antoniadis.jpg'), raw('antoniadis.jpg')],
   9:  [nej(drive('szkandera.jpg')), raw('szkandera.jpg')],
   10: [nej(web('veronika_chmelarova_c.jpg')), raw('chmelarova.jpg')],
   11: [nej(drive('tomoszek.jpg')), raw('adam-tomoszek-foto2.jpg')],
