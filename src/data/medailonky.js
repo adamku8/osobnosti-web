@@ -5,6 +5,36 @@
 // vždy zkrácený výňatek z odpovědi kandidáta — před spuštěním kampaně nechat
 // potvrdit dotyčným.
 export const medailonky = {
+  'lucie-fremrova': {
+    citace: 'Chuť proměnit nápady <span class="hl">ve skutečnost</span>',
+    odpovedi: [
+      {
+        nadpis: 'Proč kandiduji',
+        text: 'Baví mě vymýšlet nové věci, spojovat lidi a pak vidět, že z nápadu opravdu něco vznikne. TODAM, Noc vědy, Festival svobody, Třinecká rada mládeže, MAJDAY, nebo participativní rozpočet mi ukázaly, kolik skvělých lidí v Třinci máme. A dnes mám kolem sebe tým, se kterým máme spoustu dalších nápadů a chuť je proměnit ve skutečnost.',
+      },
+      {
+        nadpis: 'Co chci posunout',
+        text: 'Přála bych si, aby si víc mladých lidí řeklo: Tady chci žít. A ti, kteří odešli studovat nebo za prací, aby měli důvod se vrátit. Protože město, ve kterém chtějí zůstat naše děti, musí nabídnout dobré bydlení, práci i život – a podle mě je pak dobrým místem pro všechny generace.',
+      },
+      {
+        nadpis: 'Když zrovna nepracuji',
+        text: 'Ve volném čase mě najdete nejčastěji v přírodě s rodinou nebo doma při pečení chleba. Možná byste netipovali, že mám černý pás v karate a sedm medailí z mistrovství Evropy. Závodní roky jsou pryč, ale ke karate se občas vracím se synovcem. A naučilo mě hlavně jedno – nevzdávat se.',
+      },
+    ],
+    rychleOtazky: [
+      { otazka: 'Třinec za čtyři roky', odpoved: 'Akční' },
+      { otazka: 'Inspirace pro Třinec', odpoved: 'Bielsko-Biała' },
+      { otazka: 'Nejoblíbenější místo', odpoved: 'Lesopark' },
+      { otazka: 'Hory, nebo město?', odpoved: 'Hory' },
+      { otazka: 'Pes, nebo kočka?', odpoved: 'Pes' },
+      { otazka: 'Léto, nebo zima?', odpoved: 'Léto' },
+      { otazka: 'Kolo, nebo běh?', odpoved: 'Kolo' },
+      { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
+      { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
+    ],
+    video: null,
+  },
+
   'adam-kurzok': {
     citace: 'Jedni mluví o problémech, druzí <span class="hl">mají vizi</span>',
     odpovedi: [
