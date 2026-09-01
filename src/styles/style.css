@@ -105,7 +105,9 @@ h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 800;
   text-transform: uppercase;
-  line-height: 1.02;
+  /* 1.15 místo původních 1.02: highlight box .hl přesahuje kvůli diakritice
+     nad účaří, a při těsném prokládání zasahoval do řádku nad sebou. */
+  line-height: 1.15;
   letter-spacing: -0.01em;
   text-align: left;
 }
@@ -146,13 +148,16 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   display: inline-block;
   background: var(--brand-red);
   color: var(--paper);
-  /* Svislý padding je kvůli české diakritice: bez něj končí box přesně na hraně
-     čárky nebo háčku (OSOBNOSTÍ, MODERNÍ, AKČNÍ). Nahoře proto víc než dole.
-     Záporné svislé marginy to vrací zpátky, aby se nezvětšila výška řádku —
-     u inline-block se do řádku počítá margin box, ne padding box. */
-  padding: 0.30em 0.18em 0.12em;
-  margin-top: -0.30em;
-  margin-bottom: -0.12em;
+  /* Horní padding je kvůli české diakritice: bez něj vyčnívá čárka nebo háček
+     nad červenou plochu (OSOBNOSTÍ, MODERNÍ, TŘINEC). Stačí málo — hlavní práci
+     odvede prokládání nadpisů (line-height 1.15), které glyfu udělá místo.
+     Pixelové minimum je tam proto, že v em to u menších nadpisů (h2 32 px)
+     vyjde tak málo, že čárka nad Í zase sedí přesně na hraně.
+     Záporný horní margin to vrací zpět, aby se nezvětšila výška řádku:
+     u inline-block se do řádku počítá margin box, ne padding box.
+     Spodek zůstává bez paddingu, jinak je box opticky těžký dole. */
+  padding: max(6px, 0.05em) 0.18em 0;
+  margin-top: calc(-1 * max(6px, 0.05em));
   margin-left: -0.18em;
 }
 /* Drží interpunkci hned za .hl pohromadě — jinak inline-block boxu
