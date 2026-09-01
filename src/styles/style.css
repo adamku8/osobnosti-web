@@ -1483,3 +1483,67 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   border: 3px solid var(--brand-red);
   flex: 0 0 auto;
 }
+
+/* ---------- Rozpis projektů (náhled programu) ---------- */
+.projekty-rozpis { border-top: 1px solid var(--border); }
+.proj-list { list-style: none; margin: var(--s-40) 0 0; padding: 0; }
+.proj-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--s-24);
+  padding: var(--s-24) 0;
+  border-top: 1px solid var(--border);
+}
+.proj-row:first-child { border-top: 0; }
+.proj-foto img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.proj-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 var(--s-8);
+}
+.proj-cislo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-muted);
+}
+.proj-nazev {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.1;
+}
+.proj-tag {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal-blue);
+  border: 1px solid rgba(0, 59, 142, 0.35);
+  border-radius: 100px;
+  padding: 4px 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 240ms var(--ease-ui), color 240ms var(--ease-ui);
+}
+a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
+.proj-tag-chybi {
+  color: var(--brand-red);
+  border-color: rgba(255, 45, 45, 0.35);
+}
+.proj-text { color: var(--text-secondary); line-height: 1.6; margin: 0; }
+.proj-body .people-more { display: inline-block; margin-top: var(--s-8); }
+
+@media (max-width: 700px) {
+  .proj-row { grid-template-columns: 1fr; gap: var(--s-16); }
+  .proj-nazev { font-size: 18px; }
+}

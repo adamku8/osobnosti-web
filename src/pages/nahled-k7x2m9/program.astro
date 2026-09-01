@@ -7,6 +7,12 @@ import { u } from '../../lib/url.js';
 
 // vize navázané na oblast — pořadí drží oblasti.js
 const vizeProOblast = o => o.projekty.map(s => projekty.find(p => p.slug === s)).filter(Boolean);
+
+// Zařazení projektu do oblasti — tag u každého projektu v rozpisu níže.
+// Zdroj je pole `projekty` v oblasti.js; projekt bez oblasti se vypíše jako nezařazený.
+const oblastProProjekt = (slug) => oblasti.find(o => o.projekty.includes(slug)) ?? null;
+const nezarazene = projekty.filter(p => !oblastProProjekt(p.slug));
+
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 ---
 <Base
@@ -67,6 +73,50 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       </section>
     ))}
   </div>
+
+  <!-- ================= Rozpis projektů — každý s tagem oblasti ================= -->
+  <section class="section projekty-rozpis" id="projekty">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Vize · projekty</p>
+        <h2>{projekty.length} projektů, které z programu <span class="hl">chceme postavit</span>.</h2>
+        <p class="section-note">
+          Každý projekt patří k některé z {oblasti.length} oblastí — tag u názvu ukazuje ke které.
+        </p>
+      </div>
+
+      <ol class="proj-list">
+        {projekty.map(p => {
+          const o = oblastProProjekt(p.slug);
+          return (
+            <li class="proj-row" id={`projekt-${p.slug}`}>
+              <div class="proj-foto">
+                <img src={u(`assets/img/projekty/${p.obrazek}`)} alt={p.alt} loading="lazy">
+              </div>
+              <div class="proj-body">
+                <p class="proj-head">
+                  <span class="proj-cislo">{p.cislo}</span>
+                  <span class="proj-nazev">{p.nazev}</span>
+                  {o
+                    ? <a class="proj-tag" href={`#oblast-${o.cislo}`}>{o.cislo} · {o.podnadpis}</a>
+                    : <span class="proj-tag proj-tag-chybi">bez oblasti</span>}
+                </p>
+                <p class="proj-text">{p.text}</p>
+                {p.odkaz && <a class="people-more" href={u('nahled-k7x2m9/' + p.odkaz.href)}>{p.odkaz.text}</a>}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+
+      {nezarazene.length > 0 && (
+        <p class="section-note">
+          Pozor: {nezarazene.length} projektů nemá v oblasti.js zařazení —
+          {nezarazene.map(p => ` ${p.nazev}`).join(',')}.
+        </p>
+      )}
+    </div>
+  </section>
 
   <section class="section section-cta-band">
     <div class="container">
