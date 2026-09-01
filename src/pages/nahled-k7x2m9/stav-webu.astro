@@ -1,0 +1,285 @@
+---
+// SKRYTÁ MAPA WEBU — co je kde nasazené, od kdy a co ještě není proklikatelné.
+// Interní kontrolní stránka pro tým. Není nikde prolinkovaná (kromě rozcestníku
+// náhledu), má noindex. Data o kandidátech se dopočítávají, zbytek je ručně
+// udržovaný soupis — při vzniku nové stránky doplň řádek do VEREJNE/SKRYTE/CLANKY.
+import Base from '../../layouts/Base.astro';
+import { kandidati } from '../../data/kandidati.js';
+import { medailonky } from '../../data/medailonky.js';
+import { projekty } from '../../data/projekty.js';
+import { oblasti } from '../../data/oblasti.js';
+import { PLNA_KANDIDATKA, REZIM_MEDAILONKU, verejnySlug } from '../../lib/verejne.js';
+import { u } from '../../lib/url.js';
+
+// ── stav medailonků (dopočet z dat) ─────────────────────────────────────────
+const maStranku = (k) => {
+  const s = k.detail ?? k.detailPriprava ?? null;
+  return Boolean(s && medailonky[s]);
+};
+const verejnyOdkaz = (k) => {
+  const s = verejnySlug(k);
+  return Boolean(s && medailonky[s]);
+};
+const verejnychMedailonku = kandidati.filter(verejnyOdkaz).length;
+const bezMedailonku = kandidati.filter(k => !maStranku(k));
+const schvalene = kandidati.filter(k => k.detail).length;
+const priprava = kandidati.filter(k => !k.detail && k.detailPriprava).length;
+
+// ── soupis stránek ──────────────────────────────────────────────────────────
+const VEREJNE = [
+  { cesta: '/',                  nazev: 'Úvod (teaser)',        menu: 'Úvod',         od: '19. 8.', zmena: '25. 8.',
+    stav: 'ok',   pozn: 'Billboard, datum voleb, banner s číslem. Sekce program a kandidáti tu zatím nejsou.' },
+  { cesta: '/program',           nazev: 'Program (teaser)',     menu: 'Program',      od: '26. 8.', zmena: '26. 8.',
+    stav: 'cast', pozn: `Jen ${oblasti.length} oblasti s kresbou a dvěma větami. Bez závazků, bez ${projekty.length} projektů, bez PDF.` },
+  { cesta: '/kandidati',         nazev: 'Kandidáti — plná listina', menu: 'Kandidáti', od: '19. 8.', zmena: '26. 8.',
+    stav: 'ok',   pozn: `Všech ${kandidati.length} jmen s fotkami. Od 26. 8. jsou venku i medailonky.` },
+  { cesta: '/podporte-nas',      nazev: 'Podpořte nás',         menu: 'Podpořte nás', od: '19. 8.', zmena: '19. 8.',
+    stav: 'ok',   pozn: 'Beze změny od spuštění.' },
+  { cesta: '/kandidat-<slug>',   nazev: `Medailonky kandidátů (${verejnychMedailonku}×)`, menu: 'z listiny', od: '26. 8.', zmena: '1. 9.',
+    stav: 'ok',   pozn: `Generují se jen pro kandidáty se záznamem v medailonky.js. Chybí ${bezMedailonku.length}.` },
+];
+
+const NEPROLINKOVANE = [
+  { cesta: '/blog-je-v-trinci-mrtvo-nebo-zivo', nazev: 'Článek „Je v Třinci mrtvo, nebo živo?"', od: '19. 8.', zmena: '20. 8.',
+    stav: 'draft', pozn: 'Na doméně leží, ale nevede na něj žádný odkaz a má noindex (draft = true). Uvnitř 6 nedodělaných bloků a chybí reels.' },
+];
+
+const SKRYTE = [
+  { cesta: '/nahled-k7x2m9/',                    nazev: 'Rozcestník náhledu',            od: '19. 8.', zmena: '24. 8.',
+    stav: 'stary', pozn: 'Popisuje veřejný web ještě jako teaser s první trojkou — od 26. 8. to neplatí.' },
+  { cesta: '/nahled-k7x2m9/program',             nazev: 'Program — kompletní',           od: '19. 8.', zmena: '21. 8.',
+    stav: 'ok',    pozn: `Závazky + ${projekty.length} projektů u oblastí. Tohle veřejný web nemá.` },
+  { cesta: '/nahled-k7x2m9/program-osobnosti-pro-trinec-2026.pdf', nazev: 'Program 2026 — PDF', od: '19. 8.', zmena: '—',
+    stav: 'ok',    pozn: 'Ke stažení jen z náhledu.' },
+  { cesta: '/nahled-k7x2m9/kandidati',           nazev: 'Kandidáti — plná listina',      od: '19. 8.', zmena: '26. 8.',
+    stav: 'shoda', pozn: 'Dnes shodné s veřejnou verzí — od zveřejnění plné listiny se neliší.' },
+  { cesta: '/nahled-k7x2m9/kandidat-<slug>',     nazev: `Medailonky (${verejnychMedailonku}×)`, od: '19. 8.', zmena: '1. 9.',
+    stav: 'shoda', pozn: 'Také shodné s veřejnými — režim medailonků je „vše".' },
+  { cesta: '/nahled-k7x2m9/javorovy',            nazev: 'Javorový 2.0 — celá vize',      od: '19. 8.', zmena: '19. 8.',
+    stav: 'ceka',  pozn: 'Hotová stránka, ven zatím nejde. Z veřejného webu na ni nevede odkaz.' },
+  { cesta: '/nahled-k7x2m9/medailonky-prehled',  nazev: 'Přehled medailonků a fotek',    od: '20. 8.', zmena: '20. 8.',
+    stav: 'ok',    pozn: 'Kontrolní tabulka všech 27 — dotazník, foto, medailonek.' },
+  { cesta: '/nahled-k7x2m9/fotky',               nazev: 'Fotobanka kandidátů',           od: '24. 8.', zmena: '24. 8.',
+    stav: 'ok',    pozn: 'Všechny varianty fotek vedle sebe, s doporučeným výběrem.' },
+  { cesta: '/nahled-k7x2m9/stav-webu',           nazev: 'Tato stránka — mapa webu',      od: '1. 9.', zmena: '1. 9.',
+    stav: 'ok',    pozn: 'Soupis toho, co je kde nasazené.' },
+];
+
+const CLANKY = [
+  { nazev: 'Je v Třinci mrtvo, nebo živo?', kde: '/blog-je-v-trinci-mrtvo-nebo-zivo', vznik: '19. 8. 2026',
+    stav: 'draft', pozn: 'Web verze existuje a je nasazená, ale jako draft: noindex, bez odkazu odkudkoli. Před publikací doplnit 6 bloků [DOPLNIT] a dva Instagram reels, pak přepnout draft na false.' },
+  { nazev: 'Deset kilometrů. O tolik se Třinec stěhuje.', kde: 'zatím jen text (WEB/blog-deset-kilometru-DRAFT.md)', vznik: '1. 9. 2026',
+    stav: 'text',  pozn: 'Pokračování prvního článku. Webová stránka neexistuje. Před sazbou ověřit počty bytů, doplnit autora, nechat odsouhlasit 5 ze 7 závazků a dodělat tři grafiky.' },
+];
+
+const CEKA = [
+  `Program se závazky a ${projekty.length} projekty — hotový v náhledu, veřejně slíbený „postupně v září".`,
+  'Javorový 2.0 — hotová stránka v náhledu, z webu na ni nevede odkaz.',
+  'PDF programu ke stažení — leží jen pod náhledovou adresou.',
+  `Medailonky ${bezMedailonku.map(k => `${k.cislo}. ${k.jmeno}`).join(', ')} — karty v listině nejsou proklikatelné.`,
+  'Článek „Je v Třinci mrtvo, nebo živo?" — nasazený, ale jako draft bez odkazu.',
+  'Článek „Deset kilometrů" — existuje jen jako text, webová verze zatím nevznikla.',
+  'Rozcestník náhledu — jeho popisky veřejného webu jsou od 26. 8. neaktuální.',
+];
+
+const STAVY = {
+  ok:    { text: 'veřejné',     tone: 'blue' },
+  cast:  { text: 'jen část',    tone: 'red'  },
+  draft: { text: 'draft',       tone: 'red'  },
+  stary: { text: 'neaktuální',  tone: 'red'  },
+  ceka:  { text: 'čeká',        tone: 'red'  },
+  shoda: { text: 'shodné',      tone: 'mute' },
+  text:  { text: 'jen text',    tone: 'red'  },
+};
+---
+<Base
+  title="Mapa webu — co je kde nasazené (interní)"
+  description="Interní přehled nasazených a skrytých stránek webu."
+  path="nahled-k7x2m9/stav-webu.html"
+  noindex={true}
+>
+  <style is:inline>
+    .mapa-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .mapa-table th, .mapa-table td { padding: 0.6rem 0.75rem; text-align: left;
+      border-bottom: 1px solid rgba(50,50,50,0.15); vertical-align: top; }
+    .mapa-table th { font-weight: 700; font-size: 0.8rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: rgba(50,50,50,0.55); }
+    .mapa-wrap { overflow-x: auto; }
+    .mapa-cesta { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85rem; white-space: nowrap; }
+    .mapa-nazev { font-weight: 600; }
+    .mapa-pozn { color: rgba(50,50,50,0.72); line-height: 1.5; max-width: 34rem; }
+    .mapa-datum { white-space: nowrap; color: rgba(50,50,50,0.55); font-size: 0.88rem; }
+    .znacka { display: inline-block; white-space: nowrap; font-size: 0.78rem;
+      font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+      padding: 0.2rem 0.55rem; border-radius: 4px; }
+    .znacka-blue { color: #003B8E; border: 1px solid rgba(0,59,142,0.35); }
+    .znacka-red  { color: #FF2D2D; border: 1px solid rgba(255,45,45,0.35); }
+    .znacka-mute { color: rgba(50,50,50,0.55); border: 1px solid rgba(50,50,50,0.2); }
+    .mapa-sum { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0 0;
+      padding: 0; list-style: none; }
+    .mapa-sum li { border: 1px solid rgba(50,50,50,0.18); border-radius: 4px;
+      padding: 0.6rem 0.85rem; font-size: 0.82rem; letter-spacing: 0.02em; }
+    .mapa-sum b { display: block; font-family: Montserrat, sans-serif;
+      font-weight: 800; font-size: 1.4rem; letter-spacing: 0; }
+    .mapa-note { font-size: 0.9rem; line-height: 1.6; color: rgba(50,50,50,0.72);
+      border-left: 3px solid rgba(50,50,50,0.25); padding-left: 0.8rem; margin: 0 0 1.25rem; }
+    @media (max-width: 700px) { .mapa-pozn { min-width: 18rem; } }
+  </style>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Interní přehled — nesdílet</p>
+      <h1>Co je kde <span class="hl">nasazené</span>.</h1>
+      <p class="hero-lead">
+        Mapa všech stránek webu: co vidí veřejnost, co leží schované pod touhle
+        adresou a co ještě není proklikatelné. Stav k 1. 9. 2026.
+      </p>
+      <ul class="mapa-sum">
+        <li><b>{VEREJNE.length}</b>veřejné stránky</li>
+        <li><b>{SKRYTE.length}</b>skryté v náhledu</li>
+        <li><b>{verejnychMedailonku}/{kandidati.length}</b>medailonků venku</li>
+        <li><b>{CLANKY.length}</b>články (0 publikovaných)</li>
+        <li><b>{CEKA.length}</b>věcí čeká</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Veřejný web</h2></div>
+      <p class="mapa-note">
+        Nasazuje se automaticky při každém pushi do větve <code>main</code>
+        (GitHub Actions → GitHub Pages). Poslední nasazení 1. 9. 2026 v 11:43,
+        commit <code>8639971</code>. Nic nečeká na push — všechno hotové je venku.
+      </p>
+      <div class="mapa-wrap">
+        <table class="mapa-table">
+          <thead>
+            <tr><th>Adresa</th><th>Stránka</th><th>V menu</th><th>Venku od</th><th>Změna</th><th>Stav</th><th>Poznámka</th></tr>
+          </thead>
+          <tbody>
+            {VEREJNE.map(r => (
+              <tr>
+                <td class="mapa-cesta">{r.cesta}</td>
+                <td class="mapa-nazev">{r.nazev}</td>
+                <td class="mapa-datum">{r.menu}</td>
+                <td class="mapa-datum">{r.od}</td>
+                <td class="mapa-datum">{r.zmena}</td>
+                <td><span class={`znacka znacka-${STAVY[r.stav].tone}`}>{STAVY[r.stav].text}</span></td>
+                <td class="mapa-pozn">{r.pozn}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Na doméně, ale bez odkazu</h2></div>
+      <p class="mapa-note">
+        Stránky, které na ostré doméně existují, ale nevede na ně žádný odkaz
+        a mají zakázanou indexaci. Kdo zná adresu, uvidí je.
+      </p>
+      <div class="mapa-wrap">
+        <table class="mapa-table">
+          <thead>
+            <tr><th>Adresa</th><th>Stránka</th><th>Nasazeno</th><th>Změna</th><th>Stav</th><th>Poznámka</th></tr>
+          </thead>
+          <tbody>
+            {NEPROLINKOVANE.map(r => (
+              <tr>
+                <td class="mapa-cesta">{r.cesta}</td>
+                <td class="mapa-nazev">{r.nazev}</td>
+                <td class="mapa-datum">{r.od}</td>
+                <td class="mapa-datum">{r.zmena}</td>
+                <td><span class={`znacka znacka-${STAVY[r.stav].tone}`}>{STAVY[r.stav].text}</span></td>
+                <td class="mapa-pozn">{r.pozn}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Skryté pod /nahled-k7x2m9/</h2></div>
+      <div class="mapa-wrap">
+        <table class="mapa-table">
+          <thead>
+            <tr><th>Adresa</th><th>Stránka</th><th>Vzniklo</th><th>Změna</th><th>Stav</th><th>Poznámka</th></tr>
+          </thead>
+          <tbody>
+            {SKRYTE.map(r => (
+              <tr>
+                <td class="mapa-cesta">{r.cesta}</td>
+                <td class="mapa-nazev">{r.nazev}</td>
+                <td class="mapa-datum">{r.od}</td>
+                <td class="mapa-datum">{r.zmena}</td>
+                <td><span class={`znacka znacka-${STAVY[r.stav].tone}`}>{STAVY[r.stav].text}</span></td>
+                <td class="mapa-pozn">{r.pozn}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Články</h2></div>
+      <p class="mapa-note">
+        Publikovaný není zatím ani jeden. Na webu není rozcestník blogu — až
+        bude první článek hotový, bude potřeba i přehledová stránka a odkaz v menu.
+      </p>
+      <div class="mapa-wrap">
+        <table class="mapa-table">
+          <thead>
+            <tr><th>Článek</th><th>Kde je</th><th>Vzniklo</th><th>Stav</th><th>Co zbývá</th></tr>
+          </thead>
+          <tbody>
+            {CLANKY.map(r => (
+              <tr>
+                <td class="mapa-nazev">{r.nazev}</td>
+                <td class="mapa-cesta">{r.kde}</td>
+                <td class="mapa-datum">{r.vznik}</td>
+                <td><span class={`znacka znacka-${STAVY[r.stav].tone}`}>{STAVY[r.stav].text}</span></td>
+                <td class="mapa-pozn">{r.pozn}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Co ještě není proklikatelné</h2></div>
+      <ul class="area-list">
+        {CEKA.map(t => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Přepínače</h2></div>
+      <p class="mapa-note">
+        Co je veřejné, řídí dva soubory. <code>src/lib/verejne.js</code>:
+        plná kandidátka <b>{String(PLNA_KANDIDATKA)}</b>, režim medailonků
+        <b> „{REZIM_MEDAILONKU}"</b> — tedy venku jsou i medailonky, které
+        kandidáti neodsouhlasili ({priprava} z {verejnychMedailonku}; potvrzených
+        je {schvalene}). <code>src/lib/rezim.js</code> drží tajný prefix náhledu.
+      </p>
+      <div class="section-cta stat-links" style="justify-content:flex-start">
+        <a class="btn btn-secondary btn-lg" href={u('nahled-k7x2m9.html')}>Zpět na rozcestník</a>
+      </div>
+    </div>
+  </section>
+</Base>
