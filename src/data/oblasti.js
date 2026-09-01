@@ -47,9 +47,9 @@ export const oblasti = [
     "body": [
       "podpoříme <strong>začínající podnikatele</strong> — „Podnikej v Třinci“",
       "<strong>propojíme podnikatele</strong> v Třinci prostřednictvím pravidelných akcí",
-      "budeme rozšiřovat <strong>prostory pro coworking</strong> i podnikatele",
+      "otevřeme <strong>expat centrum</strong> pro nově příchozí i navrátilce do Třince",
       "zajistíme <strong>vstřícný a otevřený magistrát</strong>",
-      "budeme podporovat rozvoj <strong>digitálních dovedností</strong>"
+      "zavedeme <strong>startovací nájmy</strong> pro začínající podnikatele"
     ],
     "obrazek": "coworking-kresba.png",
     "projekty": ["coworking"],
@@ -66,7 +66,7 @@ export const oblasti = [
       "podpoříme dostupnou <strong>zdravotní i psychologickou péči</strong>",
       "pomůžeme <strong>rodinám</strong> pečujícím o své blízké",
       "otevřeme <strong>Centrum pro aktivní seniory</strong> na Smetanově",
-      "podpoříme <strong>duševní zdraví mládeže</strong>"
+      "podpoříme další rozvoj <strong>péče o duševní zdraví</strong>"
     ],
     "obrazek": "dps-kresba.png",
     "projekty": ["dps"],
