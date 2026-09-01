@@ -53,21 +53,6 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
             <ul class="area-list">
               {o.body.map(b => <li set:html={b} />)}
             </ul>
-            <details class="area-vize">
-              <summary>Zjistěte více<span class="area-vize-plus" aria-hidden="true">+</span></summary>
-              <div class="vize-grid">
-                {vizeProOblast(o).map(p => (
-                  <article class="vize-karta">
-                    <img src={u(`assets/img/projekty/${p.obrazek}`)} alt={p.alt} loading="lazy">
-                    <div class="vize-body">
-                      <p class="eyebrow">Vize · {p.nazev}</p>
-                      <p>{p.text}</p>
-                      {p.odkaz && <a class="people-more" href={u('nahled-k7x2m9/' + p.odkaz.href)}>{p.odkaz.text}</a>}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </details>
           </div>
         </div>
       </section>
