@@ -105,9 +105,10 @@ h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 800;
   text-transform: uppercase;
-  /* 1.15 místo původních 1.02: highlight box .hl přesahuje kvůli diakritice
-     nad účaří, a při těsném prokládání zasahoval do řádku nad sebou. */
-  line-height: 1.15;
+  /* 1.25 místo původních 1.02: highlight box .hl je kvůli diakritice vyšší než
+     řádek a při těsném prokládání se dotýkal řádku nad sebou. Při 1.15 zbývaly
+     u dvouřádkového hero nadpisu 3 px, teď 10 px. */
+  line-height: 1.25;
   letter-spacing: -0.01em;
   text-align: left;
 }
@@ -156,8 +157,15 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
      Záporný horní margin to vrací zpět, aby se nezvětšila výška řádku:
      u inline-block se do řádku počítá margin box, ne padding box.
      Spodek zůstává bez paddingu, jinak je box opticky těžký dole. */
-  padding: max(6px, 0.05em) 0.18em 0;
-  margin-top: calc(-1 * max(6px, 0.05em));
+  /* Vlastní line-height: bez něj červená plocha kopíruje prokládání okolní
+     sazby, takže v citaci (line-height 1,6) byl box zbytečně vysoký. Takhle
+     obepíná text stejně ve všech kontextech a padding vyjde nahoře i po
+     stranách zhruba stejně. Záporné svislé marginy drží výšku řádku beze
+     změny — u inline-block se do řádku počítá margin box, ne padding box. */
+  line-height: 1.05;
+  padding: 0.22em 0.18em 0.06em;
+  margin-top: -0.22em;
+  margin-bottom: -0.06em;
   margin-left: -0.18em;
 }
 /* Drží interpunkci hned za .hl pohromadě — jinak inline-block boxu
