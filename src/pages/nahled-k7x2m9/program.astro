@@ -98,7 +98,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
                   <span class="proj-cislo">{p.cislo}</span>
                   <span class="proj-nazev">{p.nazev}</span>
                   {o
-                    ? <a class="proj-tag" href={`#oblast-${o.cislo}`}>{o.cislo} · {o.podnadpis}</a>
+                    ? <a class="proj-tag" href={`#oblast-${o.cislo}`}>{o.klic}</a>
                     : <span class="proj-tag proj-tag-chybi">bez oblasti</span>}
                 </p>
                 <p class="proj-text">{p.text}</p>
