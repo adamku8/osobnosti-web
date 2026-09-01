@@ -12,7 +12,9 @@ export const kandidati = [
     "profese": "radní, organizátorka akcí",
     "foto": "lucie_fremrova_c.jpg",
     "iniciraly": null,
+    "dotaznik": true,
     "detail": null,
+    "detailPriprava": "lucie-fremrova",
     "poradiSlovem": "první"
   },
   {
