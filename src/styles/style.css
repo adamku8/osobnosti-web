@@ -1540,7 +1540,7 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
   color: var(--brand-red);
   border-color: rgba(255, 45, 45, 0.35);
 }
-.proj-text { color: var(--text-secondary); line-height: 1.6; margin: 0; }
+.proj-text { color: var(--text-secondary); line-height: 1.6; margin: 0; max-width: 46rem; }
 .proj-body .people-more { display: inline-block; margin-top: var(--s-8); }
 
 @media (max-width: 700px) {
