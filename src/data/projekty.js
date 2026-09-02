@@ -30,9 +30,9 @@ export const projekty = [
   {
     "cislo": "04",
     "slug": "hriste-knihovna",
-    "nazev": "Dětské hřiště u knihovny",
+    "nazev": "Nové dětské hřiště u knihovny",
     "obrazek": "hriste-knihovna-kresba.png",
-    "alt": "Vizualizace dětského hřiště u knihovny",
+    "alt": "Vizualizace nového dětského hřiště u knihovny",
     "text": "Moderní hřiště přímo u knihovny propojí hru a čtení — děti si hrají, rodiče mají kávu a knihu po ruce. Bezpečné místo v centru pro celou rodinu."
   },
   {
