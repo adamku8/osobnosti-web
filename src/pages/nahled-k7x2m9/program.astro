@@ -14,8 +14,9 @@ const oblastProProjekt = (slug) => oblasti.find(o => o.projekty.includes(slug)) 
 const nezarazene = projekty.filter(p => !oblastProProjekt(p.slug));
 
 // „Nová / Nové / Nový" na začátku názvu jde do červeného boxu (.hl) jako v nadpisech.
+// Bere i vtípek „(Staro)nový" u Javorového.
 const rozdelNove = (nazev) => {
-  const m = nazev.match(/^(Nov[áéý])\s+(.+)$/);
+  const m = nazev.match(/^(\(Staro\)nov[áéý]|Nov[áéý])\s+(.+)$/);
   return m ? { nove: m[1], zbytek: m[2] } : { nove: null, zbytek: nazev };
 };
 
@@ -70,7 +71,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Vize · projekty</p>
-        <h2>{projekty.length} projektů, které z programu <span class="hl">chceme postavit</span>.</h2>
+        <h2>{projekty.length} <span class="hl">nových</span> investic pro Třinec.</h2>
         <p class="section-note">
           Každý projekt patří k některé z {oblasti.length} oblastí — tag u názvu ukazuje ke které.
         </p>

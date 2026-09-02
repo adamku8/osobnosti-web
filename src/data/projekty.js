@@ -38,7 +38,7 @@ export const projekty = [
   {
     "cislo": "05",
     "slug": "javorovy",
-    "nazev": "Javorový 2.0",
+    "nazev": "(Staro)nový Javorový 2.0",
     "obrazek": "javorovy-kresba.png",
     "alt": "Vizualizace Javorový 2.0",
     "text": "Javorový je vstupní brána Beskyd. Modernizujeme zázemí — lanovku, vyhlídku i služby na vrcholu — aby hora žila celý rok, pro rodiny i sportovce.",
@@ -50,9 +50,9 @@ export const projekty = [
   {
     "cislo": "06",
     "slug": "coworking",
-    "nazev": "Sdílené kanceláře",
+    "nazev": "Nové sdílené kanceláře",
     "obrazek": "coworking-kresba.png",
-    "alt": "Vizualizace sdílených a startovacích kanceláří",
+    "alt": "Vizualizace nových sdílených a startovacích kanceláří",
     "text": "Třinec má ideální pozici stát se lokálním centrem podnikavosti. Budeme aktivně podporovat vznik startovacích kanceláří pro nové firmy i nových kancelářských prostor — co třeba přímo vedle magistrátu?"
   },
   {
