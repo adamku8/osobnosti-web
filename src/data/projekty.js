@@ -9,7 +9,7 @@ export const projekty = [
     "nazev": "Nové propojené chodníky i cyklostezky",
     "obrazek": "propojene-mesto-kresba.png",
     "alt": "Vizualizace nových propojených chodníků a cyklostezek",
-    "text": "Citlivě propojíme lesopark s dalšími částmi města chodníky a bezpečnou infrastrukturou pro pěší. Prvním projektem může být spojení lesoparku a SPŠ na Kanadě."
+    "text": "Investujeme desítky milionů do propojení centra a příměstských částí bezpečnou infrastrukturou pro pěší i cyklodopravu. Prvním projektem může být spojení lesoparku Kanady nebo Terasy a Oldřichovic."
   },
   {
     "cislo": "02",
