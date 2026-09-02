@@ -64,7 +64,7 @@ export const projekty = [
     "cislo": "07",
     "slug": "centrum-senioru",
     "nazev": "Nové centrum aktivních seniorů",
-    "obrazek": "centrum-senioru.jpg",
+    "obrazek": "centrum-senioru-kresba.png",
     "alt": "Vizualizace nového centra aktivních seniorů",
     "text": "Na ulici Smetanově otevřeme centrum, kde se senioři potkají, vzdělají i zasportují. Aktivní stáří v Třinci — mezi lidmi, ne doma o samotě."
   }
