@@ -43,9 +43,9 @@ export const projekty = [
     "cislo": "05",
     "slug": "javorovy",
     "tag": false,
-    "nazev": "Nový Javorový 2.0",
+    "nazev": "Nový koncept areálu Javorový",
     "obrazek": "javorovy-kresba.png",
-    "alt": "Vizualizace nového Javorového 2.0",
+    "alt": "Vizualizace nového konceptu areálu Javorový",
     "text": "Máme vizi, jak modernizovat areál Javorový, aby získal širší celoroční využití. Chceme rekonstruovat chatu a vytvořit oddělené zázemí pro spolky i prostor pro kulturní či sportovní akce.",
     "odkaz": {
       "href": "javorovy.html",
