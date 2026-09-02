@@ -66,6 +66,6 @@ export const projekty = [
     "nazev": "Nové centrum aktivních seniorů",
     "obrazek": "centrum-senioru.jpg",
     "alt": "Vizualizace nového centra aktivních seniorů",
-    "text": "Na Smetanově otevřeme centrum, kde se senioři potkají, vzdělají i zasportují. Aktivní stáří v Třinci — mezi lidmi, ne doma o samotě."
+    "text": "Na ulici Smetanově otevřeme centrum, kde se senioři potkají, vzdělají i zasportují. Aktivní stáří v Třinci — mezi lidmi, ne doma o samotě."
   }
 ];
