@@ -1,13 +1,14 @@
 // Jediný zdroj pravdy pro projekty (vize). Pořadí odpovídá oblastem v oblasti.js.
-// Projekt „Centrum aktivních seniorů" byl zrušen — zůstává jen jako závazek
-// v oblasti Zdravý Třinec („otevřeme Centrum pro aktivní seniory na Smetanově").
+// Projekt „Nové centrum aktivních seniorů" (08) se vrátil mezi projekty (2. 9. 2026)
+// — v oblasti Zdravý Třinec zůstává i jako závazek („otevřeme Centrum pro aktivní
+// seniory na Smetanově").
 export const projekty = [
   {
     "cislo": "01",
     "slug": "propojene-mesto",
-    "nazev": "Propojené město",
+    "nazev": "Propojené chodníky i cyklostezky",
     "obrazek": "propojene-mesto-kresba.png",
-    "alt": "Vizualizace propojeného města",
+    "alt": "Vizualizace propojených chodníků a cyklostezek",
     "text": "Citlivě propojíme lesopark s dalšími částmi města chodníky a bezpečnou infrastrukturou pro pěší. Prvním projektem může být spojení lesoparku a SPŠ na Kanadě."
   },
   {
@@ -49,10 +50,10 @@ export const projekty = [
   {
     "cislo": "06",
     "slug": "coworking",
-    "nazev": "Coworking i kanceláře",
+    "nazev": "Sdílené kanceláře",
     "obrazek": "coworking-kresba.png",
-    "alt": "Vizualizace coworkingu a startovacích kanceláří",
-    "text": "Práce se mění — víc lidí podniká, pracuje na dálku nebo obojí kombinuje. Podpoříme podnikavost přímo v Třinci: coworking, startovací kanceláře a moderní prostory."
+    "alt": "Vizualizace sdílených a startovacích kanceláří",
+    "text": "Třinec má ideální pozici stát se lokálním centrem podnikavosti. Budeme aktivně podporovat vznik startovacích kanceláří pro nové firmy i nových kancelářských prostor — co třeba přímo vedle magistrátu?"
   },
   {
     "cislo": "07",
@@ -61,5 +62,13 @@ export const projekty = [
     "obrazek": "dps-kresba.png",
     "alt": "Vizualizace moderního domu s pečovatelskou službou",
     "text": "Postavíme moderní dům, který umožní seniorům zůstat v Třinci i v době, kdy potřebují každodenní podporu — bezbariérové byty, dostupná péče, společné prostory."
+  },
+  {
+    "cislo": "08",
+    "slug": "centrum-senioru",
+    "nazev": "Nové centrum aktivních seniorů",
+    "obrazek": "centrum-senioru.jpg",
+    "alt": "Vizualizace nového centra aktivních seniorů",
+    "text": "Na Smetanově otevřeme centrum, kde se senioři potkají, vzdělají i zasportují. Aktivní stáří v Třinci — mezi lidmi, ne doma o samotě."
   }
 ];
