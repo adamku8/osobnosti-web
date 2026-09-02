@@ -56,8 +56,8 @@ export const projekty = [
     "cislo": "06",
     "slug": "coworking",
     "nazev": "Nové sdílené kanceláře",
-    "obrazek": "coworking-kresba.png",
-    "alt": "Vizualizace nových sdílených a startovacích kanceláří",
+    "obrazek": "coworking-vizualizace.webp",
+    "alt": "Architektonická vizualizace nové budovy s kancelářskými prostory a parkovacím domem u magistrátu",
     "text": "Třinec má ideální pozici stát se lokálním centrem podnikavosti. Budeme aktivně podporovat vznik startovacích kanceláří pro nové firmy i nových kancelářských prostor — co třeba přímo vedle magistrátu?"
   },
   {
