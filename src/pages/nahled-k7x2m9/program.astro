@@ -13,6 +13,12 @@ const vizeProOblast = o => o.projekty.map(s => projekty.find(p => p.slug === s))
 const oblastProProjekt = (slug) => oblasti.find(o => o.projekty.includes(slug)) ?? null;
 const nezarazene = projekty.filter(p => !oblastProProjekt(p.slug));
 
+// „Nová / Nové / Nový" na začátku názvu jde do červeného boxu (.hl) jako v nadpisech.
+const rozdelNove = (nazev) => {
+  const m = nazev.match(/^(Nov[áéý])\s+(.+)$/);
+  return m ? { nove: m[1], zbytek: m[2] } : { nove: null, zbytek: nazev };
+};
+
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 ---
 <Base
@@ -81,7 +87,10 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
               <div class="proj-body">
                 <p class="proj-head">
                   <span class="proj-cislo">{p.cislo}</span>
-                  <span class="proj-nazev">{p.nazev}</span>
+                  <span class="proj-nazev">
+                    {rozdelNove(p.nazev).nove && <span class="hl">{rozdelNove(p.nazev).nove}</span>}
+                    {rozdelNove(p.nazev).nove ? ' ' : ''}{rozdelNove(p.nazev).zbytek}
+                  </span>
                   {o
                     ? <a class="proj-tag" href={`#oblast-${o.cislo}`}>{o.klic}</a>
                     : <span class="proj-tag proj-tag-chybi">bez oblasti</span>}
