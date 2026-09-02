@@ -46,7 +46,7 @@ export const projekty = [
     "nazev": "Nový Javorový 2.0",
     "obrazek": "javorovy-kresba.png",
     "alt": "Vizualizace nového Javorového 2.0",
-    "text": "Javorový je vstupní brána Beskyd. Modernizujeme zázemí — lanovku, vyhlídku i služby na vrcholu — aby hora žila celý rok, pro rodiny i sportovce.",
+    "text": "Máme vizi, jak modernizovat areál Javorový, aby získal širší celoroční využití. Chceme rekonstruovat chatu a vytvořit oddělené zázemí pro spolky i prostor pro kulturní či sportovní akce.",
     "odkaz": {
       "href": "javorovy.html",
       "text": "Celá vize Javorového →"
