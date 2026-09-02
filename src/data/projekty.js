@@ -1,7 +1,9 @@
 // Jediný zdroj pravdy pro projekty (vize). Pořadí odpovídá oblastem v oblasti.js.
-// Projekt „Nové centrum aktivních seniorů" (08) se vrátil mezi projekty (2. 9. 2026)
+// Projekt „Nové centrum aktivních seniorů" (07) se vrátil mezi projekty (2. 9. 2026)
 // — v oblasti Zdravý Třinec zůstává i jako závazek („otevřeme Centrum pro aktivní
-// seniory na Smetanově").
+// seniory na Smetanově"). Projekt „Moderní dům s pečovatelskou službou" byl z rozpisu
+// vyřazen (2. 9. 2026); v závazcích oblasti zůstává „více míst v domech s pečovatelskou
+// službou".
 export const projekty = [
   {
     "cislo": "01",
@@ -57,14 +59,6 @@ export const projekty = [
   },
   {
     "cislo": "07",
-    "slug": "dps",
-    "nazev": "Moderní dům s pečovatelskou službou",
-    "obrazek": "dps-kresba.png",
-    "alt": "Vizualizace moderního domu s pečovatelskou službou",
-    "text": "Postavíme moderní dům, který umožní seniorům zůstat v Třinci i v době, kdy potřebují každodenní podporu — bezbariérové byty, dostupná péče, společné prostory."
-  },
-  {
-    "cislo": "08",
     "slug": "centrum-senioru",
     "nazev": "Nové centrum aktivních seniorů",
     "obrazek": "centrum-senioru.jpg",
