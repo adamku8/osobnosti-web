@@ -8,14 +8,15 @@ export const projekty = [
   {
     "cislo": "01",
     "slug": "propojene-mesto",
-    "nazev": "Nové propojené chodníky i cyklostezky",
+    "nazev": "Nové chodníky i cyklostezky",
     "obrazek": "propojene-mesto-kresba.png",
-    "alt": "Vizualizace nových propojených chodníků a cyklostezek",
+    "alt": "Vizualizace nových chodníků a cyklostezek",
     "text": "Investujeme desítky milionů do propojení centra a příměstských částí bezpečnou infrastrukturou pro pěší i cyklodopravu. Prvním projektem může být spojení lesoparku Kanady nebo Terasy a Oldřichovic."
   },
   {
     "cislo": "02",
     "slug": "letni-scena",
+    "tag": false,
     "nazev": "Nová letní scéna",
     "obrazek": "letni-scena-kresba.png",
     "alt": "Vizualizace nové letní scény",
@@ -32,6 +33,7 @@ export const projekty = [
   {
     "cislo": "04",
     "slug": "hriste-knihovna",
+    "tag": false,
     "nazev": "Nové dětské hřiště u knihovny",
     "obrazek": "hriste-knihovna-kresba.png",
     "alt": "Vizualizace nového dětského hřiště u knihovny",
@@ -40,9 +42,10 @@ export const projekty = [
   {
     "cislo": "05",
     "slug": "javorovy",
-    "nazev": "(Staro)nový Javorový 2.0",
+    "tag": false,
+    "nazev": "Nový Javorový 2.0",
     "obrazek": "javorovy-kresba.png",
-    "alt": "Vizualizace Javorový 2.0",
+    "alt": "Vizualizace nového Javorového 2.0",
     "text": "Javorový je vstupní brána Beskyd. Modernizujeme zázemí — lanovku, vyhlídku i služby na vrcholu — aby hora žila celý rok, pro rodiny i sportovce.",
     "odkaz": {
       "href": "javorovy.html",

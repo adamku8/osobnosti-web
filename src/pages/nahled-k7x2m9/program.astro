@@ -14,13 +14,9 @@ const oblastProProjekt = (slug) => oblasti.find(o => o.projekty.includes(slug)) 
 const nezarazene = projekty.filter(p => !oblastProProjekt(p.slug));
 
 // „Nová / Nové / Nový" na začátku názvu jde do červeného boxu (.hl) jako v nadpisech.
-// U vtípku „(Staro)nový" se předpona vysází menším šedým „staro" bez závorek,
-// červený je jen „nový".
 const rozdelNove = (nazev) => {
-  const m = nazev.match(/^(\(Staro\))?(nov[áéý]|Nov[áéý])\s+(.+)$/);
-  return m
-    ? { pred: m[1] ? 'staro' : '', nove: m[2], zbytek: m[3] }
-    : { pred: '', nove: null, zbytek: nazev };
+  const m = nazev.match(/^(Nov[áéý])\s+(.+)$/);
+  return m ? { nove: m[1], zbytek: m[2] } : { nove: null, zbytek: nazev };
 };
 
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
@@ -92,10 +88,10 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
                 <p class="proj-head">
                   <span class="proj-cislo">{p.cislo}</span>
                   <span class="proj-nazev">
-                    {rozdelNove(p.nazev).pred && <span class="proj-pred">{rozdelNove(p.nazev).pred}</span>}{rozdelNove(p.nazev).nove && <span class="hl">{rozdelNove(p.nazev).nove}</span>}
+                    {rozdelNove(p.nazev).nove && <span class="hl">{rozdelNove(p.nazev).nove}</span>}
                     {rozdelNove(p.nazev).nove ? ' ' : ''}{rozdelNove(p.nazev).zbytek}
                   </span>
-                  {o
+                  {p.tag === false ? null : o
                     ? <a class="proj-tag" href={`#oblast-${o.cislo}`}>{o.klic}</a>
                     : <span class="proj-tag proj-tag-chybi">bez oblasti</span>}
                 </p>
