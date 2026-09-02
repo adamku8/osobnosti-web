@@ -1527,7 +1527,9 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   color: var(--text-muted);
   text-transform: lowercase;
   letter-spacing: 0.02em;
-  margin-right: 1px;
+  /* .hl si stahuje levý padding záporným marginem (-3.6 px) — bez tohohle
+     by červená plocha začínala ještě pod koncem šedého „staro". */
+  margin-right: 5px;
 }
 .proj-tag {
   font-family: var(--font-display);
