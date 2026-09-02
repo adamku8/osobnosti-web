@@ -1486,16 +1486,19 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 
 /* ---------- Rozpis projektů (náhled programu) ---------- */
 .projekty-rozpis { border-top: 1px solid var(--border); }
-.proj-list { list-style: none; margin: var(--s-40) 0 0; padding: 0; }
+.proj-list {
+  list-style: none;
+  margin: var(--s-40) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-96);
+}
 .proj-row {
   display: grid;
   grid-template-columns: minmax(260px, 340px) 1fr;
-  gap: var(--s-32);
-  padding: var(--s-32) 0;
-  border-top: 1px solid var(--border);
+  gap: var(--s-40);
   align-items: start;
 }
-.proj-row:first-child { border-top: 0; }
 /* Kresby jsou 3:2 — držíme jejich vlastní poměr a necháme je celé,
    dřívější 16/9 + cover je ořezávalo shora i zdola. */
 .proj-foto img {
@@ -1541,6 +1544,7 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
 .proj-body .people-more { display: inline-block; margin-top: var(--s-8); }
 
 @media (max-width: 700px) {
-  .proj-row { grid-template-columns: 1fr; gap: var(--s-16); padding: var(--s-24) 0; }
+  .proj-list { gap: var(--s-64); }
+  .proj-row { grid-template-columns: 1fr; gap: var(--s-16); }
   .proj-nazev { font-size: 18px; }
 }
