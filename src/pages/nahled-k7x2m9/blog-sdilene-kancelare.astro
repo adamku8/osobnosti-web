@@ -1,0 +1,638 @@
+---
+import Base from '../../layouts/Base.astro';
+import { u } from '../../lib/url.js';
+
+// DRAFT v0.1 — článek o sdílených kancelářích a podnikavosti.
+// Textový zdroj: WEB/blog-sdilene-kancelare-DRAFT.md
+// Stránka žije zatím jen ve skrytém náhledu (nahled-k7x2m9) — na veřejný web
+// se přesune až po vyřešení bodů v draft-note níže (a přepnutí draft na false).
+const draft = true;
+
+const obsah = [
+  { id: 'firmy',    num: '01', title: 'Umíme velké firmy' },
+  { id: 'plan',     num: '02', title: 'Město to má ve strategii' },
+  { id: 'prichozi', num: '03', title: 'Kdo tu nikoho nezná' },
+  { id: 'hustota',  num: '04', title: 'Nejde o stoly' },
+  { id: 'skoly',    num: '05', title: 'Podnikavost se dá učit' },
+  { id: 'kroky',    num: '06', title: 'Pět kroků radnice' },
+  { id: 'vysledek', num: '07', title: 'Co z toho město má' },
+];
+---
+<Base
+  title="Třinec potřebuje místo, kde se potkají lidé s nápady | Osobnosti pro Třinec"
+  description="Železárny a Walmark vozí zboží do desítek zemí. Chybí ale místo, kde firmy začínají. Sdílené kanceláře, podnikavost a co s tím může udělat radnice."
+  path="nahled-k7x2m9/blog-sdilene-kancelare.html"
+  active=""
+  noindex={true}
+>
+  <style is:inline>
+    /* ==========================================================
+       Sazba článku — standardní „content grid" longformu.
+       Parametry z změřených computed styles živých článků
+       Guardianu, Atlanticu, Verge a Respektu (srpen 2026):
+         · sloupec 620–790 px, míra 60–78 znaků → bereme horní okraj
+           pásma: 800 px / 20 px ≈ 72 znaků (Smashing 20,4 px, Atlantic 22 px);
+           strop je ~78 znaků na řádek — šířku zvyšuj jen spolu s písmem
+         · písmo 17–22 px, řádkování 1,4–1,5
+         · zarovnání vlevo — do bloku sází 0 ze 6
+         · bez automatického dělení slov — 0 ze 6
+         · žádný trvalý boční sloupec vedle textu — 0 ze 6
+       JEDNA čtecí hrana: text, data, tabulky i grafy mají shodnou šířku.
+       Sloupec prolomí jedině fotka přes celou šířku — to je zavedená
+       výjimka, kterou oko čte jako záměr, ne jako uskočení.
+       ========================================================== */
+
+    /* --- Content grid ---------------------------------------- */
+    .art {
+      display: grid;
+      grid-template-columns:
+        [full-start] minmax(var(--s-24), 1fr)
+        [wide-start] minmax(0, 120px)
+        [text-start] min(800px, 100% - 48px) [text-end]
+        minmax(0, 120px) [wide-end]
+        minmax(var(--s-24), 1fr) [full-end];
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .art > *     { grid-column: text-start / text-end; }
+    .art > .wide { grid-column: wide-start / wide-end; }
+    .art > .full { grid-column: full-start / full-end; }
+
+    .art-section {
+      padding: var(--s-64) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    /* --- Cover ------------------------------------------------ */
+    .art-cover {
+      position: relative;
+      min-height: 560px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .art-cover-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center 60%;
+      filter: saturate(0.5) contrast(1.06);
+    }
+    .art-cover-shade {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(20,24,32,0.30) 0%, rgba(20,24,32,0.46) 45%, rgba(20,24,32,0.90) 100%),
+        linear-gradient(90deg, rgba(20,24,32,0.55) 0%, rgba(20,24,32,0.05) 70%);
+    }
+    .art-cover .container { position: relative; z-index: 2; padding-top: 150px; padding-bottom: var(--s-40); }
+    .art-cover h1 { color: #fff; max-width: 15ch; }
+    .art-cover-kicker {
+      font-family: var(--font-display); font-weight: 700; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.80); margin-bottom: var(--s-16);
+      padding-bottom: var(--s-8); border-bottom: 1px solid rgba(255,255,255,0.25);
+      display: inline-block;
+    }
+    .art-cover-lead {
+      color: rgba(255,255,255,0.94); font-size: 20px; line-height: 1.5;
+      max-width: 52ch; margin-top: var(--s-24);
+    }
+    .art-cover-meta { margin-top: var(--s-16); font-size: 13px; letter-spacing: 0.04em; color: rgba(255,255,255,0.65); }
+
+    /* --- Text ------------------------------------------------- */
+    .art p {
+      font-size: 20px;
+      line-height: 1.6;   /* delší řádek chce víc vedení */
+      color: var(--text-secondary);
+      margin-bottom: var(--s-24);
+    }
+
+    /* Blokové zarovnání — jen hlavní odstavce a jen tam, kde je míra
+       dost dlouhá. Bez dělení slov by v češtině vznikaly řeky, proto
+       je hyphens:auto podmínkou, ne ozdobou (stránka má lang="cs").
+       Krátké texty (popisky, poznámky, tabulky, body programu)
+       zůstávají vlevo — na 40–50 znacích blok rozhazuje mezery. */
+    .art > p,
+    .art > .art-lead {
+      text-align: justify;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphenate-limit-chars: 6 3 3;  /* dělit slova od 6 znaků, min. 3+3 */
+      text-wrap: pretty;             /* hlídá osamocené slovo na konci */
+    }
+    .art p:last-child { margin-bottom: 0; }
+    .art p strong { color: var(--text); font-weight: 600; }
+    .art h2 { margin-bottom: var(--s-24); font-size: clamp(26px, 3vw, 34px); }
+    .art-lead { font-size: 24px !important; line-height: 1.45 !important; color: var(--text) !important; }
+    .art-dropcap::first-letter {
+      float: left; font-family: var(--font-display); font-weight: 800;
+      font-size: 72px; line-height: 0.78; margin: 8px 12px 0 0; color: var(--anthracite);
+    }
+    .art-kicker {
+      display: flex; align-items: baseline; gap: var(--s-16);
+      margin-bottom: var(--s-16) !important; padding-bottom: var(--s-8);
+      border-bottom: 1px solid var(--anthracite);
+      font-family: var(--font-display); font-weight: 600; font-size: 12px !important;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted) !important;
+      line-height: 1.2 !important;
+    }
+    .art-kicker span { font-weight: 800; color: var(--signal-blue); letter-spacing: 0.1em; }
+    .art-sub {
+      font-family: var(--font-display); font-weight: 600; font-size: 15px;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--text);
+      margin: var(--s-40) 0 var(--s-8) !important;
+    }
+
+    /* --- Poznámka redakce ------------------------------------- */
+    .art-note {
+      border-left: 2px solid var(--signal-blue);
+      padding-left: var(--s-24);
+      margin: var(--s-40) 0;
+    }
+    .art-note-label {
+      font-family: var(--font-display); font-weight: 700; font-size: 11px !important;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--signal-blue) !important;
+      margin-bottom: var(--s-8) !important;
+    }
+    .art-note p { font-size: 15px !important; line-height: 1.5 !important; color: var(--text-muted) !important; margin-bottom: var(--s-8); }
+
+    /* --- Datová tabulka --------------------------------------- */
+    .dtab { width: 100%; border-collapse: collapse; margin: var(--s-40) 0; }
+    .dtab td { border-bottom: 1px solid var(--border); padding: 11px 0; vertical-align: baseline; }
+    .dtab tr:last-child td { border-bottom: none; }
+    .dtab .n {
+      font-family: var(--font-display); font-weight: 800; font-size: 20px; line-height: 1.15;
+      color: var(--signal-blue); white-space: nowrap; padding-right: var(--s-24); width: 1%;
+    }
+    .dtab .t { font-size: 15px; line-height: 1.45; color: var(--text-secondary); }
+    .dtab caption {
+      caption-side: top; text-align: left;
+      font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      color: var(--text); padding-bottom: var(--s-8);
+      border-bottom: 1px solid var(--anthracite);
+    }
+    .dtab caption b { color: var(--text-muted); font-weight: 400; }
+
+    /* --- Klíčová čísla ---------------------------------------- */
+    .art-facts {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-16);
+      margin: var(--s-40) 0; padding: var(--s-24) 0;
+      border-top: 1px solid var(--anthracite); border-bottom: 1px solid var(--border);
+    }
+    .art-fact-n { font-family: var(--font-display); font-weight: 800; font-size: 23px; color: var(--signal-blue); line-height: 1; }
+    .art-fact-t { font-size: 13px; line-height: 1.4; color: var(--text-muted); margin-top: var(--s-8); }
+
+    /* --- Pull quote ------------------------------------------- */
+    .art-pull { margin: var(--s-64) 0; padding: var(--s-24) 0; border-top: 2px solid var(--anthracite); border-bottom: 1px solid var(--border); }
+    .art-pull p {
+      font-family: var(--font-display); font-weight: 800; text-transform: uppercase;
+      font-size: clamp(22px, 2.2vw, 29px); line-height: 1.06; color: var(--text);
+      margin: 0 !important;
+    }
+    .art-pull span { color: var(--signal-blue); }
+
+    /* --- Velké číslo ------------------------------------------ */
+    .art-band {
+      display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--s-40);
+      align-items: center; padding: var(--s-40) 0;
+      border-top: 2px solid var(--anthracite); border-bottom: 2px solid var(--anthracite);
+    }
+    .art-bignum {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(56px, 7vw, 92px); line-height: 0.84;
+      color: var(--brand-red); letter-spacing: -0.03em; white-space: nowrap;
+    }
+    .art-band h2 { font-size: 22px !important; margin-bottom: var(--s-8); }
+    .art-band p { font-size: 15px !important; color: var(--text-muted) !important; margin: 0 !important; }
+
+    /* --- Sloupcový graf --------------------------------------- */
+    .art-bars { display: flex; align-items: flex-end; gap: var(--s-40); margin: var(--s-40) 0; }
+    .art-barcol { display: flex; flex-direction: column; align-items: flex-start; }
+    .art-barnum { font-family: var(--font-display); font-weight: 800; font-size: 26px; color: var(--signal-blue); margin-bottom: var(--s-4); white-space: nowrap; }
+    .art-bar { width: 112px; background: var(--signal-blue); }
+    .art-bar--a { height: 140px; }
+    .art-bar--b { height: 84px; }
+    .art-baryear { font-family: var(--font-display); font-weight: 600; font-size: 16px; margin-top: var(--s-8); padding-top: var(--s-4); border-top: 1px solid var(--border); width: 112px; }
+    .art-barnote { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .art-delta { align-self: flex-end; padding-bottom: 54px; font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; white-space: nowrap; }
+    .art-delta small { display: block; font-weight: 600; font-size: 12px; color: var(--text-muted); margin-top: var(--s-4); white-space: normal; max-width: 16ch; }
+
+    /* --- Instagram reels -------------------------------------- */
+    .art-reels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-24);
+      margin: var(--s-40) 0;
+      align-items: start;
+    }
+    .art-reels blockquote.instagram-media { margin: 0 !important; min-width: 0 !important; width: 100% !important; }
+    @media (max-width: 700px) { .art-reels { grid-template-columns: 1fr; } }
+
+    /* --- Obrázky ---------------------------------------------- */
+    .art-fig { margin: var(--s-40) 0; }
+    .art-fig img { width: 100%; height: auto; display: block; }
+    .art-cap { font-size: 13px; line-height: 1.45; color: var(--text-muted); margin-top: var(--s-8); }
+
+    /* --- Štítky akcí ------------------------------------------ */
+    .art-tags { display: flex; flex-wrap: wrap; gap: var(--s-8); margin: var(--s-24) 0 var(--s-40); }
+    .art-tag { border: 1px solid var(--border); border-radius: 999px; padding: 7px 16px; font-size: 14px; color: var(--text-muted); }
+    .art-tag b { color: var(--text); font-weight: 600; }
+
+    /* --- Body programu ---------------------------------------- */
+    .art-steps { margin: var(--s-40) 0; border-top: 1px solid var(--anthracite); }
+    .art-step { display: grid; grid-template-columns: 44px 1fr; column-gap: var(--s-24); padding: var(--s-24) 0; border-bottom: 1px solid var(--border); }
+    .art-step-num { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--signal-blue); line-height: 1.6; }
+    .art-step h3 { font-size: 18px; margin-bottom: var(--s-8); }
+    .art-step p { font-size: 16px !important; line-height: 1.5 !important; margin: 0 !important; }
+
+    /* --- Co už běží (promise rows) ----------------------------- */
+    .art-done { margin-top: var(--s-40); border-top: 1px solid var(--anthracite); }
+    .art-done-row { display: grid; grid-template-columns: 44px 1fr; column-gap: var(--s-24); padding: var(--s-24) 0; border-bottom: 1px solid var(--border); }
+    .art-check { width: 26px; height: 26px; background: var(--brand-red); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 16px; margin-top: 4px; }
+    .art-done-row h3 { font-size: 18px; margin-bottom: var(--s-8); }
+    .art-done-row p { font-size: 16px !important; line-height: 1.5 !important; margin: 0 !important; }
+
+    /* --- Obsah ------------------------------------------------ */
+    .art-toc { padding: var(--s-40) 0 0; }
+    .art-toc-list { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: var(--s-24); border-top: 1px solid var(--anthracite); }
+    .art-toc-list a {
+      display: block; padding: var(--s-16) 0; border-bottom: 1px solid var(--border);
+      text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 13px;
+      text-transform: uppercase; letter-spacing: 0.04em; color: var(--text);
+      transition: color 240ms var(--ease-ui);
+    }
+    .art-toc-list a:hover { color: var(--brand-red); }
+    .art-toc-list .tn { display: block; font-size: 11px; color: var(--signal-blue); letter-spacing: 0.1em; margin-bottom: 2px; }
+
+    /* --- Kolofon ---------------------------------------------- */
+    .art-colophon { padding: var(--s-40) 0 var(--s-64); border-top: 2px solid var(--anthracite); }
+    .art-colophon-cols { columns: 2; column-gap: var(--s-40); }
+    .art-colophon p { font-size: 13px !important; line-height: 1.55 !important; color: var(--text-muted) !important; margin-bottom: var(--s-16); break-inside: avoid; }
+    .art-colophon a { color: var(--signal-blue); text-decoration: none; }
+    .art-colophon a:hover { text-decoration: underline; }
+
+    /* --- Draft box -------------------------------------------- */
+    .draft-note { border: 1px dashed #b58900; background: #fffdf5; padding: var(--s-16) var(--s-24); margin-bottom: var(--s-40); font-size: 14px; line-height: 1.55; color: #6b5400; }
+    .draft-note ul { margin: var(--s-4) 0 0 var(--s-24); }
+
+    /* ================= Responsivita ================= */
+    @media (max-width: 900px) {
+      .art-facts { grid-template-columns: repeat(2, 1fr); }
+      .art-toc-list { grid-template-columns: 1fr 1fr; }
+      .art-band { grid-template-columns: 1fr; row-gap: var(--s-16); }
+      .art-colophon-cols { columns: 1; }
+      .art-cover { min-height: 440px; }
+      .art-cover .container { padding-top: 110px; }
+    }
+    @media (max-width: 560px) {
+      .art-toc-list { grid-template-columns: 1fr; }
+      .art-facts { grid-template-columns: 1fr; gap: var(--s-16); }
+      .art-bars { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-16); align-items: end; }
+      .art-bar, .art-baryear { width: 100%; }
+      .art-delta { grid-column: 1 / 3; order: 3; align-self: start; padding: var(--s-16) 0 0; border-top: 1px solid var(--border); }
+      .art-delta small { max-width: none; }
+      .art-step { grid-template-columns: 32px 1fr; column-gap: var(--s-16); }
+      .art p { font-size: 17px; }
+    }
+    /* Na úzké obrazovce má řádek jen ~40 znaků — blok by roztrhal mezery.
+       Pod 700 px se proto vracíme k zarovnání vlevo. */
+    @media (max-width: 700px) {
+      .art > p,
+      .art > .art-lead { text-align: left; hyphens: manual; }
+    }
+  </style>
+
+  <style is:inline>
+    /* Programová deska — závazky z volebního programu uvnitř článku. */
+    .art-promise {
+      margin: var(--s-64) 0;
+      padding: var(--s-24);
+      border-left: 3px solid var(--brand-red);
+      background: rgba(50, 50, 50, 0.03);
+    }
+    .art-promise .art-note-label { color: var(--anthracite); }
+    .art-promise ul { margin: var(--s-16) 0 0 var(--s-24); }
+    .art-promise li { font-size: 16px; line-height: 1.55; margin-bottom: var(--s-8); }
+    .art-quote { margin: var(--s-40) 0; padding-left: var(--s-24); border-left: 2px solid var(--signal-blue); }
+    .art-quote p { font-size: 19px !important; line-height: 1.5 !important; font-style: italic; margin: 0 !important; }
+    .art-quote cite { display: block; margin-top: var(--s-8); font-size: 13px; font-style: normal; color: var(--text-muted); }
+  </style>
+
+  <!-- ================= COVER ================= -->
+  <section class="art-cover">
+    <img class="art-cover-bg" src={u('assets/img/projekty/coworking.jpg')} alt="Sdílená kancelář — lidé pracující u společného stolu">
+    <div class="art-cover-shade"></div>
+    <div class="container">
+      <p class="art-cover-kicker">Blog · Osobnosti pro Třinec</p>
+      <h1>Třinec potřebuje místo,<br><span class="hl">kde se potkají lidé s nápady.</span></h1>
+      <p class="art-cover-lead">
+        Třinec umí velké firmy. Železárny, Walmark — odsud se vozí zboží do
+        desítek zemí. Co Třinec neumí, je začátek: místo, kde si člověk
+        s nápadem sedne, potká někoho dalšího a za dva roky z toho je firma
+        o pěti lidech.
+      </p>
+      <p class="art-cover-meta">Adam Kurzok · září 2026 · čtení na 6 minut</p>
+    </div>
+  </section>
+
+  <!-- ================= OBSAH ================= -->
+  <section class="art art-toc">
+    {draft && (
+      <div class="draft-note">
+        <strong>PRACOVNÍ VERZE v0.1 — než půjde na veřejný web, vyřešit:</strong>
+        <ul>
+          <li><b>Jména třineckých firem</b> do sekce 01 — zatím jen TŽ a Walmark. Doplnit 3–5 dalších (výroba / služby / něco mladého). Nevymýšlím je.</li>
+          <li><b>„Cirk aréna"</b> — potvrdit přesný název a stav projektu, než ho v sekci 05 pojmenujeme.</li>
+          <li><b>Expati a partneři navrátilců</b> (sekce 03) — buď doplnit číslo (cizinci s pobytem v Třinci), nebo ponechat jako pozorování bez statistiky.</li>
+          <li><b>Údaje o Walmarku</b> (56 trhů, největší závod skupiny Stada) — ověřit v aktuální výroční zprávě, čísla se mění.</li>
+          <li><b>Grafika</b> — cover je zatím vizualizace coworkingu z programu; zvážit vlastní fotku a desku s citací ze strategického plánu.</li>
+          <li>Sekce 06 (pět kroků) je programově krytá oblastí 03 „Odvážný Třinec" — přesto ať ji projde lídr, hlavně bod o městských prostorách.</li>
+        </ul>
+      </div>
+    )}
+    <nav class="art-toc-list" aria-label="Obsah článku">
+      {obsah.map(s => (
+        <a href={`#${s.id}`}><span class="tn">{s.num}</span>{s.title}</a>
+      ))}
+    </nav>
+  </section>
+
+  <!-- ================= 01 · FIRMY ================= -->
+  <section class="art art-section" id="firmy">
+    <p class="art-kicker"><span>01</span>Co už tady je</p>
+    <h2>Umíme velké firmy. Ale ty tady nezačaly včera.</h2>
+    <p class="art-lead art-dropcap">
+      Na město o pětatřiceti tisících obyvatelích má Třinec pozoruhodnou
+      bilanci. Třinecké železárny drží region přes sto třicet let.
+    </p>
+    <p>
+      Walmark tu vznikl před necelými třiceti lety. Dnes je největším
+      výrobním závodem doplňků stravy ve skupině Stada a dodává na{' '}
+      <strong>56 trhů</strong>. Z Třince do 56 zemí. To není maloměstský
+      příběh.
+    </p>
+    <p>
+      <em>[DOPLNIT: 3–5 dalších třineckých firem — jména až po ověření.]</em>
+    </p>
+    <p>
+      Jenže všechny tyhle firmy mají jedno společné: <strong>začaly dávno</strong>.
+      Otázka pro příští čtyři roky nezní, jestli je udržíme. Zní, kde
+      v Třinci vzniká ta příští.
+    </p>
+  </section>
+
+  <!-- ================= 02 · STRATEGICKÝ PLÁN ================= -->
+  <section class="art art-section" id="plan">
+    <p class="art-kicker"><span>02</span>Není to nápad do kampaně</p>
+    <h2>Město to ví. Má to napsané ve strategickém plánu.</h2>
+    <p>
+      Stojí to černé na bílém ve <strong>Strategickém plánu rozvoje města
+      Třinec 2030+</strong>, který schválilo zastupitelstvo. V analytické
+      části se píše přímo:
+    </p>
+
+    <div class="art-quote">
+      <p>
+        „Kromě Třineckých železáren se ve městě nachází další úspěšné
+        společnosti a startupy, kterým se podařilo proniknout i na
+        mezinárodní trh, často se o nich ale neví."
+      </p>
+      <cite>Strategický plán rozvoje města Třinec 2030+, vazba na analytickou část, cíl 2.2</cite>
+    </div>
+
+    <p>A hned pod tím: <em>„Chybí podpůrné služby pro podnikání. Obyvatelé by ocenili větší nabídku podpůrných služeb pro podnikání ze strany města."</em></p>
+    <p>
+      Plán z toho dělá <strong>strategický cíl 2.2 — Být atraktivním městem
+      pro nové a moderní firmy, rozvíjet podnikatelské prostředí
+      a podnikavost.</strong> Mezi typové aktivity patří „podpora zformování
+      aktivní komunity podnikavých lidí a podnikatelů" a „příprava aktivit
+      a programů vedoucích k podpoře podnikavého myšlení u ekonomicky aktivní
+      části obyvatelstva, studentů, ale i žáků na všech stupních škol".
+    </p>
+
+    <table class="dtab">
+      <caption>Slovo <b>coworking</b> je ve strategickém plánu dvakrát</caption>
+      <tbody>
+        <tr><td class="n">Cíl 1.4</td><td class="t">infrastruktura, kterou má město zajistit: „prostory pro neformální setkávání rodin a mládeže, <b>coworky, studovny</b>"</td></tr>
+        <tr><td class="n">Cíl 2.3</td><td class="t">nástroj proti odlivu lidí: „vytváření lepších podmínek pro vzdálenou a hybridní práci … (<b>podpora vzniku center sdílených služeb a coworkingu</b>)"</td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      Vize plánu jde ještě dál: <em>„Podnikatelské inkubátory a coworkingové
+      prostory poskytují začínajícím firmám potřebné zázemí, mentoring
+      a přístup k investicím."</em>
+    </p>
+
+    <div class="art-pull">
+      <p>
+        Město má cíl, formulaci i odůvodnění.
+        Chybí <span>adresa</span> a člověk, který to otevře.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 03 · PŘÍCHOZÍ ================= -->
+  <section class="art art-section" id="prichozi">
+    <p class="art-kicker"><span>03</span>Pohyb opačným směrem</p>
+    <h2>Do Třince se lidé i vracejí. Jen tu nikoho neznají.</h2>
+    <p>
+      O odlivu z Třince jsme psali dost. Je tu ale i pohyb opačným směrem,
+      o kterém se skoro nemluví.
+    </p>
+    <p>
+      Do Třince přicházejí lidé za prací v železárnách a v dalších firmách —
+      část z ciziny. Vracejí se Třinečané po letech v Praze, Brně nebo
+      v zahraničí a přivážejí partnerku či partnera, kteří tu v životě
+      nebyli. Přibývá lidí, kteří tady bydlí a pracují pro firmu se sídlem
+      o pět set kilometrů dál.
+    </p>
+    <p>
+      Všichni tihle lidé mají stejný problém. Ne bydlení, ne práci.
+      {' '}<strong>Neznají tu nikoho.</strong>
+    </p>
+    <p>
+      Sdílená kancelář tenhle problém řeší mimochodem — tím, že člověk chodí
+      každý den na stejné místo mezi stejné lidi. Je to nejlevnější
+      integrační nástroj, jaký město má k dispozici. A pro člověka, který
+      pracuje z kuchyně, je to rozdíl mezi „bydlím v Třinci" a „žiju
+      v Třinci".
+    </p>
+
+    <div class="art-note">
+      <p class="art-note-label">Poctivě k číslům</p>
+      <p>
+        Tenhle odstavec stojí na zkušenosti, ne na statistice. Údaj o počtu
+        cizinců s pobytem v Třinci do článku doplníme, nebo ho necháme jako
+        pozorování — ale nebudeme ho vydávat za číslo.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= 04 · HUSTOTA ================= -->
+  <section class="art art-section" id="hustota">
+    <p class="art-kicker"><span>04</span>Proč to funguje</p>
+    <h2>Nejde o stoly. Jde o to, kdo u nich sedí vedle sebe.</h2>
+    <p>
+      Sdílená kancelář sama o sobě žádnou firmu nezaloží. Wi-Fi a kávovar
+      má dnes každý.
+    </p>
+    <p>
+      Co dělá rozdíl, je <strong>hustota potkávání</strong>. Grafik, který
+      u oběda potká člověka s e-shopem. Programátor, který se doslechne, že
+      železárny hledají dodavatele na věc, kterou umí. Student průmyslovky,
+      který poprvé vidí, že podnikání není abstraktní pojem, ale chlap
+      o dva stoly dál.
+    </p>
+    <p>
+      Přesně tohle strategický plán popisuje slovy „propojovat podnikavé
+      lidi, inovativní nápady a myšlenky". Jenže potkávání se nedá naplánovat
+      na papíře. Musí mít adresu, otevírací dobu a někoho, kdo ho moderuje.
+    </p>
+    <p>
+      Proto k prostoru patří i program: pravidelná setkání podnikatelů,
+      hosté zvenčí, workshopy pro školy. To všechno plán jmenuje — jako
+      „podnikatelský klub" a „setkání s hosty ze světa businessu".
+    </p>
+
+    <figure class="art-fig">
+      <img src={u('assets/img/projekty/coworking-kresba.png')} alt="Vizualizace nových sdílených a startovacích kanceláří v Třinci">
+      <figcaption class="art-cap">Projekt „Nové sdílené kanceláře" z našeho programu. Co třeba přímo vedle magistrátu?</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= 05 · ŠKOLY ================= -->
+  <section class="art art-section" id="skoly">
+    <p class="art-kicker"><span>05</span>Odkud se berou zakladatelé</p>
+    <h2>Podnikavost se dá učit. Nejlíp tam, kde se dělá.</h2>
+    <p>
+      Ve strategickém cíli 2.4 stojí závazek „podpora programů nebo aktivit
+      vedoucích k získávání a prohlubování podnikatelských kompetencí žáků
+      a studentů".
+    </p>
+    <p>
+      V praxi to znamená jediné: dostat žáky a studenty z lavice mezi lidi,
+      kteří něco dělají. Ne přednáška o podnikání. Odpoledne strávené tam,
+      kde se podniká.
+    </p>
+    <p>
+      Třinec má k tomu dvě věci, které jinde nemají.{' '}
+      <strong>Ekosystém Třineckých železáren</strong> — desítky dodavatelů,
+      servisních a technologických firem, které kolem hutě žijí a řeší
+      reálné technické problémy. A prostory po průmyslu, které se dají
+      využít jinak; plán sám mluví o „podpoře přeměny nevyužitých
+      průmyslových ploch na zelené zóny či místa s novým využitím".
+    </p>
+    <p>
+      <em>[OVĚŘIT: sem patří konkrétní projekt („cirk aréna") — doplnit přesný název a stav.]</em>
+    </p>
+    <p>
+      Startup z Třince nemusí být appka. Klidně to bude firma pěti lidí,
+      která dodává jednu součástku do celé Evropy. Takové tady už vznikly.
+    </p>
+
+    <div class="art-promise">
+      <p class="art-note-label">My jako Osobnosti chceme prosadit</p>
+      <ul>
+        <li>podporu <b>začínajících podnikatelů</b> — „Podnikej v Třinci"</li>
+        <li><b>propojení podnikatelů</b> v Třinci prostřednictvím pravidelných akcí</li>
+        <li><b>expat centrum</b> pro nově příchozí i navrátilce do Třince</li>
+        <li><b>startovací nájmy</b> pro začínající podnikatele</li>
+        <li>vstřícný a otevřený magistrát</li>
+        <li><b>nové sdílené a startovací kanceláře</b> — co třeba přímo vedle magistrátu?</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 06 · KROKY ================= -->
+  <section class="art art-section" id="kroky">
+    <p class="art-kicker"><span>06</span>Co je v možnostech radnice</p>
+    <h2>Pět kroků. Žádný z nich není novostavba.</h2>
+
+    <table class="dtab">
+      <caption>Co uděláme <b>v příštím volebním období</b></caption>
+      <tbody>
+        <tr><td class="n">1</td><td class="t"><b>Najít adresu, ne stavět budovu.</b> Město vlastní prostory, které dnes stojí prázdné nebo poloprázdné. Sdílená kancelář se dá otevřít v jednom patře. Zásadní je poloha — pěšky z centra, ne na okraji.</td></tr>
+        <tr><td class="n">2</td><td class="t"><b>Startovací nájem s jasnou hranou.</b> První dva roky levně, pak tržně. Ne dotace na věčnost — rozjezd.</td></tr>
+        <tr><td class="n">3</td><td class="t"><b>Jeden člověk, který to má na starost.</b> Ne referát, ne pracovní skupina. Komunitní manažer, který zná lidi jménem a jednou měsíčně uspořádá setkání.</td></tr>
+        <tr><td class="n">4</td><td class="t"><b>Napojit se na to, co už existuje.</b> Plán jmenuje spolupráci s MSIC — Moravskoslezským inovačním centrem — a „rozšíření některých jeho služeb nebo programů na území města". Nemusíme vymýšlet akcelerátor. Stačí do Třince přivést ten krajský.</td></tr>
+        <tr><td class="n">5</td><td class="t"><b>Otevřít prostor školám.</b> Půl dne v týdnu patří studentům průmyslovky a gymnázia. Tam se z „podnikavosti" ve strategickém plánu stane něco, co si student osahá.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ================= 07 · VÝSLEDEK ================= -->
+  <section class="art art-section" id="vysledek">
+    <p class="art-kicker"><span>07</span>Co z toho město má</p>
+    <h2>Tři měřitelné věci. Žádný dojem moderního města.</h2>
+    <p>
+      <strong>Pestřejší nabídku práce.</strong> Cíl 2.3 plánu to říká přímo —
+      snížit závislost na jednom dominujícím odvětví. Deset firem po pěti
+      lidech je pro město jiná pojistka než jedna firma o padesáti.
+    </p>
+    <p>
+      <strong>Práci pro lidi, kteří už tady bydlí.</strong> Kdo pracuje na
+      dálku, dnes v Třinci utrácí, ale nic tu nebuduje. Sdílená kancelář
+      z něj udělá člověka, který zná další místní lidi — a příště najme
+      někoho odsud.
+    </p>
+    <p>
+      <strong>Firmy, které tu zůstanou.</strong> Firma vzniklá v Třinci má
+      tady majitele, kontakty i první zaměstnance. Ta se nestěhuje tak
+      snadno jako pobočka, kterou sem někdo přivedl dotací.
+    </p>
+  </section>
+
+  <!-- ================= ZÁVĚR ================= -->
+  <section class="closing">
+    <img src={u('assets/img/panorama.jpg')} alt="Panorama Třince a Beskyd">
+    <div class="closing-overlay">
+      <div class="container">
+        <h2 class="closing-claim">Máme cíl napsaný. Chybí dveře.</h2>
+        <div class="closing-text" style="max-width: 54ch;">
+          <p>
+            Neslibujeme, že v Třinci vyroste druhý Walmark. To se naplánovat
+            nedá a byla by to lež.
+          </p>
+          <p style="margin-top: var(--s-16);">
+            Slibujeme něco menšího a splnitelného: adresu, otevírací dobu
+            a člověka, který tam bude. Zbytek — jestli z toho vznikne pět
+            firem, nebo padesát — nezáleží na radnici. Záleží na lidech,
+            kteří se tam potkají.
+          </p>
+        </div>
+        <div class="closing-cta" style="margin-top: var(--s-24);">
+          <a class="btn btn-primary" href={u('nahled-k7x2m9/program.html')}>Náš program</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KOLOFON ================= -->
+  <section class="art art-colophon">
+    <p class="art-note-label">Odkud citace bereme</p>
+    <div class="art-colophon-cols">
+      <p>
+        <strong>Strategický plán.</strong> Strategický plán rozvoje města
+        Třinec 2030+ (pořizovatel: statutární město Třinec, zpracovatel
+        BeePartner a.s., období 2025–2030). Citované pasáže: cíl 1.4
+        (coworky a studovny), cíl 2.2 (podnikatelské prostředí
+        a podnikavost), cíl 2.3 (nabídka zaměstnání, vzdálená práce
+        a coworking), cíl 2.4 (podnikatelské kompetence žáků a studentů).
+        Zdroj:{' '}
+        <a href="https://www.trinecko.cz/strategicky-plan-mesta-2025-2030-1" target="_blank" rel="noopener">trinecko.cz</a>.
+      </p>
+      <p>
+        <strong>Firmy.</strong> Údaje o společnosti Walmark (vznik v Třinci,
+        největší výrobní závod doplňků stravy ve skupině Stada, dodávky na
+        56 trhů) pocházejí z veřejných zdrojů; před publikací je ověříme
+        v aktuální výroční zprávě. Další jména třineckých firem do článku
+        doplníme až po ověření.
+      </p>
+      <p>
+        <strong>Program.</strong> Závazky v desce vycházejí z oblasti 03
+        „Odvážný Třinec" a projektu „Nové sdílené kanceláře" volebního
+        programu Osobností pro Třinec 2026.
+      </p>
+      <p>#SPOJUJEMEGENERACE · #PROTRINEC</p>
+    </div>
+  </section>
+</Base>
