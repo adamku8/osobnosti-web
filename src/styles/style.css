@@ -900,12 +900,6 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 }
 .fakturacni-radek dd { font-size: 15px; }
 .fakturacni-radek a { color: var(--signal-blue); text-decoration: none; }
-.fakturacni-pozn {
-  margin-top: var(--s-24);
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-.fakturacni-pozn a { color: var(--signal-blue); text-decoration: none; }
 
 /* ---------- Closing ---------- */
 .closing { position: relative; }
