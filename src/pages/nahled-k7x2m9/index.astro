@@ -1,29 +1,31 @@
 ---
-// ROZCESTNÍK SKRYTÉHO NÁHLEDU — interní kontrola plných verzí stránek,
-// které v teaser režimu nejsou veřejně vidět (viz src/lib/rezim.js).
+// ROZCESTNÍK SKRYTÉHO NÁHLEDU — interní kontrola stránek, které jsou hotové,
+// ale zatím nejsou veřejně publikované (viz src/lib/rezim.js).
 // Stránka není nikde prolinkovaná, není v sitemapě a má noindex.
+//
+// Pravidlo obsahu (3. 9. 2026, rozhodnutí Adama): patří sem POUZE zpracované
+// a nepublikované stránky. Kandidátka i medailonky jsou od 26. 8. živé na webu
+// (viz PLNA_KANDIDATKA a REZIM_MEDAILONKU v src/lib/verejne.js), proto tady
+// už nejsou. Pracovní pomůcky (mapa webu, fotobanka, kontrolní tabulka
+// medailonků) zůstávají na svých adresách, jen se sem nelinkují.
 import Base from '../../layouts/Base.astro';
-import { kandidati } from '../../data/kandidati.js';
-import { medailonky } from '../../data/medailonky.js';
 import { u } from '../../lib/url.js';
-
-const sMedailonkem = kandidati.filter(k => k.detail && medailonky[k.detail]);
 ---
 <Base
   title="Interní náhled — Osobnosti pro Třinec"
-  description="Rozcestník skrytých stránek pro interní kontrolu."
+  description="Rozcestník hotových, zatím nepublikovaných stránek."
   path="nahled-k7x2m9.html"
   noindex={true}
 >
   <section class="page-hero">
     <div class="container">
       <p class="eyebrow">Interní náhled — nesdílet</p>
-      <h1>Schované stránky <span class="hl">pro kontrolu</span>.</h1>
+      <h1>Hotové stránky, <span class="hl">které ještě nejsou venku</span>.</h1>
       <p class="hero-lead">
-        Web běží v teaser režimu. Tady jsou plné verze stránek, které zatím
-        nejsou veřejné. Odkaz na tuto stránku prosím nešiřte — stránky nejsou
-        v menu ani v sitemapě a mají zakázanou indexaci, ale kdo zná adresu,
-        ten je uvidí.
+        Tady jsou plné verze stránek a rozepsané články, které zatím nejsou
+        veřejné. Odkaz na tuto stránku prosím nešiřte — stránky nejsou v menu
+        ani v sitemapě a mají zakázanou indexaci, ale kdo zná adresu, ten je
+        uvidí.
       </p>
     </div>
   </section>
@@ -31,43 +33,20 @@ const sMedailonkem = kandidati.filter(k => k.detail && medailonky[k.detail]);
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <h2>Plné verze stránek</h2>
+        <h2>Nepublikované stránky</h2>
       </div>
       <ul class="area-list">
-        <li><a href={u('nahled-k7x2m9/stav-webu.html')}>Mapa webu — co je kde nasazené, od kdy a co ještě nejde prokliknout</a></li>
         <li><a href={u('nahled-k7x2m9/program.html')}>Program 2026 — kompletní (závazky, vize, PDF)</a></li>
         <li><a href={u('nahled-k7x2m9/program-osobnosti-pro-trinec-2026.pdf')}>Program 2026 — PDF ke stažení</a></li>
-        <li><a href={u('nahled-k7x2m9/kandidati.html')}>Kandidáti — kompletní listina (27 jmen)</a></li>
         <li><a href={u('nahled-k7x2m9/javorovy.html')}>Javorový 2.0 — celá vize</a></li>
       </ul>
 
       <div class="section-head" style="margin-top:2rem">
-        <h2>Blog — pracovní verze</h2>
+        <h2>Články — pracovní verze</h2>
       </div>
       <ul class="area-list">
+        <li><a href={u('blog-je-v-trinci-mrtvo-nebo-zivo.html')}>Je v Třinci mrtvo, nebo živo? — draft (chybí pár bloků a reels)</a></li>
         <li><a href={u('nahled-k7x2m9/blog-sdilene-kancelare.html')}>Třinec potřebuje místo, kde se potkají lidé s nápady — sdílené kanceláře a podnikavost (DRAFT v0.1)</a></li>
-      </ul>
-
-      <div class="section-head" style="margin-top:2rem">
-        <h2>Medailonky kandidátů</h2>
-      </div>
-      <ul class="area-list">
-        <li><a href={u('nahled-k7x2m9/medailonky-prehled.html')}>Přehled medailonků a fotek — kontrolní tabulka (všech 27)</a></li>
-        <li><a href={u('nahled-k7x2m9/fotky.html')}>Fotobanka — všechny fotky z Drive pohromadě, s doporučeným výběrem</a></li>
-      </ul>
-      <ul class="area-list">
-        {sMedailonkem.map(k => (
-          <li><a href={u(`nahled-k7x2m9/kandidat-${k.detail}.html`)}>{k.cislo}. {k.jmeno} — {k.profese}</a></li>
-        ))}
-      </ul>
-
-      <div class="section-head" style="margin-top:2rem">
-        <h2>Veřejný teaser (pro srovnání)</h2>
-      </div>
-      <ul class="area-list">
-        <li><a href={u('index.html')}>Úvod — jen logo, úvod a billboard</a></li>
-        <li><a href={u('kandidati.html')}>Kandidáti — první trojka + anonymní sloty</a></li>
-        <li><a href={u('program.html')}>Program — jen oblasti + „zveřejníme v září“</a></li>
       </ul>
     </div>
   </section>
