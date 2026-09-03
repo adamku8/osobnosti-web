@@ -875,6 +875,38 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 .donate-note li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
 .donate-note a { color: var(--signal-blue); text-decoration: none; }
 
+/* ---------- Fakturační údaje ---------- */
+.fakturacni {
+  border: 1px solid var(--border);
+  padding: var(--s-40);
+  max-width: 900px;
+}
+.fakturacni-list { display: grid; gap: 0; }
+.fakturacni-radek {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--s-16);
+  padding: var(--s-16) 0;
+  border-bottom: 1px solid var(--border);
+}
+.fakturacni-radek:last-child { border-bottom: none; }
+.fakturacni-radek dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.fakturacni-radek dd { font-size: 15px; }
+.fakturacni-radek a { color: var(--signal-blue); text-decoration: none; }
+.fakturacni-pozn {
+  margin-top: var(--s-24);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+.fakturacni-pozn a { color: var(--signal-blue); text-decoration: none; }
+
 /* ---------- Closing ---------- */
 .closing { position: relative; }
 .closing img {
@@ -1010,6 +1042,8 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 
   .stat-grid { grid-template-columns: 1fr; gap: var(--s-24); }
   .support-grid, .donate-grid { grid-template-columns: 1fr; }
+  .fakturacni { padding: var(--s-24); }
+  .fakturacni-radek { grid-template-columns: 1fr; gap: var(--s-8); }
   .projects { grid-template-columns: 1fr; gap: var(--s-40); }
   .cand-grid { grid-template-columns: repeat(2, 1fr); gap: var(--s-40) var(--s-16); }
   .closing img { height: 720px; }
