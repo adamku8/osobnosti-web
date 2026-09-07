@@ -2,7 +2,8 @@
 // Struktura dle rozvržení „Čtyři oblasti" (srpen 2026): klíčové slovo v červeném
 // boxu + „Třinec.", podnadpis, pět závazků a projekty (vize) navázané na oblast.
 // Závazky v `body` obsahují <strong> kolem jádrového předmětu — vykreslovat přes set:html.
-// `teaser` = dvě věty pro veřejnou teaser stránku /program.html (bez konkrétních závazků).
+// `teaser` = dvě věty z teaser verze /program.html (srpen 2026); od 7. 9. je program plný,
+// pole zůstává pro případné shrnutí oblasti jinde (úvod, letáky).
 export const oblasti = [
   {
     "cislo": "01",

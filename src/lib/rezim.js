@@ -3,7 +3,7 @@
 // Plné verze stránek (kompletní listina, program se závazky, medailonky)
 // jsou schované pod tajným prefixem NAHLED pro interní kontrolu.
 //
-// SPUŠTĚNÍ PLNÉHO WEBU: není potřeba nic mazat — vrať obsah stránek
-// index/kandidati/program z jejich plných verzí ve složce src/pages/{NAHLED}/
-// a skrytou složku pak smaž.
+// STAV: kandidátka je veřejná od 26. 8. (src/lib/verejne.js), plný program
+// od 7. 9. 2026 (src/pages/program.astro; skrytá kopie smazána). Ve skryté
+// složce zbývá Javorový, draft článku a pracovní pomůcky (fotobanka, mapa webu).
 export const NAHLED = 'nahled-k7x2m9';

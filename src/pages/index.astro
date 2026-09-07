@@ -1,7 +1,7 @@
 ---
-// TEASER verze úvodu (srpen 2026): jen logo (v hlavičce), úvodní text
-// a billboard s fotkou kandidátů. Plná verze sekcí (program, projekty,
-// kandidáti) je schovaná — viz src/lib/rezim.js.
+// Úvod: logo (v hlavičce), úvodní text a billboard s fotkou kandidátů.
+// Kandidátka (od 26. 8.) i plný program (od 7. 9.) jsou veřejné na vlastních
+// stránkách; sekce s nimi na úvodu zatím nejsou — viz src/lib/rezim.js.
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url.js';
 ---
@@ -30,7 +30,7 @@ import { u } from '../lib/url.js';
         <p class="hero-lead">
           Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.
           Osobnosti, které v Třinci doopravdy žijí a pracují.
-          Kompletní kandidátku i program postupně představíme.
+          Přečtěte si <a href={u('program.html')}>náš program</a> a poznejte <a href={u('kandidati.html')}>celou kandidátku</a>.
         </p>
         <div class="hero-vote">
           <div>

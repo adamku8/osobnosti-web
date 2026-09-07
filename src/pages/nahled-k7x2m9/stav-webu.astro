@@ -27,10 +27,10 @@ const priprava = kandidati.filter(k => !k.detail && k.detailPriprava).length;
 
 // ── soupis stránek ──────────────────────────────────────────────────────────
 const VEREJNE = [
-  { cesta: '/',                  nazev: 'Úvod (teaser)',        menu: 'Úvod',         od: '19. 8.', zmena: '25. 8.',
-    stav: 'ok',   pozn: 'Billboard, datum voleb, banner s číslem. Sekce program a kandidáti tu zatím nejsou.' },
-  { cesta: '/program',           nazev: 'Program (teaser)',     menu: 'Program',      od: '26. 8.', zmena: '26. 8.',
-    stav: 'cast', pozn: `Jen ${oblasti.length} oblasti s kresbou a dvěma větami. Bez závazků, bez ${projekty.length} projektů, bez PDF.` },
+  { cesta: '/',                  nazev: 'Úvod',                 menu: 'Úvod',         od: '19. 8.', zmena: '7. 9.',
+    stav: 'ok',   pozn: 'Billboard, datum voleb, banner s číslem, v textu odkazy na program a kandidátku. Sekce program a kandidáti tu zatím nejsou.' },
+  { cesta: '/program',           nazev: 'Program — kompletní',  menu: 'Program',      od: '26. 8.', zmena: '7. 9.',
+    stav: 'ok',   pozn: `Od 7. 9. plná verze: ${oblasti.length} oblasti se závazky, ${projekty.length} projektů a PDF ke stažení (/assets/program-osobnosti-pro-trinec-2026.pdf, verze z 2. 9.). Odkaz z Javorového na podstránku se zatím nevykresluje.` },
   { cesta: '/kandidati',         nazev: 'Kandidáti — plná listina', menu: 'Kandidáti', od: '19. 8.', zmena: '26. 8.',
     stav: 'ok',   pozn: `Všech ${kandidati.length} jmen s fotkami. Od 26. 8. jsou venku i medailonky.` },
   { cesta: '/podporte-nas',      nazev: 'Podpořte nás',         menu: 'Podpořte nás', od: '19. 8.', zmena: '19. 8.',
@@ -45,12 +45,8 @@ const NEPROLINKOVANE = [
 ];
 
 const SKRYTE = [
-  { cesta: '/nahled-k7x2m9/',                    nazev: 'Rozcestník náhledu',            od: '19. 8.', zmena: '24. 8.',
-    stav: 'stary', pozn: 'Popisuje veřejný web ještě jako teaser s první trojkou — od 26. 8. to neplatí.' },
-  { cesta: '/nahled-k7x2m9/program',             nazev: 'Program — kompletní',           od: '19. 8.', zmena: '21. 8.',
-    stav: 'ok',    pozn: `Závazky + ${projekty.length} projektů u oblastí. Tohle veřejný web nemá.` },
-  { cesta: '/nahled-k7x2m9/program-osobnosti-pro-trinec-2026.pdf', nazev: 'Program 2026 — PDF', od: '19. 8.', zmena: '—',
-    stav: 'ok',    pozn: 'Ke stažení jen z náhledu.' },
+  { cesta: '/nahled-k7x2m9/',                    nazev: 'Rozcestník náhledu',            od: '19. 8.', zmena: '7. 9.',
+    stav: 'ok',    pozn: 'Jen nepublikované stránky: Javorový a draft článku o sdílených kancelářích.' },
   { cesta: '/nahled-k7x2m9/kandidati',           nazev: 'Kandidáti — plná listina',      od: '19. 8.', zmena: '26. 8.',
     stav: 'shoda', pozn: 'Dnes shodné s veřejnou verzí — od zveřejnění plné listiny se neliší.' },
   { cesta: '/nahled-k7x2m9/kandidat-<slug>',     nazev: `Medailonky (${verejnychMedailonku}×)`, od: '19. 8.', zmena: '1. 9.',
@@ -73,13 +69,10 @@ const CLANKY = [
 ];
 
 const CEKA = [
-  `Program se závazky a ${projekty.length} projekty — hotový v náhledu, veřejně slíbený „postupně v září".`,
-  'Javorový 2.0 — hotová stránka v náhledu, z webu na ni nevede odkaz.',
-  'PDF programu ke stažení — leží jen pod náhledovou adresou.',
+  'Javorový 2.0 — hotová stránka v náhledu, z webu na ni nevede odkaz (ani z projektu v programu — přepínač ODKAZY_PROJEKTU v program.astro).',
   `Medailonky ${bezMedailonku.map(k => `${k.cislo}. ${k.jmeno}`).join(', ')} — karty v listině nejsou proklikatelné.`,
   'Článek „Je v Třinci mrtvo, nebo živo?" — nasazený, ale jako draft bez odkazu.',
   'Článek „Deset kilometrů" — existuje jen jako text, webová verze zatím nevznikla.',
-  'Rozcestník náhledu — jeho popisky veřejného webu jsou od 26. 8. neaktuální.',
 ];
 
 const STAVY = {
@@ -133,7 +126,7 @@ const STAVY = {
       <h1>Co je kde <span class="hl">nasazené</span>.</h1>
       <p class="hero-lead">
         Mapa všech stránek webu: co vidí veřejnost, co leží schované pod touhle
-        adresou a co ještě není proklikatelné. Stav k 1. 9. 2026.
+        adresou a co ještě není proklikatelné. Stav k 7. 9. 2026.
       </p>
       <ul class="mapa-sum">
         <li><b>{VEREJNE.length}</b>veřejné stránky</li>
@@ -150,8 +143,8 @@ const STAVY = {
       <div class="section-head"><h2>Veřejný web</h2></div>
       <p class="mapa-note">
         Nasazuje se automaticky při každém pushi do větve <code>main</code>
-        (GitHub Actions → GitHub Pages). Poslední nasazení 1. 9. 2026 v 11:43,
-        commit <code>8639971</code>. Nic nečeká na push — všechno hotové je venku.
+        (GitHub Actions → GitHub Pages). Poslední větší nasazení 7. 9. 2026 —
+        zveřejnění plného programu. Nic nečeká na push — všechno hotové je venku.
       </p>
       <div class="mapa-wrap">
         <table class="mapa-table">
