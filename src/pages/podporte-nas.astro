@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
 ---
 <Base
   title="Podpořte nás — Osobnosti pro Třinec"
@@ -43,6 +44,24 @@ import Base from '../layouts/Base.astro';
         </div>
         <span class="btn btn-primary btn-lg udalost-btn">Přidat se k události</span>
       </a>
+    </div>
+  </section>
+
+  <!-- ================= SRDÍČKO NA PROFILOVKU ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Ukažte to na profilu</p>
+        <h2>Srdíčko na profilovku</h2>
+        <p class="section-note">
+          Přidejte si srdíčko Osobností na svoji profilovou fotku.
+          Nahrajete fotku, srovnáte výřez, stáhnete — a nastavíte na Facebooku.
+          Trvá to minutu a fotka zůstává ve vašem prohlížeči.
+        </p>
+      </div>
+      <div class="section-cta">
+        <a class="btn btn-primary btn-lg" href={u('srdicko.html')}>Vyrobit profilovku</a>
+      </div>
     </div>
   </section>
 

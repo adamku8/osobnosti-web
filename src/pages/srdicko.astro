@@ -1,0 +1,429 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+
+// Srdíčko na profilovku — klientský generátor profilové fotky.
+// Facebook vlastní „rámečky" (Frame Studio) od roku 2022 zrušil, proto si
+// hotový obrázek uživatel stáhne tady a nahraje ho na FB ručně.
+// Vše běží v prohlížeči — žádná fotka se nikam neodesílá.
+const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-64.72,40.59-85.51,72.75-9.68,14.98-16.33,30.53-20.92,47.62l-2.92,6.97-9.26-24.36c-17.85-46.94-69.67-73.09-118.62-64.72-30.62,5.24-54.54,25.89-57.75,57.42-1.34,13.19.33,26.21,4.42,38.93,1.64,5.09,5.26,9.29,6,15.15-27.39-29.33-24.97-76.94-3.5-109.16,11.81-17.73,29.1-29.41,49.69-34.24,44.29-10.38,91.77,4.54,118.11,42.44l10.74,17.1,12.99-23.97c25.45-46.95,78.78-83.87,129.74-98.84,27.88-8.19,56.53-10.55,84.92-5.99,51.3,8.24,93.39,41.92,111.77,90.4,20.46,53.94,9.1,112.16-20.96,160.6-31.74,51.12-84.63,97.24-133.56,131.97-15.15,10.75-28.33,22.26-41.12,35.53-29.53,30.64-54.91,62.2-69.04,102.89-4.82,13.89-7.67,27.39-10.85,42.19-7.26-51.37,1.38-97.12,32.17-139.67,18.96-26.19,39.33-49.99,62.68-72.38l49.19-47.17c14.92-14.31,28.75-28.67,41.63-44.77,24.78-30.95,41.11-65.51,35.29-105.97-5.18-35.99-21.1-65.72-51.44-86.12Z';
+---
+<Base
+  title="Srdíčko na profilovku — Osobnosti pro Třinec"
+  description="Přidejte si srdíčko Osobností na profilovou fotku. Nahrajte fotku, srovnejte výřez, stáhněte a nastavte na Facebooku. Vše proběhne přímo ve vašem prohlížeči."
+  path="srdicko.html"
+  active="podporte"
+>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-copy" style="max-width: 760px;">
+        <p class="eyebrow">Srdíčko na profilovku</p>
+        <h1>Dejte Třinci <span class="hl">srdce</span>.</h1>
+        <p class="hero-lead">
+          Nahrajte svoji fotku, srovnejte výřez a stáhněte si ji se srdíčkem
+          Osobností. Fotka zůstává ve vašem prohlížeči — nikam ji neposíláme.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section srdicko-section">
+    <div class="container">
+      <div class="srdicko-app" id="app">
+
+        <div class="srdicko-plocha">
+          <div class="srdicko-nahled" id="drop">
+            <canvas id="platno" width="1080" height="1080" aria-label="Náhled profilové fotky se srdíčkem"></canvas>
+            <div class="srdicko-kruh" aria-hidden="true"></div>
+            <div class="srdicko-vyzva" id="vyzva">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v13"/>
+              </svg>
+              <p><strong>Vyberte fotku</strong><br>nebo ji sem přetáhněte</p>
+            </div>
+          </div>
+          <p class="srdicko-tip">Fotku posunete tažením, velikost změníte posuvníkem níže.</p>
+        </div>
+
+        <div class="srdicko-ovladani">
+          <label class="srdicko-vyber">
+            <input type="file" id="soubor" accept="image/*" hidden>
+            <span class="btn btn-primary btn-lg" id="btn-vybrat">Vybrat fotku</span>
+          </label>
+
+          <div class="srdicko-blok">
+            <p class="srdicko-label">Varianta</p>
+            <div class="srdicko-varianty" role="group" aria-label="Varianta srdíčka">
+              <button type="button" class="srdicko-varianta is-aktivni" data-varianta="odznak">Srdíčko</button>
+              <button type="button" class="srdicko-varianta" data-varianta="prstenec">Srdíčko + prstenec</button>
+            </div>
+          </div>
+
+          <div class="srdicko-blok">
+            <label class="srdicko-label" for="zoom">Velikost fotky</label>
+            <input type="range" id="zoom" min="100" max="300" value="100" step="1" disabled>
+          </div>
+
+          <div class="srdicko-akce">
+            <button type="button" class="btn btn-primary btn-lg" id="stahnout" disabled>Stáhnout profilovku</button>
+            <button type="button" class="btn btn-secondary" id="reset" disabled>Vrátit výřez</button>
+          </div>
+
+          <p class="srdicko-poznamka">
+            Obrázek se uloží jako PNG 1080 × 1080 px — přesně ve formátu,
+            který Facebook i Instagram chtějí.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Tři kroky</p>
+        <h2>Jak si ji nastavíte</h2>
+      </div>
+      <div class="srdicko-kroky">
+        <div class="srdicko-krok">
+          <span class="srdicko-cislo">1</span>
+          <h3>Stáhněte obrázek</h3>
+          <p>Vyberte fotku, srovnejte výřez a klikněte na Stáhnout profilovku.</p>
+        </div>
+        <div class="srdicko-krok">
+          <span class="srdicko-cislo">2</span>
+          <h3>Otevřete Facebook</h3>
+          <p>Na svém profilu klikněte na profilovou fotku a zvolte Aktualizovat profilový obrázek.</p>
+        </div>
+        <div class="srdicko-krok">
+          <span class="srdicko-cislo">3</span>
+          <h3>Nahrajte a uložte</h3>
+          <p>Nahrajte stažený soubor. Ořez nechte, jak je — je připravený na kruh.</p>
+        </div>
+      </div>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href="https://www.facebook.com/me" target="_blank" rel="noopener">Otevřít můj profil na Facebooku</a>
+        <a class="btn btn-secondary btn-lg" href={u('podporte-nas.html')}>Další způsoby podpory</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .srdicko-app {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
+      gap: var(--s-64);
+      align-items: start;
+    }
+    .srdicko-nahled {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 1 / 1;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      touch-action: none;
+      cursor: grab;
+    }
+    .srdicko-nahled.is-tazeno { cursor: grabbing; }
+    .srdicko-nahled.is-prazdne { cursor: pointer; }
+    .srdicko-nahled.je-cil { border-color: var(--brand-red); }
+    #platno { width: 100%; height: 100%; display: block; }
+    /* Vodítko kruhového ořezu — jen náhled, do staženého souboru se nekreslí. */
+    .srdicko-kruh {
+      position: absolute; inset: 0;
+      border-radius: 12px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 2000px rgba(50, 50, 50, 0.14);
+      -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0 49.6%, #000 49.7%);
+      mask: radial-gradient(circle at 50% 50%, transparent 0 49.6%, #000 49.7%);
+    }
+    .srdicko-nahled.is-prazdne .srdicko-kruh { display: none; }
+    .srdicko-vyzva {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: var(--s-16);
+      color: var(--text-muted);
+      text-align: center;
+      pointer-events: none;
+    }
+    .srdicko-vyzva[hidden] { display: none; }
+    .srdicko-vyzva strong { color: var(--text); }
+    .srdicko-tip {
+      margin-top: var(--s-16);
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 460px;
+    }
+    .srdicko-nahled.is-prazdne + .srdicko-tip { visibility: hidden; }
+
+    .srdicko-blok { margin-top: var(--s-40); }
+    .srdicko-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--s-16);
+    }
+    .srdicko-vyber .btn { width: 100%; justify-content: center; text-align: center; cursor: pointer; }
+    .srdicko-varianty { display: flex; gap: var(--s-8); flex-wrap: wrap; }
+    .srdicko-varianta {
+      flex: 1 1 auto;
+      font: inherit;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 240ms var(--ease-ui), color 240ms var(--ease-ui);
+    }
+    .srdicko-varianta:hover { border-color: var(--anthracite); }
+    .srdicko-varianta.is-aktivni {
+      border-color: var(--anthracite);
+      background: var(--anthracite);
+      color: var(--paper);
+    }
+    #zoom { width: 100%; accent-color: var(--brand-red); }
+    #zoom:disabled { opacity: 0.4; }
+    .srdicko-akce {
+      margin-top: var(--s-40);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-16);
+    }
+    .srdicko-akce .btn { justify-content: center; text-align: center; }
+    .srdicko-akce .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .srdicko-poznamka {
+      margin-top: var(--s-24);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .srdicko-kroky {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--s-40);
+    }
+    .srdicko-krok { border-top: 1px solid var(--border); padding-top: var(--s-24); }
+    .srdicko-cislo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 32px;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: var(--s-8);
+    }
+    .srdicko-krok h3 { font-size: 18px; margin-bottom: var(--s-8); }
+    .srdicko-krok p { color: var(--text-secondary); font-size: 15px; }
+
+    @media (max-width: 860px) {
+      .srdicko-app { grid-template-columns: minmax(0, 1fr); gap: var(--s-40); }
+      .srdicko-nahled, .srdicko-tip { max-width: none; }
+      .srdicko-kroky { grid-template-columns: minmax(0, 1fr); gap: var(--s-24); }
+    }
+  </style>
+
+  <script is:inline define:vars={{ SRDCE_PATH }}>
+    (function () {
+      const S = 1080;                       // výstupní rozměr
+      const platno = document.getElementById('platno');
+      const ctx = platno.getContext('2d');
+      const drop = document.getElementById('drop');
+      const vyzva = document.getElementById('vyzva');
+      const vstup = document.getElementById('soubor');
+      const zoom = document.getElementById('zoom');
+      const btnStahnout = document.getElementById('stahnout');
+      const btnReset = document.getElementById('reset');
+
+      const srdce = new Path2D(SRDCE_PATH);
+      // Rámeček cesty srdce v souřadnicích loga (viz OPT-podklady-grafika/01 LOGO/SVG).
+      const SRDCE_BOX = { x: 734.47, y: 0, w: 544.88, h: 565.87 };
+
+      let obr = null;
+      let zaklad = 1;      // měřítko „cover"
+      let mer = 1;         // násobek od uživatele
+      let posX = 0, posY = 0;
+      let varianta = 'odznak';
+
+      function kresliSrdce(cx, cy, vel, barva) {
+        const k = vel / Math.max(SRDCE_BOX.w, SRDCE_BOX.h);
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.scale(k, k);
+        ctx.translate(-(SRDCE_BOX.x + SRDCE_BOX.w / 2), -(SRDCE_BOX.y + SRDCE_BOX.h / 2));
+        ctx.fillStyle = barva;
+        ctx.fill(srdce);
+        ctx.restore();
+      }
+
+      function kresli() {
+        ctx.clearRect(0, 0, S, S);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, S, S);
+
+        if (obr) {
+          const m = zaklad * mer;
+          const w = obr.naturalWidth * m;
+          const h = obr.naturalHeight * m;
+          ctx.drawImage(obr, (S - w) / 2 + posX, (S - h) / 2 + posY, w, h);
+        }
+
+        // Prstenec (volitelný) — kreslí se první, odznak sedí na něm.
+        if (varianta === 'prstenec') {
+          ctx.save();
+          ctx.lineWidth = 44;
+          ctx.strokeStyle = '#FF2D2D';
+          ctx.beginPath();
+          ctx.arc(S / 2, S / 2, S / 2 - 22, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Odznak se srdíčkem — bílá samolepka uvnitř kruhového ořezu, vpravo dole.
+        const bx = 786, by = 822, br = 152;
+        ctx.save();
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.arc(bx, by, br, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'rgba(50,50,50,0.14)';
+        ctx.stroke();
+        ctx.restore();
+        kresliSrdce(bx, by, br * 1.22, '#FF2D2D');
+      }
+
+      function omez() {
+        // Fotka nesmí odjet tak, aby v kruhu vznikla prázdná plocha.
+        const m = zaklad * mer;
+        const maxX = Math.max(0, (obr.naturalWidth * m - S) / 2);
+        const maxY = Math.max(0, (obr.naturalHeight * m - S) / 2);
+        posX = Math.min(maxX, Math.max(-maxX, posX));
+        posY = Math.min(maxY, Math.max(-maxY, posY));
+      }
+
+      function nacti(soubor) {
+        if (!soubor || !soubor.type.startsWith('image/')) return;
+        const url = URL.createObjectURL(soubor);
+        const i = new Image();
+        i.onload = function () {
+          obr = i;
+          zaklad = Math.max(S / i.naturalWidth, S / i.naturalHeight);
+          mer = 1; posX = 0; posY = 0;
+          zoom.value = 100;
+          zoom.disabled = false;
+          btnStahnout.disabled = false;
+          btnReset.disabled = false;
+          drop.classList.remove('is-prazdne');
+          vyzva.hidden = true;
+          kresli();
+          URL.revokeObjectURL(url);
+        };
+        i.src = url;
+      }
+
+      // --- ovládání ---
+      document.getElementById('btn-vybrat').addEventListener('click', () => vstup.click());
+      vstup.addEventListener('change', (e) => nacti(e.target.files[0]));
+
+      drop.classList.add('is-prazdne');
+      drop.addEventListener('click', () => { if (!obr) vstup.click(); });
+      ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, (e) => {
+        e.preventDefault(); drop.classList.add('je-cil');
+      }));
+      ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, (e) => {
+        e.preventDefault(); drop.classList.remove('je-cil');
+      }));
+      drop.addEventListener('drop', (e) => nacti(e.dataTransfer.files[0]));
+
+      zoom.addEventListener('input', () => {
+        if (!obr) return;
+        mer = Number(zoom.value) / 100;
+        omez(); kresli();
+      });
+
+      btnReset.addEventListener('click', () => {
+        if (!obr) return;
+        mer = 1; posX = 0; posY = 0; zoom.value = 100;
+        kresli();
+      });
+
+      document.querySelectorAll('.srdicko-varianta').forEach(b => {
+        b.addEventListener('click', () => {
+          document.querySelectorAll('.srdicko-varianta').forEach(x => x.classList.remove('is-aktivni'));
+          b.classList.add('is-aktivni');
+          varianta = b.dataset.varianta;
+          kresli();
+        });
+      });
+
+      // Tažení myší i prstem, dvěma prsty i přiblížení.
+      const prsty = new Map();
+      let odstup = 0, merNaZacatku = 1;
+
+      drop.addEventListener('pointerdown', (e) => {
+        if (!obr) return;
+        drop.setPointerCapture(e.pointerId);
+        prsty.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        drop.classList.add('is-tazeno');
+        if (prsty.size === 2) {
+          const [a, b] = [...prsty.values()];
+          odstup = Math.hypot(a.x - b.x, a.y - b.y);
+          merNaZacatku = mer;
+        }
+      });
+
+      drop.addEventListener('pointermove', (e) => {
+        if (!obr || !prsty.has(e.pointerId)) return;
+        const p = prsty.get(e.pointerId);
+        const pomer = S / drop.getBoundingClientRect().width;
+
+        if (prsty.size === 1) {
+          posX += (e.clientX - p.x) * pomer;
+          posY += (e.clientY - p.y) * pomer;
+        }
+        prsty.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+        if (prsty.size === 2 && odstup > 0) {
+          const [a, b] = [...prsty.values()];
+          const novy = Math.hypot(a.x - b.x, a.y - b.y);
+          mer = Math.min(3, Math.max(1, merNaZacatku * (novy / odstup)));
+          zoom.value = Math.round(mer * 100);
+        }
+        omez(); kresli();
+      });
+
+      ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => drop.addEventListener(t, (e) => {
+        prsty.delete(e.pointerId);
+        if (prsty.size === 0) drop.classList.remove('is-tazeno');
+      }));
+
+      drop.addEventListener('wheel', (e) => {
+        if (!obr) return;
+        e.preventDefault();
+        mer = Math.min(3, Math.max(1, mer * (e.deltaY < 0 ? 1.06 : 1 / 1.06)));
+        zoom.value = Math.round(mer * 100);
+        omez(); kresli();
+      }, { passive: false });
+
+      btnStahnout.addEventListener('click', () => {
+        if (!obr) return;
+        platno.toBlob((blob) => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'profilovka-osobnosti-pro-trinec.png';
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+        }, 'image/png');
+      });
+
+      kresli();
+    })();
+  </script>
+</Base>
