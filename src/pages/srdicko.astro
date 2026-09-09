@@ -49,6 +49,14 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           <button type="button" class="btn btn-primary btn-lg srdicko-vyber" id="btn-vybrat">Vybrat fotku</button>
           <p class="srdicko-hlaska" id="hlaska" role="status" hidden></p>
 
+          <div class="srdicko-blok" id="blok-odznak" hidden>
+            <p class="srdicko-label">Co dát na fotku</p>
+            <div class="srdicko-odznaky" role="group" aria-label="Výběr odznaku">
+              <button type="button" class="srdicko-odznak is-aktivni" data-odznak="srdce">Srdíčko</button>
+              <button type="button" class="srdicko-odznak" data-odznak="kvet">Květinka s číslem</button>
+            </div>
+          </div>
+
           <div class="srdicko-blok">
             <label class="srdicko-label" for="zoom">Velikost fotky</label>
             <input type="range" id="zoom" min="100" max="300" value="100" step="1" disabled>
@@ -158,6 +166,26 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
       color: var(--brand-red);
     }
     .srdicko-hlaska[hidden] { display: none; }
+    .srdicko-blok[hidden] { display: none; }
+    .srdicko-odznaky { display: flex; gap: var(--s-8); flex-wrap: wrap; }
+    .srdicko-odznak {
+      flex: 1 1 auto;
+      font: inherit;
+      font-size: 14px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 240ms var(--ease-ui), background 240ms var(--ease-ui);
+    }
+    .srdicko-odznak:hover { border-color: var(--anthracite); }
+    .srdicko-odznak.is-aktivni {
+      border-color: var(--anthracite);
+      background: var(--anthracite);
+      color: var(--paper);
+    }
     #zoom { width: 100%; accent-color: var(--brand-red); }
     #zoom:disabled { opacity: 0.4; }
     .srdicko-akce {
@@ -213,6 +241,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
       const btnSdilet = document.getElementById('sdilet');
       const odkazSdilet = document.getElementById('sdilet-odkaz');
       const hlaska = document.getElementById('hlaska');
+      const blokOdznak = document.getElementById('blok-odznak');
 
       const srdce = new Path2D(SRDCE_PATH);
       // Rámeček cesty srdce v souřadnicích loga (viz OPT-podklady-grafika/01 LOGO/SVG).
@@ -222,6 +251,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
       let zaklad = 1;      // měřítko „cover"
       let mer = 1;         // násobek od uživatele
       let posX = 0, posY = 0;
+      let odznak = 'srdce';        // 'srdce' | 'kvet'
 
       function kresliSrdce(cx, cy, vel, barva) {
         const k = vel / Math.max(SRDCE_BOX.w, SRDCE_BOX.h);
@@ -231,6 +261,47 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
         ctx.translate(-(SRDCE_BOX.x + SRDCE_BOX.w / 2), -(SRDCE_BOX.y + SRDCE_BOX.h / 2));
         ctx.fillStyle = barva;
         ctx.fill(srdce);
+        ctx.restore();
+      }
+
+      // Modrý květ s volebním číslem — stejný tvar jako na úvodní stránce
+      // (šest okvětních lístků + střed). Souřadnice jsou z SVG na indexu,
+      // střed tvaru je bod 100,100.
+      const KVET = [
+        [100, 40, 45], [152, 70, 45], [152, 130, 45],
+        [100, 160, 45], [48, 130, 45], [48, 70, 45], [100, 100, 68],
+      ];
+
+      function kresliKvet(cx, cy, polomer) {
+        const k = polomer / 100;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.scale(k, k);
+        ctx.translate(-100, -100);
+
+        // Bílý obrys, aby květ držel i na tmavé fotce.
+        ctx.fillStyle = '#FFFFFF';
+        KVET.forEach(([x, y, r]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, r + 9, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.fillStyle = '#003B8E';
+        KVET.forEach(([x, y, r]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.textAlign = 'center';
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '1px';
+        ctx.font = "700 16px Montserrat, 'Arial Black', sans-serif";
+        ctx.fillText('VOLTE Č.', 100, 78);
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+        ctx.font = "800 68px Montserrat, 'Arial Black', sans-serif";
+        ctx.fillText('3', 100, 140);
         ctx.restore();
       }
 
@@ -246,28 +317,30 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           ctx.drawImage(obr, (S - w) / 2 + posX, (S - h) / 2 + posY, w, h);
         }
 
-        // Odznak se srdíčkem — bílá samolepka v pravém dolním rohu. Střed leží
-        // na úhlopříčce (45°), takže je od pravého i spodního okraje stejně
-        // daleko, a odznak se dotýká kruhu, do kterého Facebook fotku ořízne —
-        // blíž k rohu už by ho ořez ukrojil.
+        // Odznak v pravém dolním rohu. Střed leží na úhlopříčce (45°), takže je
+        // od pravého i spodního okraje stejně daleko. PRESAH ho posouvá blíž
+        // rohu čtverce — o tolik pak vystupuje za kruh, do kterého Facebook
+        // profilovku ořezává.
         const br = 118;
-        // PRESAH posouvá odznak po úhlopříčce ven, blíž rohu čtverce; 88 px
-        // odpovídá posunu o 62 px doprava a 62 px dolů. Odznak tím vystupuje
-        // za kruh, do kterého Facebook profilovku ořezává.
         const PRESAH = 88;
         const vzdalenost = S / 2 - br + PRESAH;
         const bx = S / 2 + vzdalenost / Math.SQRT2;
         const by = S / 2 + vzdalenost / Math.SQRT2;
-        ctx.save();
-        ctx.fillStyle = '#FFFFFF';
-        ctx.beginPath();
-        ctx.arc(bx, by, br, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'rgba(50,50,50,0.14)';
-        ctx.stroke();
-        ctx.restore();
-        kresliSrdce(bx, by, br * 1.22, '#FF2D2D');
+
+        if (odznak === 'kvet') {
+          kresliKvet(bx, by, br);
+        } else {
+          ctx.save();
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(bx, by, br, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = 'rgba(50,50,50,0.14)';
+          ctx.stroke();
+          ctx.restore();
+          kresliSrdce(bx, by, br * 1.22, '#FF2D2D');
+        }
       }
 
       function omez() {
@@ -306,6 +379,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           btnStahnout.disabled = false;
           btnReset.disabled = false;
           btnSdilet.disabled = false;
+          blokOdznak.hidden = false;
           drop.classList.remove('is-prazdne');
           vyzva.hidden = true;
           kresli();
@@ -343,6 +417,24 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
         mer = 1; posX = 0; posY = 0; zoom.value = 100;
         kresli();
       });
+
+      document.querySelectorAll('.srdicko-odznak').forEach((b) => {
+        b.addEventListener('click', () => {
+          document.querySelectorAll('.srdicko-odznak').forEach((x) => x.classList.remove('is-aktivni'));
+          b.classList.add('is-aktivni');
+          odznak = b.dataset.odznak;
+          kresli();
+        });
+      });
+
+      // Montserrat musí být načtený, jinak canvas vysází číslo náhradním
+      // fontem; po doběhnutí překreslíme.
+      if (document.fonts && document.fonts.load) {
+        Promise.all([
+          document.fonts.load("700 16px Montserrat"),
+          document.fonts.load("800 68px Montserrat"),
+        ]).then(() => kresli()).catch(() => {});
+      }
 
       // Tažení myší i prstem, dvěma prsty i přiblížení.
       const prsty = new Map();
