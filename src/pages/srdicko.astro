@@ -251,7 +251,11 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
         // daleko, a odznak se dotýká kruhu, do kterého Facebook fotku ořízne —
         // blíž k rohu už by ho ořez ukrojil.
         const br = 118;
-        const vzdalenost = S / 2 - br;
+        // PRESAH posouvá odznak po úhlopříčce ven, blíž rohu čtverce; 88 px
+        // odpovídá posunu o 62 px doprava a 62 px dolů. Odznak tím vystupuje
+        // za kruh, do kterého Facebook profilovku ořezává.
+        const PRESAH = 88;
+        const vzdalenost = S / 2 - br + PRESAH;
         const bx = S / 2 + vzdalenost / Math.SQRT2;
         const by = S / 2 + vzdalenost / Math.SQRT2;
         ctx.save();
