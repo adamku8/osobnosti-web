@@ -162,8 +162,7 @@ export const kandidati = [
     "foto": "aron_chmielewski_c.jpg",
     "iniciraly": "AC",
     "dotaznik": true,
-    "detail": null,
-    "detailPriprava": "aron-chmielewski",
+    "detail": "aron-chmielewski",
     "poradiSlovem": "čtrnáctý"
   },
   {
