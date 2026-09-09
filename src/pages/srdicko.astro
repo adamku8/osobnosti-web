@@ -290,8 +290,14 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           ctx.restore();
         }
 
-        // Odznak se srdíčkem — bílá samolepka uvnitř kruhového ořezu, vpravo dole.
-        const bx = 786, by = 822, br = 152;
+        // Odznak se srdíčkem — bílá samolepka v pravém dolním rohu kruhového
+        // ořezu. Střed leží na úhlopříčce (45°), takže je od pravého i spodního
+        // okraje kruhu stejně daleko; ODSAZENI drží mezeru k okraji.
+        const br = 152;
+        const ODSAZENI = 20;
+        const vzdalenost = S / 2 - br - ODSAZENI;
+        const bx = S / 2 + vzdalenost / Math.SQRT2;
+        const by = S / 2 + vzdalenost / Math.SQRT2;
         ctx.save();
         ctx.fillStyle = '#FFFFFF';
         ctx.beginPath();
