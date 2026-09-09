@@ -788,4 +788,34 @@ export const medailonky = {
     ],
     video: null,
   },
+
+  'aron-chmielewski': {
+    citace: 'Chci, aby měl Třinec <span class="hl">ještě víc co nabídnout mladým lidem</span>',
+    odpovedi: [
+      {
+        nadpis: 'Proč kandiduji',
+        text: 'Třinec je už řadu let můj domov a záleží mi na tom, jak se bude dál rozvíjet. Když mě Lucie oslovila s myšlenkou vytvořit novou generaci lidí, kteří chtějí pro město něco udělat, dávalo mi smysl se přidat. Myslím, že když má člověk možnost svému okolí pomoct, měl by se o to alespoň pokusit.',
+      },
+      {
+        nadpis: 'Co chci posunout',
+        text: 'Chtěl bych, aby měl Třinec ještě více co nabídnout mladým lidem a aby měli důvod se sem po studiu nebo práci jinde vracet. Aby tu našli kvalitní život, práci, sport, volný čas i prostředí, ve kterém budou chtít založit rodinu. Třinec by měl být městem, ze kterého lidé nemusí odcházet za lepším životem – a pokud odejdou, rádi se vrátí.',
+      },
+      {
+        nadpis: 'Když zrovna nepracuji',
+        text: 'Většina lidí mě asi zná hlavně z hokeje, ale mimo stadion jsem především táta a člověk, který má rád obyčejný čas s rodinou a přáteli. I když teď hraju v Polsku, domov mám pořád v Třinci. Když nejsem na ledě, nejspíš mě potkáte někde s rodinou, při sportu nebo prostě ve městě.',
+      },
+    ],
+    rychleOtazky: [
+      { otazka: 'Třinec za čtyři roky', odpoved: 'Atraktivnější' },
+      { otazka: 'Inspirace pro Třinec', odpoved: 'Polský Těšín' },
+      { otazka: 'Nejoblíbenější místo', odpoved: 'Podlesí' },
+      { otazka: 'Hory, nebo město?', odpoved: 'Hory' },
+      { otazka: 'Pes, nebo kočka?', odpoved: 'Pes' },
+      { otazka: 'Léto, nebo zima?', odpoved: 'Léto' },
+      { otazka: 'Kolo, nebo běh?', odpoved: 'Kolo' },
+      { otazka: 'Ráno, nebo večer?', odpoved: 'Ráno' },
+      { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
+    ],
+    video: null,
+  },
 };

@@ -161,7 +161,8 @@ export const kandidati = [
     "profese": "hokejista",
     "foto": "aron_chmielewski_c.jpg",
     "iniciraly": "AC",
-    "detail": null,
+    "dotaznik": true,
+    "detail": "aron-chmielewski",
     "poradiSlovem": "čtrnáctý"
   },
   {
