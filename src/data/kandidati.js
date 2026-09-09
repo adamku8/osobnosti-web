@@ -95,6 +95,7 @@ export const kandidati = [
     "foto": "thanasis_antoniadis_c.jpg",
     "iniciraly": "TA",
     "detail": null,
+    "detailPriprava": "thanasis-antoniadis",
     "poradiSlovem": "osmý"
   },
   {
@@ -184,6 +185,7 @@ export const kandidati = [
     "foto": "darina_kubikova_c.jpg",
     "iniciraly": "DK",
     "detail": null,
+    "detailPriprava": "darina-kubikova",
     "poradiSlovem": "šestnáctá"
   },
   {
@@ -312,6 +314,7 @@ export const kandidati = [
     "foto": "rudolf_rucki_c2.jpg",
     "iniciraly": "RR",
     "detail": null,
+    "detailPriprava": "rudolf-rucki",
     "poradiSlovem": "sedmadvacátý"
   }
 ];
