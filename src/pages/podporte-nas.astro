@@ -52,18 +52,44 @@ import { u } from '../lib/url.js';
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Ukažte to na profilu</p>
-        <h2>Srdíčko na profilovku</h2>
+        <h2>Srdíčko na <span class="hl">profilovku</span></h2>
         <p class="section-note">
-          Přidejte si srdíčko Osobností na svoji profilovou fotku.
-          Nahrajete fotku, srovnáte výřez, stáhnete — a nastavíte na Facebooku.
-          Trvá to minutu a fotka zůstává ve vašem prohlížeči.
+          Nejrychlejší způsob, jak nás podpořit. Nahrajete fotku, srovnáte
+          výřez a stáhnete si profilovku se srdíčkem Osobností. Na telefonu
+          ji pošlete rovnou do Facebooku. Trvá to minutu.
         </p>
       </div>
-      <div class="section-cta">
+      <div class="srdicko-pozvanka">
+        <div class="srdicko-pozvanka-text">
+          <h3>Vaše fotka zůstává u vás</h3>
+          <p>
+            Obrázek skládá váš prohlížeč — nikam se neodesílá ani neukládá.
+            Výsledek je PNG 1080 × 1080 px pro Facebook i Instagram.
+          </p>
+        </div>
         <a class="btn btn-primary btn-lg" href={u('srdicko.html')}>Vyrobit profilovku</a>
       </div>
     </div>
   </section>
+
+  <style>
+    .srdicko-pozvanka {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-40);
+      flex-wrap: wrap;
+      max-width: 900px;
+      border: 1px solid var(--border);
+      padding: var(--s-40);
+    }
+    .srdicko-pozvanka h3 { margin-bottom: var(--s-8); }
+    .srdicko-pozvanka p { color: var(--text-secondary); font-size: 14px; max-width: 480px; }
+    @media (max-width: 720px) {
+      .srdicko-pozvanka { padding: var(--s-24); }
+      .srdicko-pozvanka .btn { width: 100%; text-align: center; justify-content: center; }
+    }
+  </style>
 
   <!-- ================= SOCIÁLNÍ SÍTĚ ================= -->
   <section class="section">

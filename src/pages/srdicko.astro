@@ -66,6 +66,8 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
 
           <div class="srdicko-akce">
             <button type="button" class="btn btn-primary btn-lg" id="stahnout" disabled>Stáhnout profilovku</button>
+            <button type="button" class="btn btn-blue btn-lg" id="sdilet" hidden disabled>Sdílet fotku</button>
+            <a class="btn btn-secondary" id="sdilet-odkaz" href="#" target="_blank" rel="noopener" hidden>Sdílet generátor na Facebooku</a>
             <button type="button" class="btn btn-secondary" id="reset" disabled>Vrátit výřez</button>
           </div>
 
@@ -199,6 +201,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
     }
     .srdicko-akce .btn { justify-content: center; text-align: center; }
     .srdicko-akce .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .srdicko-akce [hidden] { display: none; }
     .srdicko-poznamka {
       margin-top: var(--s-24);
       font-size: 13px;
@@ -240,6 +243,8 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
       const zoom = document.getElementById('zoom');
       const btnStahnout = document.getElementById('stahnout');
       const btnReset = document.getElementById('reset');
+      const btnSdilet = document.getElementById('sdilet');
+      const odkazSdilet = document.getElementById('sdilet-odkaz');
 
       const srdce = new Path2D(SRDCE_PATH);
       // Rámeček cesty srdce v souřadnicích loga (viz OPT-podklady-grafika/01 LOGO/SVG).
@@ -320,6 +325,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           zoom.disabled = false;
           btnStahnout.disabled = false;
           btnReset.disabled = false;
+          btnSdilet.disabled = false;
           drop.classList.remove('is-prazdne');
           vyzva.hidden = true;
           kresli();
@@ -411,6 +417,39 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
         zoom.value = Math.round(mer * 100);
         omez(); kresli();
       }, { passive: false });
+
+      // Sdílení: na mobilu pošleme rovnou hotové PNG do Facebooku či Messengeru,
+      // na počítači nabídneme aspoň sdílení odkazu na generátor.
+      function hotovaFotka() {
+        return new Promise((res) => platno.toBlob(
+          (b) => res(new File([b], 'profilovka-osobnosti-pro-trinec.png', { type: 'image/png' })),
+          'image/png'
+        ));
+      }
+
+      const umiSdiletSoubor = !!(navigator.canShare && navigator.canShare({
+        files: [new File([new Blob([''], { type: 'image/png' })], 'x.png', { type: 'image/png' })],
+      }));
+
+      if (umiSdiletSoubor) {
+        btnSdilet.hidden = false;
+        btnSdilet.addEventListener('click', async () => {
+          if (!obr) return;
+          try {
+            await navigator.share({
+              files: [await hotovaFotka()],
+              title: 'Srdcem pro Třinec',
+              text: 'Moje profilovka se srdíčkem Osobností pro Třinec.',
+            });
+          } catch (e) {
+            // Uživatel sdílení zavřel — nic neděláme.
+          }
+        });
+      } else {
+        odkazSdilet.hidden = false;
+        odkazSdilet.href = 'https://www.facebook.com/sharer/sharer.php?u='
+          + encodeURIComponent(location.origin + location.pathname);
+      }
 
       btnStahnout.addEventListener('click', () => {
         if (!obr) return;
