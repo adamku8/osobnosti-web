@@ -94,8 +94,7 @@ export const kandidati = [
     "profese": "analytik kyberbezpečnosti, fotograf",
     "foto": "thanasis_antoniadis_c.jpg",
     "iniciraly": "TA",
-    "detail": null,
-    "detailPriprava": "thanasis-antoniadis",
+    "detail": "thanasis-antoniadis",
     "poradiSlovem": "osmý"
   },
   {
@@ -184,8 +183,7 @@ export const kandidati = [
     "profese": "fotografka, marketingová specialistka",
     "foto": "darina_kubikova_c.jpg",
     "iniciraly": "DK",
-    "detail": null,
-    "detailPriprava": "darina-kubikova",
+    "detail": "darina-kubikova",
     "poradiSlovem": "šestnáctá"
   },
   {
@@ -313,8 +311,7 @@ export const kandidati = [
     "profese": "majitel cyklosalonu",
     "foto": "rudolf_rucki_c2.jpg",
     "iniciraly": "RR",
-    "detail": null,
-    "detailPriprava": "rudolf-rucki",
+    "detail": "rudolf-rucki",
     "poradiSlovem": "sedmadvacátý"
   }
 ];
