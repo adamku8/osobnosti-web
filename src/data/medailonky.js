@@ -698,4 +698,94 @@ export const medailonky = {
     ],
     video: null,
   },
+
+  'darina-kubikova': {
+    citace: 'Chci, aby se v Třinci <span class="hl">ještě víc žilo</span>, nejen bydlelo',
+    odpovedi: [
+      {
+        nadpis: 'Proč kandiduji',
+        text: 'Myslím si, že když člověk dostane příležitost něco ovlivnit nebo třeba jen trochu přispět k tomu, aby se věci posouvaly správným směrem, byla by škoda ji nevyužít.',
+      },
+      {
+        nadpis: 'Co chci posunout',
+        text: 'Ráda bych, aby se v Třinci ještě víc žilo, nejen bydlelo :) Aby se myslelo i na části města, které nejsou v centru, třeba na Sosnu. Chtěla bych, aby tu bylo víc možností pro sport (třeba zrovna workout hřiště na Sosně), volnočasové aktivity, kulturu a místa, kde se lidé můžou potkávat. A hlavně, aby tu chtěli zůstávat lidé, kteří se tu narodili, nebo se sem časem rádi vraceli.',
+      },
+      {
+        nadpis: 'Když zrovna nepracuji',
+        text: 'Ve volném čase nejraději sportuju, objevuju nová místa, čtu knihy a trávím čas v přírodě. A samozřejmě s partnerem, rodinou a přáteli.',
+      },
+    ],
+    rychleOtazky: [
+      { otazka: 'Třinec za čtyři roky', odpoved: 'Živější' },
+      { otazka: 'Inspirace pro Třinec', odpoved: 'Ostrava, Soluň' },
+      { otazka: 'Nejoblíbenější místo', odpoved: 'Záleží podle nálady' },
+      { otazka: 'Hory, nebo město?', odpoved: 'Město' },
+      { otazka: 'Pes, nebo kočka?', odpoved: 'Pes' },
+      { otazka: 'Léto, nebo zima?', odpoved: 'Jaro, léto, podzim, zima' },
+      { otazka: 'Kolo, nebo běh?', odpoved: 'Běh' },
+      { otazka: 'Ráno, nebo večer?', odpoved: 'Ráno i večer' },
+      { otazka: 'Hokej, nebo fotbal?', odpoved: 'Muay Thai :)' },
+    ],
+    video: null,
+  },
+
+  'rudolf-rucki': {
+    citace: 'Starší lidé by se měli <span class="hl">kamkoli jednoduše dostat</span>',
+    odpovedi: [
+      {
+        nadpis: 'Proč kandiduji',
+        text: 'Bydlím tu celý život, od malého děcka. Město mi není ukradené a chci, aby vzkvétalo.',
+      },
+      {
+        nadpis: 'Co chci posunout',
+        text: 'Je třeba se zaměřit na starší lidi, zejména ty nemobilní. Měli by se kamkoli jednoduše dostat, do nemocnice, na poštu, dalších zařízení. Taky bychom měli podporovat venkovní vyžití dětí, aby nemusely vysedávat doma u počítače nebo u telefonu. Sport je pro děti velmi důležitý, naučí se přijímat prohru a taky zažijí euforický pocit z výhry.',
+      },
+      {
+        nadpis: 'Když zrovna nepracuji',
+        text: 'Já jsem v práci prakticky pořád. Pokud nepracuju, uteču rád na kole mimo město. Jinak jsem nejradši v přírodě, v lese, mám dřevěnici pod Javorovým a nejraději bych tam byl pořád.',
+      },
+    ],
+    rychleOtazky: [
+      { otazka: 'Třinec za čtyři roky', odpoved: 'Lepší' },
+      { otazka: 'Inspirace pro Třinec', odpoved: 'Ustka (Polsko)' },
+      { otazka: 'Nejoblíbenější místo', odpoved: 'Oldřichovice' },
+      { otazka: 'Hory, nebo město?', odpoved: 'Hory' },
+      { otazka: 'Pes, nebo kočka?', odpoved: 'Kočkopes' },
+      { otazka: 'Léto, nebo zima?', odpoved: 'Léto' },
+      { otazka: 'Kolo, nebo běh?', odpoved: 'Kolo' },
+      { otazka: 'Ráno, nebo večer?', odpoved: 'Ráno' },
+      { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
+    ],
+    video: null,
+  },
+
+  'thanasis-antoniadis': {
+    citace: 'Chci, aby byl Třinec <span class="hl">ještě živější a příjemnější</span>',
+    odpovedi: [
+      {
+        nadpis: 'Proč kandiduji',
+        text: 'Dostal jsem možnost kandidovat a řekl jsem si, že proč ne. Když člověk dostane možnost něco ovlivnit a udělat něco pro město, kde žije, byla by škoda to nezkusit.',
+      },
+      {
+        nadpis: 'Co chci posunout',
+        text: 'Chtěl bych, aby byl Třinec ještě živějším a příjemnějším městem pro lidi, kteří tu žijí. Vidím prostor hlavně v kultuře, volnočasových aktivitách a místech, kde se lidé můžou potkávat. Aby Třinec nebyl jen městem, kde člověk bydlí, ale kde chce trávit svůj čas.',
+      },
+      {
+        nadpis: 'Když zrovna nepracuji',
+        text: 'Volný čas nejraději trávím s partnerkou, rodinou, přáteli a naším psem. K tomu si občas odskočím za bicí do zkušebny nebo vyrazím fotit do studia.',
+      },
+    ],
+    rychleOtazky: [
+      { otazka: 'Třinec za čtyři roky', odpoved: 'Živý' },
+      { otazka: 'Inspirace pro Třinec', odpoved: 'Soluň, Polský Těšín' },
+      { otazka: 'Nejoblíbenější místo', odpoved: 'Kdekoliv' },
+      { otazka: 'Hory, nebo město?', odpoved: 'Město' },
+      { otazka: 'Pes, nebo kočka?', odpoved: 'Pes' },
+      { otazka: 'Léto, nebo zima?', odpoved: 'Všechny roční období' },
+      { otazka: 'Kolo, nebo běh?', odpoved: 'Chůze' },
+      { otazka: 'Ráno, nebo večer?', odpoved: 'Obojí' },
+      { otazka: 'Hokej, nebo fotbal?', odpoved: 'Bojové sporty' },
+    ],
+    video: null,
+  },
 };
