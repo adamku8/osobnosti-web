@@ -45,10 +45,9 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
         </div>
 
         <div class="srdicko-ovladani">
-          <label class="srdicko-vyber">
-            <input type="file" id="soubor" accept="image/*" hidden>
-            <span class="btn btn-primary btn-lg" id="btn-vybrat">Vybrat fotku</span>
-          </label>
+          <input type="file" id="soubor" accept="image/jpeg,image/png,image/webp,image/gif,image/*" hidden>
+          <button type="button" class="btn btn-primary btn-lg srdicko-vyber" id="btn-vybrat">Vybrat fotku</button>
+          <p class="srdicko-hlaska" id="hlaska" role="status" hidden></p>
 
           <div class="srdicko-blok">
             <label class="srdicko-label" for="zoom">Velikost fotky</label>
@@ -152,7 +151,13 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
       color: var(--text-muted);
       margin-bottom: var(--s-16);
     }
-    .srdicko-vyber .btn { width: 100%; justify-content: center; text-align: center; cursor: pointer; }
+    .srdicko-vyber { width: 100%; justify-content: center; text-align: center; cursor: pointer; }
+    .srdicko-hlaska {
+      margin-top: var(--s-16);
+      font-size: 14px;
+      color: var(--brand-red);
+    }
+    .srdicko-hlaska[hidden] { display: none; }
     #zoom { width: 100%; accent-color: var(--brand-red); }
     #zoom:disabled { opacity: 0.4; }
     .srdicko-akce {
@@ -207,6 +212,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
       const btnReset = document.getElementById('reset');
       const btnSdilet = document.getElementById('sdilet');
       const odkazSdilet = document.getElementById('sdilet-odkaz');
+      const hlaska = document.getElementById('hlaska');
 
       const srdce = new Path2D(SRDCE_PATH);
       // Rámeček cesty srdce v souřadnicích loga (viz OPT-podklady-grafika/01 LOGO/SVG).
@@ -269,10 +275,24 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
         posY = Math.min(maxY, Math.max(-maxY, posY));
       }
 
+      function rekni(text) {
+        hlaska.textContent = text || '';
+        hlaska.hidden = !text;
+      }
+
       function nacti(soubor) {
-        if (!soubor || !soubor.type.startsWith('image/')) return;
+        if (!soubor) return;
+        // Typ nekontrolujeme dopředu: některé systémy pošlou prázdný MIME
+        // a HEIC z iPhonu se tváří jako obrázek, ale prohlížeč ho nerozkóduje.
+        // Rozhodne až samotné načtení, chybu oznámíme uživateli.
+        rekni('');
         const url = URL.createObjectURL(soubor);
         const i = new Image();
+        i.onerror = function () {
+          URL.revokeObjectURL(url);
+          rekni('Tuhle fotku se nepodařilo otevřít. Bývá to formát HEIC z iPhonu — '
+            + 'uložte ji prosím jako JPG nebo PNG a zkuste to znovu.');
+        };
         i.onload = function () {
           obr = i;
           zaklad = Math.max(S / i.naturalWidth, S / i.naturalHeight);
@@ -292,7 +312,11 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
 
       // --- ovládání ---
       document.getElementById('btn-vybrat').addEventListener('click', () => vstup.click());
-      vstup.addEventListener('change', (e) => nacti(e.target.files[0]));
+      vstup.addEventListener('change', (e) => {
+        nacti(e.target.files[0]);
+        // Bez vynulování by druhý výběr téhož souboru neodpálil change.
+        e.target.value = '';
+      });
 
       drop.classList.add('is-prazdne');
       drop.addEventListener('click', () => { if (!obr) vstup.click(); });
