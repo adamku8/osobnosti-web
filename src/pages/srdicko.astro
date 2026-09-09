@@ -54,6 +54,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
             <p class="srdicko-label">Co dát na fotku</p>
             <div class="srdicko-odznaky" role="group" aria-label="Výběr odznaku">
               <button type="button" class="srdicko-odznak is-aktivni" data-odznak="srdce">Srdíčko</button>
+              <button type="button" class="srdicko-odznak" data-odznak="srdce-cislo">Srdíčko s číslem</button>
               <button type="button" class="srdicko-odznak" data-odznak="kvet">Květinka s číslem</button>
             </div>
           </div>
@@ -301,6 +302,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
             ctx.drawImage(kvet, bx - w / 2, by - h / 2, w, h);
           }
         } else {
+          // Bílá samolepka pod srdíčkem (a případně i pod číslem).
           ctx.save();
           ctx.fillStyle = '#FFFFFF';
           ctx.beginPath();
@@ -310,7 +312,18 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           ctx.strokeStyle = 'rgba(50,50,50,0.14)';
           ctx.stroke();
           ctx.restore();
-          kresliSrdce(bx, by, br * 1.22, '#FF2D2D');
+
+          if (odznak === 'srdce-cislo') {
+            kresliSrdce(bx, by - br * 0.34, br * 0.86, '#FF2D2D');
+            ctx.save();
+            ctx.fillStyle = '#FF2D2D';
+            ctx.textAlign = 'center';
+            ctx.font = "800 92px Montserrat, 'Arial Black', sans-serif";
+            ctx.fillText('3', bx, by + br * 0.78);
+            ctx.restore();
+          } else {
+            kresliSrdce(bx, by, br * 1.22, '#FF2D2D');
+          }
         }
       }
 
@@ -397,6 +410,12 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           kresli();
         });
       });
+
+      // Číslo u varianty se srdíčkem sází canvas Montserratem; než se font
+      // stáhne, vykreslil by ho náhradním řezem — proto po načtení překreslíme.
+      if (document.fonts && document.fonts.load) {
+        document.fonts.load("800 92px Montserrat").then(() => kresli()).catch(() => {});
+      }
 
       // Tažení myší i prstem, dvěma prsty i přiblížení.
       const prsty = new Map();
