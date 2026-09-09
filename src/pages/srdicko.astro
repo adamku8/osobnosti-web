@@ -34,7 +34,6 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
         <div class="srdicko-plocha">
           <div class="srdicko-nahled" id="drop">
             <canvas id="platno" width="1080" height="1080" aria-label="Náhled profilové fotky se srdíčkem"></canvas>
-            <div class="srdicko-kruh" aria-hidden="true"></div>
             <div class="srdicko-vyzva" id="vyzva">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v13"/>
@@ -42,7 +41,7 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
               <p><strong>Vyberte fotku</strong><br>nebo ji sem přetáhněte</p>
             </div>
           </div>
-          <p class="srdicko-tip">Fotku posunete tažením, velikost změníte posuvníkem níže.</p>
+          <p class="srdicko-tip">Fotku posunete tažením, velikost změníte posuvníkem níže. Facebook si obrázek sám ořízne do kolečka.</p>
         </div>
 
         <div class="srdicko-ovladani">
@@ -133,16 +132,6 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
     .srdicko-nahled.is-prazdne { cursor: pointer; }
     .srdicko-nahled.je-cil { border-color: var(--brand-red); }
     #platno { width: 100%; height: 100%; display: block; }
-    /* Vodítko kruhového ořezu — jen náhled, do staženého souboru se nekreslí. */
-    .srdicko-kruh {
-      position: absolute; inset: 0;
-      border-radius: 12px;
-      pointer-events: none;
-      box-shadow: inset 0 0 0 2000px rgba(50, 50, 50, 0.14);
-      -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0 49.6%, #000 49.7%);
-      mask: radial-gradient(circle at 50% 50%, transparent 0 49.6%, #000 49.7%);
-    }
-    .srdicko-nahled.is-prazdne .srdicko-kruh { display: none; }
     .srdicko-vyzva {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
