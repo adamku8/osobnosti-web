@@ -708,7 +708,7 @@ export const medailonky = {
       },
       {
         nadpis: 'Co chci posunout',
-        text: 'Ráda bych, aby se v Třinci ještě víc žilo, nejen bydlelo :) Aby se myslelo i na části města, které nejsou v centru, třeba na Sosnu. Chtěla bych, aby tu bylo víc možností pro sport (třeba zrovna workout hřiště na Sosně), volnočasové aktivity, kulturu a místa, kde se lidé můžou potkávat. A hlavně, aby tu chtěli zůstávat lidé, kteří se tu narodili, nebo se sem časem rádi vraceli.',
+        text: 'Ráda bych, aby se v Třinci ještě víc žilo, nejen bydlelo :) Aby se myslelo i na části města, které nejsou v centru, třeba na Sosnu. Chtěla bych, aby tu bylo víc možností pro sport, volnočasové aktivity, kulturu a místa, kde se lidé můžou potkávat. A hlavně, aby tu chtěli zůstávat lidé, kteří se tu narodili, nebo se sem časem rádi vraceli.',
       },
       {
         nadpis: 'Když zrovna nepracuji',
