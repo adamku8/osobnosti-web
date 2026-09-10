@@ -1,6 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url.js';
+
+const podnav = [
+  { id: 'udalost',   label: 'Událost na Facebooku' },
+  { id: 'srdicko',   label: 'Srdíčko na profilovku' },
+  { id: 'site',      label: 'Sociální sítě' },
+  { id: 'akce',      label: 'Meetingy a akce' },
+  { id: 'prispevek', label: 'Finanční příspěvek' },
+  { id: 'fakturace', label: 'Fakturační údaje' },
+];
 ---
 <Base
   title="Podpořte nás — Osobnosti pro Třinec"
@@ -22,81 +31,93 @@ import { u } from '../lib/url.js';
     </div>
   </section>
 
-  <!-- ================= FB UDÁLOST ================= -->
-  <section class="section udalost-section">
+  <!-- ================= PODMENU ================= -->
+  <nav class="podnav" aria-label="Obsah stránky">
     <div class="container">
-      <a class="udalost" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">
-        <div class="udalost-ikona">
+      <p class="podnav-title">Na této stránce</p>
+      <ol class="podnav-list">
+        {podnav.map((polozka, i) => (
+          <li>
+            <a href={`#${polozka.id}`}>
+              <span class="podnav-cislo">{String(i + 1).padStart(2, '0')}</span>
+              <span class="podnav-label">{polozka.label}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ================= 01 · FB UDÁLOST ================= -->
+  <section class="section podpora-sekce" id="udalost">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">01 · Přidejte se k události</p>
+        <h2>Volím Osobnosti</h2>
+        <p class="section-note">
+          Dejte ostatním vědět, že jdete volit. Přidání do události uvidí
+          vaši přátelé — je to nejrychlejší způsob, jak nám pomoct.
+        </p>
+      </div>
+      <a class="akce-karta" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">
+        <span class="akce-ikona">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="4" width="18" height="18" rx="2"/>
             <path d="M16 2v4M8 2v4M3 10h18"/>
             <path d="m9 16 2 2 4-4"/>
           </svg>
-        </div>
-        <div class="udalost-text">
-          <p class="udalost-eyebrow">Událost na Facebooku</p>
-          <h2>Volím <span class="hl">Osobnosti</span></h2>
-          <p class="udalost-popis">
-            Dejte ostatním vědět, že jdete volit. Přidejte se k události —
-            je to nejrychlejší způsob, jak nám pomoct.
-          </p>
-          <p class="udalost-datum">9.–10. října 2026 · Třinec</p>
-        </div>
-        <span class="btn btn-primary btn-lg udalost-btn">Přidat se k události</span>
+        </span>
+        <span class="akce-text">
+          <span class="akce-nadpis">9.–10. října 2026 · Třinec</span>
+          <span class="akce-popis">
+            Událost „Volím Osobnosti“ na Facebooku. Jedno kliknutí,
+            žádná registrace, žádné údaje navíc.
+          </span>
+        </span>
+        <span class="btn btn-primary btn-lg akce-btn">Přidat se k události</span>
       </a>
     </div>
   </section>
 
-  <!-- ================= SRDÍČKO NA PROFILOVKU ================= -->
-  <section class="section">
+  <!-- ================= 02 · SRDÍČKO NA PROFILOVKU ================= -->
+  <section class="section podpora-sekce" id="srdicko">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Ukažte to na profilu</p>
-        <h2>Srdíčko na <span class="hl">profilovku</span></h2>
+        <p class="eyebrow">02 · Ukažte to na profilu</p>
+        <h2>Srdíčko na profilovku</h2>
         <p class="section-note">
-          Nejrychlejší způsob, jak nás podpořit. Nahrajete fotku, srovnáte
-          výřez a stáhnete si profilovku se srdíčkem Osobností. Na telefonu
-          ji pošlete rovnou do Facebooku. Trvá to minutu.
+          Nahrajete fotku, srovnáte výřez a stáhnete si profilovku se srdíčkem
+          Osobností. Na telefonu ji pošlete rovnou do Facebooku. Trvá to minutu.
         </p>
       </div>
-      <div class="srdicko-pozvanka">
-        <div class="srdicko-pozvanka-text">
-          <h3>Vaše fotka zůstává u vás</h3>
-          <p>
+      <a class="akce-karta" href={u('srdicko.html')}>
+        <span class="akce-ikona">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.8 6.6a5 5 0 0 0-7.1 0L12 8.3l-1.7-1.7a5 5 0 1 0-7.1 7.1l1.7 1.7L12 22.5l7.1-7.1 1.7-1.7a5 5 0 0 0 0-7.1z"/>
+          </svg>
+        </span>
+        <span class="akce-text">
+          <span class="akce-nadpis">Vaše fotka zůstává u vás</span>
+          <span class="akce-popis">
             Obrázek skládá váš prohlížeč — nikam se neodesílá ani neukládá.
             Výsledek je PNG 1080 × 1080 px pro Facebook i Instagram.
-          </p>
-        </div>
-        <a class="btn btn-primary btn-lg" href={u('srdicko.html')}>Vyrobit profilovku</a>
-      </div>
+          </span>
+        </span>
+        <span class="btn btn-primary btn-lg akce-btn">Vyrobit profilovku</span>
+      </a>
     </div>
   </section>
 
-  <style>
-    .srdicko-pozvanka {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--s-40);
-      flex-wrap: wrap;
-      max-width: 900px;
-      border: 1px solid var(--border);
-      padding: var(--s-40);
-    }
-    .srdicko-pozvanka h3 { margin-bottom: var(--s-8); }
-    .srdicko-pozvanka p { color: var(--text-secondary); font-size: 14px; max-width: 480px; }
-    @media (max-width: 720px) {
-      .srdicko-pozvanka { padding: var(--s-24); }
-      .srdicko-pozvanka .btn { width: 100%; text-align: center; justify-content: center; }
-    }
-  </style>
-
-  <!-- ================= SOCIÁLNÍ SÍTĚ ================= -->
-  <section class="section">
+  <!-- ================= 03 · SOCIÁLNÍ SÍTĚ ================= -->
+  <section class="section podpora-sekce" id="site">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Sledujte nás</p>
+        <p class="eyebrow">03 · Sledujte nás</p>
         <h2>Sociální sítě</h2>
+        <p class="section-note">
+          Novinky, akce a lidé z kampaně. Sledovat a sdílet je pomoc,
+          která nic nestojí.
+        </p>
       </div>
       <div class="support-grid">
         <a class="support-card" href="https://www.facebook.com/osobnostiprotrinec" target="_blank" rel="noopener">
@@ -112,18 +133,14 @@ import { u } from '../lib/url.js';
           <span class="support-link">@osobnosti_pro_trinec →</span>
         </a>
       </div>
-      <div class="section-cta stat-links" style="justify-content:center">
-        <a class="btn btn-blue btn-lg" href="https://www.facebook.com/osobnostiprotrinec" target="_blank" rel="noopener">Sledovat na Facebooku</a>
-        <a class="btn btn-secondary btn-lg" href="https://www.instagram.com/osobnosti_pro_trinec/" target="_blank" rel="noopener">Sledovat na Instagramu</a>
-      </div>
     </div>
   </section>
 
-  <!-- ================= MEETINGY A AKCE ================= -->
-  <section class="section">
+  <!-- ================= 04 · MEETINGY A AKCE ================= -->
+  <section class="section podpora-sekce" id="akce">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Potkejme se</p>
+        <p class="eyebrow">04 · Potkejme se</p>
         <h2>Meetingy a akce</h2>
         <p class="section-note">
           Přijďte si popovídat — o programu, o městě, o čemkoli.
@@ -145,16 +162,6 @@ import { u } from '../lib/url.js';
               <p>Termín a místo doplníme. Sledujte Facebook.</p>
             </div>
           </article>
-          <article class="event">
-            <div class="event-date">
-              <span class="event-day">—</span>
-              <span class="event-month">brzy</span>
-            </div>
-            <div class="event-body">
-              <h3>Debata o programu</h3>
-              <p>Termín a místo doplníme. Sledujte Facebook.</p>
-            </div>
-          </article>
         </div>
       )}
       <div class="section-cta">
@@ -163,12 +170,16 @@ import { u } from '../lib/url.js';
     </div>
   </section>
 
-  <!-- ================= FINANČNÍ PŘÍSPĚVEK ================= -->
-  <section class="section">
+  <!-- ================= 05 · FINANČNÍ PŘÍSPĚVEK ================= -->
+  <section class="section podpora-sekce" id="prispevek">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Přispějte na kampaň</p>
+        <p class="eyebrow">05 · Přispějte na kampaň</p>
         <h2>Finanční příspěvek</h2>
+        <p class="section-note">
+          Tisk, plakáty, web, nájmy sálů. Vše platíme z transparentního účtu,
+          takže je vidět každá koruna na obou stranách.
+        </p>
       </div>
       <div class="donate-grid">
         <div class="donate-box">
@@ -196,11 +207,11 @@ import { u } from '../lib/url.js';
     </div>
   </section>
 
-  <!-- ================= FAKTURAČNÍ ÚDAJE ================= -->
-  <section class="section">
+  <!-- ================= 06 · FAKTURAČNÍ ÚDAJE ================= -->
+  <section class="section podpora-sekce" id="fakturace">
     <div class="container">
       <div class="section-head">
-        <p class="eyebrow">Pro dárce a dodavatele</p>
+        <p class="eyebrow">06 · Pro dárce a dodavatele</p>
         <h2>Fakturační údaje</h2>
         <p class="section-note">
           Zadavatelem i zpracovatelem kampaně je politické hnutí NOVÁ GENERACE.
@@ -241,4 +252,124 @@ import { u } from '../lib/url.js';
       </div>
     </div>
   </section>
+
+  <style>
+    /* ---------- Podmenu (obsah stránky) ---------- */
+    .podnav {
+      margin-top: var(--s-64);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: var(--s-24) 0;
+    }
+    .podnav-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--s-16);
+    }
+    .podnav-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--s-8) var(--s-24);
+    }
+    .podnav-list a {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 6px 0;
+      text-decoration: none;
+      color: var(--text);
+      transition: color 240ms var(--ease-ui);
+    }
+    .podnav-cislo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      transition: color 240ms var(--ease-ui);
+    }
+    .podnav-label {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+    }
+    .podnav-list a:hover { color: var(--signal-blue); }
+    .podnav-list a:hover .podnav-cislo { color: var(--signal-blue); }
+
+    /* ---------- Sjednocené sekce ---------- */
+    .podpora-sekce { scroll-margin-top: 88px; }
+    .podpora-sekce + .podpora-sekce { border-top: 1px solid var(--border); }
+    .podpora-sekce .section-head { margin-bottom: var(--s-40); }
+
+    /* ---------- Akční karta (událost, srdíčko) ---------- */
+    .akce-karta {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: var(--s-40);
+      align-items: center;
+      max-width: 900px;
+      padding: var(--s-40);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 240ms var(--ease-ui), box-shadow 240ms var(--ease-ui);
+    }
+    .akce-karta:hover {
+      border-color: var(--anthracite);
+      box-shadow: 0 8px 24px rgba(50, 50, 50, 0.10);
+    }
+    .akce-ikona {
+      width: 88px;
+      height: 88px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      color: var(--signal-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .akce-ikona svg { width: 40px; height: 40px; }
+    .akce-text { display: block; min-width: 0; }
+    .akce-nadpis {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: var(--s-8);
+    }
+    .akce-popis {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 14px;
+      max-width: 48ch;
+      overflow-wrap: break-word;
+    }
+    .akce-btn { white-space: nowrap; }
+
+    @media (max-width: 900px) {
+      .podnav-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .akce-karta {
+        grid-template-columns: minmax(0, 1fr);
+        justify-items: center;
+        text-align: center;
+        gap: var(--s-24);
+        padding: var(--s-24);
+      }
+      .akce-ikona { width: 72px; height: 72px; }
+      .akce-text { width: 100%; }
+      .akce-ikona svg { width: 32px; height: 32px; }
+      .akce-popis { margin-left: auto; margin-right: auto; }
+      .akce-btn { width: 100%; text-align: center; justify-content: center; white-space: normal; }
+    }
+    @media (max-width: 560px) {
+      .podnav-list { grid-template-columns: 1fr; }
+    }
+  </style>
 </Base>
