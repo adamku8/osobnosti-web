@@ -1313,7 +1313,8 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 .video-wrap.is-instagram {
   aspect-ratio: auto;
   /* 340px sloupec → video 9:16 = 604px, k tomu hlavička embedu (~54)
-     a lišta s ikonami (~48). Ověřeno na reelu Kurzok/Chmielewski. */
+     a lišta s ikonami (~48). Dopočítané, ne změřené — při první vizuální
+     kontrole doladit, ať embed nemá uříznutý spodek ani prázdné pásmo. */
   height: 710px;
   min-width: 326px; /* pod tuhle šířku Instagram embed nevykreslí */
   background: transparent;
