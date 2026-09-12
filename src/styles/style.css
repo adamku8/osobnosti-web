@@ -1419,9 +1419,6 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .cand-nav .container { grid-template-columns: 1fr; }
   .cand-nav-item.next { text-align: left; align-items: flex-start; border-left: none; border-top: 1px solid var(--border); }
   .cand-main { grid-template-columns: 1fr; gap: var(--s-40); }
-  /* Na mobilu stojí video samo nad odpověďmi — vycentrovat i s popiskem. */
-  .cand-media { display: flex; flex-direction: column; align-items: center; }
-  .video-caption { text-align: center; }
   .video-wrap { max-width: 320px; }
   /* IG embed má tvrdé minimum 326px, takže ho z max-width vyjímáme */
   .video-wrap.is-instagram { max-width: 326px; height: 690px; }
