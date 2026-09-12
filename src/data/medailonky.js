@@ -707,7 +707,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: null,
+    video: { typ: 'instagram', url: 'https://www.instagram.com/p/DczAeD1IGRo/' },
   },
 
   'darina-kubikova': {
