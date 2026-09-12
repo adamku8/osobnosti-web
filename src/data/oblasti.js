@@ -30,6 +30,7 @@ export const oblasti = [
     "klic": "Akční",
     "nazev": "Akční Třinec.",
     "podnadpis": "Sport a kultura",
+    "uvod": "Třinec má energii. Dávají mu ji lidé, kteří sportují, tvoří, pořádají akce a dávají ostatní dohromady. Podpoříme je, rozhýbeme centrum i příměstské části a dětem otevřeme dveře ke sportu a kroužkům. Nejlepší město je totiž to, které žije.",
     "teaser": "Třinec drží spolky, sport a lidé, kteří něco dělají. Chceme jim uvolnit ruce a otevřít víc míst k setkávání.",
     "body": [
       "podpoříme místní <strong>spolky a aktivní komunity</strong>",
