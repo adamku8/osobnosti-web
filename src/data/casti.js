@@ -236,7 +236,7 @@ export const zavazky = [
     "ikona": "<path d=\"M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z\"/>",
     "strucne": "Sucho ve studni a čekání na kanalizaci se netýká sídlišť, ale částí. Na domovní čistírny má stát vypsané peníze — jenže žádost musí podat město, ne majitel domu.",
     "detail": [
-      "<strong>Domovní čistírny.</strong> Národní program Životní prostředí platí až 80 % ceny — 150 tisíc na čistírnu pro jeden dům, 300 tisíc pro větší. Žádosti se přijímají do ledna 2027 a čistírny zůstávají ve správě města. Podáme ji.",
+      "<strong>Domovní čistírny.</strong> Národní program Životní prostředí přispěje až 150 tisíc na čistírnu pro jeden dům a 300 tisíc pro větší — bez procentního stropu, může pokrýt i celou cenu. Žádosti se přijímají do ledna 2027, město pak čistírny deset let provozuje a ručí za jejich chod. Podáme ji za části, kam kanalizace nikdy nepovede.",
       "<strong>Půjčka na vodu.</strong> Město má Fond rozvoje bydlení a nevyčerpá ho — loni z půldruhého milionu půjčilo 590 tisíc. Rozšíříme ho o nádrže, vsakování a studny.",
       "<strong>Konec čekání naslepo.</strong> Zveřejníme plán odkanalizování s pořadím a termíny, ať každý ví, jestli má čekat, nebo si pořídit vlastní čistírnu.",
       "<strong>Vodovod dál od centra.</strong> Rozšíření vodovodu Nebory–Dušinec směrem na Kanadu a Podlesí dostane termín místo dnešního „2027+“."
