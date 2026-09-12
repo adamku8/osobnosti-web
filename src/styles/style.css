@@ -966,7 +966,7 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: var(--s-40);
   margin-bottom: var(--s-40);
 }
@@ -992,6 +992,38 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 .site-footer a { color: rgba(255, 255, 255, 0.72); text-decoration: none; transition: color 240ms var(--ease-ui); }
 .site-footer a:hover { color: #ffffff; }
 .site-footer li { list-style: none; margin-bottom: var(--s-8); }
+/* Výrazné odkazy na sítě — bílá tlačítka na tmavé patičce (bez červené,
+   ta patří jen jednomu prvku na vizuál). */
+.footer-social-label {
+  margin-top: var(--s-24);
+  margin-bottom: var(--s-16);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.footer-social { display: flex; flex-wrap: wrap; gap: var(--s-16); }
+.site-footer a.social-btn,
+.site-footer a.social-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 100px;
+  background: #ffffff;
+  color: var(--anthracite);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  transition: background 240ms var(--ease-ui);
+}
+.site-footer a.social-btn:hover,
+.site-footer a.social-btn:visited:hover {
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--anthracite);
+}
 .footer-legal {
   border-top: 1px solid rgba(255, 255, 255, 0.14);
   padding-top: var(--s-24);
