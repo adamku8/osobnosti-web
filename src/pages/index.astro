@@ -130,7 +130,7 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
         </p>
       </div>
       <div class="promises">
-        {oblasti.map(o => <OblastKarta o={o} href={u(`program.html#oblast-${o.cislo}`)} />)}
+        {oblasti.map(o => <OblastKarta o={o} href={u(`program.html#oblast-${o.cislo}`)} odkazText="Náš program →" bezCisla />)}
       </div>
       <div class="section-cta stat-links" style="justify-content:center">
         <a class="btn btn-blue btn-lg" href={u('program.html')}>Celý program</a>

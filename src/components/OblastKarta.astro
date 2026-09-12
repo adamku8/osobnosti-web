@@ -1,18 +1,19 @@
 ---
 // Karta programové oblasti. Volitelný `href` (úvod) přidá dole proklik
-// na plný blok oblasti v /program.html#oblast-XX.
-const { o, href = null } = Astro.props;
+// na plný blok oblasti v /program.html#oblast-XX; `odkazText` je jeho popisek.
+// `bezCisla` skryje pořadové číslo — na úvodu zůstává jen ikona.
+const { o, href = null, odkazText = 'Celá oblast →', bezCisla = false } = Astro.props;
 ---
 <article class="promise" id={`promise-${o.cislo}`}>
   <svg class="promise-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
   <div class="promise-head">
-    <div class="promise-index">{o.cislo}</div>
+    {!bezCisla && <div class="promise-index">{o.cislo}</div>}
     <svg class="promise-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={o.ikona} />
   </div>
   <h3>{o.nazev}</h3>
   <p class="promise-podnadpis">{o.podnadpis}</p>
   <ul>{o.body.map(b => <li set:html={b} />)}</ul>
-  {href && <a class="people-more promise-more" href={href}>Celá oblast →</a>}
+  {href && <a class="people-more promise-more" href={href}>{odkazText}</a>}
 </article>
 
 <style>
