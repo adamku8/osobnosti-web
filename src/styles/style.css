@@ -1053,8 +1053,11 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .promise { border-right: none; padding-left: 0; padding-right: 0; }
     .footer-grid { grid-template-columns: 1fr; }
 
-  .vote-callout .container { flex-direction: column; text-align: center; gap: var(--s-24); }
+  /* banner s květem zůstává vedle sebe, jen menší květ; sloupec až na telefonech */
   .vote-flower { width: 128px; height: 128px; }
+}
+@media (max-width: 600px) {
+  .vote-callout .container { flex-direction: column; text-align: center; gap: var(--s-24); }
 }
 
 /* Velmi úzké telefony (~360px a méně) — hlavička se jinak nevejde na jeden řádek
