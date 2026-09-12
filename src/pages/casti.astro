@@ -11,7 +11,7 @@
 // Licence vyžaduje uvedení autora — popisek v .panorama-caption smazat nelze.
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url.js';
-import { casti, souhrn, zavazky, SKOLY, OBDOBI } from '../data/casti.js';
+import { souhrn, zavazky, SKOLY, OBDOBI } from '../data/casti.js';
 import { oblasti } from '../data/oblasti.js';
 
 const cislo = new Intl.NumberFormat('cs-CZ');
@@ -19,10 +19,6 @@ const cislo = new Intl.NumberFormat('cs-CZ');
 // Přesná čísla na haléře drží casti.js a analýza.
 const procenta = (x) => `${Math.round(x * 100)} %`;
 const miliony = (x) => cislo.format(Math.round(x / 1e6));
-// Akce pod milion se píšou v tisících, ať nikde nevznikne „0 mil.“.
-const castka = (mil) => mil >= 1
-  ? `${cislo.format(Math.round(mil))} mil.`
-  : `${cislo.format(Math.round(mil * 1000))} tis.`;
 
 // Podíly pro infografiku — obojí z casti.js, ať se to nikdy nerozejde.
 const lidiCasti = souhrn.podilObyvatel;
@@ -42,12 +38,6 @@ const sBoxem = (z) => {
     ? { pred: z.nazev, box: null, za: '' }
     : { pred: z.nazev.slice(0, i), box: z.hl, za: z.nazev.slice(i + z.hl.length) };
 };
-
-// Největší akce, od nejdražší. Části, kde největší akce nedosáhla milionu
-// (Kojkovice, Karpentná) nebo kde nebyla žádná (Kanada, Horní Líštná), se
-// nevypisují — ocas seznamu s pomlčkami četl jako obvinění, a ten tón na
-// stránku nechceme. Kompletní přehled má analýza.
-const nejvetsi = casti.filter(c => c.top.mil >= 1).sort((a, b) => b.top.mil - a.top.mil);
 
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 // Tisková zkratka téhle stránky — generuje ji ../../make_casti_a4.py.
@@ -150,19 +140,6 @@ const PDF = 'assets/casti-osobnosti-pro-trinec-2026.pdf';
         stejně tak jsme odečetli školy v Oldřichovicích, Gutech a na Osůvkách.
         Přesunuto je {miliony(SKOLY)} mil. Kč.
       </p>
-
-      <div class="nej">
-        <h3 class="nej-nadpis">Největší akce posledních čtyř let</h3>
-        <ol class="nej-list">
-          {nejvetsi.map(c => (
-            <li class="nej-radek">
-              <span class="nej-cast">{c.nazev}</span>
-              <span class="nej-akce">{c.top.co}</span>
-              <span class="nej-castka">{castka(c.top.mil)}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
 
       <p class="section-note">
         Kapitálové výdaje města {OBDOBI} — skutečné čerpání, bez oprav z běžných výdajů.

@@ -1703,57 +1703,6 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
 }
 .ig-skoly strong { color: var(--text); font-weight: 600; }
 
-/* ---------- Největší akce v každé části ---------- */
-.nej { margin-top: var(--s-64); }
-.nej-nadpis {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: var(--s-16);
-}
-.nej-list {
-  list-style: none;
-  columns: 2;
-  column-gap: var(--s-64);
-}
-.nej-radek {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: 0 var(--s-16);
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-  break-inside: avoid;
-}
-.nej-cast {
-  grid-column: 1;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-.nej-akce {
-  grid-column: 1;
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-.nej-castka {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: center;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 15px;
-  color: var(--signal-blue);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
 /* ---------- Závazky ---------- */
 .zav-list { list-style: none; border-top: 1px solid var(--border); }
 .zav {
@@ -1798,7 +1747,6 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
   .zav { grid-template-columns: 1fr; gap: var(--s-16); padding: var(--s-24) 0; }
   .zav-obraz { grid-column: 1; grid-row: auto; order: 3; }
   .zav-znak, .zav-body { grid-row: auto; }
-  .nej-list { columns: 1; }
   .ig-mark-note { margin-left: 0 !important; padding-left: 0; }
 }
 @media (max-width: 520px) {
