@@ -1,6 +1,10 @@
 ---
+// Karta projektu (vize) na úvodu. Odkaz `p.odkaz` (např. Javorový) vede na
+// podstránku, která zatím není veřejná (src/pages/nahled-k7x2m9/) — dokud není
+// venku, karta ho nevykresluje. Stejný přepínač má src/pages/program.astro.
 const { p } = Astro.props;
 import { u } from '../lib/url.js';
+const ODKAZY_PROJEKTU = false;
 ---
 <article class="project">
   <img src={u(`assets/img/projekty/${p.obrazek}`)} alt={p.alt} loading="lazy">
@@ -8,6 +12,6 @@ import { u } from '../lib/url.js';
     <div class="promise-index">{p.cislo}</div>
     <h3>{p.nazev}</h3>
     <p>{p.text}</p>
-    {p.odkaz && <a class="people-more" href={u(p.odkaz.href)}>{p.odkaz.text}</a>}
+    {ODKAZY_PROJEKTU && p.odkaz && <a class="people-more" href={u(p.odkaz.href)}>{p.odkaz.text}</a>}
   </div>
 </article>
