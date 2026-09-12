@@ -1577,142 +1577,281 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
   .proj-nazev { font-size: 18px; }
 }
 
+
 /* ==========================================================
-   Příměstské části (/casti.html)
-   Graf je čistě CSS: pruh = investice na obyvatele vůči nejsilnější části.
-   Barva pruhu drží paletu — antracit v alfě, sídliště světlejší; červená
-   zůstává jen pro .hl v nadpisech (jeden hit na obrazovku).
+   Příměstské části (/casti.html) — stručná verze
+   Infografika je čisté CSS: dva stoprocentní pruhy pod sebou,
+   modrá = příměstské části (barva dat), šedá = sídliště.
+   Červená zůstává jen pro .hl v nadpisech — jeden hit na sekci.
    ========================================================== */
-.casti-cisla {
+.casti-cisla-sekce .section-head { margin-bottom: var(--s-40); }
+/* Dvě sekce po sobě s plným paddingem dělaly mezi grafem a závazky přes 190 px prázdna. */
+.casti-cisla-sekce { padding-bottom: var(--s-64); }
+.casti-zavazky-sekce { padding-top: var(--s-64); }
+
+/* Fotka pod hero: na /casti.html se nepodsouvá pod nadpis jako na úvodu —
+   hero má delší text a přetahoval se přes něj. Bílý závoj shora (.panorama::before)
+   zůstává (změkčuje nástup z bílé). Výřez je posunutý dolů, ať je v záběru
+   vesnice, ne mraky. */
+.panorama-flat { margin-top: calc(-1 * var(--s-24)); }
+.panorama-flat img { object-position: center 68%; }
+.page-hero + .panorama-flat { margin-top: 0; }
+
+.ig {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-40);
-  margin-bottom: var(--s-64);
-  padding-bottom: var(--s-40);
-  border-bottom: 1px solid var(--border);
+  grid-template-columns: minmax(240px, 300px) 1fr;
+  gap: var(--s-64);
+  align-items: start;
 }
-.casti-cislo-hodnota {
+.ig-cislo-hodnota {
   display: block;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(44px, 6vw, 64px);
-  line-height: 1;
-  margin-bottom: var(--s-8);
+  font-size: clamp(56px, 7vw, 80px);
+  line-height: 0.95;
+  color: var(--signal-blue);
 }
-.casti-cislo-popis {
+.ig-cislo-jednotka {
   display: block;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text-secondary);
-  max-width: 26ch;
-}
-
-.casti-graf { list-style: none; }
-.casti-radek {
-  display: grid;
-  grid-template-columns: minmax(160px, 200px) 1fr minmax(96px, auto);
-  grid-template-areas: "nazev pruh hodnota" ". akce akce";
-  align-items: center;
-  column-gap: var(--s-24);
-  row-gap: var(--s-4);
-  padding: var(--s-16) 0;
-  border-bottom: 1px solid var(--border);
-}
-.casti-radek:first-child { border-top: 1px solid var(--border); }
-.casti-nazev {
-  grid-area: nazev;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-.casti-obyvatel {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 12px;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--text-muted);
-}
-.casti-pruh {
-  grid-area: pruh;
-  display: block;
-  height: 14px;
-  background: rgba(50, 50, 50, 0.06);
-}
-.casti-pruh > span {
-  display: block;
-  height: 100%;
-  background: var(--anthracite);
-  min-width: 2px;
-}
-.je-sidliste .casti-pruh > span { background: rgba(50, 50, 50, 0.34); }
-.je-nula .casti-pruh > span { background: transparent; border-left: 2px solid var(--brand-red); }
-.casti-hodnota {
-  grid-area: hodnota;
-  text-align: right;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 16px;
-  white-space: nowrap;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--signal-blue);
+  margin: var(--s-4) 0 var(--s-16);
 }
-.casti-hodnota-popis {
+.ig-cislo-popis {
   display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 11px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.ig-bars { display: flex; flex-direction: column; gap: var(--s-24); }
+.ig-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--text-muted);
+  margin-bottom: var(--s-8);
 }
-.casti-akce {
-  grid-area: akce;
+.ig-bar { display: flex; position: relative; height: 44px; }
+.ig-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ig-seg-s { background: rgba(50, 50, 50, 0.10); color: var(--anthracite); }
+.ig-seg-c { background: var(--signal-blue); color: var(--paper); }
+/* První pruh: celoměstské stavby (antracit) vs. zbytek, na který se dívají
+   pruhy pod ním (modrý závoj — „tuhle část si rozebereme“). */
+.ig-seg-v { background: var(--anthracite); color: var(--paper); }
+.ig-seg-p { background: rgba(0, 59, 142, 0.12); color: var(--anthracite); }
+.ig-row-note {
   font-size: 13px;
-  line-height: 1.5;
-  color: var(--text-secondary);
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-top: var(--s-8);
+  max-width: 62ch;
 }
-.je-nula .casti-akce { color: var(--text); }
-
-.casti-vyklad { border-top: 1px solid var(--border); padding-top: var(--s-64); }
-.casti-vyklad h2 { margin-bottom: var(--s-24); }
-.casti-vyklad-text { max-width: 62ch; }
-.casti-vyklad-text p { color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--s-16); }
-.casti-vyklad-text p:last-child { margin-bottom: 0; color: var(--text); }
-
-.casti-zavazky .promise { padding: var(--s-24); }
-.casti-zavazek-text {
-  font-size: 14px;
-  line-height: 1.6;
+.ig-mark {
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  width: 0;
+  border-left: 2px dashed var(--anthracite);
+}
+.ig-mark-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding-left: 10px;
+  margin-top: var(--s-8);
+  max-width: 34ch;
+}
+.ig-legenda {
+  list-style: none;
+  font-size: 13px;
   color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 24px;
   margin-top: var(--s-8);
 }
+.ig-legenda li { display: flex; align-items: center; gap: 8px; }
+.ig-klic { width: 14px; height: 14px; display: inline-block; flex: 0 0 auto; }
+.ig-klic-s { background: rgba(50, 50, 50, 0.10); }
+.ig-klic-c { background: var(--signal-blue); }
+.ig-klic-v { background: var(--anthracite); }
 
-.casti-metodika { padding-top: 0; }
-.casti-metodika-text { max-width: 68ch; padding: var(--s-24) 0 0; }
-.casti-metodika-text p { font-size: 14px; line-height: 1.65; color: var(--text-secondary); margin-bottom: var(--s-16); }
-.casti-metodika-text ul { list-style: none; margin-bottom: var(--s-16); }
-.casti-metodika-text li {
-  position: relative;
-  padding-left: var(--s-24);
+.ig-skoly {
+  margin-top: var(--s-40);
+  padding: var(--s-24);
+  background: rgba(0, 59, 142, 0.04);
+  border-left: 3px solid var(--signal-blue);
   font-size: 14px;
   line-height: 1.65;
   color: var(--text-secondary);
-  margin-bottom: var(--s-8);
+  max-width: 78ch;
 }
-.casti-metodika-text li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
-.casti-metodika-text strong { color: var(--text); font-weight: 600; }
+.ig-skoly strong { color: var(--text); font-weight: 600; }
+
+/* ---------- Největší akce v každé části ---------- */
+.nej { margin-top: var(--s-64); }
+.nej-nadpis {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--s-16);
+}
+.nej-list {
+  list-style: none;
+  columns: 2;
+  column-gap: var(--s-64);
+}
+.nej-radek {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0 var(--s-16);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  break-inside: avoid;
+}
+.nej-cast {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.nej-akce {
+  grid-column: 1;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.nej-castka {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--signal-blue);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Závazky ---------- */
+.zav-list { list-style: none; border-top: 1px solid var(--border); }
+.zav {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) minmax(280px, 420px);
+  gap: var(--s-40);
+  align-items: start;
+  padding: var(--s-40) 0;
+  border-bottom: 1px solid var(--border);
+}
+.zav-obraz { grid-column: 3; grid-row: 1; align-self: center; }
+.zav-obraz img { width: 100%; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
+.zav-znak, .zav-body { grid-row: 1; }
+.zav-znak { display: flex; }
+.zav-ikona { color: rgba(50, 50, 50, 0.55); display: block; margin-top: 2px; }
+.zav-body h3 { margin-bottom: var(--s-8); }
+.zav-strucne {
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 60ch;
+}
+.zav-detail {
+  list-style: none;
+  margin-top: var(--s-16);
+  max-width: 62ch;
+  padding-left: var(--s-16);
+  border-left: 2px solid var(--border);
+}
+.zav-detail li {
+  position: relative;
+  padding-left: var(--s-24);
+  margin-bottom: var(--s-8);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.zav-detail li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
+.zav-detail li strong { color: var(--text); font-weight: 600; }
 
 @media (max-width: 900px) {
-  .casti-cisla { grid-template-columns: 1fr; gap: var(--s-24); }
-  .casti-cislo-popis { max-width: none; }
+  .ig { grid-template-columns: 1fr; gap: var(--s-40); }
+  .zav { grid-template-columns: 1fr; gap: var(--s-16); padding: var(--s-24) 0; }
+  .zav-obraz { grid-column: 1; grid-row: auto; order: 3; }
+  .zav-znak, .zav-body { grid-row: auto; }
+  .nej-list { columns: 1; }
+  .ig-mark-note { margin-left: 0 !important; padding-left: 0; }
 }
-@media (max-width: 700px) {
-  .casti-radek {
-    grid-template-columns: 1fr auto;
-    grid-template-areas: "nazev hodnota" "pruh pruh" "akce akce";
-    row-gap: var(--s-8);
-  }
-  .casti-pruh { grid-area: pruh; }
+@media (max-width: 520px) {
+  .ig-seg { font-size: 13px; }
+  .ig-legenda { font-size: 12px; }
+}
+
+/* ---------- Shrnutí priorit na konci /casti.html ---------- */
+.priority { border-top: 1px solid var(--border); }
+.priority-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.priority-karta { background: var(--paper); }
+.priority-karta a {
+  display: block;
+  padding: var(--s-24);
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  transition: background 240ms var(--ease-ui);
+}
+.priority-karta a:hover { background: rgba(50, 50, 50, 0.04); }
+.priority-cislo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--brand-red);
+  display: block;
+  margin-bottom: var(--s-8);
+}
+.priority-karta h3 { font-size: 19px; margin-bottom: var(--s-4); }
+.priority-podnadpis {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--s-8);
+}
+.priority-text { font-size: 14px; line-height: 1.55; color: var(--text-secondary); }
+.priority-cta { margin-top: var(--s-40); }
+
+@media (max-width: 900px) {
+  .priority-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .priority-list { grid-template-columns: 1fr; }
 }
 
 /* Odkaz na pasáž o částech uvnitř programu */

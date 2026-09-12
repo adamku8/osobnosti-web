@@ -1,0 +1,259 @@
+---
+// Programová pasáž k příměstským částem (září 2026).
+// Vznikla z bodu ze schůzky 9. 9.: „podpora městských částí v programu je,
+// ale málo viditelně → zvážit vlastní pasáž.“
+//
+// STRUČNÁ verze (10. 9.): úvod o vyváženosti, jedna infografika, sedm závazků
+// s rozklikávacím detailem. Datový rozbor po částech (graf, tabulky, metodika)
+// na web nepatří — zůstává v analyzy/investice-mimo-centrum-2022-2026.md.
+//
+// Foto: Kanada, autor Jan Liszka Trinec, CC BY-SA 4.0, Wikimedia Commons.
+// Licence vyžaduje uvedení autora — popisek v .panorama-caption smazat nelze.
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+import { casti, souhrn, zavazky, SKOLY, OBDOBI } from '../data/casti.js';
+import { oblasti } from '../data/oblasti.js';
+
+const cislo = new Intl.NumberFormat('cs-CZ');
+// Bez desetinných čárek — na stránce jde o řády, ne o účetní přesnost.
+// Přesná čísla na haléře drží casti.js a analýza.
+const procenta = (x) => `${Math.round(x * 100)} %`;
+const miliony = (x) => cislo.format(Math.round(x / 1e6));
+// Akce pod milion se píšou v tisících, ať nikde nevznikne „0 mil.“.
+const castka = (mil) => mil >= 1
+  ? `${cislo.format(Math.round(mil))} mil.`
+  : `${cislo.format(Math.round(mil * 1000))} tis.`;
+
+// Podíly pro infografiku — obojí z casti.js, ať se to nikdy nerozejde.
+const lidiCasti = souhrn.podilObyvatel;
+const lidiSidliste = 1 - lidiCasti;
+const penizeCasti = souhrn.podilInvestic;
+const penizeSidliste = 1 - penizeCasti;
+// První pruh pracuje s celým objemem, druhé dva jen s tím, co jde přiřadit části.
+const celomestske = souhrn.podilCelomestskych;
+const prirazene = 1 - celomestske;
+
+// Červený box uvnitř názvu závazku — stejný princip jako .hl u projektů
+// na /program.html. `hl` musí být doslovný výřez z `nazev`; když nesedí,
+// vykreslí se název bez boxu, nikdy se nerozsype.
+const sBoxem = (z) => {
+  const i = z.hl ? z.nazev.indexOf(z.hl) : -1;
+  return i < 0
+    ? { pred: z.nazev, box: null, za: '' }
+    : { pred: z.nazev.slice(0, i), box: z.hl, za: z.nazev.slice(i + z.hl.length) };
+};
+
+// Největší akce, od nejdražší. Části, kde největší akce nedosáhla milionu
+// (Kojkovice, Karpentná) nebo kde nebyla žádná (Kanada, Horní Líštná), se
+// nevypisují — ocas seznamu s pomlčkami četl jako obvinění, a ten tón na
+// stránku nechceme. Kompletní přehled má analýza.
+const nejvetsi = casti.filter(c => c.top.mil >= 1).sort((a, b) => b.top.mil - a.top.mil);
+
+const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
+// Tisková zkratka téhle stránky — generuje ji ../../make_casti_a4.py.
+const PDF = 'assets/casti-osobnosti-pro-trinec-2026.pdf';
+---
+<Base
+  title="Příměstské části — Osobnosti pro Třinec"
+  description={`Třetina Třinečanů bydlí v příměstských částech a šla do nich čtvrtina investic města ${OBDOBI}. Sedm závazků pro Guty, Nebory, Oldřichovice, Kanadu a další části: místa k setkávání, doprava na zavolání, chodníky, voda.`}
+  path="casti.html"
+  active="program"
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Program 2026 · části města</p>
+      <h1>Jeden Třinec.<br><span class="hl">Třináct</span> částí.</h1>
+      <p class="hero-lead">
+        Třinec není jen sídliště. Třetina z nás — skoro jedenáct tisíc lidí — bydlí
+        v Gutech, Neborech, Oldřichovicích, Konské, na Kanadě nebo v Karpentné.
+        Živé centrum potřebujeme všichni. A stejně tak potřebujeme, aby se do něj
+        dalo z každé části bezpečně dostat.
+      </p>
+      <div class="stat-links">
+        <a class="btn btn-secondary" href={u(PDF)} target="_blank" rel="noopener">Stáhnout na jednu A4</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="panorama panorama-flat">
+    <img class="pano-slide active" src={u('assets/img/casti-kanada.jpg')} alt="Pohled na Kanadu a Třinec pod Beskydami">
+    <span class="panorama-caption">Kanada · foto Jan Liszka, CC BY-SA 4.0</span>
+  </div>
+
+  <!-- ================= Infografika ================= -->
+  <section class="section casti-cisla-sekce">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Fakta · {OBDOBI}</p>
+        <h2>Třetina lidí, <span class="hl">třetina</span> investic.</h2>
+        <p class="section-note">
+          Když odečteme to, co slouží celému městu, dělí se zbytek peněz skoro
+          přesně podle toho, kde lidé bydlí. Problém není v objemu. Je v tom,
+          co v částech pořád chybí.
+        </p>
+      </div>
+
+      <div class="ig">
+        <div class="ig-cislo">
+          <span class="ig-cislo-hodnota">{miliony(souhrn.investicePrimestske)}</span>
+          <span class="ig-cislo-jednotka">milionů korun</span>
+          <span class="ig-cislo-popis">
+            šlo za čtyři roky do {souhrn.pocetPrimestskych} příměstských částí Třince.
+          </span>
+        </div>
+
+        <div class="ig-bars">
+          <div class="ig-row">
+            <p class="ig-label">Všechny investice — {miliony(souhrn.investiceVse)} mil. Kč</p>
+            <div class="ig-bar">
+              <span class="ig-seg ig-seg-v" style={`width:${celomestske * 100}%`}>{procenta(celomestske)}</span>
+              <span class="ig-seg ig-seg-p" style={`width:${prirazene * 100}%`}>{procenta(prirazene)}</span>
+            </div>
+            <p class="ig-row-note">
+              Skoro tři pětiny spolklo to, co slouží celému městu — kino, nadjezd, semafory,
+              lesopark a školy. Zbytek se dá přiřadit konkrétní části. A ten se dělí takhle:
+            </p>
+          </div>
+
+          <div class="ig-row">
+            <p class="ig-label">Kde bydlíme</p>
+            <div class="ig-bar">
+              <span class="ig-seg ig-seg-s" style={`width:${lidiSidliste * 100}%`}>{procenta(lidiSidliste)}</span>
+              <span class="ig-seg ig-seg-c" style={`width:${lidiCasti * 100}%`}>{procenta(lidiCasti)}</span>
+            </div>
+          </div>
+
+          <div class="ig-row">
+            <p class="ig-label">Kam šly peníze — {miliony(souhrn.investiceCelkem)} mil. Kč</p>
+            <div class="ig-bar">
+              <span class="ig-seg ig-seg-s" style={`width:${penizeSidliste * 100}%`}>{procenta(penizeSidliste)}</span>
+              <span class="ig-seg ig-seg-c" style={`width:${penizeCasti * 100}%`}>{procenta(penizeCasti)}</span>
+              <span class="ig-mark" style={`left:${lidiSidliste * 100}%`} aria-hidden="true"></span>
+            </div>
+            <p class="ig-mark-note" style={`margin-left:${lidiSidliste * 100}%`}>
+              Modrá začíná přesně tam, kde by podle počtu lidí měla.
+            </p>
+          </div>
+
+          <ul class="ig-legenda">
+            <li><span class="ig-klic ig-klic-v"></span>Pro celé město — stavby i školy</li>
+            <li><span class="ig-klic ig-klic-s"></span>Sídliště — Lyžbice, Staré Město, Sosna</li>
+            <li><span class="ig-klic ig-klic-c"></span>Příměstské části — Oldřichovice, Nebory a osm dalších</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="ig-skoly">
+        <strong>Školy počítáme mezi to, co slouží celému městu</strong>, ne mezi investice
+        do části, kde stojí budova — do škol na Kaštanové, Koperníkově, Míru nebo
+        u Petra Bezruče chodí děti z Nebor i z Karpentné. Pravidlo platí na obě strany:
+        stejně tak jsme odečetli školy v Oldřichovicích, Gutech a na Osůvkách.
+        Přesunuto je {miliony(SKOLY)} mil. Kč. Bez tohoto přesunu vychází poměr
+        75 : 25 ve prospěch sídlišť — s ním {procenta(1 - penizeCasti)} : {procenta(penizeCasti)},
+        tedy prakticky přesně podle počtu obyvatel.
+      </p>
+
+      <div class="nej">
+        <h3 class="nej-nadpis">Největší akce posledních čtyř let</h3>
+        <ol class="nej-list">
+          {nejvetsi.map(c => (
+            <li class="nej-radek">
+              <span class="nej-cast">{c.nazev}</span>
+              <span class="nej-akce">{c.top.co}</span>
+              <span class="nej-castka">{castka(c.top.mil)}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <p class="section-note">
+        Kapitálové výdaje města {OBDOBI} — skutečné čerpání, bez oprav z běžných výdajů.
+        Zdroj: závěrečné účty statutárního města Třince, počty obyvatel ze sčítání 2021.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Závazky ================= -->
+  <section class="section casti-zavazky-sekce" id="zavazky">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Program</p>
+        <h2>Lepší život, <span class="hl">kdekoliv</span> v Třinci bydlíte.</h2>
+        <p class="section-note">
+          Pět závazků, které platí pro všechny části stejně — ne seznam slibů
+          rozdaných po vesnicích podle toho, kde máme nejvíc hlasů.
+        </p>
+      </div>
+
+      <ol class="zav-list">
+        {zavazky.map(z => (
+          <li class="zav">
+            <div class="zav-znak">
+              {z.ikona && (
+                <svg class="zav-ikona" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" set:html={z.ikona} />
+              )}
+            </div>
+            <div class="zav-obraz">
+              <img src={u(`assets/img/casti/${z.obrazek}`)} alt={z.alt} loading="lazy">
+            </div>
+            <div class="zav-body">
+              <h3>
+                {sBoxem(z).pred}{sBoxem(z).box && <span class="hl">{sBoxem(z).box}</span>}{sBoxem(z).za}
+              </h3>
+              <p class="zav-strucne">{z.strucne}</p>
+              {z.detail?.length > 0 && (
+                <ul class="zav-detail">
+                  {z.detail.map(d => <li set:html={d} />)}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= Shrnutí: čtyři priority + rozcestník ================= -->
+  <section class="section priority">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Zbytek programu</p>
+        <h2>Čtyři priority pro <span class="hl">celý</span> Třinec.</h2>
+        <p class="section-note">
+          Co chceme pro příměstské části, stojí na stejných čtyřech pilířích jako
+          zbytek našeho programu. Platí pro sídliště i pro vesnici.
+        </p>
+      </div>
+
+      <ol class="priority-list">
+        {oblasti.map(o => (
+          <li class="priority-karta">
+            <a href={u(`program.html#oblast-${o.cislo}`)}>
+              <span class="priority-cislo">{o.cislo}</span>
+              <h3>{o.klic} Třinec.</h3>
+              <p class="priority-podnadpis">{o.podnadpis}</p>
+              <p class="priority-text">{o.teaser}</p>
+            </a>
+          </li>
+        ))}
+      </ol>
+
+      <div class="stat-links priority-cta">
+        <a class="btn btn-primary" href={u('program.html')}>Celý program 2026</a>
+        <a class="btn btn-secondary" href={u('kandidati.html')}>Kdo to bude prosazovat</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cta-band">
+    <div class="container">
+      <h2><span class="hl">Nová generace</span>. Nové vize.</h2>
+      <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>
+      </div>
+    </div>
+  </section>
+</Base>
