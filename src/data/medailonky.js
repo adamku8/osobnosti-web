@@ -4,6 +4,17 @@
 // POZOR: odpovědi jsou převzaté doslova z dotazníků. Citace (pole `citace`) je
 // vždy zkrácený výňatek z odpovědi kandidáta — před spuštěním kampaně nechat
 // potvrdit dotyčným.
+// VIDEO MEDAILONEK — pole `video` u každého kandidáta. Dokud je `null`,
+// sekce se na stránce vůbec nezobrazí (žádné „připravujeme"). Tři možnosti:
+//
+//   video: { typ: 'instagram', url: 'https://www.instagram.com/reel/XXXXXXXXX/' }
+//   video: { typ: 'youtube',   id: 'XXXXXXXXXXX' }
+//   video: { typ: 'soubor',    src: '/assets/video/jmeno.mp4' }
+//
+// Nejlepší výsledek dává 'soubor' (vyplní formát 9:16, žádný cizí skript).
+// 'instagram' je nejrychlejší cesta, když video existuje jen jako reel —
+// vykreslí se i s hlavičkou a popiskem Instagramu a reel musí být veřejný.
+
 export const medailonky = {
   'adam-kurzok': {
     citace: 'Jedni mluví o problémech, druzí <span class="hl">mají vizi</span>',
@@ -32,7 +43,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: null,
+    video: { typ: 'instagram', url: 'https://www.instagram.com/reel/DdCAnF0lAKd/' },
   },
 
   'david-szkandera': {
@@ -816,6 +827,6 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Ráno' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: null,
+    video: { typ: 'instagram', url: 'https://www.instagram.com/reel/DdKE0seAP-H/' },
   },
 };

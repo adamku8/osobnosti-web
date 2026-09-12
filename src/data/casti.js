@@ -229,7 +229,7 @@ export const zavazky = [
     ]
   },
   {
-    "nazev": "Více vody pro teplé roky",
+    "nazev": "Více vody pro suchá léta",
     "hl": "Více vody",
     "obrazek": "voda.jpg",
     "alt": "Kresba: vesnický dům s nádrží na dešťovou vodu a studnou, potok s lávkou za zahradou",

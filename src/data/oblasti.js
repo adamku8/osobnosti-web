@@ -4,12 +4,15 @@
 // Závazky v `body` obsahují <strong> kolem jádrového předmětu — vykreslovat přes set:html.
 // `teaser` = dvě věty z teaser verze /program.html (srpen 2026); od 7. 9. je program plný,
 // pole zůstává pro případné shrnutí oblasti jinde (úvod, letáky).
+// `uvod` = krátký úvodní odstavec bloku na /program.html (kurzíva, tlumený) — září 2026;
+// oblast bez `uvod` se vykreslí bez odstavce.
 export const oblasti = [
   {
     "cislo": "01",
     "klic": "Moderní",
     "nazev": "Moderní Třinec.",
     "podnadpis": "Moderní a bezpečné město",
+    "uvod": "Třinec je dobré místo pro život. Posuneme ho o kus dál, aby s ním svou budoucnost spojovalo víc mladých lidí a rodin: kvalitní bydlení, bezpečný pohyb po městě i volný čas. Dobré město totiž tvoří lidé, kterým se v něm dobře žije.",
     "teaser": "Aby se v Třinci dobře bydlelo a bezpečně chodilo. Zaměřujeme se na byty, chodníky, zeleň a pořádek na sídlištích.",
     "body": [
       "aktivně podpoříme výstavbu <strong>nových bytů</strong>",
@@ -44,6 +47,7 @@ export const oblasti = [
     "klic": "Odvážný",
     "nazev": "Odvážný Třinec.",
     "podnadpis": "Práce a podnikání",
+    "uvod": "Dobré nápady potřebují prostor a správné lidi kolem sebe. Propojíme podnikatele, podpoříme ty, kdo začínají, a vytvoříme podmínky, aby se v Třinci vyplatilo něco rozjet. S Třineckými železárnami budeme ještě těsněji spolupracovat na budoucnosti města i regionu. Změny přijdou — buďme na ně připraveni a hledejme v nich nové příležitosti.",
     "teaser": "Práce a podnikání drží město naživu. Podpoříme ty, kdo v Třinci začínají, a propojíme ty, kdo už podnikají.",
     "body": [
       "podpoříme <strong>začínající podnikatele</strong> — „Podnikej v Třinci“",
@@ -61,6 +65,7 @@ export const oblasti = [
     "klic": "Zdravý",
     "nazev": "Zdravý Třinec.",
     "podnadpis": "Sociální péče a zdraví",
+    "uvod": "Zdravé město myslí na každou generaci. Mladým nabídneme pomoc v náročných chvílích, rodinám usnadníme péči o blízké a seniorům dáme víc možností zůstat aktivní. V Třinci se má žít dobře v každém věku.",
     "teaser": "Péče musí být po ruce, když ji člověk potřebuje. Řešíme místa v pečovatelských domech, dostupnost lékařů i podporu rodin.",
     "body": [
       "zajistíme více míst v <strong>domech s pečovatelskou službou</strong>",
