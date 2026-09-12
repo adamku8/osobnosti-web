@@ -1,5 +1,5 @@
 ---
-// Úvod: hero s billboardem, banner s volebním číslem a pod ním plný rozcestník
+// Úvod: hero s billboardem a pod ním plný rozcestník
 // webu — blok „27", deska Společný Třinec, čtyři programové oblasti s prokliky
 // do /program.html, sedm projektů, dvanáct kandidátů a závěrečný rozcestník.
 // (Do 12. 9. 2026 byl úvod v teaser režimu jen s hero a bannerem — viz git.)
@@ -66,26 +66,6 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
       <img class="pano-slide" src={u('assets/img/panorama-zelezarny.jpg')} alt="Třinecké železárny v beskydské krajině" loading="lazy">
       <img class="pano-slide" src={u('assets/img/panorama-hreben.jpg')} alt="Chata a rozhledna na Javorovém" loading="lazy">
       <img class="pano-slide" src={u('assets/img/panorama-zapad.jpg')} alt="Západ slunce nad Beskydami" loading="lazy">
-    </div>
-  </section>
-
-  <!-- ================= Banner — volební číslo (modrý květ, DESIGN-SYSTEM §5.7) ================= -->
-  <section class="vote-callout">
-    <div class="container">
-      <h2>Stejné hodnoty.<br><span class="hl-nowrap"><span class="hl">Nové vize</span>.</span></h2>
-      <svg class="vote-flower" viewBox="-10 -10 220 220" role="img" aria-label="Volte číslo 3">
-        <g fill="#003B8E">
-          <circle cx="100" cy="40" r="45"/>
-          <circle cx="152" cy="70" r="45"/>
-          <circle cx="152" cy="130" r="45"/>
-          <circle cx="100" cy="160" r="45"/>
-          <circle cx="48" cy="130" r="45"/>
-          <circle cx="48" cy="70" r="45"/>
-          <circle cx="100" cy="100" r="68"/>
-        </g>
-        <text x="100" y="78" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, 'Arial Black', sans-serif" font-weight="700" font-size="16" letter-spacing="1">VOLTE Č.</text>
-        <text x="100" y="140" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, 'Arial Black', sans-serif" font-weight="800" font-size="68">3</text>
-      </svg>
     </div>
   </section>
 
