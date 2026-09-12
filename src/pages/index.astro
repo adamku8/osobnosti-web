@@ -90,14 +90,18 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
     </div>
   </section>
 
-  <!-- ================= TÝMOVÁ FOTKA (září 2026) ================= -->
+  <!-- ================= TÝMOVÁ FOTKA (září 2026) =================
+       Originál tym-2026.jpg (před obchodem) zůstává v assets; na webu je verze
+       s vyměněným pozadím — kresba města v duchu vizualizací projektů. Lidé jsou
+       pixelově z originálu (maska ISNet+U2Net), jen pozadí je z Gemini.
+       Alternativa s panoramatem Javorového: tym-2026-javorovy.jpg. -->
   <section class="deska">
     <div class="container">
-      <img src={u('assets/img/tym-2026.jpg')}
-           srcset={`${u('assets/img/tym-2026-1200.jpg')} 1200w, ${u('assets/img/tym-2026.jpg')} 2000w`}
+      <img src={u('assets/img/tym-2026-kresba.jpg')}
+           srcset={`${u('assets/img/tym-2026-kresba-1200.jpg')} 1200w, ${u('assets/img/tym-2026-kresba.jpg')} 2000w`}
            sizes="(max-width: 1200px) 100vw, 1200px"
            width="2000" height="1326"
-           alt="Tým hnutí Osobnosti pro Třinec — společná fotka, září 2026" loading="lazy">
+           alt="Tým hnutí Osobnosti pro Třinec před kresbou nového Třince, září 2026" loading="lazy">
     </div>
   </section>
 
