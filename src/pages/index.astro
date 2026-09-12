@@ -90,11 +90,14 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
     </div>
   </section>
 
-  <!-- ================= DESKA — SPOLEČNÝ TŘINEC ================= -->
+  <!-- ================= TÝMOVÁ FOTKA (září 2026) ================= -->
   <section class="deska">
     <div class="container">
-      <img src={u('assets/img/deska-spolecny-trinec.jpg')}
-           alt="Osobnosti pro… Společný Třinec!" loading="lazy">
+      <img src={u('assets/img/tym-2026.jpg')}
+           srcset={`${u('assets/img/tym-2026-1200.jpg')} 1200w, ${u('assets/img/tym-2026.jpg')} 2000w`}
+           sizes="(max-width: 1200px) 100vw, 1200px"
+           width="2000" height="1326"
+           alt="Tým hnutí Osobnosti pro Třinec — společná fotka, září 2026" loading="lazy">
     </div>
   </section>
 
