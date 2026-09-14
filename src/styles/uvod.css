@@ -11,15 +11,6 @@
   line-height: 1.05;
   max-width: 14ch;
 }
-.tym-note {
-  margin-top: 12px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
 
 /* ---------- Aktuálně — příspěvky ze sítí ---------- */
 /* Instagram embed se nevykreslí užší než 326 px — sloupce se místo
