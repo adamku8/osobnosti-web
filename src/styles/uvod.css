@@ -9,7 +9,10 @@
 .tym-claim {
   font-size: clamp(30px, 5vw, 60px);
   line-height: 1.05;
-  max-width: 14ch;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .tym-claim { white-space: normal; }
 }
 
 /* ---------- Aktuálně — příspěvky ze sítí ---------- */
