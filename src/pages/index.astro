@@ -92,10 +92,6 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
             Lidé z Třince, ne z Prahy. Pracujeme, nestěžujeme si.
             Navazujeme na 20 let dobré práce pro město.
           </p>
-          <div class="stat-links">
-            <a class="btn btn-blue" href={u('program.html')}>Náš program</a>
-            <a class="btn btn-secondary" href={u('kandidati.html')}>Kandidáti</a>
-          </div>
         </div>
       </div>
     </div>
@@ -110,11 +106,17 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     <div class="container tym-head">
       <h2 class="tym-claim reveal">Spojujeme <span class="hl">generace</span>.</h2>
     </div>
-    <img src={u('assets/img/tym-2026-javorovy.jpg')}
-         srcset={`${u('assets/img/tym-2026-javorovy-1200.jpg')} 1200w, ${u('assets/img/tym-2026-javorovy.jpg')} 2000w`}
-         sizes="100vw"
-         width="2000" height="1326"
-         alt="Tým hnutí Osobnosti pro Třinec na Javorovém nad Třincem, září 2026" loading="lazy">
+    <div class="tym-foto">
+      <img src={u('assets/img/tym-2026-javorovy.jpg')}
+           srcset={`${u('assets/img/tym-2026-javorovy-1200.jpg')} 1200w, ${u('assets/img/tym-2026-javorovy.jpg')} 2000w`}
+           sizes="100vw"
+           width="2000" height="1326"
+           alt="Tým hnutí Osobnosti pro Třinec na Javorovém nad Třincem, září 2026" loading="lazy">
+      <div class="tym-links reveal">
+        <a class="btn btn-blue btn-lg" href={u('program.html')}>Náš program</a>
+        <a class="btn btn-primary btn-lg" href={u('kandidati.html')}>Kandidáti</a>
+      </div>
+    </div>
   </section>
 
   <!-- ================= PROGRAM — MŘÍŽKA OBLASTÍ (proklik do /program.html) ================= -->
