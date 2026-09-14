@@ -1,0 +1,191 @@
+---
+// Programová pasáž k lesoparku (září 2026) — stejná stavba jako /casti.html:
+// hero, náčrt, číslo s přehledem „co už máme“, závazky s detailem, rozcestník.
+// Vznikla ze speciálního letáku pro kontaktní akci v lesoparku 15. 9. 2026
+// (SCHUZKY/2026-09-09_schuzka-2). Data drží ../data/lesopark.js.
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+import { zavazky, mame, INVESTICE, INVESTICE_CELKEM, OBDOBI } from '../data/lesopark.js';
+import { oblasti } from '../data/oblasti.js';
+import '../styles/lesopark.css';
+
+// Jedno desetinné místo — 18,9 mil. říká víc než „19“.
+const milionyDes = (x) => new Intl.NumberFormat('cs-CZ', {
+  minimumFractionDigits: 1, maximumFractionDigits: 1,
+}).format(x / 1e6);
+
+// Červený box uvnitř názvu závazku — stejný princip jako na /casti.html.
+const sBoxem = (z) => {
+  const i = z.hl ? z.nazev.indexOf(z.hl) : -1;
+  return i < 0
+    ? { pred: z.nazev, box: null, za: '' }
+    : { pred: z.nazev.slice(0, i), box: z.hl, za: z.nazev.slice(i + z.hl.length) };
+};
+
+const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
+// Tisková zkratka téhle stránky — generuje ji ../../make_lesopark_a4.py.
+const PDF = 'assets/lesopark-osobnosti-pro-trinec-2026.pdf';
+---
+<Base
+  title="Lesopark — Osobnosti pro Třinec"
+  description={`Lesopark je klenot Třince a chceme ho dál rozvíjet. Čtyři věci, které v něm pořád chybí: oplocená psí loučka, posilovna pro seniory, WC u dětského hřiště a cesta do lesa nad Kanadou. Město do něj ${OBDOBI} dalo ${milionyDes(INVESTICE_CELKEM)} mil. Kč.`}
+  path="lesopark.html"
+  active="program"
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Program 2026 · lesopark</p>
+      <h1>Lesopark pro <span class="hl">všechny</span> generace.</h1>
+      <p class="hero-lead">
+        Lesopark je klenot Třince. Chodí sem celé město — rodiny s kočárky, běžci,
+        senioři i pejskaři. Poslední roky se do něj investovalo a je to vidět.
+        My chceme náš klenot dál rozvíjet.
+      </p>
+      <div class="stat-links">
+        <a class="btn btn-secondary" href={u(PDF)} target="_blank" rel="noopener">Stáhnout na jednu A4</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <figure class="lesopark-kresba">
+      <img src={u('assets/img/lesopark/lesopark-kresba.jpg')}
+           alt="Kresba lesoparku: vlevo oplocený výběh pro psy a venkovní posilovna pro seniory, uprostřed dětské hřiště s veřejným WC, vpravo značená cesta do lesa nad Kanadou"
+           width="2000" height="1342">
+      <figcaption>Takhle si lesopark představujeme: psí loučka, posilovna pro seniory, WC u hřiště a cesta dál do lesa.</figcaption>
+    </figure>
+  </div>
+
+  <!-- ================= Číslo + co už máme ================= -->
+  <section class="section casti-cisla-sekce lesopark-cisla-sekce">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Fakta · {OBDOBI}</p>
+        <h2>Do lesoparku jsme <span class="hl">investovali</span>. A je to vidět.</h2>
+        <p class="section-note">
+          Nové pobytové plochy a nové osvětlení jsou hotové. Teď je na řadě to,
+          co lidem v lesoparku pořád chybí.
+        </p>
+      </div>
+
+      <div class="ig">
+        <div class="ig-cislo">
+          <span class="ig-cislo-hodnota">{milionyDes(INVESTICE_CELKEM)}</span>
+          <span class="ig-cislo-jednotka">milionu korun</span>
+          <span class="ig-cislo-popis">
+            šlo v letech {OBDOBI} do lesoparku — pobytové plochy a osvětlení.
+          </span>
+        </div>
+
+        <div class="ig-bars">
+          <div class="ig-row">
+            <p class="ig-label">Co už jsme do lesoparku přidali</p>
+            <ul class="lesopark-mame">
+              {mame.map(m => (
+                <li><strong>{m.co}</strong><span>{m.kdy}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div class="ig-row">
+            <p class="ig-label">Z čeho je to složené</p>
+            <ul class="lesopark-rozpis">
+              {INVESTICE.map(p => (
+                <li><span>{p.ucel} · {p.roky}</span><b>{milionyDes(p.kc)} mil. Kč</b></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="section-note">
+        Skutečné čerpání akcí „Obnova pobytových ploch v lesoparku v Třinci“
+        a „Lesopark Třinec – rekonstrukce VO“. Zdroj: závěrečné účty statutárního
+        města Třince {OBDOBI}.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Závazky ================= -->
+  <section class="section casti-zavazky-sekce" id="zavazky">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Program</p>
+        <h2>Co pro lesopark <span class="hl">uděláme</span>.</h2>
+        <p class="section-note">
+          Čtyři věci, které v lesoparku pořád chybí — pro pejskaře, seniory,
+          rodiny s dětmi i pro ty, kdo chtějí jít dál do lesa.
+        </p>
+      </div>
+
+      <ol class="zav-list">
+        {zavazky.map(z => (
+          <li class="zav">
+            <div class="zav-znak">
+              {z.ikona && (
+                <svg class="zav-ikona" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" aria-hidden="true" set:html={z.ikona} />
+              )}
+            </div>
+            <div class="zav-obraz">
+              <img src={u(`assets/img/lesopark/${z.obrazek}`)} alt={z.alt} loading="lazy">
+            </div>
+            <div class="zav-body">
+              <h3>
+                {sBoxem(z).pred}{sBoxem(z).box && <span class="hl">{sBoxem(z).box}</span>}{sBoxem(z).za}
+              </h3>
+              <p class="zav-strucne">{z.strucne}</p>
+              {z.detail?.length > 0 && (
+                <ul class="zav-detail">
+                  {z.detail.map(d => <li set:html={d} />)}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= Shrnutí: čtyři priority + rozcestník ================= -->
+  <section class="section priority">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Zbytek programu</p>
+        <h2>Čtyři priority pro <span class="hl">celý</span> Třinec.</h2>
+        <p class="section-note">
+          Lesopark je jedno místo. Náš program stojí na čtyřech pilířích,
+          které platí pro celé město.
+        </p>
+      </div>
+
+      <ol class="priority-list">
+        {oblasti.map(o => (
+          <li class="priority-karta">
+            <a href={u(`program.html#oblast-${o.cislo}`)}>
+              <span class="priority-cislo">{o.cislo}</span>
+              <h3>{o.klic} Třinec.</h3>
+              <p class="priority-podnadpis">{o.podnadpis}</p>
+              <p class="priority-text">{o.teaser}</p>
+            </a>
+          </li>
+        ))}
+      </ol>
+
+      <div class="stat-links priority-cta">
+        <a class="btn btn-primary" href={u('program.html')}>Celý program 2026</a>
+        <a class="btn btn-secondary" href={u('kandidati.html')}>Kdo to bude prosazovat</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-cta-band">
+    <div class="container">
+      <h2><span class="hl">Nová generace</span>. Nové vize.</h2>
+      <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>
+      </div>
+    </div>
+  </section>
+</Base>

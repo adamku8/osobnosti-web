@@ -1,0 +1,25 @@
+/* Styly jen pro /lesopark.html — samostatný soubor, ať se nesahá do style.css. */
+/* ---------- /lesopark.html ---------- */
+.lesopark-kresba { margin: 0 0 var(--s-16); }
+.lesopark-kresba img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--border);
+}
+.lesopark-kresba figcaption {
+  margin-top: var(--s-8); font-size: 13px; color: var(--text-muted);
+}
+.lesopark-mame { list-style: none; display: flex; flex-direction: column; gap: var(--s-8); }
+.lesopark-mame li {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px;
+  padding-left: 18px; position: relative; font-size: 15px; line-height: 1.5;
+}
+.lesopark-mame li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
+.lesopark-mame li span { font-size: 13px; color: var(--text-muted); }
+.lesopark-rozpis { list-style: none; margin: var(--s-8) 0 0; padding: 0; }
+.lesopark-rozpis li {
+  display: flex; justify-content: space-between; gap: var(--s-16);
+  padding: var(--s-8) 0; border-bottom: 1px solid var(--border);
+  font-size: 15px; line-height: 1.5;
+}
+.lesopark-rozpis li:last-child { border-bottom: 0; }
+.lesopark-rozpis b { white-space: nowrap; font-variant-numeric: tabular-nums; }
