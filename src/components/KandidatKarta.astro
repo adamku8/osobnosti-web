@@ -1,10 +1,10 @@
 ---
-const { k, detailPrefix = '' } = Astro.props;
+const { k, detailPrefix = '', class: extra = '', style = undefined } = Astro.props;
 const href = k.detail ? u(`${detailPrefix}kandidat-${k.detail}.html`) : null;
 const Tag = href ? 'a' : 'article';
 import { u } from '../lib/url.js';
 ---
-<Tag class={`cand-card${href ? ' cand-card-link' : ''}`} href={href} id={`kandidat-${String(k.cislo).padStart(2,'0')}`}>
+<Tag class={`cand-card${href ? ' cand-card-link' : ''}${extra ? ' ' + extra : ''}`} href={href} style={style} id={`kandidat-${String(k.cislo).padStart(2,'0')}`}>
   {k.foto
     ? <img class="cand-photo" src={u(`assets/img/kandidati/${k.foto}`)} alt={k.jmeno} loading="lazy">
     : <div class="slide-avatar">{k.iniciraly}</div>}

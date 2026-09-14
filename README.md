@@ -51,9 +51,10 @@ SITE=https://osobnostiprotrinec.cz npm run build
 | Medailonek kandidáta (odpovědi, video, citace) | `src/data/medailonky.js` |
 | Programové oblasti a jejich vize | `src/data/oblasti.js` |
 | Konkrétní projekty | `src/data/projekty.js` |
+| Blok „Aktuálně“ na úvodu (3 příspěvky z Instagramu) | `src/data/aktualne.js` — stačí ID z URL postu |
 | Menu, patička, hlavička | `src/components/` |
 | Meta tagy, OG, GTM | `src/layouts/Base.astro` |
-| Styly | `src/styles/style.css` |
+| Styly | `src/styles/style.css` (sdílené), `src/styles/uvod.css` (jen úvod) |
 | Obrázky, fonty, PDF | `public/assets/` |
 
 ## Přidání medailonku kandidáta

@@ -1,7 +1,8 @@
 ---
-// Úvod: hero s billboardem a pod ním plný rozcestník
-// webu — blok „27", deska Společný Třinec, čtyři programové oblasti s prokliky
-// do /program.html, sedm projektů, dvanáct kandidátů a závěrečný rozcestník.
+// Úvod: hero s billboardem a pod ním plný rozcestník webu — blok „27", týmovka
+// přes celou šířku s claimem, čtyři programové oblasti s prokliky do
+// /program.html, sedm projektů, dvanáct kandidátů, Aktuálně ze sítí, Jak volit
+// s odpočtem a závěrečný rozcestník. Styly jen pro úvod: src/styles/uvod.css.
 // (Do 12. 9. 2026 byl úvod v teaser režimu jen s hero a bannerem — viz git.)
 import Base from '../layouts/Base.astro';
 import OblastKarta from '../components/OblastKarta.astro';
@@ -10,8 +11,10 @@ import SekceProjekty from '../components/SekceProjekty.astro';
 import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
+import { aktualne, SOCIAL } from '../data/aktualne.js';
 import { verejnySlug } from '../lib/verejne.js';
 import { u } from '../lib/url.js';
+import '../styles/uvod.css';
 
 // Na úvodu ukazujeme prvních dvanáct kandidátů s fotkou; proklik na medailonek
 // řídí stejná pravidla jako /kandidati.html (src/lib/verejne.js).
@@ -20,6 +23,13 @@ const sOdkazem = (k) => {
   return { ...k, detail: slug && medailonky[slug] ? slug : null };
 };
 const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
+
+// Volby do zastupitelstva: pátek 9. 10. 14:00–22:00, sobota 10. 10. 8:00–14:00.
+// Odpočet dnů se dopočítá v prohlížeči; tady jen hodnota pro build (fallback).
+const VOLBY_START = '2026-10-09T14:00:00+02:00';
+const VOLBY_KONEC = '2026-10-10T14:00:00+02:00';
+const dnuDoVoleb = Math.ceil((new Date('2026-10-09T00:00:00+02:00') - new Date()) / 86400000);
+const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 ---
 <Base
   title="Osobnosti pro Třinec — Nové vize. Nový Třinec. Osobnosti."
@@ -27,6 +37,7 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
   path=""
   active="uvod"
 >
+  <script is:inline>document.documentElement.classList.add('js');</script>
 
   <!-- ================= HERO — billboard ================= -->
   <section class="hero hero-bb" id="uvod">
@@ -53,7 +64,7 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
             <div class="hero-date-label">Volby do zastupitelstva</div>
             <div class="hero-date">9.–10. října 2026</div>
           </div>
-          <a class="btn btn-blue" href="https://www.facebook.com/events/2134356773779029/" target="_blank" rel="noopener">Chci volit!</a>
+          <a class="btn btn-blue" href="#jak-volit">Jak volit</a>
         </div>
       </div>
     </div>
@@ -72,7 +83,7 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
   <!-- ================= ČÍSLO A TEXT ================= -->
   <section class="stat">
     <div class="container">
-      <div class="stat-grid">
+      <div class="stat-grid reveal">
         <div class="stat-number">27</div>
         <div class="stat-text">
           <h2>Sedmadvacet osobností. Jeden Třinec.</h2>
@@ -90,25 +101,29 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
     </div>
   </section>
 
-  <!-- ================= TÝMOVÁ FOTKA (září 2026) =================
+  <!-- ================= TÝMOVÁ FOTKA (září 2026) — přes celou šířku, s claimem =================
        Originál tym-2026.jpg (před obchodem) zůstává v assets; na webu je verze
        s vyměněným pozadím — panorama Javorového s Třincem v údolí. Lidé jsou
        pixelově z originálu (maska ISNet+U2Net), jen pozadí je z Gemini.
        Alternativa s kresbou města: tym-2026-kresba.jpg. -->
-  <section class="deska">
-    <div class="container">
-      <img src={u('assets/img/tym-2026-javorovy.jpg')}
-           srcset={`${u('assets/img/tym-2026-javorovy-1200.jpg')} 1200w, ${u('assets/img/tym-2026-javorovy.jpg')} 2000w`}
-           sizes="(max-width: 1200px) 100vw, 1200px"
-           width="2000" height="1326"
-           alt="Tým hnutí Osobnosti pro Třinec na Javorovém nad Třincem, září 2026" loading="lazy">
+  <section class="tym" id="tym">
+    <img src={u('assets/img/tym-2026-javorovy.jpg')}
+         srcset={`${u('assets/img/tym-2026-javorovy-1200.jpg')} 1200w, ${u('assets/img/tym-2026-javorovy.jpg')} 2000w`}
+         sizes="100vw"
+         width="2000" height="1326"
+         alt="Tým hnutí Osobnosti pro Třinec na Javorovém nad Třincem, září 2026" loading="lazy">
+    <div class="tym-overlay">
+      <div class="container">
+        <h2 class="tym-claim reveal">Spojujeme <span class="hl">generace</span>.</h2>
+        <p class="tym-note reveal" style="--i:1">Náš tým · Javorový · září 2026</p>
+      </div>
     </div>
   </section>
 
   <!-- ================= PROGRAM — MŘÍŽKA OBLASTÍ (proklik do /program.html) ================= -->
   <section class="section" id="program">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <p class="eyebrow">Program 2026</p>
         <h2>Čtyři oblasti. Konkrétní závazky.</h2>
         <p class="section-note">
@@ -117,9 +132,11 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
         </p>
       </div>
       <div class="promises">
-        {oblasti.map(o => <OblastKarta o={o} href={u(`program.html#oblast-${o.cislo}`)} odkazText="Náš program →" bezCisla />)}
+        {oblasti.map((o, i) => (
+          <OblastKarta o={o} href={u(`program.html#oblast-${o.cislo}`)} odkazText="Náš program →" bezCisla class="reveal" style={`--i:${i}`} />
+        ))}
       </div>
-      <div class="section-cta stat-links" style="justify-content:center">
+      <div class="section-cta stat-links reveal" style="justify-content:center">
         <a class="btn btn-blue btn-lg" href={u('program.html')}>Celý program</a>
         <a class="btn btn-secondary btn-lg" href={u('assets/program-osobnosti-pro-trinec-2026.pdf')} target="_blank" rel="noopener">Stáhnout PDF</a>
       </div>
@@ -131,7 +148,7 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
   <!-- ================= KANDIDÁTI ================= -->
   <section class="section" id="kandidati">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head reveal">
         <p class="eyebrow">Kandidáti</p>
         <h2>Poznejte naše <span class="kw-blue">osobnosti</span>.</h2>
         <p class="section-note">
@@ -139,11 +156,100 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
         </p>
       </div>
       <div class="cand-grid">
-        {naUvodu.map(k => <KandidatKarta k={k} />)}
+        {naUvodu.map((k, i) => <KandidatKarta k={k} class="reveal" style={`--i:${i % 4}`} />)}
       </div>
-      <div class="cand-cta">
+      <div class="cand-cta reveal">
         <a class="btn btn-primary btn-lg" href={u('kandidati.html')}>Všech {kandidati.length} kandidátů</a>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= AKTUÁLNĚ — příspěvky ze sítí (src/data/aktualne.js) ================= -->
+  <section class="section" id="aktualne">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Aktuálně</p>
+        <h2>Co se děje v kampani.</h2>
+        <p class="section-note">
+          Poslední příspěvky z našeho Instagramu. Sledujte nás, ať vám nic neuteče.
+        </p>
+      </div>
+      <div class="social-grid">
+        {aktualne.map((p, i) => (
+          <div class="social-item reveal" style={`--i:${i}`}>
+            <iframe src={`https://www.instagram.com/${p.typ}/${p.id}/embed/`}
+                    title="Příspěvek Osobnosti pro Třinec na Instagramu"
+                    loading="lazy" scrolling="no" allowtransparency
+                    allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        ))}
+      </div>
+      <div class="social-cta reveal">
+        <a class="btn btn-secondary btn-lg" href={SOCIAL.instagram} target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-secondary btn-lg" href={SOCIAL.facebook} target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JAK VOLIT + ODPOČET ================= -->
+  <section class="section volit" id="jak-volit">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Volby 9.–10. října 2026</p>
+        <h2>Jak volit <span class="hl">Osobnosti</span>?</h2>
+        <p class="section-note">
+          Do zastupitelstva Třince se volí 27 lidí a každý volič má 27 hlasů.
+          Nejjednodušší a nejsilnější je dát je všechny nám — jedním křížkem.
+        </p>
+      </div>
+      <div class="volit-grid">
+        <div class="volit-cislo reveal">
+          <svg class="vote-flower" viewBox="-10 -10 220 220" role="img" aria-label="Volte číslo 3">
+            <g fill="#003B8E">
+              <circle cx="100" cy="40" r="45"/>
+              <circle cx="152" cy="70" r="45"/>
+              <circle cx="152" cy="130" r="45"/>
+              <circle cx="100" cy="160" r="45"/>
+              <circle cx="48" cy="130" r="45"/>
+              <circle cx="48" cy="70" r="45"/>
+              <circle cx="100" cy="100" r="68"/>
+            </g>
+            <text x="100" y="78" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, 'Arial Black', sans-serif" font-weight="700" font-size="16" letter-spacing="1">VOLTE Č.</text>
+            <text x="100" y="140" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, 'Arial Black', sans-serif" font-weight="800" font-size="68">3</text>
+          </svg>
+          <div class="volit-odpocet" id="odpocet" data-start={VOLBY_START} data-konec={VOLBY_KONEC}>
+            <div class="volit-odpocet-num">{dnuDoVoleb > 0 ? dnuDoVoleb : '—'}</div>
+            <div class="volit-odpocet-label">{dnuDoVoleb > 0 ? 'dní do voleb' : 'volby'}</div>
+          </div>
+        </div>
+        <ol class="volit-kroky">
+          <li class="volit-krok reveal" style="--i:0">
+            <span class="volit-krok-n" aria-hidden="true">1</span>
+            <div>
+              <h3>Najděte na lístku číslo 3</h3>
+              <p>Hlasovací lístek je jeden velký arch se všemi stranami. <strong>Osobnosti pro Třinec</strong> mají volební číslo 3.</p>
+            </div>
+          </li>
+          <li class="volit-krok reveal" style="--i:1">
+            <span class="volit-krok-n" aria-hidden="true">2</span>
+            <div>
+              <h3>Udělejte jeden křížek u názvu hnutí</h3>
+              <p>Do rámečku u <strong>„Osobnosti pro Třinec“</strong> nahoře nad jmény. Tím dáte hlas všem 27 našim kandidátům najednou.</p>
+            </div>
+          </li>
+          <li class="volit-krok reveal" style="--i:2">
+            <span class="volit-krok-n" aria-hidden="true">3</span>
+            <div>
+              <h3>Nic dalšího nekřížkujte</h3>
+              <p>Každý křížek u jména z jiné strany <strong>ubírá hlas našemu kandidátovi</strong> z konce listiny. Jeden křížek, plná síla.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <p class="volit-hodiny reveal">
+        Volební místnosti jsou otevřené v pátek 9. října od 14 do 22 hodin a v sobotu 10. října od 8 do 14 hodin.
+        Volit můžete i s voličským průkazem — <a href={udalostFB} target="_blank" rel="noopener">připomínku najdete v události na Facebooku</a>.
+      </p>
     </div>
   </section>
 
@@ -152,22 +258,49 @@ const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
     <img src={u('assets/img/panorama-udoli.jpg')} alt="Údolí Třince z Javorového" loading="lazy">
     <div class="closing-overlay">
       <div class="container">
-        <h2 class="closing-claim">Spojujeme <span class="hl">generace</span>.</h2>
-        <p class="closing-text">
+        <h2 class="closing-claim reveal">S vaším hlasem <span class="hl">měníme</span> Třinec.</h2>
+        <p class="closing-text reveal" style="--i:1">
           Již 20 let zastáváme hodnoty jako poctivost, odbornost a dobrou
           správu pro naše město, na které chceme navazovat — a zároveň
           prosazovat nové nápady a vize.
         </p>
-        <nav class="closing-nav" aria-label="Rozcestník">
+        <nav class="closing-nav reveal" aria-label="Rozcestník" style="--i:2">
           <a href={u('program.html')}>Program</a>
           <a href={u('kandidati.html')}>Kandidáti</a>
+          <a href="#jak-volit">Jak volit</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
-        <div class="closing-cta">
+        <div class="closing-cta reveal" style="--i:3">
           <a class="btn btn-blue btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
         </div>
       </div>
     </div>
   </section>
 
+  <script is:inline>
+    // Odpočet do voleb — přepočítá se v prohlížeči (build může být starší).
+    (function () {
+      var el = document.getElementById('odpocet');
+      if (!el) return;
+      var start = new Date(el.dataset.start), konec = new Date(el.dataset.konec), ted = new Date();
+      var num = el.querySelector('.volit-odpocet-num'), lab = el.querySelector('.volit-odpocet-label');
+      if (ted >= konec) { num.textContent = '✓'; lab.textContent = 'volby skončily'; return; }
+      if (ted >= start) { num.textContent = '!'; lab.textContent = 'volby právě probíhají'; return; }
+      var pulnoc = new Date(start); pulnoc.setHours(0, 0, 0, 0);
+      var d = Math.ceil((pulnoc - ted) / 86400000);
+      if (d <= 0) { num.textContent = 'dnes'; lab.textContent = 'volby začínají ve 14:00'; return; }
+      num.textContent = d;
+      lab.textContent = d === 1 ? 'den do voleb' : d < 5 ? 'dny do voleb' : 'dní do voleb';
+    })();
+
+    // Vynořování sekcí při scrollu — bez JS zůstává vše viditelné (třída .js na <html>).
+    (function () {
+      var items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { items.forEach(function (i) { i.classList.add('is-in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      items.forEach(function (i) { io.observe(i); });
+    })();
+  </script>
 </Base>
