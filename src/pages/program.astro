@@ -28,6 +28,27 @@ const ODKAZY_PROJEKTU = false;
 
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 const PDF = 'assets/program-osobnosti-pro-trinec-2026.pdf';
+import '../styles/temata.css';
+
+// Témata s vlastní stránkou — pořadí = pořadí boxů.
+const temata = [
+  {
+    nazev: 'Příměstské části',
+    href: 'casti.html',
+    obrazek: 'assets/img/casti-kanada.jpg',
+    alt: 'Pohled na Kanadu a Třinec pod Beskydami',
+    text: 'Třetina Třinečanů bydlí v Gutech, Neborech, Oldřichovicích, Konské, na Kanadě a v dalších částech. Kolik do nich šlo peněz a pět závazků, které platí všude stejně.',
+    cta: 'Program pro příměstské části',
+  },
+  {
+    nazev: 'Lesopark',
+    href: 'lesopark.html',
+    obrazek: 'assets/img/lesopark/lesopark-kresba.jpg',
+    alt: 'Kresba lesoparku s psí loučkou, posilovnou pro seniory, hřištěm s WC a cestou do lesa',
+    text: 'Klenot Třince, do kterého jsme investovali a chceme ho rozvíjet dál: oplocená psí loučka, posilovna pro seniory, WC u hřiště a cesta do lesa nad Kanadou.',
+    cta: 'Program pro lesopark',
+  },
+];
 ---
 <Base
   title="Program 2026 — Osobnosti pro Třinec"
@@ -73,21 +94,36 @@ const PDF = 'assets/program-osobnosti-pro-trinec-2026.pdf';
     ))}
   </div>
 
-  <!-- Vlastní pasáž k příměstským částem (/casti.html) — v oblastech výše je
-       jen jedna odrážka, téma si zaslouží víc prostoru. -->
-  <section class="section casti-odkaz">
+  <!-- ================= Témata — pasáže, které mají vlastní stránku =================
+       Mezi čtyřmi oblastmi a rozpisem projektů. Zatím dvě: příměstské části
+       (/casti.html) a lesopark (/lesopark.html). Další téma = další položka
+       v poli `temata`; styly drží src/styles/temata.css. -->
+  <section class="section temata" id="temata">
     <div class="container">
-      <p class="eyebrow">Program · části města</p>
-      <h2>A co <span class="hl">příměstské</span> části?</h2>
-      <p class="section-note">
-        Guty, Nebory, Oldřichovice, Kanada, Karpentná, Kojkovice, Osůvky, Tyra,
-        Horní Líštná i Konská s Podlesím mají vlastní pasáž — s čísly, kolik do nich
-        za poslední čtyři roky šlo, a s pěti závazky, které platí pro všechny stejně.
-      </p>
-      <div class="stat-links">
-        <a class="btn btn-secondary" href={u('casti.html')}>Program pro příměstské části</a>
-        <a class="btn btn-secondary" href={u('lesopark.html')}>Program pro lesopark</a>
+      <div class="section-head">
+        <p class="eyebrow">Program · témata</p>
+        <h2>Témata, která si zaslouží <span class="hl">víc</span> místa.</h2>
+        <p class="section-note">
+          Některé věci se do jedné odrážky v oblastech nevejdou. Mají proto vlastní
+          stránku — s čísly, se závazky a s letákem ke stažení.
+        </p>
       </div>
+
+      <ul class="temata-list">
+        {temata.map(t => (
+          <li class="tema-karta">
+            <a href={u(t.href)}>
+              <img class="tema-obraz" src={u(t.obrazek)} alt={t.alt} loading="lazy">
+              <div class="tema-body">
+                <span class="tema-stitek">Téma</span>
+                <h3>{t.nazev}</h3>
+                <p class="tema-text">{t.text}</p>
+                <span class="tema-odkaz">{t.cta} →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
