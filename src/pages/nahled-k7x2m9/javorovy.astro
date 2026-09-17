@@ -162,6 +162,9 @@ import { u } from '../../lib/url.js';
       padding: var(--s-40);
     }
     .jv-history-clip .jv-viz img { border: 1px solid var(--border); }
+    @media (max-width: 900px) {
+      .jv-history-clip { padding: var(--s-24); gap: var(--s-24); }
+    }
     #historie.section { padding-top: 0; }
     /* Nadpis nad kroky */
     .steps-title { font-size: 24px; margin-bottom: var(--s-40); }
@@ -228,12 +231,11 @@ import { u } from '../../lib/url.js';
     /* Horizontální timeline a kroky (DTP sloupce) */
     .timeline-h {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: var(--s-40);
     }
     @media (max-width: 900px) {
       .timeline-h { grid-template-columns: 1fr 1fr; }
-      .timeline-h .tl-col:last-child { grid-column: 1 / -1; }
     }
     .tl-col { border-top: 1px solid var(--border); padding-top: var(--s-16); }
     .tl-date {
@@ -246,10 +248,13 @@ import { u } from '../../lib/url.js';
     .tl-col p { font-size: 15px; color: var(--text-secondary); }
     .steps-h {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: var(--s-40);
     }
-    @media (max-width: 900px) { .steps-h { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 900px) {
+      .steps-h { grid-template-columns: 1fr 1fr; }
+      .steps-h .step-col:last-child { grid-column: 1 / -1; }
+    }
     .steps-h .step-col { border-top: 1px solid var(--border); padding-top: var(--s-16); }
     .steps-h .step-num-h {
       font-family: var(--font-display);
@@ -385,12 +390,12 @@ import { u } from '../../lib/url.js';
     .against-block .note-block {
       background: var(--paper);
       padding: var(--s-24);
-      border-left: 3px solid var(--brand-red);
+      border-left: 3px solid var(--border);
     }
     /* proti čemu budeme bojovat — červené × místo modrého + */
     .wishes--against { grid-template-columns: repeat(2, 1fr); }
     @media (max-width: 600px) { .wishes--against { grid-template-columns: 1fr; } }
-    .wishes--against .wish::before { content: "×"; color: var(--brand-red); }
+    .wishes--against .wish::before { content: "×"; color: var(--text); }
     .wishes--against .wish strong { color: var(--text); }
     /* datové odrážky a zdroje */
     .lyz-body { max-width: 900px; }
@@ -570,7 +575,7 @@ import { u } from '../../lib/url.js';
       align-items: baseline;
     }
     .zadani-item .check {
-      color: var(--brand-red);
+      color: var(--signal-blue);
       font-weight: 800;
       font-size: 20px;
       flex-shrink: 0;
@@ -626,11 +631,13 @@ import { u } from '../../lib/url.js';
     <div class="jv-cover-tint"></div>
     <div class="jv-cover-shade"></div>
     <div class="container">
+      <p class="jv-cover-eyebrow">Program 2026 · Javorový</p>
       <h1>Javorový.<br><span class="hl">Nová vize.</span></h1>
       <p class="jv-cover-lead">
-        Rok práce. Stovky hlasů. Jeden kopec. Z pověření zastupitelstva
-        jsme připravili podklad pro rozhodnutí o budoucnosti chaty
-        i celého areálu — a tady je, co jsme zjistili.
+        O Javorovém se v Třinci mluví dvacet let. Prodat, neprodat, opravit,
+        nechat být — rozhodnutí pořád chybělo. Z pověření zastupitelstva jsme
+        se rok ptali, poslouchali a počítali. Javorový má poprvé podklad,
+        který stojí na datech, ne na dojmech. Tady je.
       </p>
     </div>
   </section>
@@ -699,15 +706,19 @@ import { u } from '../../lib/url.js';
         </div>
         <div class="tl-col">
           <div class="tl-date">2024</div>
-          <p>415 dotazníků, 14 rozhovorů, veřejná beseda i setkání s architekty.</p>
+          <p>414 dotazníků, 14 rozhovorů, veřejná beseda i setkání s architekty.</p>
         </div>
         <div class="tl-col">
           <div class="tl-date">05/2024</div>
           <p>Studie proveditelnosti a první vizualizace chaty.</p>
         </div>
         <div class="tl-col">
+          <div class="tl-date">2024–26</div>
+          <p>Chata dostala novou střechu a čistírnu odpadních vod. Na demolici starých chat má město peníze v rozpočtu.</p>
+        </div>
+        <div class="tl-col">
           <div class="tl-date">Teď</div>
-          <p>Vize je na stole — tři návrhy architektů a výběr i s vámi.</p>
+          <p>Vize je na stole. Zbývá poslední krok: rozhodnout a začít — tři návrhy architektů a výběr i s vámi.</p>
         </div>
       </div>
     </div>
@@ -730,7 +741,7 @@ import { u } from '../../lib/url.js';
           <p>z vás vyrazí na kopec několikrát ročně</p>
         </div>
         <div class="jv-stat">
-          <div class="jv-stat-num">415</div>
+          <div class="jv-stat-num">414</div>
           <p>občanů se zapojilo do dotazníku o budoucnosti Javorového</p>
         </div>
       </div>
@@ -745,7 +756,7 @@ import { u } from '../../lib/url.js';
         <h2>Chatu máme rádi. Zaslouží si víc.</h2>
         <p class="section-note">
           Občerstvení na chatě si dává 88 % z vás — jídlo ale hodnotíte
-          známkou 2,1 z 5 a ubytování 3 z 5. Proto chceme víc:
+          známkou 2,2 z 5 a ubytování 3 z 5. Proto chceme víc:
         </p>
       </div>
       <div class="jv-pruzkum-grid">
@@ -808,9 +819,9 @@ import { u } from '../../lib/url.js';
             <svg viewBox="0 0 120 120" aria-hidden="true">
               <circle class="ring-track" cx="60" cy="60" r="52"/>
               <circle class="ring-fill" cx="60" cy="60" r="52"
-                      stroke-dasharray="326.7" stroke-dashoffset="71.9"/>
+                      stroke-dasharray="326.7" stroke-dashoffset="173.2"/>
             </svg>
-            <span class="ring-num">78&nbsp;%</span>
+            <span class="ring-num">47&nbsp;%</span>
           </div>
           <figcaption>považuje rekonstrukci chaty za důležitou</figcaption>
         </figure>
@@ -819,33 +830,33 @@ import { u } from '../../lib/url.js';
             <svg viewBox="0 0 120 120" aria-hidden="true">
               <circle class="ring-track" cx="60" cy="60" r="52"/>
               <circle class="ring-fill" cx="60" cy="60" r="52"
-                      stroke-dasharray="326.7" stroke-dashoffset="104.5"/>
+                      stroke-dasharray="326.7" stroke-dashoffset="114.3"/>
             </svg>
-            <span class="ring-num">68&nbsp;%</span>
+            <span class="ring-num">65&nbsp;%</span>
           </div>
-          <figcaption>nesouhlasí se zpřístupněním vrcholu pro auta</figcaption>
+          <figcaption>považuje ochranu přírody na Javorovém za důležitou</figcaption>
         </figure>
         <figure class="ring">
           <div class="ring-wrap">
             <svg viewBox="0 0 120 120" aria-hidden="true">
               <circle class="ring-track" cx="60" cy="60" r="52"/>
               <circle class="ring-fill" cx="60" cy="60" r="52"
-                      stroke-dasharray="326.7" stroke-dashoffset="0"/>
+                      stroke-dasharray="326.7" stroke-dashoffset="179.7"/>
             </svg>
-            <span class="ring-num">100&nbsp;%</span>
+            <span class="ring-num">45&nbsp;%</span>
           </div>
-          <figcaption>vidí největší potenciál v pěší turistice</figcaption>
+          <figcaption>má obavy, co s přírodou udělá rostoucí návštěvnost</figcaption>
         </figure>
         <figure class="ring">
           <div class="ring-wrap">
             <svg viewBox="0 0 120 120" aria-hidden="true">
               <circle class="ring-track" cx="60" cy="60" r="52"/>
               <circle class="ring-fill" cx="60" cy="60" r="52"
-                      stroke-dasharray="326.7" stroke-dashoffset="39.2"/>
+                      stroke-dasharray="326.7" stroke-dashoffset="238.5"/>
             </svg>
-            <span class="ring-num">88&nbsp;%</span>
+            <span class="ring-num">27&nbsp;%</span>
           </div>
-          <figcaption>a hned po ní v paraglidingu</figcaption>
+          <figcaption>se na vrchol dostane autem nebo lanovkou — ostatní jdou pěšky</figcaption>
         </figure>
       </div>
     </div>
@@ -910,12 +921,12 @@ import { u } from '../../lib/url.js';
       <p class="jv-band-eyebrow">Naše vize</p>
       <h2>Živý kopec. Po celý rok.</h2>
       <p>
-        Mluví za to i čísla: za turistikou na kopec chodí 91 % z vás,
-        na lyžích jezdí 7 %. Klimatické změny
-        rozhodly — z Javorového už nebude lyžařský areál. To ale otevírá
-        nové možnosti: sport, kulturu a komunity po celý rok. Areál
-        zůstává v rukou města a chata se vrátí k podobě, jakou měla
-        v roce 1895.
+        Lyžování na Javorovém je už jen vzpomínka: za dvacet let se zimní
+        sezona zkrátila o šest týdnů a v Beskydech ubývá sněhu nejrychleji
+        v Česku. Klimatické změny rozhodly — z Javorového už nebude lyžařský
+        areál. To ale otevírá nové možnosti: sport, kulturu a komunity
+        po celý rok. Areál zůstává v rukou města a chata se vrátí k podobě,
+        jakou měla v roce 1895.
       </p>
     </div>
   </section>
@@ -965,6 +976,15 @@ import { u } from '../../lib/url.js';
         <div class="zadani-item"><span class="check">✓</span>
           <p><strong>Výběrové řízení na nového nájemce až po rekonstrukci</strong> — s novými podmínkami nájmu.</p>
         </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Cesta nahoru jako součást zážitku</strong> — nové stezky pro sportovce i děti, naučná stezka a víc odpočívadel.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Parkoviště pod lanovkou zpoplatnit pro návštěvníky</strong> — Třinečané ho budou mít zdarma a výnosy vrátíme do stezek.</p>
+        </div>
+        <div class="zadani-item"><span class="check">✓</span>
+          <p><strong>Mamlas plac ožije po celý rok</strong> — bývalá horní sjezdovka dostane nové využití: další sporty nebo aktivity pro děti.</p>
+        </div>
       </div>
       <div class="jv-viz" style="margin-top: var(--s-64);">
         <img src={u('assets/img/javorovy/vizualizace-kania.jpg')} alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
@@ -980,19 +1000,21 @@ import { u } from '../../lib/url.js';
         <p class="eyebrow">Studie proveditelnosti · KANIA, 2024</p>
         <h2>Tři varianty. Jasné ceny.</h2>
         <p class="section-note">
-          Nezačínáme na zelené louce — studie proveditelnosti spočítala
-          tři varianty, jak s chatou naložit. Ceny jsou včetně DPH.
+          Nezačínáme na zelené louce. Chata už má novou střechu a čistírnu
+          odpadních vod, na demolici starých chat má město peníze v rozpočtu
+          a studie proveditelnosti spočítala tři varianty, jak s chatou naložit.
         </p>
       </div>
       <div class="zones">
         <div class="zone approach">
-          <div class="approach-meta">Varianta A · 9,6 mil. Kč</div>
+          <div class="approach-meta">Varianta A · cca 10 mil. Kč</div>
           <h3>Nejnutnější údržba</h3>
           <p>Okna a dveře, elektroinstalace, nová čistírna odpadních vod,
-            rekonstrukce střechy a podhledů. Chata přežije — ale nic víc.</p>
+            rekonstrukce střechy a podhledů. Střecha a čistírna jsou od té
+            doby hotové. Chata přežije — ale nic víc.</p>
         </div>
         <div class="zone approach">
-          <div class="approach-meta">Varianta B · 15,4 mil. Kč</div>
+          <div class="approach-meta">Varianta B · min. 15 mil. Kč</div>
           <span class="approach-pick">Naše doporučení</span>
           <h3>Rekonstrukce s novou terasou</h3>
           <p>Vše z údržby + jednotná fasáda a nová dřevěná terasa pro
@@ -1000,11 +1022,11 @@ import { u } from '../../lib/url.js';
             vizualizace výše.</p>
         </div>
         <div class="zone approach">
-          <div class="approach-meta">Varianta C · 50,4 mil. Kč</div>
+          <div class="approach-meta">Varianta C · min. 60 mil. Kč</div>
           <h3>Výstavba nového objektu</h3>
           <p>Nová budova na kamenném základu — restaurace s terasou
             pro 100 lidí, ubytování pro 40 osob, fotovoltaika na jižní
-            střeše.</p>
+            střeše. Nejistá návratnost a odpor CHKO.</p>
         </div>
       </div>
 
@@ -1024,11 +1046,10 @@ import { u } from '../../lib/url.js';
           vyjmuli ze smlouvy a postupně našli nové využití těchto prostorů.
         </p>
         <p class="rec-text">
-          Spolu s dalšími aktéry — krajem, Lesy ČR i poskytovateli dotací —
-          budeme pokračovat v diskusi, co dál s lanovkou na Javorový.
-          Nebránili bychom se jejímu převodu na město a hlavně lepšímu
-          využití celého objektu dolní stanice, například jako komunitního
-          centra nebo místa pro akce.
+          S krajem a Lesy ČR budeme jednat, jak zachovat přístupnost vrcholu,
+          až lanovka doslouží. Nebránili bychom se jejímu převodu na město
+          a hlavně lepšímu využití celého objektu dolní stanice, například
+          jako komunitního centra nebo místa pro akce. Chatu ani vrch neprodáme.
         </p>
       </div>
 
@@ -1140,7 +1161,7 @@ import { u } from '../../lib/url.js';
       <p class="jv-vize-lead" style="margin-bottom: var(--s-40);">
         Pokud budeme zvoleni, budeme prosazovat celkovou koncepci vrchu
         i areálu Javorový. Jako první věc začneme spolupracovat s architekty
-        a dál zapojovat veřejnost do diskuse.
+        a dál zapojovat veřejnost do diskuse. Chatu ani vrch neprodáme.
       </p>
       <div class="steps-h">
         <div class="step-col">
@@ -1158,6 +1179,10 @@ import { u } from '../../lib/url.js';
         <div class="step-col">
           <div class="step-num-h">04</div>
           <p>Město zajistí financování a projekt dotáhne k realizaci.</p>
+        </div>
+        <div class="step-col">
+          <div class="step-num-h">05</div>
+          <p>Teprve potom vypíšeme výběrové řízení na nájemce chaty — s novými podmínkami.</p>
         </div>
       </div>
     </div>
