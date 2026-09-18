@@ -7,14 +7,16 @@
 .tym-head { padding-bottom: var(--s-40); }
 .tym img { display: block; width: 100%; height: auto; }
 .tym-foto { position: relative; }
-/* tlačítka leží v nebi vpravo nahoře — dole stojí lidé až k okraji fotky */
+/* tlačítka leží dole uprostřed, na chodníku pod schody */
 .tym-links {
   position: absolute;
-  top: clamp(16px, 3vw, 40px); right: clamp(16px, 3vw, 40px);
+  left: 0; right: 0;
+  bottom: clamp(16px, 3vw, 40px);
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+  padding: 0 16px;
 }
 @media (max-width: 700px) {
   .tym-links { position: static; padding: var(--s-24) 16px 0; }
