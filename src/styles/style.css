@@ -811,6 +811,7 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--signal-blue);
+  overflow-wrap: anywhere; /* pojistka: adresa bez mezer nesmí přetéct z karty */
 }
 .support-card.is-muted { opacity: 0.55; }
 .support-card.is-muted svg { color: var(--text-muted); }
@@ -1074,7 +1075,9 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .logo img { height: 56px; }
 
   .stat-grid { grid-template-columns: 1fr; gap: var(--s-24); }
-  .support-grid, .donate-grid { grid-template-columns: 1fr; }
+  /* minmax(0, 1fr): samotné 1fr nesmí klesnout pod min-content obsahu, takže dlouhý
+     odkaz v kartě (facebook.com/osobnostiprotrinec) sloupec roztáhl přes displej */
+  .support-grid, .donate-grid { grid-template-columns: minmax(0, 1fr); }
   .fakturacni { padding: var(--s-24); }
   .fakturacni-radek { grid-template-columns: 1fr; gap: var(--s-8); }
   .projects { grid-template-columns: 1fr; gap: var(--s-40); }
@@ -1098,6 +1101,31 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   .logo img { height: 44px; }
   .header-right { gap: var(--s-8); }
   .header-right .btn { padding: 8px 14px; font-size: 11px; }
+}
+
+/* Tlačítka na telefonu. `.btn` má white-space: nowrap (pilulka se nemá lámat),
+   jenže dlouhý popisek ve velkém `.btn-lg` (17px písmo + 48px padding) se na
+   390px nevejde — „Všechny akce na Facebooku" vytekla z displeje a stránka šla
+   rolovat do strany (totéž „Všechny projekty v programu" na úvodu a „Otevřít můj
+   profil na Facebooku" u srdíčka). Pojistka pro všechna tlačítka: nikdy nepřesáhnout
+   sloupec, v krajním případě zalomit. Závěrečné CTA sekcí (.section-cta) jdou na
+   telefonu přes celou šířku sloupce v běžné velikosti písma, ať se popisek vejde
+   na jeden řádek; dvě CTA vedle sebe se poskládají pod sebe. */
+@media (max-width: 600px) {
+  .btn {
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+  .section-cta .btn {
+    display: flex;
+    width: 100%;
+  }
+  .section-cta .btn-lg {
+    padding: 16px 24px;
+    font-size: 14px;
+  }
 }
 
 /* ==========================================================

@@ -124,7 +124,7 @@ const podnav = [
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           <h3>Facebook</h3>
           <p>Novinky z kampaně, akce, lidé. Sledujte a sdílejte.</p>
-          <span class="support-link">facebook.com/osobnostiprotrinec →</span>
+          <span class="support-link">facebook.com/<wbr>osobnostiprotrinec →</span>
         </a>
         <a class="support-card" href="https://www.instagram.com/osobnosti_pro_trinec/" target="_blank" rel="noopener">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
@@ -367,6 +367,14 @@ const podnav = [
       .akce-ikona svg { width: 32px; height: 32px; }
       .akce-popis { margin-left: auto; margin-right: auto; }
       .akce-btn { width: 100%; text-align: center; justify-content: center; white-space: normal; }
+    }
+    @media (max-width: 600px) {
+      /* Na telefonu sekce těsněji: plný padding 96px nad i pod dělal mezi sekcemi
+         přes 190px prázdna a osamocené CTA viselo 64px pod textem. Akční tlačítka
+         v kartách v běžné velikosti písma, ať se popisek vejde na jeden řádek. */
+      .podpora-sekce { padding: var(--s-64) 0; }
+      .podpora-sekce .section-cta { margin-top: var(--s-40); }
+      .akce-btn { padding: 16px 24px; font-size: 14px; }
     }
     @media (max-width: 560px) {
       .podnav-list { grid-template-columns: 1fr; }
