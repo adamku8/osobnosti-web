@@ -1,0 +1,186 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+import { sdeleni, poznamky } from '../data/transparentnost.js';
+---
+<Base
+  title="Oznámení o transparentnosti politické reklamy — Osobnosti pro Třinec"
+  description="Přehled politických reklamních sdělení hnutí NOVÁ GENERACE (Osobnosti pro Třinec) ve smyslu nařízení (EU) 2024/900."
+  path="transparentnost.html"
+  active="podporte"
+>
+  <!-- ================= TRANSPARENTNOST POLITICKÉ REKLAMY ================= -->
+  <section class="section transp-stranka">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Kdo platí naši kampaň</p>
+        <h1>Oznámení o transparentnosti politické reklamy</h1>
+        <p class="section-note">
+          Níže naleznete přehled politických reklamních sdělení ve smyslu
+          nařízení (EU) 2024/900 a doprovodných informací.
+        </p>
+      </div>
+
+      <div class="transp">
+        <div class="transp-blok">
+          <h3>1. Identifikace zadavatele</h3>
+          <dl class="fakturacni-list">
+            <div class="fakturacni-radek"><dt>Zadavatel</dt><dd>Politické hnutí NOVÁ GENERACE</dd></div>
+            <div class="fakturacni-radek"><dt>IČO</dt><dd>29 68 47 73</dd></div>
+            <div class="fakturacni-radek"><dt>Sídlo</dt><dd>Poštovní 244, 739 61 Třinec</dd></div>
+            <div class="fakturacni-radek"><dt>E-mail</dt><dd><a href="mailto:lucie.fremrova@gmail.com">lucie.fremrova@gmail.com</a></dd></div>
+          </dl>
+        </div>
+
+        <div class="transp-blok">
+          <h3>2. Financování</h3>
+          <p>Níže zveřejněná reklamní sdělení jsou financována pouze zadavatelem.</p>
+          <p>
+            Částky, které poskytovatelé / vydavatelé obdrželi od zadavatele
+            v souvislosti se službou politické reklamy, pocházejí z příjmů
+            politického hnutí dle § 17 odst. 8 zákona o sdružování v politických
+            stranách a hnutích. Jedná se o soukromé prostředky pocházející
+            z EU.<sup>(1)</sup>
+          </p>
+        </div>
+
+        <div class="transp-blok">
+          <h3>3. Přehled politických reklamních sdělení</h3>
+          <p>
+            Oficiální informace o způsobech účasti ve volbách najdete na{' '}
+            <a href="https://mv.gov.cz/volby-referenda/druhy-voleb" target="_blank" rel="noopener">stránkách Ministerstva vnitra</a>.
+          </p>
+          <p>
+            Upozornění na politická reklamní sdělení, která mohou být v rozporu
+            s pravidly, lze učinit e-mailem
+            (<a href="mailto:lucie.fremrova@gmail.com">lucie.fremrova@gmail.com</a>)
+            nebo datovou schránkou (ID: t5ty7t4).
+          </p>
+          <p>
+            Zadavatel je oprávněn politickou reklamu zadat a poskytnuté údaje
+            jsou pravdivé, úplné a aktuální. Obsah sdělení neporušuje právní
+            předpisy ani práva třetích osob. Zadavatel prohlašuje, že jde
+            o politickou reklamu.
+          </p>
+        </div>
+      </div>
+
+      <div class="transp-tabulka" role="region" aria-label="Přehled politických reklamních sdělení" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Typ reklamního sdělení</th>
+              <th scope="col">Vydavatel</th>
+              <th scope="col">Období<sup>(2)</sup></th>
+              <th scope="col">Souvislost s</th>
+              <th scope="col">Částka za sdělení (Kč vč. DPH)<sup>(3)</sup></th>
+              <th scope="col">Částka za kampaň (Kč vč. DPH)<sup>(4)</sup></th>
+              <th scope="col">Metodika výpočtu<sup>(5)</sup></th>
+              <th scope="col">Cílení<sup>(6)</sup></th>
+              <th scope="col">Poznámka</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sdeleni.map((r) => (
+              <tr>
+                <th scope="row">{r.typ}</th>
+                <td>{r.vydavatel}</td>
+                <td class="nowrap">{r.obdobi}</td>
+                <td>{r.souvislost}</td>
+                <td class="cislo">{r.castkaSdeleni || <span class="doplnime">doplníme</span>}</td>
+                <td class="cislo">{r.castkaKampan || <span class="doplnime">doplníme</span>}</td>
+                <td>{r.metodika}</td>
+                <td>{r.cileni}</td>
+                <td>{r.poznamka || '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <ol class="transp-poznamky">
+        {poznamky.map((text) => <li>{text}</li>)}
+      </ol>
+      <p class="transp-zpet"><a href={u('podporte-nas.html')}>← Zpět na Podpořte nás</a></p>
+    </div>
+  </section>
+
+  <style>
+    .transp-stranka h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      overflow-wrap: break-word;
+    }
+    .transp-stranka .section-head { margin-bottom: var(--s-40); }
+    .transp-zpet { margin-top: var(--s-40); font-size: 14px; }
+
+    /* ---------- Transparentnost politické reklamy ---------- */
+    .transp {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--s-40);
+      margin-bottom: var(--s-40);
+    }
+    .transp-blok h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: var(--s-16);
+    }
+    .transp-blok p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: var(--s-16);
+      overflow-wrap: break-word;
+    }
+    /* Ve třetinovém sloupci popisek nad hodnotou — 200px sloupec dt by hodnoty rozsekal. */
+    .transp-blok .fakturacni-radek { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+    .transp-blok .fakturacni-radek:first-child { padding-top: 0; }
+    .transp-blok .fakturacni-radek dd { font-size: 14px; overflow-wrap: anywhere; }
+    .transp sup, .transp-tabulka sup { font-size: 0.7em; margin-left: 2px; }
+    .transp-tabulka {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+    }
+    .transp-tabulka table {
+      width: 100%;
+      min-width: 960px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .transp-tabulka th,
+    .transp-tabulka td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: manual;
+    }
+    .transp-tabulka thead th {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      background: var(--white, #fff);
+    }
+    .transp-tabulka tbody th { font-family: var(--font-display); font-weight: 700; }
+    .transp-tabulka tbody tr:last-child > * { border-bottom: 0; }
+    .transp-tabulka .nowrap { white-space: nowrap; }
+    .transp-tabulka .cislo { white-space: nowrap; }
+    .transp-tabulka .doplnime { color: var(--text-muted); font-style: italic; }
+    .transp-poznamky {
+      margin-top: var(--s-24);
+      padding-left: 1.6em;
+      color: var(--text-muted);
+      font-size: 12px;
+      max-width: 90ch;
+    }
+    .transp-poznamky li { margin-bottom: 4px; }
+    .transp-poznamky li::marker { content: "(" counter(list-item) ")  "; }
+    @media (max-width: 900px) {
+      .transp { grid-template-columns: minmax(0, 1fr); gap: var(--s-24); }
+    }
+  </style>
+</Base>
