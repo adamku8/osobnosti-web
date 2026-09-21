@@ -522,19 +522,39 @@ import { u } from '../../lib/url.js';
       letter-spacing: 0.06em;
       font-weight: 600;
     }
-    .quote-nav { display: flex; gap: var(--s-8); margin-top: var(--s-40); }
+    .quote-stage { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .quote-stage.is-dragging { cursor: grabbing; }
+    .quote-nav { display: flex; align-items: center; gap: var(--s-8); margin-top: var(--s-40); }
+    /* čárka je 4 px vysoká, ale kliká se na 28 px (průhledný rámeček + background-clip) */
     .quote-dot {
+      box-sizing: content-box;
       width: 40px;
       height: 4px;
-      border: none;
+      border: solid transparent;
+      border-width: 12px 0;
+      background-clip: padding-box;
       padding: 0;
-      background: rgba(50,50,50,0.16);
+      background-color: rgba(50,50,50,0.16);
       cursor: pointer;
-      transition: background 240ms var(--ease-ui);
+      transition: background-color 240ms var(--ease-ui);
     }
-    .quote-dot.is-active { background: var(--brand-red); }
-    .quote-dot:hover { background: rgba(50,50,50,0.36); }
-    .quote-dot.is-active:hover { background: var(--brand-red); }
+    .quote-arrow {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      transition: border-color 240ms var(--ease-ui), color 240ms var(--ease-ui);
+    }
+    .quote-arrow:first-of-type { margin-left: var(--s-16); }
+    .quote-arrow:hover { border-color: var(--signal-blue); color: var(--signal-blue); }
+    .quote-dot.is-active { background-color: var(--brand-red); }
+    .quote-dot:hover { background-color: rgba(50,50,50,0.36); }
+    .quote-dot.is-active:hover { background-color: var(--brand-red); }
     .jv-toc { margin-top: var(--s-40); }
     .jv-toc-label {
       font-family: var(--font-display);
@@ -876,7 +896,7 @@ import { u } from '../../lib/url.js';
         <h2>Co říkají lidé z kopce.</h2>
       </div>
       <div class="hlasy-grid">
-      <div class="quote-slider" id="quoteSlider">
+      <div class="quote-slider" id="quoteSlider" tabindex="0" aria-roledescription="carousel" aria-label="Citace z rozhovorů">
         <div class="quote-stage">
         <blockquote class="quote-slide is-active">
           <p>„Hlavní náplní práce je úklid odpadu po turistech."</p>
@@ -895,6 +915,8 @@ import { u } from '../../lib/url.js';
           <button class="quote-dot is-active" type="button" aria-label="Citace 1"></button>
           <button class="quote-dot" type="button" aria-label="Citace 2"></button>
           <button class="quote-dot" type="button" aria-label="Citace 3"></button>
+          <button class="quote-arrow" type="button" data-dir="-1" aria-label="Předchozí citace">←</button>
+          <button class="quote-arrow" type="button" data-dir="1" aria-label="Další citace">→</button>
         </div>
       </div>
       <figure class="beseda">
@@ -1210,4 +1232,67 @@ import { u } from '../../lib/url.js';
       </div>
     </div>
   </section>
+
+  <!-- Slider citací: samo se střídá po 4 s, jde posouvat čárkami, šipkami,
+       tažením (prst i myš) a klávesami ← →. Po ručním zásahu se časovač restartuje. -->
+  <script is:inline>
+    (function () {
+      var slider = document.getElementById('quoteSlider');
+      if (!slider) return;
+      var stage = slider.querySelector('.quote-stage');
+      var slides = slider.querySelectorAll('.quote-slide');
+      var dots = slider.querySelectorAll('.quote-dot');
+      var INTERVAL = 4000;
+      var i = 0, timer = null, hover = false;
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function show(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach(function (s, k) {
+          s.classList.toggle('is-active', k === i);
+          s.setAttribute('aria-hidden', k === i ? 'false' : 'true');
+        });
+        dots.forEach(function (d, k) { d.classList.toggle('is-active', k === i); });
+      }
+      function stop() { clearInterval(timer); timer = null; }
+      function start() {
+        stop();
+        if (reduced || hover) return;
+        timer = setInterval(function () { show(i + 1); }, INTERVAL);
+      }
+      function go(n) { show(n); start(); }
+
+      dots.forEach(function (d, k) { d.addEventListener('click', function () { go(k); }); });
+      slider.querySelectorAll('.quote-arrow').forEach(function (b) {
+        b.addEventListener('click', function () { go(i + Number(b.dataset.dir)); });
+      });
+      slider.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { go(i - 1); e.preventDefault(); }
+        if (e.key === 'ArrowRight') { go(i + 1); e.preventDefault(); }
+      });
+
+      // tažení — prst i myš
+      var x0 = null;
+      stage.addEventListener('pointerdown', function (e) {
+        x0 = e.clientX; stage.classList.add('is-dragging'); stop();
+      });
+      function release(e) {
+        if (x0 === null) return;
+        var dx = e.clientX - x0; x0 = null;
+        stage.classList.remove('is-dragging');
+        if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1));
+        start();
+      }
+      stage.addEventListener('pointerup', release);
+      stage.addEventListener('pointercancel', release);
+      stage.addEventListener('pointerleave', release);
+
+      slider.addEventListener('mouseenter', function () { hover = true; stop(); });
+      slider.addEventListener('mouseleave', function () { hover = false; start(); });
+      document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+
+      show(0);
+      start();
+    })();
+  </script>
 </Base>
