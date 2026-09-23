@@ -43,7 +43,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: { typ: 'instagram', url: 'https://www.instagram.com/reel/DdCAnF0lAKd/' },
+    video: { typ: 'soubor', src: '/assets/video/adam-kurzok.mp4' },
   },
 
   'david-szkandera': {
@@ -230,7 +230,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Ráno' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: { typ: 'instagram', url: 'https://www.instagram.com/reel/DdRgcLbkpGm/' },
+    video: { typ: 'soubor', src: '/assets/video/erika-sirotova.mp4' },
   },
 
   'marek-sterba': {
@@ -707,7 +707,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: { typ: 'instagram', url: 'https://www.instagram.com/p/DczAeD1IGRo/' },
+    video: { typ: 'soubor', src: '/assets/video/lucie-fremrova.mp4' },
   },
 
   'darina-kubikova': {
