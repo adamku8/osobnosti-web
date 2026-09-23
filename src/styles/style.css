@@ -59,7 +59,10 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth;
+  /* kotvy (#oblast-XX, #projekty…) nesmí skončit pod lepícím se menu: 72 px hlavička + 16 px vzduch */
+  scroll-padding-top: 88px;
+}
 
 body {
   font-family: var(--font-body);
@@ -1815,6 +1818,65 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
   max-width: 78ch;
 }
 .ig-skoly strong { color: var(--text); font-weight: 600; }
+
+/* rozklikávací rozpis „co počítáme pro celé město" — stejný pill jako .area-vize */
+.ig-rozpis { margin-top: var(--s-8); }
+.ig-rozpis > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 11px 20px;
+  border: 1.5px solid var(--anthracite);
+  border-radius: 100px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--anthracite);
+  cursor: pointer;
+  list-style: none;
+  transition: background 240ms var(--ease-ui), color 240ms var(--ease-ui);
+}
+.ig-rozpis > summary::-webkit-details-marker { display: none; }
+.ig-rozpis > summary::marker { content: ""; }
+.ig-rozpis > summary:hover { background: var(--anthracite); color: var(--paper); }
+.ig-rozpis-plus { font-size: 16px; line-height: 1; transition: transform 240ms var(--ease-ui); }
+.ig-rozpis[open] .ig-rozpis-plus { transform: rotate(45deg); }
+.ig-rozpis-body {
+  margin-top: var(--s-16);
+  padding: var(--s-24);
+  border: 1px solid var(--border);
+  max-width: 78ch;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.ig-rozpis-uvod { margin-bottom: var(--s-16); }
+.ig-rozpis-body h4 {
+  margin: var(--s-16) 0 var(--s-8);
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.ig-rozpis-list { list-style: none; margin: 0; padding: 0; }
+.ig-rozpis-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-16);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ig-rozpis-list li:last-child { border-bottom: 0; }
+.ig-rozpis-list b {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--text);
+}
 
 /* ---------- Závazky ---------- */
 .zav-list { list-style: none; border-top: 1px solid var(--border); }

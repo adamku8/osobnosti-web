@@ -1,6 +1,7 @@
 ---
 // Karta programové oblasti. Volitelný `href` (úvod) přidá dole proklik
 // na plný blok oblasti v /program.html#oblast-XX; `odkazText` je jeho popisek.
+// Na stejnou kotvu vede i nadpis oblasti (září 2026) — bez `href` je jen text.
 // `bezCisla` skryje pořadové číslo — na úvodu zůstává jen ikona.
 const { o, href = null, odkazText = 'Celá oblast →', bezCisla = false, class: extra = '', style = undefined } = Astro.props;
 ---
@@ -10,7 +11,7 @@ const { o, href = null, odkazText = 'Celá oblast →', bezCisla = false, class:
     {!bezCisla && <div class="promise-index">{o.cislo}</div>}
     <svg class="promise-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={o.ikona} />
   </div>
-  <h3>{o.nazev}</h3>
+  <h3>{href ? <a class="promise-title" href={href}>{o.nazev}</a> : o.nazev}</h3>
   <p class="promise-podnadpis">{o.podnadpis}</p>
   <ul>{o.body.map(b => <li set:html={b} />)}</ul>
   {href && <a class="people-more promise-more" href={href}>{odkazText}</a>}
@@ -18,4 +19,6 @@ const { o, href = null, odkazText = 'Celá oblast →', bezCisla = false, class:
 
 <style>
   .promise-more { display: inline-block; margin-top: var(--s-16); }
+  .promise-title { color: inherit; text-decoration: none; transition: color 240ms var(--ease-ui); }
+  .promise-title:hover, .promise-title:focus-visible { color: var(--signal-blue); text-decoration: none; }
 </style>
