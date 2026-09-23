@@ -1382,6 +1382,15 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   border: 1px solid var(--border);
   overflow: hidden;
 }
+.video-wrap:has(.video-cta) { position: relative; }
+.video-cta {
+  position: absolute;
+  left: 50%;
+  bottom: var(--s-24, 24px);
+  transform: translateX(-50%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+.video-cta[hidden] { display: none; }
 .video-wrap.is-wide { aspect-ratio: 16 / 9; }
 /* Instagram embed si nese vlastní hlavičku a popisek, takže se do poměru 9:16
    nevejde — místo ořezu mu dáme pevnou výšku a necháme ho dýchat. */

@@ -9,7 +9,9 @@
 //
 //   video: { typ: 'instagram', url: 'https://www.instagram.com/reel/XXXXXXXXX/' }
 //   video: { typ: 'youtube',   id: 'XXXXXXXXXXX' }
-//   video: { typ: 'soubor',    src: '/assets/video/jmeno.mp4' }
+//   video: { typ: 'soubor',    src: '/assets/video/jmeno.mp4', poster: '/assets/video/jmeno.jpg' }
+//   (poster = první snímek videa: ffmpeg -i jmeno.mp4 -frames:v 1 -q:v 4 jmeno.jpg;
+//    bez posteru se ukáže fotka kandidáta)
 //
 // Nejlepší výsledek dává 'soubor' (vyplní formát 9:16, žádný cizí skript).
 // 'instagram' je nejrychlejší cesta, když video existuje jen jako reel —
@@ -43,7 +45,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: { typ: 'soubor', src: '/assets/video/adam-kurzok.mp4' },
+    video: { typ: 'soubor', src: '/assets/video/adam-kurzok.mp4', poster: '/assets/video/adam-kurzok.jpg' },
   },
 
   'david-szkandera': {
@@ -230,7 +232,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Ráno' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: { typ: 'soubor', src: '/assets/video/erika-sirotova.mp4' },
+    video: { typ: 'soubor', src: '/assets/video/erika-sirotova.mp4', poster: '/assets/video/erika-sirotova.jpg' },
   },
 
   'marek-sterba': {
@@ -707,7 +709,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Večer' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: { typ: 'soubor', src: '/assets/video/lucie-fremrova.mp4' },
+    video: { typ: 'soubor', src: '/assets/video/lucie-fremrova.mp4', poster: '/assets/video/lucie-fremrova.jpg' },
   },
 
   'darina-kubikova': {
