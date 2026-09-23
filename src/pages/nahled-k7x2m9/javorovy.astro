@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { u } from '../../lib/url.js';
+// Tisková zkratka téhle stránky — generuje ji ../../../make_javorovy_a4.py.
+const PDF = 'assets/javorovy-osobnosti-pro-trinec-2026.pdf';
 ---
 <Base
   title="Javorový — nová vize | Osobnosti pro Třinec"
@@ -646,6 +648,9 @@ import { u } from '../../lib/url.js';
         se rok ptali, poslouchali a počítali. Javorový má poprvé podklad,
         který stojí na datech, ne na dojmech. Tady je.
       </p>
+      <div class="section-cta" style="margin-top: var(--s-24); text-align: left;">
+        <a class="btn btn-white" href={u(PDF)} target="_blank" rel="noopener">Stáhnout na jednu A4</a>
+      </div>
     </div>
   </section>
 
