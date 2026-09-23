@@ -305,13 +305,16 @@ const SRDCE_PATH = 'M1163,69.8c-36.96-24.85-83.81-22.18-123.9-4.62-35.13,15.39-6
           ctx.drawImage(obr, (S - w) / 2 + posX, (S - h) / 2 + posY, w, h);
         }
 
-        // Odznaky sedí v dolních rozích. Střed leží na úhlopříčce (45°), takže
-        // je od svislého i spodního okraje stejně daleko. PRESAH je posouvá blíž
-        // rohu čtverce — o tolik pak vystupují za kruh, do kterého Facebook
-        // profilovku ořezává.
+        // Odznaky sedí v dolních rozích na úhlopříčce (45°), takže jsou od
+        // svislého i spodního okraje stejně daleko. Facebook profilovku ořezává
+        // do kruhu vepsaného do čtverce a v kolečku se ukáže jen to, co leží
+        // uvnitř — celý odznak proto musí být v kruhu (dřív o 88 px přesahoval
+        // a v nerozkliknuté profilovce byl useknutý). OKRAJ je rezerva mezi
+        // odznakem a hranou kruhu: květ přesahuje svůj poloměr o ~4 % a hranu
+        // Facebook po zmenšení ještě vyhlazuje.
         const br = 118;
-        const PRESAH = 88;
-        const vzdalenost = S / 2 - br + PRESAH;
+        const OKRAJ = 12;
+        const vzdalenost = S / 2 - br - OKRAJ;
         const odsazeniOsy = vzdalenost / Math.SQRT2;
         const vpravo = S / 2 + odsazeniOsy;
         const vlevo = S / 2 - odsazeniOsy;
