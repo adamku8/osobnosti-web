@@ -59,7 +59,8 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
   /* kotvy (#oblast-XX, #projekty…) nesmí skončit pod lepícím se menu: 72 px hlavička + 16 px vzduch */
   scroll-padding-top: 88px;
 }
