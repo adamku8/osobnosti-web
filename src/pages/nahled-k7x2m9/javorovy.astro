@@ -88,15 +88,19 @@ import { u } from '../../lib/url.js';
       .jv-cover-bg { position: absolute; width: 100%; height: 100%; }
     }
     .jv-toc-section { padding-top: var(--s-64); padding-bottom: var(--s-40); }
-    .jv-toc-2col {
+    /* osnova: čtyři kapitoly v jedné řadě přes celou šířku (jako timeline pod ní),
+       na tabletu 2×2, na telefonu pod sebe. Dvojitý selektor: .jv-toc-links (níže) má
+       max-width 560px a stejnou specificitu — jinak by vyhrál a popisky se lámaly. */
+    .jv-toc-links.jv-toc-row {
       max-width: none;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: var(--s-64);
+      grid-template-columns: repeat(4, 1fr);
+      column-gap: var(--s-40);
       border-top: none;
     }
-    .jv-toc-2col a { border-top: 1px solid var(--border); border-bottom: none; }
-    @media (max-width: 800px) { .jv-toc-2col { grid-template-columns: 1fr; } }
+    .jv-toc-row a { border-top: 1px solid var(--border); border-bottom: none; }
+    @media (max-width: 900px) { .jv-toc-links.jv-toc-row { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .jv-toc-links.jv-toc-row { grid-template-columns: 1fr; } }
     .jv-caption {
       font-size: 14px;
       color: var(--text-muted);
@@ -168,31 +172,6 @@ import { u } from '../../lib/url.js';
     #historie.section { padding-top: 0; }
     /* Nadpis nad kroky */
     .steps-title { font-size: 24px; margin-bottom: var(--s-40); }
-    .jv-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--s-40);
-    }
-    .stat .section-head { margin-bottom: var(--s-40); }
-    @media (max-width: 800px) {
-      .jv-stats { gap: var(--s-16); }
-      .jv-stat-num { font-size: 40px; }
-      .jv-stat p { font-size: 14px; }
-    }
-    /* tři sloupce se na telefon nevejdou (třetí ujížděl za okraj) — pod sebe */
-    @media (max-width: 600px) {
-      .jv-stats { grid-template-columns: minmax(0, 1fr); gap: var(--s-24); }
-      .jv-stat p { max-width: none; }
-    }
-    .jv-stat-num {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 64px;
-      line-height: 1;
-      color: var(--signal-blue);
-      margin-bottom: var(--s-8);
-    }
-    .jv-stat p { color: var(--text-secondary); max-width: 30ch; }
     .approach { border-top: 1px solid var(--border); padding-top: var(--s-16); }
     .approach-meta {
       font-family: var(--font-display);
@@ -434,14 +413,16 @@ import { u } from '../../lib/url.js';
       font-size: 13px !important;
       color: var(--text-muted) !important;
     }
-    /* Infografika — prstence */
+    /* Infografika — prstence: šest v řadě (6×168 + 5×24 = 1128 px se do kontejneru vejde),
+       na tabletu po třech, na telefonu po dvou */
     .rings {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--s-40);
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: var(--s-24);
     }
     /* minmax(0, 1fr): kruh má pevných 168px, samotné 1fr by na 375px nabobtnalo a přeteklo */
-    @media (max-width: 900px) { .rings { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-40) var(--s-24); } }
+    @media (max-width: 1100px) { .rings { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-40) var(--s-24); } }
+    @media (max-width: 600px) { .rings { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     .ring { text-align: center; margin: 0; }
     .ring-wrap {
       position: relative;
@@ -673,18 +654,11 @@ import { u } from '../../lib/url.js';
     <div class="container">
       <nav class="jv-toc" aria-label="Obsah stránky" style="margin-top: 0;">
         <p class="jv-toc-label">Jak jsme se rozhodovali, co dál s Javorovým</p>
-        <div class="jv-toc-links jv-toc-2col">
+        <div class="jv-toc-links jv-toc-row">
           <a href="#historie"><span class="toc-num">01</span> Historie chaty</a>
-          <a href="#harmonogram"><span class="toc-num">02</span> Krok za krokem</a>
-          <a href="#pruzkum"><span class="toc-num">03</span> Co říká průzkum</a>
-          <a href="#ctyri-cisla"><span class="toc-num">04</span> Čtyři čísla, která nás vedla</a>
-          <a href="#hlasy"><span class="toc-num">05</span> Co říkají lidé z kopce</a>
-          <a href="#zjisteni"><span class="toc-num">06</span> Klíčové zjištění</a>
-          <a href="#vize"><span class="toc-num">07</span> Živý kopec po celý rok</a>
-          <a href="#zadani"><span class="toc-num">08</span> Naše vize areálu</a>
-          <a href="#varianty"><span class="toc-num">09</span> Tři varianty a kolik stojí</a>
-          <a href="#lyzovani"><span class="toc-num">10</span> Proč ne lyžování</a>
-          <a href="#jak-dal"><span class="toc-num">11</span> Jak dál</a>
+          <a href="#pruzkum"><span class="toc-num">02</span> Co říká průzkum</a>
+          <a href="#vize"><span class="toc-num">03</span> Naše vize</a>
+          <a href="#jak-dal"><span class="toc-num">04</span> Co bude dál</a>
         </div>
       </nav>
     </div>
@@ -750,30 +724,6 @@ import { u } from '../../lib/url.js';
     </div>
   </section>
 
-  <!-- ================= PÁS TŘÍ ČÍSEL ================= -->
-  <section class="stat">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Co ukázal průzkum</p>
-        <h2>Javorový v číslech.</h2>
-      </div>
-      <div class="jv-stats">
-        <div class="jv-stat">
-          <div class="jv-stat-num">81&nbsp;%</div>
-          <p>z vás považuje Javorový za jednu z hlavních dominant Třince</p>
-        </div>
-        <div class="jv-stat">
-          <div class="jv-stat-num">90&nbsp;%</div>
-          <p>z vás vyrazí na kopec několikrát ročně</p>
-        </div>
-        <div class="jv-stat">
-          <div class="jv-stat-num">414</div>
-          <p>občanů se zapojilo do dotazníku o budoucnosti Javorového</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ================= PRŮZKUM — CHATA ================= -->
   <section class="section" id="pruzkum">
     <div class="container">
@@ -832,14 +782,36 @@ import { u } from '../../lib/url.js';
     </div>
   </section>
 
-  <!-- ================= INFOGRAFIKA — ČTYŘI ČÍSLA ================= -->
-  <section class="section" id="ctyri-cisla">
+  <!-- ================= INFOGRAFIKA — ŠEST ČÍSEL ================= -->
+  <section class="section" id="sest-cisel">
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Průzkum v číslech</p>
-        <h2>Čtyři čísla, která nás vedla.</h2>
+        <h2>Šest čísel, která nás vedla.</h2>
       </div>
       <div class="rings">
+        <figure class="ring">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-track" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52"
+                      stroke-dasharray="326.7" stroke-dashoffset="62.1"/>
+            </svg>
+            <span class="ring-num">81&nbsp;%</span>
+          </div>
+          <figcaption>považuje Javorový za jednu z hlavních dominant Třince</figcaption>
+        </figure>
+        <figure class="ring">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-track" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" cx="60" cy="60" r="52"
+                      stroke-dasharray="326.7" stroke-dashoffset="32.7"/>
+            </svg>
+            <span class="ring-num">90&nbsp;%</span>
+          </div>
+          <figcaption>vyrazí na kopec několikrát ročně</figcaption>
+        </figure>
         <figure class="ring">
           <div class="ring-wrap">
             <svg viewBox="0 0 120 120" aria-hidden="true">
@@ -970,24 +942,14 @@ import { u } from '../../lib/url.js';
           chatu i areál dál ve svých rukou — a investovalo do nich.
         </p>
       </div>
+      <!-- Strategická vize: šest principů. Konkrétní dílčí aktivity jsou v bloku pod tím,
+           ať se seznamy nedublují (WC, odpočívadla, zázemí… bývaly na obou místech). -->
       <div class="zadani">
         <div class="zadani-item"><span class="check">✓</span>
           <p><strong>Rekonstrukce chaty do původní podoby</strong> z přelomu 19. a 20. století — s novou terasou směrem na jih.</p>
         </div>
         <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Oddělené místo pro konání akcí</strong> — letní scéna a menší akce na místě zbouraných chat.</p>
-        </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Sociální zázemí a WC otevřené 24/7</strong> — nezávislé na hlavní chatě.</p>
-        </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Zázemí pro spolky a kluby</strong>, které na kopci žijí — sklad, klubovna, přenocování.</p>
-        </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Nové atrakce pro rodinné výlety</strong> — pro děti od 0 do 15 let.</p>
-        </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Celoroční zázemí pro turisty a sportovce</strong> — kopec slouží v létě i v zimě.</p>
+          <p><strong>Živý kopec po celý rok</strong> — pro turisty, sportovce, spolky i rodiny s dětmi, v létě i v zimě. Cesta nahoru je součást zážitku.</p>
         </div>
         <div class="zadani-item"><span class="check">✓</span>
           <p><strong>Návštěvnost nemá rapidně růst</strong> — zachováme charakter místa.</p>
@@ -999,19 +961,26 @@ import { u } from '../../lib/url.js';
           <p><strong>Respekt k územnímu plánu</strong> a technická řešení připravená na různé provozovatele.</p>
         </div>
         <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Odpovědné nakládání s odpady</strong> — dnes často končí v lese.</p>
+          <p><strong>Nový nájemce až po rekonstrukci</strong> — výběrové řízení s novými podmínkami nájmu.</p>
         </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Výběrové řízení na nového nájemce až po rekonstrukci</strong> — s novými podmínkami nájmu.</p>
-        </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Cesta nahoru jako součást zážitku</strong> — nové stezky pro sportovce i děti, naučná stezka a víc odpočívadel.</p>
-        </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Parkoviště pod lanovkou zpoplatnit pro návštěvníky</strong> — Třinečané ho budou mít zdarma a výnosy vrátíme do stezek.</p>
-        </div>
-        <div class="zadani-item"><span class="check">✓</span>
-          <p><strong>Mamlas plac ožije po celý rok</strong> — bývalá horní sjezdovka dostane nové využití: další sporty nebo aktivity pro děti.</p>
+      </div>
+
+      <!-- Dílčí aktivity — co konkrétně chceme na kopci změnit -->
+      <div class="wishes-block">
+        <h3 class="wishes-head">Co na Javorovém dnes chybí a chceme zlepšit?</h3>
+        <div class="wishes">
+          <div class="wish">sociální zázemí a WC otevřené 24/7, nezávislé na chatě</div>
+          <div class="wish">oběd na nové terase chaty s vyhlídkou</div>
+          <div class="wish">letní scéna na místě zbouraných chat — komorní divadlo, recitál, menší akce</div>
+          <div class="wish">zázemí pro spolky a kluby — sklad, klubovna, přespání v útulně</div>
+          <div class="wish">nové dětské prvky a atrakce pro rodinné výlety — děti od 0 do 15 let</div>
+          <div class="wish">naučná stezka pro mládež s výstupem</div>
+          <div class="wish">více odpočívadel na cestě nahoru</div>
+          <div class="wish">více tras nahoru, i pro kočárky</div>
+          <div class="wish">časomíra pro výstupy a sportovce</div>
+          <div class="wish">parkoviště pod lanovkou — Třinečané zdarma, poplatek od návštěvníků půjde do stezek</div>
+          <div class="wish">Mamlas plac ožije po celý rok — bývalá horní sjezdovka pro další sporty nebo děti</div>
+          <div class="wish">odpovědné nakládání s odpady — dnes často končí v lese</div>
         </div>
       </div>
       <div class="jv-viz" style="margin-top: var(--s-64);">
@@ -1079,25 +1048,6 @@ import { u } from '../../lib/url.js';
           a hlavně lepšímu využití celého objektu dolní stanice, například
           jako komunitního centra nebo místa pro akce. Chatu ani vrch neprodáme.
         </p>
-      </div>
-
-      <!-- Co dnes chybí -->
-      <div class="wishes-block">
-        <h3 class="wishes-head">Co na Javorovém dnes chybí a chceme zlepšit?</h3>
-        <div class="wishes">
-          <div class="wish">zázemí pro spolky i sportovce</div>
-          <div class="wish">přespání v útulně pro turisty</div>
-          <div class="wish">komorní divadlo či recitál</div>
-          <div class="wish">oběd na terase chaty s vyhlídkou</div>
-          <div class="wish">naučná stezka pro mládež s výstupem</div>
-          <div class="wish">časomíra pro výstupy a sportovce</div>
-          <div class="wish">více tras nahoru pro kočárky</div>
-          <div class="wish">více odpočívadel pro výstupy</div>
-          <div class="wish">lepší možnosti parkování pod vrchem</div>
-          <div class="wish">nové dětské prvky v areálu</div>
-          <div class="wish">sociální zázemí 24/7</div>
-          <div class="wish">nové nápady pro Mamlas plac</div>
-        </div>
       </div>
 
       <!-- Proti čemu budeme bojovat -->
