@@ -230,7 +230,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Ráno' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Hokej' },
     ],
-    video: null,
+    video: { typ: 'instagram', url: 'https://www.instagram.com/reel/DdRgcLbkpGm/' },
   },
 
   'marek-sterba': {
@@ -797,7 +797,7 @@ export const medailonky = {
       { otazka: 'Ráno, nebo večer?', odpoved: 'Obojí' },
       { otazka: 'Hokej, nebo fotbal?', odpoved: 'Bojové sporty' },
     ],
-    video: null,
+    video: { typ: 'instagram', url: 'https://www.instagram.com/reel/DdmayEYlODB/' },
   },
 
   'aron-chmielewski': {
