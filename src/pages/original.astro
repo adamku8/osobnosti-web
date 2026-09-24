@@ -1,6 +1,6 @@
 ---
 // „Originál" — věcné srovnání našeho webu s webem hnutí NEZÁVISLÍ Třinec (září 2026).
-// Šest dvojic výřezů: nahoře náš web, pod ním jejich. Žlutě zvýrazněné shodné pasáže
+// Dvě dvojice výřezů: nahoře náš web, pod ním jejich. Žlutě zvýrazněné shodné pasáže
 // vznikly strojově (Playwright), podklady drží ../../ANTI/srovnani-webu-nezavisli-2026-09-24/.
 // Tón držíme věcný: žádný útok, jen data — kdo, co a kdy (brand voice §4, pravidlo 03).
 import Base from '../layouts/Base.astro';
@@ -31,42 +31,6 @@ const dvojice = [
     my: '2-hero-osobnosti.jpg', oni: '2-hero-nezavisli.jpg', detail: true,
     altMy: 'Úvod webu Osobnosti pro Třinec: šest kandidátů, deska Osobnosti pro… nový Třinec a věta Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.',
     altOni: 'Úvod webu NEZÁVISLÍ Třinec: nadpis Nezávislí lidé pro nový Třinec a věta Doktoři, učitelé, podnikatelé, trenéři.',
-  },
-  {
-    id: 'datum', num: '03',
-    nazev: 'Volby do zastupitelstva · 9.–10. října 2026',
-    hl: 'zastupitelstva',
-    text: 'Stejný popisek nad datem, stejná typografie, stejné umístění vpravo vedle úvodního textu.',
-    my: '3-datum-osobnosti.jpg', oni: '3-datum-nezavisli.jpg', detail: true,
-    altMy: 'Blok Volby do zastupitelstva 9.–10. října 2026 na webu Osobnosti pro Třinec.',
-    altOni: 'Blok Volby do zastupitelstva 9.–10. října 2026 na webu NEZÁVISLÍ Třinec.',
-  },
-  {
-    id: 'kandidati', num: '04',
-    nazev: 'Stránka kandidátů',
-    hl: 'kandidátů',
-    text: '„Kandidáti 2026" · výčet profesí · „lidé, kteří v Třinci doopravdy žijí a pracují" · výzva kliknout na kandidáta. Na druhém webu totéž ve stejném pořadí.',
-    my: '5-kandidati-osobnosti.jpg', oni: '5-kandidati-nezavisli.jpg',
-    altMy: 'Úvod stránky Kandidáti na webu Osobnosti pro Třinec: Sedmadvacet osobností.',
-    altOni: 'Úvod stránky Kandidáti na webu NEZÁVISLÍ Třinec: Lidé, kteří tu opravdu žijí.',
-  },
-  {
-    id: 'sedm', num: '05',
-    nazev: 'Sedm očíslovaných bodů 01–07',
-    hl: 'Sedm',
-    text: 'Naše „Sedm konkrétních projektů" je na webu od 19. srpna. Stejný formát dvoumístných čísel a odkaz na celý program pod tím.',
-    my: '4-sedm-bodu-osobnosti.jpg', oni: '4-sedm-bodu-nezavisli.jpg',
-    altMy: 'Sekce Sedm konkrétních projektů na webu Osobnosti pro Třinec.',
-    altOni: 'Sekce Sedmička pro Třinec na webu NEZÁVISLÍ Třinec.',
-  },
-  {
-    id: 'menu', num: '06',
-    nazev: 'Menu a tlačítko „Volte č. X"',
-    hl: 'Volte',
-    text: 'Stejné pořadí položek Program · Kandidáti a vpravo plné tlačítko s volebním číslem. Před patičkou pak velké „Volte č. X" a dvojice tlačítek program / kandidáti.',
-    my: '1-hlavicka-osobnosti.jpg', oni: '1-hlavicka-nezavisli.jpg',
-    altMy: 'Hlavička webu Osobnosti pro Třinec s tlačítkem Volte č. 3.',
-    altOni: 'Hlavička webu NEZÁVISLÍ Třinec s tlačítkem Volte č. 7.',
   },
 ];
 
@@ -148,7 +112,7 @@ const sBoxem = (d) => {
       <ul class="orig-lead-fakta">
         <li><b>19. 8.</b><span>spuštění webu osobnostiprotrinec.cz; slogan „Stejné hodnoty. Nové vize." v patičce od téhož dne</span></li>
         <li><b>21. 9.</b><span>datum poslední změny stránek nezavislitrinec.cz podle jejich serveru; starší verze webu není nikde archivovaná</span></li>
-        <li><b>6</b><span>míst, kde se oba weby shodují ve stavbě nebo v textu — všechna níže, bez komentáře navíc</span></li>
+        <li><b>2</b><span>doslovné shody v textu — slogan a věta o kandidátech, obě níže bez komentáře navíc</span></li>
       </ul>
     </div>
   </section>
@@ -188,8 +152,8 @@ const sBoxem = (d) => {
 
   <section class="section section-cta-band">
     <div class="container">
-      <h2>Program máme <span class="hl">svůj</span>. Od začátku.</h2>
-      <p class="section-note">Čtyři oblasti, dvacet závazků, sedm konkrétních projektů. Přečtěte si ho v originále.</p>
+      <h2>Jsme rádi inspirací, ale volit je lepší <span class="hl">originál</span>.</h2>
+      <p class="section-note">Čtyři oblasti, dvacet závazků, sedm konkrétních projektů. Přečtěte si program tam, kde vznikl.</p>
       <div class="section-cta stat-links" style="justify-content:center">
         <a class="btn btn-primary btn-lg" href={u('program.html')}>Náš program</a>
         <a class="btn btn-secondary btn-lg" href={u('kandidati.html')}>Naši kandidáti</a>
