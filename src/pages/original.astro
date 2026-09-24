@@ -1,0 +1,188 @@
+---
+// „Originál" — věcné srovnání našeho webu s webem hnutí NEZÁVISLÍ Třinec (září 2026).
+// Sedm dvojic výřezů: nahoře náš web, pod ním jejich. Žlutě zvýrazněné shodné pasáže
+// vznikly strojově (Playwright), podklady drží ../../ANTI/srovnani-webu-nezavisli-2026-09-24/.
+// Tón držíme věcný: žádný útok, jen data — kdo, co a kdy (brand voice §4, pravidlo 03).
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+
+// Před zveřejněním přepnout na false (stránka je do té doby noindex, v menu není).
+const draft = true;
+
+const IMG = 'assets/img/original/';
+const dvojice = [
+  {
+    id: 'slogan', num: '01',
+    nazev: 'Stejné hodnoty. Nové vize.',
+    hl: 'Nové vize.',
+    text: 'Náš slogan je v patičce webu od 19. srpna a od září i na billboardech a v tisku. Na druhém webu stojí dvakrát na úvodní stránce, jen s dovětkem „Třinec".',
+    my: '6-paticka-osobnosti.jpg', oni: '3-volby-box-nezavisli.jpg',
+    altMy: 'Patička webu Osobnosti pro Třinec se sloganem Stejné hodnoty. Nové vize.',
+    altOni: 'Úvodní stránka NEZÁVISLÍ Třinec s nadpisem Stejné hodnoty. Nové vize. Město, které nezůstane stát.',
+  },
+  {
+    id: 'hero', num: '02',
+    nazev: 'Doktoři, učitelé, podnikatelé…',
+    hl: 'podnikatelé',
+    text: 'Věta pod naším hlavním vizuálem je na webu od 10. srpna: „Doktoři, učitelé, podnikatelé, sportovci… Osobnosti, které v Třinci doopravdy žijí a pracují." Druhá verze: „Doktoři, učitelé, podnikatelé, trenéři. Lidé, kteří v Třinci opravdu žijí a pracují."',
+    my: '2-hero-osobnosti.jpg', oni: '2-hero-nezavisli.jpg',
+    altMy: 'Úvod webu Osobnosti pro Třinec: šest kandidátů, deska Osobnosti pro… nový Třinec a věta Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.',
+    altOni: 'Úvod webu NEZÁVISLÍ Třinec: nadpis Nezávislí lidé pro nový Třinec a věta Doktoři, učitelé, podnikatelé, trenéři.',
+  },
+  {
+    id: 'datum', num: '03',
+    nazev: 'Volby do zastupitelstva · 9.–10. října 2026',
+    hl: 'zastupitelstva',
+    text: 'Stejný popisek nad datem, stejná typografie, stejné umístění vpravo vedle úvodního textu.',
+    my: '3-volby-box-osobnosti.jpg', oni: '3-volby-box-nezavisli.jpg',
+    altMy: 'Blok Volby do zastupitelstva 9.–10. října 2026 na webu Osobnosti pro Třinec.',
+    altOni: 'Blok Volby do zastupitelstva 9.–10. října 2026 na webu NEZÁVISLÍ Třinec.',
+  },
+  {
+    id: 'paticka', num: '04',
+    nazev: 'Patička se sloganem a řádkem „zadavatel i zpracovatel"',
+    hl: 'Patička',
+    text: 'Slogan pod logem, sloupec nadepsaný „Web" a řádek „© 2026 Politické hnutí …, zadavatel i zpracovatel". U nás od srpna.',
+    my: '6-paticka-osobnosti.jpg', oni: '6-paticka-nezavisli.jpg',
+    altMy: 'Patička webu Osobnosti pro Třinec.',
+    altOni: 'Patička webu NEZÁVISLÍ Třinec.',
+  },
+  {
+    id: 'kandidati', num: '05',
+    nazev: 'Stránka kandidátů',
+    hl: 'kandidátů',
+    text: '„Kandidáti 2026" · výčet profesí · „lidé, kteří v Třinci doopravdy žijí a pracují" · výzva kliknout na kandidáta. Na druhém webu totéž ve stejném pořadí.',
+    my: '5-kandidati-osobnosti.jpg', oni: '5-kandidati-nezavisli.jpg',
+    altMy: 'Úvod stránky Kandidáti na webu Osobnosti pro Třinec: Sedmadvacet osobností.',
+    altOni: 'Úvod stránky Kandidáti na webu NEZÁVISLÍ Třinec: Lidé, kteří tu opravdu žijí.',
+  },
+  {
+    id: 'sedm', num: '06',
+    nazev: 'Sedm očíslovaných bodů 01–07',
+    hl: 'Sedm',
+    text: 'Naše „Sedm konkrétních projektů" je na webu od 19. srpna. Stejný formát dvoumístných čísel a odkaz na celý program pod tím.',
+    my: '4-sedm-bodu-osobnosti.jpg', oni: '4-sedm-bodu-nezavisli.jpg',
+    altMy: 'Sekce Sedm konkrétních projektů na webu Osobnosti pro Třinec.',
+    altOni: 'Sekce Sedmička pro Třinec na webu NEZÁVISLÍ Třinec.',
+  },
+  {
+    id: 'menu', num: '07',
+    nazev: 'Menu a tlačítko „Volte č. X"',
+    hl: 'Volte',
+    text: 'Stejné pořadí položek Program · Kandidáti a vpravo plné tlačítko s volebním číslem. Před patičkou pak velké „Volte č. X" a dvojice tlačítek program / kandidáti.',
+    my: '1-hlavicka-osobnosti.jpg', oni: '1-hlavicka-nezavisli.jpg',
+    altMy: 'Hlavička webu Osobnosti pro Třinec s tlačítkem Volte č. 3.',
+    altOni: 'Hlavička webu NEZÁVISLÍ Třinec s tlačítkem Volte č. 7.',
+  },
+];
+
+const sBoxem = (d) => {
+  const i = d.nazev.indexOf(d.hl);
+  return i < 0 ? { pred: d.nazev, box: null, za: '' }
+    : { pred: d.nazev.slice(0, i), box: d.hl, za: d.nazev.slice(i + d.hl.length) };
+};
+---
+<Base
+  title="Originál — Osobnosti pro Třinec"
+  description="Náš web běží od 19. srpna 2026. V září se objevil web dalšího hnutí se stejnou stavbou a stejnými větami. Těší nás to. Pro pořádek ukazujeme, co bylo první."
+  path="original.html"
+  active=""
+  noindex={draft}
+>
+  <style is:inline>
+    .orig-lead-fakta {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-24);
+      margin: var(--s-40) 0 0; padding: 0; list-style: none;
+    }
+    .orig-lead-fakta li { border-top: 1px solid rgba(50,50,50,.14); padding-top: var(--s-16); }
+    .orig-lead-fakta b {
+      display: block; font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(28px, 3vw, 40px); line-height: 1; color: var(--anthracite);
+    }
+    .orig-lead-fakta span { display: block; margin-top: var(--s-8); color: rgba(50,50,50,.72); font-size: 15px; }
+
+    .orig-list { list-style: none; margin: 0; padding: 0; }
+    .orig-item { padding: var(--s-64) 0; border-top: 1px solid rgba(50,50,50,.14); }
+    .orig-item:first-child { border-top: 0; padding-top: 0; }
+    .orig-head { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--s-16); align-items: start; margin-bottom: var(--s-24); }
+    .orig-num { font-family: var(--font-display); font-weight: 800; font-size: 20px; color: var(--brand-red); padding-top: 6px; }
+    .orig-head h2 { margin: 0 0 var(--s-8); font-size: clamp(24px, 2.6vw, 34px); }
+    .orig-head p { margin: 0; max-width: 62ch; color: rgba(50,50,50,.72); }
+
+    .orig-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-24); }
+    .orig-pair figure { margin: 0; }
+    .orig-pair figcaption {
+      font-family: var(--font-display); font-weight: 600; font-size: 12px; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(50,50,50,.55); margin-bottom: var(--s-8);
+    }
+    .orig-pair figcaption b { color: var(--anthracite); font-weight: 600; }
+    .orig-pair img { display: block; width: 100%; height: auto; border: 1px solid rgba(50,50,50,.14); border-radius: 4px; }
+    .orig-note { margin-top: var(--s-16); font-size: 13px; color: rgba(50,50,50,.55); }
+
+    @media (max-width: 760px) {
+      .orig-lead-fakta { grid-template-columns: 1fr; }
+      .orig-pair { grid-template-columns: 1fr; }
+      .orig-head { grid-template-columns: 48px minmax(0, 1fr); }
+    }
+  </style>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Kampaň 2026 · pro pořádek</p>
+      <h1>Originál je <span class="hl">jen jeden</span>.</h1>
+      <p class="hero-lead">
+        Náš web běží od 19. srpna 2026. V září se objevil web dalšího třineckého hnutí
+        se stejnou stavbou stránek a několika stejnými větami. Těší nás, že se náš
+        přístup líbí. Pro pořádek ukazujeme, co bylo první.
+      </p>
+      <ul class="orig-lead-fakta">
+        <li><b>19. 8.</b><span>spuštění webu osobnostiprotrinec.cz; slogan „Stejné hodnoty. Nové vize." v patičce od téhož dne</span></li>
+        <li><b>21. 9.</b><span>datum poslední změny stránek nezavislitrinec.cz podle jejich serveru; starší verze webu není nikde archivovaná</span></li>
+        <li><b>7</b><span>míst, kde se oba weby shodují ve stavbě nebo v textu — všechna níže, bez komentáře navíc</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ol class="orig-list">
+        {dvojice.map(d => (
+          <li class="orig-item" id={d.id}>
+            <div class="orig-head">
+              <span class="orig-num">{d.num}</span>
+              <div>
+                <h2>{sBoxem(d).pred}{sBoxem(d).box && <span class="hl">{sBoxem(d).box}</span>}{sBoxem(d).za}</h2>
+                <p>{d.text}</p>
+              </div>
+            </div>
+            <div class="orig-pair">
+              <figure>
+                <figcaption><b>osobnostiprotrinec.cz</b> · od srpna 2026</figcaption>
+                <img src={u(IMG + d.my)} alt={d.altMy} loading="lazy">
+              </figure>
+              <figure>
+                <figcaption>nezavislitrinec.cz · září 2026</figcaption>
+                <img src={u(IMG + d.oni)} alt={d.altOni} loading="lazy">
+              </figure>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="orig-note">
+        Snímky obou webů pořízené 24. září 2026. Shodné pasáže jsou podbarvené žlutě,
+        jinak jsou stránky bez úprav. Data o našem webu jsou z historie jeho zdrojového kódu.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-cta-band">
+    <div class="container">
+      <h2>Program máme <span class="hl">svůj</span>. Od začátku.</h2>
+      <p class="section-note">Čtyři oblasti, dvacet závazků, sedm konkrétních projektů. Přečtěte si ho v originále.</p>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-primary btn-lg" href={u('program.html')}>Náš program</a>
+        <a class="btn btn-secondary btn-lg" href={u('kandidati.html')}>Naši kandidáti</a>
+      </div>
+    </div>
+  </section>
+</Base>
