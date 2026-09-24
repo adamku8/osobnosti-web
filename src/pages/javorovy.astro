@@ -1,0 +1,13 @@
+---
+// Veřejná adresa /javorovy.html — na ni vede QR z letáku A4 (make_javorovy_a4.py).
+// Samotná stránka zatím žije ve skrytém náhledu; tady je jen přesměrování.
+// Až se Javorový zveřejní naplno, nahradí tenhle soubor plná stránka a v Témata
+// programu přibude box (viz stav-webu).
+import { u } from '../lib/url.js';
+const cil = u('nahled-k7x2m9/javorovy.html');
+---
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content={`0; url=${cil}`}>
+<title>Javorový — Osobnosti pro Třinec</title>
+<p>Přesměrování na <a href={cil}>vizi pro Javorový</a>…</p>
