@@ -97,29 +97,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
-  <!-- ================= TÝMOVÁ FOTKA (září 2026) — přes celou šířku, s claimem =================
-       Originál tym-2026.jpg (před obchodem) zůstává v assets; na webu je verze
-       s vyměněným pozadím — panorama Javorového s Třincem v údolí. Lidé jsou
-       pixelově z originálu (maska ISNet+U2Net), jen pozadí je z Gemini.
-       Alternativa s kresbou města: tym-2026-kresba-v2.jpg.
-       -v2 (18. 9. 2026): znovu vyříznutá pravá ruka R. Ruckého vlevo
-       (FOTKY/make_tym_ruka_rucki.py); nový název souboru = nová cache. -->
-  <section class="tym" id="tym">
-    <div class="container tym-head">
-      <h2 class="tym-claim reveal">Spojujeme <span class="hl">generace</span>.</h2>
-    </div>
-    <div class="tym-foto">
-      <img src={u('assets/img/tym-2026-javorovy-v2.jpg')}
-           srcset={`${u('assets/img/tym-2026-javorovy-v2-1200.jpg')} 1200w, ${u('assets/img/tym-2026-javorovy-v2.jpg')} 2000w`}
-           sizes="100vw"
-           width="2000" height="1326"
-           alt="Tým hnutí Osobnosti pro Třinec na Javorovém nad Třincem, září 2026" loading="lazy">
-      <div class="tym-links reveal">
-        <a class="btn btn-blue btn-lg" href={u('program.html')}>Náš program</a>
-        <a class="btn btn-primary btn-lg" href={u('kandidati.html')}>Kandidáti</a>
-      </div>
-    </div>
-  </section>
+  <!-- TÝMOVÁ FOTKA (Javorový, tym-2026-javorovy-v2.jpg) odstraněna 24. 9. 2026
+       na pokyn Adama. Soubory zůstávají v public/assets/img/. -->
 
   <!-- ================= PROGRAM — MŘÍŽKA OBLASTÍ (proklik do /program.html) ================= -->
   <section class="section" id="program">

@@ -1,34 +1,5 @@
-/* Styly jen pro úvodní stránku (src/pages/index.astro) — týmovka přes celou
-   šířku, blok Aktuálně, Jak volit s odpočtem a vynořování při scrollu.
+/* Styly jen pro úvodní stránku (src/pages/index.astro) — blok Aktuálně, Jak volit s odpočtem a vynořování při scrollu.
    Sdílené styly zůstávají v style.css. */
-
-/* ---------- Týmová fotka přes celou šířku, claim nad ní ---------- */
-.tym { margin: var(--s-24) 0 0; }
-.tym-head { padding-bottom: var(--s-40); }
-.tym img { display: block; width: 100%; height: auto; }
-.tym-foto { position: relative; }
-/* tlačítka leží dole uprostřed, na chodníku pod schody */
-.tym-links {
-  position: absolute;
-  left: 0; right: 0;
-  bottom: clamp(16px, 3vw, 40px);
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding: 0 16px;
-}
-@media (max-width: 700px) {
-  .tym-links { position: static; padding: var(--s-24) 16px 0; }
-}
-.tym-claim {
-  font-size: clamp(30px, 5vw, 60px);
-  line-height: 1.05;
-  white-space: nowrap;
-}
-@media (max-width: 480px) {
-  .tym-claim { white-space: normal; }
-}
 
 /* ---------- Aktuálně — příspěvky ze sítí ---------- */
 /* Instagram embed se nevykreslí užší než 326 px — sloupce se místo
