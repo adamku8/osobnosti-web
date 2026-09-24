@@ -1,6 +1,6 @@
 ---
 // „Originál" — věcné srovnání našeho webu s webem hnutí NEZÁVISLÍ Třinec (září 2026).
-// Sedm dvojic výřezů: nahoře náš web, pod ním jejich. Žlutě zvýrazněné shodné pasáže
+// Šest dvojic výřezů: nahoře náš web, pod ním jejich. Žlutě zvýrazněné shodné pasáže
 // vznikly strojově (Playwright), podklady drží ../../ANTI/srovnani-webu-nezavisli-2026-09-24/.
 // Tón držíme věcný: žádný útok, jen data — kdo, co a kdy (brand voice §4, pravidlo 03).
 import Base from '../layouts/Base.astro';
@@ -10,6 +10,9 @@ import { u } from '../lib/url.js';
 const draft = true;
 
 const IMG = 'assets/img/original/';
+// Úplná statická kopie druhého webu (public/archiv/…), pořízená 24. 9. 2026
+// skriptem mirror.py; originál zálohy leží v ANTI/…/zaloha-2026-09-24/.
+const ARCHIV = 'archiv/nezavislitrinec-2026-09-24/index.html';
 const dvojice = [
   {
     id: 'slogan', num: '01',
@@ -25,7 +28,7 @@ const dvojice = [
     nazev: 'Doktoři, učitelé, podnikatelé…',
     hl: 'podnikatelé',
     text: 'Věta pod naším hlavním vizuálem je na webu od 10. srpna: „Doktoři, učitelé, podnikatelé, sportovci… Osobnosti, které v Třinci doopravdy žijí a pracují." Druhá verze: „Doktoři, učitelé, podnikatelé, trenéři. Lidé, kteří v Třinci opravdu žijí a pracují."',
-    my: '2-hero-osobnosti.jpg', oni: '2-hero-nezavisli.jpg',
+    my: '2-hero-osobnosti.jpg', oni: '2-hero-nezavisli.jpg', detail: true,
     altMy: 'Úvod webu Osobnosti pro Třinec: šest kandidátů, deska Osobnosti pro… nový Třinec a věta Doktoři, učitelé, podnikatelé, sportovci, současní zastupitelé.',
     altOni: 'Úvod webu NEZÁVISLÍ Třinec: nadpis Nezávislí lidé pro nový Třinec a věta Doktoři, učitelé, podnikatelé, trenéři.',
   },
@@ -34,21 +37,12 @@ const dvojice = [
     nazev: 'Volby do zastupitelstva · 9.–10. října 2026',
     hl: 'zastupitelstva',
     text: 'Stejný popisek nad datem, stejná typografie, stejné umístění vpravo vedle úvodního textu.',
-    my: '3-volby-box-osobnosti.jpg', oni: '3-volby-box-nezavisli.jpg',
+    my: '3-datum-osobnosti.jpg', oni: '3-datum-nezavisli.jpg', detail: true,
     altMy: 'Blok Volby do zastupitelstva 9.–10. října 2026 na webu Osobnosti pro Třinec.',
     altOni: 'Blok Volby do zastupitelstva 9.–10. října 2026 na webu NEZÁVISLÍ Třinec.',
   },
   {
-    id: 'paticka', num: '04',
-    nazev: 'Patička se sloganem a řádkem „zadavatel i zpracovatel"',
-    hl: 'Patička',
-    text: 'Slogan pod logem, sloupec nadepsaný „Web" a řádek „© 2026 Politické hnutí …, zadavatel i zpracovatel". U nás od srpna.',
-    my: '6-paticka-osobnosti.jpg', oni: '6-paticka-nezavisli.jpg',
-    altMy: 'Patička webu Osobnosti pro Třinec.',
-    altOni: 'Patička webu NEZÁVISLÍ Třinec.',
-  },
-  {
-    id: 'kandidati', num: '05',
+    id: 'kandidati', num: '04',
     nazev: 'Stránka kandidátů',
     hl: 'kandidátů',
     text: '„Kandidáti 2026" · výčet profesí · „lidé, kteří v Třinci doopravdy žijí a pracují" · výzva kliknout na kandidáta. Na druhém webu totéž ve stejném pořadí.',
@@ -57,7 +51,7 @@ const dvojice = [
     altOni: 'Úvod stránky Kandidáti na webu NEZÁVISLÍ Třinec: Lidé, kteří tu opravdu žijí.',
   },
   {
-    id: 'sedm', num: '06',
+    id: 'sedm', num: '05',
     nazev: 'Sedm očíslovaných bodů 01–07',
     hl: 'Sedm',
     text: 'Naše „Sedm konkrétních projektů" je na webu od 19. srpna. Stejný formát dvoumístných čísel a odkaz na celý program pod tím.',
@@ -66,7 +60,7 @@ const dvojice = [
     altOni: 'Sekce Sedmička pro Třinec na webu NEZÁVISLÍ Třinec.',
   },
   {
-    id: 'menu', num: '07',
+    id: 'menu', num: '06',
     nazev: 'Menu a tlačítko „Volte č. X"',
     hl: 'Volte',
     text: 'Stejné pořadí položek Program · Kandidáti a vpravo plné tlačítko s volebním číslem. Před patičkou pak velké „Volte č. X" a dvojice tlačítek program / kandidáti.',
@@ -117,6 +111,10 @@ const sBoxem = (d) => {
     }
     .orig-pair figcaption b { color: var(--anthracite); font-weight: 600; }
     .orig-pair img { display: block; width: 100%; height: auto; border: 1px solid rgba(50,50,50,.14); border-radius: 4px; }
+    .orig-pair--detail img { width: auto; max-width: 100%; }
+    .orig-stalo { margin-top: var(--s-40); padding: var(--s-24) 0 0; border-top: 3px solid var(--brand-red); max-width: 62ch; }
+    .orig-stalo .eyebrow { margin-bottom: var(--s-8); }
+    .orig-stalo p:not(.eyebrow) { margin: 0 0 var(--s-16); }
     .orig-note { margin-top: var(--s-16); font-size: 13px; color: rgba(50,50,50,.55); }
 
     @media (max-width: 760px) {
@@ -135,10 +133,22 @@ const sBoxem = (d) => {
         se stejnou stavbou stránek a několika stejnými větami. Těší nás, že se náš
         přístup líbí. Pro pořádek ukazujeme, co bylo první.
       </p>
+      <div class="orig-stalo">
+        <p class="eyebrow">Co přesně se stalo</p>
+        <p>
+          Web <strong>nezavislitrinec.cz</strong> nese podle svého serveru datum poslední
+          změny <strong>21. září 2026</strong>. Dne <strong>24. září 2026</strong> jsme
+          pořídili jeho úplnou kopii — všechny stránky, texty i obrázky, beze změn.
+          Přesně tento obsah si můžete proklikat v naší archivní kopii.
+        </p>
+        <div class="stat-links">
+          <a class="btn btn-secondary" href={u(ARCHIV)} target="_blank" rel="noopener nofollow">Otevřít archivní kopii webu</a>
+        </div>
+      </div>
       <ul class="orig-lead-fakta">
         <li><b>19. 8.</b><span>spuštění webu osobnostiprotrinec.cz; slogan „Stejné hodnoty. Nové vize." v patičce od téhož dne</span></li>
         <li><b>21. 9.</b><span>datum poslední změny stránek nezavislitrinec.cz podle jejich serveru; starší verze webu není nikde archivovaná</span></li>
-        <li><b>7</b><span>míst, kde se oba weby shodují ve stavbě nebo v textu — všechna níže, bez komentáře navíc</span></li>
+        <li><b>6</b><span>míst, kde se oba weby shodují ve stavbě nebo v textu — všechna níže, bez komentáře navíc</span></li>
       </ul>
     </div>
   </section>
@@ -155,7 +165,7 @@ const sBoxem = (d) => {
                 <p>{d.text}</p>
               </div>
             </div>
-            <div class="orig-pair">
+            <div class={`orig-pair${d.detail ? ' orig-pair--detail' : ''}`}>
               <figure>
                 <figcaption><b>osobnostiprotrinec.cz</b> · od srpna 2026</figcaption>
                 <img src={u(IMG + d.my)} alt={d.altMy} loading="lazy">
@@ -171,6 +181,7 @@ const sBoxem = (d) => {
       <p class="orig-note">
         Snímky obou webů pořízené 24. září 2026. Shodné pasáže jsou podbarvené žlutě,
         jinak jsou stránky bez úprav. Data o našem webu jsou z historie jeho zdrojového kódu.
+        Úplná kopie druhého webu ze dne 24. 9. 2026: <a href={u(ARCHIV)} target="_blank" rel="noopener nofollow">archivní kopie</a>.
       </p>
     </div>
   </section>
