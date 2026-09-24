@@ -1,6 +1,6 @@
 ---
 // „Originál" — věcné srovnání našeho webu s webem hnutí NEZÁVISLÍ Třinec (září 2026).
-// Dvě dvojice výřezů: nahoře náš web, pod ním jejich. Žlutě zvýrazněné shodné pasáže
+// Tři dvojice výřezů: nahoře náš web, pod ním jejich. Žlutě zvýrazněné shodné pasáže
 // vznikly strojově (Playwright), podklady drží ../../ANTI/srovnani-webu-nezavisli-2026-09-24/.
 // Tón držíme věcný: žádný útok, jen data — kdo, co a kdy (brand voice §4, pravidlo 03).
 import Base from '../layouts/Base.astro';
@@ -13,9 +13,19 @@ const IMG = 'assets/img/original/';
 // Úplná statická kopie druhého webu (public/archiv/…), pořízená 24. 9. 2026
 // skriptem mirror.py; originál zálohy leží v ANTI/…/zaloha-2026-09-24/.
 const ARCHIV = 'archiv/nezavislitrinec-2026-09-24/index.html';
+const ONI = 'https://www.nezavislitrinec.cz/';
 const dvojice = [
   {
-    id: 'slogan', num: '01',
+    id: 'novy-trinec', num: '01',
+    nazev: 'Nový Třinec',
+    hl: 'Nový Třinec',
+    text: 'Deska „OSOBNOSTI PRO… NOVÝ TŘINEC!" je náš hlavní vizuál — na webu od 19. srpna, na billboardech, plakátech i v novinách. Druhý web má v hlavním titulku „Nezávislí lidé pro nový Třinec."',
+    my: 'novy-osobnosti.jpg', oni: 'novy-nezavisli.jpg', detail: true,
+    altMy: 'Deska z úvodu webu Osobnosti pro Třinec: červený pruh OSOBNOSTI PRO… a bílý pruh NOVÝ TŘINEC!',
+    altOni: 'Hlavní titulek webu NEZÁVISLÍ Třinec: Nezávislí lidé pro nový Třinec.',
+  },
+  {
+    id: 'slogan', num: '02',
     nazev: 'Stejné hodnoty. Nové vize.',
     hl: 'Nové vize.',
     text: 'Náš slogan je v patičce webu od 19. srpna a od září i na billboardech a v tisku. Na druhém webu stojí dvakrát na úvodní stránce, jen s dovětkem „Třinec".',
@@ -24,7 +34,7 @@ const dvojice = [
     altOni: 'Úvodní stránka NEZÁVISLÍ Třinec s nadpisem Stejné hodnoty. Nové vize. Město, které nezůstane stát.',
   },
   {
-    id: 'hero', num: '02',
+    id: 'hero', num: '03',
     nazev: 'Doktoři, učitelé, podnikatelé…',
     hl: 'podnikatelé',
     text: 'Věta pod naším hlavním vizuálem je na webu od 10. srpna: „Doktoři, učitelé, podnikatelé, sportovci… Osobnosti, které v Třinci doopravdy žijí a pracují." Druhá verze: „Doktoři, učitelé, podnikatelé, trenéři. Lidé, kteří v Třinci opravdu žijí a pracují."',
@@ -63,6 +73,8 @@ const sBoxem = (d) => {
       text-transform: uppercase; color: rgba(50,50,50,.55); margin-bottom: var(--s-8);
     }
     .orig-pair figcaption b { color: var(--anthracite); font-weight: 600; }
+    .orig-pair figcaption a, .orig-stalo a { color: var(--signal-blue); text-decoration: none; border-bottom: 1px solid rgba(0,59,142,.35); }
+    .orig-pair figcaption a:hover, .orig-stalo a:hover { color: #002a66; border-bottom-color: currentColor; }
     .orig-pair img { display: block; width: 100%; height: auto; border: 1px solid rgba(50,50,50,.14); border-radius: 4px; }
     .orig-pair--detail img { width: auto; max-width: 100%; }
     .orig-stalo { margin-top: var(--s-40); padding: var(--s-24) 0 0; border-top: 3px solid var(--brand-red); max-width: 62ch; }
@@ -88,7 +100,7 @@ const sBoxem = (d) => {
       <div class="orig-stalo">
         <p class="eyebrow">Co přesně se stalo</p>
         <p>
-          Web <strong>nezavislitrinec.cz</strong> nese podle svého serveru datum poslední
+          Web <a href={ONI} target="_blank" rel="noopener nofollow"><strong>nezavislitrinec.cz</strong></a> nese podle svého serveru datum poslední
           změny <strong>21. září 2026</strong>. Dne <strong>24. září 2026</strong> jsme
           pořídili jeho úplnou kopii — všechny stránky, texty i obrázky, beze změn.
           Přesně tento obsah si můžete proklikat v naší archivní kopii.
@@ -118,7 +130,7 @@ const sBoxem = (d) => {
                 <img src={u(IMG + d.my)} alt={d.altMy} loading="lazy">
               </figure>
               <figure>
-                <figcaption>nezavislitrinec.cz · září 2026</figcaption>
+                <figcaption><a href={ONI} target="_blank" rel="noopener nofollow">nezavislitrinec.cz</a> · září 2026</figcaption>
                 <img src={u(IMG + d.oni)} alt={d.altOni} loading="lazy">
               </figure>
             </div>
