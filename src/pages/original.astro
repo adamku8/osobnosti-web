@@ -48,17 +48,6 @@ const sBoxem = (d) => {
   noindex={draft}
 >
   <style is:inline>
-    .orig-lead-fakta {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-24);
-      margin: var(--s-40) 0 0; padding: 0; list-style: none;
-    }
-    .orig-lead-fakta li { border-top: 1px solid rgba(50,50,50,.14); padding-top: var(--s-16); }
-    .orig-lead-fakta b {
-      display: block; font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(28px, 3vw, 40px); line-height: 1; color: var(--anthracite);
-    }
-    .orig-lead-fakta span { display: block; margin-top: var(--s-8); color: rgba(50,50,50,.72); font-size: 15px; }
-
     .orig-list { list-style: none; margin: 0; padding: 0; }
     .orig-item { padding: var(--s-64) 0; border-top: 1px solid rgba(50,50,50,.14); }
     .orig-item:first-child { border-top: 0; padding-top: 0; }
@@ -82,7 +71,6 @@ const sBoxem = (d) => {
     .orig-note { margin-top: var(--s-16); font-size: 13px; color: rgba(50,50,50,.55); }
 
     @media (max-width: 760px) {
-      .orig-lead-fakta { grid-template-columns: 1fr; }
       .orig-pair { grid-template-columns: 1fr; }
       .orig-head { grid-template-columns: 48px minmax(0, 1fr); }
     }
@@ -109,11 +97,6 @@ const sBoxem = (d) => {
           <a class="btn btn-secondary" href={u(ARCHIV)} target="_blank" rel="noopener nofollow">Otevřít archivní kopii webu</a>
         </div>
       </div>
-      <ul class="orig-lead-fakta">
-        <li><b>19. 8.</b><span>spuštění webu osobnostiprotrinec.cz; slogan „Stejné hodnoty. Nové vize." v patičce od téhož dne</span></li>
-        <li><b>21. 9.</b><span>datum poslední změny stránek nezavislitrinec.cz podle jejich serveru; starší verze webu není nikde archivovaná</span></li>
-        <li><b>2</b><span>doslovné shody v textu — slogan a věta o kandidátech, obě níže bez komentáře navíc</span></li>
-      </ul>
     </div>
   </section>
 
