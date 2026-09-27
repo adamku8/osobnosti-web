@@ -67,9 +67,9 @@ Spotřeba alkoholu v Česku vrcholila v roce 2019 na 173 litrech na osobu ročn�
 
 Není to třinecká specialita. Podívejte se na Stodolní v Ostravě — ulici, kam jezdil pařit celý kraj. Dnes tam zejí prázdné výlohy a zavřené bary. Když nestačí poptávka ani v třísettisícovém městě, v třiatřicetitisícovém to nezachrání žádné úřední rozhodnutí.
 
-A platí to i obráceně: žádné úřední rozhodnutí podniky nezabilo. Často slyšíme, že město vyhláškou zavřelo hospody v deset večer. Není to pravda. Vyhláška omezuje provozní dobu **do půlnoci, ne do deseti**.
+Často taky slyšíme, že město vyhláškou zavřelo hospody v deset večer. Tak to není. Vyhláška z roku 2021 omezuje provozní dobu hospod a klubů **do půlnoci, ne do deseti** — a navíc jen na sídlišti Terasa. Ve zbytku města žádné takové omezení neplatí.
 
-A velké akce smějí běžet déle. Noční klid začíná normálně ve 22:00, ale pro vybrané akce ho vyhláška zkracuje na **0:00–6:00**. Pro rok 2026 je takových výjimek sedmnáct — pět pro celé město a dvanáct v příměstských částech. Na Silvestra noční klid neplatí vůbec.
+A velké akce smějí běžet déle. Noční klid začíná normálně ve 22:00, ale pro vybrané akce ho vyhláška zkracuje na **0:00–6:00**. Pro rok 2026 je takových výjimek čtrnáct — pět pro celé město a devět v příměstských částech. Jen Letní kino to znamená jedenáct pátečních nocí. Na Silvestra noční klid neplatí vůbec.
 
 **Noční klid až od půlnoci — výjimky podle vyhlášky pro rok 2026**
 
@@ -98,18 +98,18 @@ Takové město nepotřebuje jen klub pro mladé. Potřebuje obojí — a hlavně
 
 Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív nebo později přijde řeč na bydlení. A s ním tři tvrzení, která se opakují tak často, že jim lidé věří. Čísla je ale nepotvrzují.
 
-**„Nájmy jsou tu stejné jako v Ostravě."** Nejsou. Průměrný nabízený nájem byl v srpnu 2026 v Třinci **220 Kč za metr čtvereční**, v Ostravě 257 Kč. Třinec je o **14 procent levnější**. U bytu o 60 metrech je to přes dva tisíce korun měsíčně.
+**„Nájmy jsou tu stejné jako v Ostravě."** Nejsou. Průměrný nabízený nájem byl v srpnu 2026 v Třinci **220 Kč za metr čtvereční**, v Ostravě 257 Kč. Třinec je o **14 procent levnější**. U bytu o 60 metrech je to přes dva tisíce korun měsíčně. Za celé jaro a léto je rozdíl menší, osm procent — ale Třinec je levnější v každé velikosti bytu.
 
-**„Většina Třinečanů bydlí v rodinných domech."** Také ne. Podle ČSÚ žije **55 procent** obyvatel v bytových domech a 45 procent v rodinných. Třinec je pořád hlavně město bytů — a bytová politika se tak týká většiny lidí.
+**„Většina Třinečanů bydlí v rodinných domech."** Také ne. Podle sčítání lidu z roku 2021 žije **55 procent** obyvatel v bytových domech a 45 procent v rodinných. Třinec je pořád hlavně město bytů — a bytová politika se tak týká většiny lidí.
 
-**„Byty tu vlastní CPI."** Jen zčásti. CPI má zhruba 3 600 bytů a asi 270 z nich teď prodává. Město vlastní 870 bytů. Největší skupina jsou ale bytová družstva a společenství vlastníků: **5 300 bytů**, víc než polovina. Kdo chce mluvit o bydlení v Třinci, musí mluvit hlavně s nimi.
+**„Byty tu vlastní CPI."** Jen zčásti. V bytových domech patří CPI zhruba 3 600 bytů a od jara 2025 jich asi 270 rozprodává. Město vlastní 870 bytů. Největší skupina jsou ale bytová družstva a společenství vlastníků: **5 300 bytů**, víc než polovina. Kdo chce mluvit o bydlení v Třinci, musí mluvit hlavně s nimi.
 
-**Kdo v Třinci vlastní byty — zhruba 9 800 bytů**
+**Kdo vlastní obydlené byty v bytových domech — sčítání 2021**
 
 | | |
 |---|---|
 | 5 300 | bytová družstva a společenství vlastníků (SVJ) — víc než polovina |
-| ≈ 3 600 | CPI — z toho zhruba 270 bytů teď prodává |
+| ≈ 3 600 | CPI — od jara 2025 z nich asi 270 rozprodává |
 | 870 | město Třinec |
 
 **−14 % · Nájem je levnější než v Ostravě** — průměrná nabídka v srpnu 2026: Třinec 220 Kč/m², Ostrava 257 Kč/m² (Sreality).
@@ -208,7 +208,7 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ## POZNÁMKY (v0.6)
 
-- v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; ověřit číslo vyhlášky o provozní době, rok sčítání ČSÚ u 55/45 % a zdroj počtů bytů. Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
+- v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
 - Body s `[DOPLNIT]` viz žlutý draft box na stránce (částka Trisia, stav TGM, závazky, TANCUJ.CZ + TRAYTO ověřit).
 - Zdroje dat: viz kolofon článku + `analyzy/trinec-zije-akce-brezen-srpen-2026.md` a session „Demografické statistiky Třince 2000–2025".
