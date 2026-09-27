@@ -1,6 +1,6 @@
 # Je v Třinci mrtvo, nebo živo?
 
-> **DRAFT v0.5 · 2026-08-14 · textový zdroj přegenerovaný z webové verze**
+> **DRAFT v0.6 · 2026-09-27 · doplněno o čísla z FB příspěvku (bydlení, vyhláška, výdaje na akce)**
 > Zdroj pravdy: `WEB/src/pages/blog-je-v-trinci-mrtvo-nebo-zivo.astro`. Tento soubor byl 14. 8. znovu
 > vygenerován z buildu — předchozí kopie se (patrně při přejmenování složky projektu) vrátila na v0.1.
 
@@ -8,7 +8,7 @@
 
 **Perex:** Večerní Třinec už nevypadá jako před dvaceti lety. Čísla ale říkají něco jiného než povídání u piva. Mladí neutekli — hlavně se nenarodili. A město mezitím žije jinak, než jsme bývali zvyklí.
 
-*Adam Křenek · srpen 2026 · čtení na 6 minut*
+*Adam Křenek · srpen 2026 · čtení na 8 minut*
 
 ---
 
@@ -67,6 +67,23 @@ Spotřeba alkoholu v Česku vrcholila v roce 2019 na 173 litrech na osobu ročn�
 
 Není to třinecká specialita. Podívejte se na Stodolní v Ostravě — ulici, kam jezdil pařit celý kraj. Dnes tam zejí prázdné výlohy a zavřené bary. Když nestačí poptávka ani v třísettisícovém městě, v třiatřicetitisícovém to nezachrání žádné úřední rozhodnutí.
 
+A platí to i obráceně: žádné úřední rozhodnutí podniky nezabilo. Často slyšíme, že město vyhláškou zavřelo hospody v deset večer. Není to pravda. Vyhláška omezuje provozní dobu **do půlnoci, ne do deseti**.
+
+A velké akce smějí běžet déle. Noční klid začíná normálně ve 22:00, ale pro vybrané akce ho vyhláška zkracuje na **0:00–6:00**. Pro rok 2026 je takových výjimek sedmnáct — pět pro celé město a dvanáct v příměstských částech. Na Silvestra noční klid neplatí vůbec.
+
+**Noční klid až od půlnoci — výjimky podle vyhlášky pro rok 2026**
+
+| | |
+|---|---|
+| Celé město | Pálení čarodějnic, Hutnický den, Letní kino (poslední červnový pátek a všechny pátky v červenci a srpnu), Dožínky, Festival od srdce |
+| Oldřichovice | 100 let TJ Oldřichovice, Srnčí hody |
+| Karpentná | Starlight Party, Den obce s hasiči |
+| Guty | Srnčí hody, Hasičské slavnosti SDH Guty |
+| Kojkovice | Hasiči pro obec |
+| Nebory | Dzień Oszeldy |
+| Dolní Líštná | Den obce s hasiči |
+| 31. 12. | Silvestr — noční klid neplatí vůbec |
+
 ## 05 · Třinec se nevylidnil. Přestavěl se.
 
 Zatím to zní jako příběh o mizení. Není. Obyvatel ubylo od roku 2001 o čtrnáct procent — z 38 953 na 33 523. To samo o sobě nezní dramaticky. Dramatická je změna uvnitř.
@@ -77,7 +94,27 @@ Nejsilnější ročníky jsou dnes lidé mezi pětačtyřiceti a čtyřiašedes�
 
 Takové město nepotřebuje jen klub pro mladé. Potřebuje obojí — a hlavně potřebuje, aby spolu ty generace mluvily.
 
-## 06 · Takže mrtvo? Ne. Jen jinak živo.
+## 06 · Bydlení: méně mýtů, víc čísel.
+
+Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív nebo později přijde řeč na bydlení. A s ním tři tvrzení, která se opakují tak často, že jim lidé věří. Čísla je ale nepotvrzují.
+
+**„Nájmy jsou tu stejné jako v Ostravě."** Nejsou. Průměrný nabízený nájem byl v srpnu 2026 v Třinci **220 Kč za metr čtvereční**, v Ostravě 257 Kč. Třinec je o **14 procent levnější**. U bytu o 60 metrech je to přes dva tisíce korun měsíčně.
+
+**„Většina Třinečanů bydlí v rodinných domech."** Také ne. Podle ČSÚ žije **55 procent** obyvatel v bytových domech a 45 procent v rodinných. Třinec je pořád hlavně město bytů — a bytová politika se tak týká většiny lidí.
+
+**„Byty tu vlastní CPI."** Jen zčásti. CPI má zhruba 3 600 bytů a asi 270 z nich teď prodává. Město vlastní 870 bytů. Největší skupina jsou ale bytová družstva a společenství vlastníků: **5 300 bytů**, víc než polovina. Kdo chce mluvit o bydlení v Třinci, musí mluvit hlavně s nimi.
+
+**Kdo v Třinci vlastní byty — zhruba 9 800 bytů**
+
+| | |
+|---|---|
+| 5 300 | bytová družstva a společenství vlastníků (SVJ) — víc než polovina |
+| ≈ 3 600 | CPI — z toho zhruba 270 bytů teď prodává |
+| 870 | město Třinec |
+
+**−14 % · Nájem je levnější než v Ostravě** — průměrná nabídka v srpnu 2026: Třinec 220 Kč/m², Ostrava 257 Kč/m² (Sreality).
+
+## 07 · Takže mrtvo? Ne. Jen jinak živo.
 
 Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežije míň. Žije jinak — přes den, venku, s rodinami, napříč generacemi.
 
@@ -107,23 +144,23 @@ Nezapočítali jsme akce bez události na Facebooku — jako dožínky v Gutech.
 | 33 | divadelních představení — nejsilnější kategorie. Hudba 25, besedy a dílny 24, komunitní akce 20. |
 | 0 | divadelních titulů v červenci a srpnu — sezóna končí v červnu, kultura se stěhuje ven |
 
-## 07 · Co jsme se s tím snažili udělat my?
+## 08 · Co jsme s tím udělali my?
 
-Tři věci, které už běží. Ne proto, abychom se chlubili — ale protože slibům se líp věří, když za nimi je vidět práce.
+Občas zazní, že se za poslední čtyři roky v kultuře nic neudělalo. S tím nesouhlasíme. Tři věci už běží — a píšeme o nich ne proto, abychom se chlubili, ale protože slibům se líp věří, když za nimi je vidět práce.
 
 **Participativní rozpočet.**
 
-Od roku 2024 si Třinečané sami navrhují a hlasováním vybírají akce, které město zaplatí. Sešlo se 22 projektů, deset dostalo podporu — od dílen v Karpentné po lampionový průvod v Gutech. Peníze jdou za lidmi, kteří už něco dělají.
+Od roku 2024 si Třinečané sami navrhují a hlasováním vybírají akce, které město zaplatí — na to jde **600 000 Kč ročně** přímo pořadatelům. Sešlo se 22 projektů, deset dostalo podporu — od dílen v Karpentné po lampionový průvod v Gutech. Peníze jdou za lidmi, kteří už něco dělají.
 
-**Lepší interpreti na koncertech celý rok.**
+**Čtyřikrát víc peněz na akce města.**
 
-Podpořili jsme navýšení rozpočtu na akce přes Trisiu — největšího pořadatele ve městě, čtyři z deseti akcí. Výsledek: na koncerty jezdí silnější jména, a to po celý rok. [DOPLNIT částku a rok]
+Podpořili jsme výrazné navýšení rozpočtu na městské akce — Třinecké kulturní léto, adventní podvečery, jarmarky. V roce 2022 na ně šlo **1,6 milionu korun**, v roce 2025 **6,9 milionu**. Výsledek: silnější jména na koncertech a program po celý rok.
 
-**Rekonstrukce TGM — nové místo pro akce.**
+**Náměstí TGM otevřené akcím.**
 
-Aby akce měly kde být. Z TGM má vzniknout přirozené místo pro městské akce pod širým nebem. [DOPLNIT stav a termín]
+Aby akce měly kde být. Náměstí T. G. Masaryka se nově zpřístupnilo pro akce — centrum města tak má místo, kde se dá potkat pod širým nebem.
 
-## 08 · Nevrátíme rok 2005. Postavíme rok 2026.
+## 09 · Nevrátíme rok 2005. Postavíme rok 2026.
 
 Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu — vycházejí přímo z čísel výše.
 
@@ -153,7 +190,7 @@ Seniorů je dnes v Třinci skoro čtvrtina města — a jsou aktivní: Mozková 
 
 **Místa, kde se akce dají dělat.**
 
-Akce potřebují prostor, ne razítko. Rekonstrukce TGM je první krok — chceme k tomu, aby ani Javorový nebyl jen sjezdovka. A hlavně: aby Třinec měl letní scénu. V červenci a srpnu se tu nehraje ani jedno divadlo — sezóna končí v červnu a kultura se stěhuje ven. Jenže ven nemá kam. Pódium, na které dosáhne kapela, divadlo i škola, je nejlevnější způsob, jak z prázdných měsíců udělat plné.
+Akce potřebují prostor, ne razítko. Otevřené náměstí TGM je první krok — chceme k tomu, aby ani Javorový nebyl jen sjezdovka. A hlavně: aby Třinec měl letní scénu. V červenci a srpnu se tu nehraje ani jedno divadlo — sezóna končí v červnu a kultura se stěhuje ven. Jenže ven nemá kam. Pódium, na které dosáhne kapela, divadlo i škola, je nejlevnější způsob, jak z prázdných měsíců udělat plné.
 
 *(Náměstí T. G. Masaryka. Foto: Ondřej Žváček, Wikimedia Commons, CC BY 2.5.)*
 
@@ -169,7 +206,9 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ---
 
-## POZNÁMKY (v0.5)
+## POZNÁMKY (v0.6)
+
+- v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; ověřit číslo vyhlášky o provozní době, rok sčítání ČSÚ u 55/45 % a zdroj počtů bytů. Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
 - Body s `[DOPLNIT]` viz žlutý draft box na stránce (částka Trisia, stav TGM, závazky, TANCUJ.CZ + TRAYTO ověřit).
 - Zdroje dat: viz kolofon článku + `analyzy/trinec-zije-akce-brezen-srpen-2026.md` a session „Demografické statistiky Třince 2000–2025".
