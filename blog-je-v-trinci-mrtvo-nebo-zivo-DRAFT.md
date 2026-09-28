@@ -41,10 +41,6 @@ Chybějící tisícovky mladých se neodstěhovaly. Ony se nenarodily. V roce 19
 
 Třinec tedy neselhal. Zestárnul přesně tak, jak zestárla celá země. Zpětně s tím žádná radnice nic neudělá. Dopředu ano.
 
-Poctivě k číslům
-
-Údaj za rok 2001 je odhad ze sčítání lidu — ČSÚ tehdy věkové skupiny za města nezveřejňoval; „15–35" je přesně 15–34 let. Sedm set je čistý odchod: odešlo jich víc, část nahradili přistěhovalí.
-
 *(Celý příběh v jednom obrázku. Ke stažení a sdílení.)*
 
 ## 03 · Od covidu se navíc přestalo pít.
@@ -196,7 +192,7 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ## POZNÁMKY (v0.7)
 
-- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08.
+- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen.
 
 - v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
