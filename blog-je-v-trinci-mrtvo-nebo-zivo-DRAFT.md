@@ -39,6 +39,8 @@ Chybějící tisícovky mladých se neodstěhovaly. Ony se nenarodily. V roce 19
 | ≈ 4 000 | se jich už nenarodilo — slabé ročníky devadesátých let. To je 85 % celého úbytku. |
 | ≈ 700 | čistý odchod z města za 24 let — asi třicet mladých ročně, tedy 15 % úbytku |
 
+Město se přitom nevylidnilo — obyvatel ubylo od roku 2001 o 14 procent, z 38 953 na 33 523. Změnilo se hlavně složení: dětí je o třetinu méně, seniorů o polovinu víc. Každý čtvrtý Třinečan je dnes senior, v roce 2001 to byl každý sedmý.
+
 Třinec tedy neselhal. Zestárnul přesně tak, jak zestárla celá země. Zpětně s tím žádná radnice nic neudělá. Dopředu ano.
 
 *(Celý příběh v jednom obrázku. Ke stažení a sdílení.)*
@@ -134,19 +136,19 @@ Podpořili jsme výrazné navýšení rozpočtu na městské akce — Třinecké
 
 Aby akce měly kde být. Náměstí T. G. Masaryka se nově zpřístupnilo pro akce — centrum města tak má místo, kde se dá potkat pod širým nebem.
 
-## 07 · Nevrátíme rok 2005. Postavíme rok 2026.
+## 07 · Co s tím chceme udělat?
 
 Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu — vycházejí přímo z čísel výše.
 
 **Aktivní jednotlivci. Ti to vždy zachrání.**
 
-Živé město nedělá radnice. Dělají ho lidé, kteří něco uspořádají: trenér, kapelník, farář, holka, co dá dohromady swap, chlap, co obnoví průvod v Gutech. Úloha města je najít je a nebrzdit je.
+Živé město nedělá radnice. Dělají ho lidé, kteří něco uspořádají: trenér, kapelník, farář, holka, co dá dohromady swap. Úloha města je najít je a nebrzdit je.
 
 **Příměstské části jako místa, kde se žije.**
 
-Guty, Karpentná, Oldřichovice, Nebory — tam dnes komunitní život reálně funguje. Chceme pro něj místa a peníze: opravené kulturáky, hřiště, podporu spolků. [DOPLNIT konkrétní závazky z programu]
+Guty, Karpentná, Oldřichovice, Nebory — tam dnes komunitní život reálně funguje. Chceme pro něj místa a peníze: opravené kulturáky, hřiště, podporu spolků. A v každé části nové místo, kde se lidé potkají (odkaz na /casti.html#zavazky) — s jasnými pravidly, jak město pomůže s pozemkem i penězi.
 
-**Klub pro mladé? Město připraví hřiště, ne scénář.**
+**Klub pro mladé? Město připraví prostor, ne scénář.**
 
 Město nemá provozovat diskotéku. Může nabídnout prostor, zjednodušit podmínky a nechat vzniknout to, co si mladí sami řeknou — klub, skatepark, zkušebnu.
 
@@ -162,9 +164,9 @@ Trisia není doplněk kulturního života — je to jeho páteř. Otázka tedy n
 
 Seniorů je dnes v Třinci skoro čtvrtina města — a jsou aktivní: Mozková posilovna, jazykové kurzy v knihovně, Senioři za volantem. Tyhle programy běží roztroušeně po institucích. Chceme pro ně jedno důstojné zázemí. [DOPLNIT místo a formu]
 
-**Místa, kde se akce dají dělat.**
+**Nová letní scéna.**
 
-Akce potřebují prostor, ne razítko. Otevřené náměstí TGM je první krok — chceme k tomu, aby ani Javorový nebyl jen sjezdovka. A hlavně: aby Třinec měl letní scénu. V červenci a srpnu se tu nehraje ani jedno divadlo — sezóna končí v červnu a kultura se stěhuje ven. Jenže ven nemá kam. Pódium, na které dosáhne kapela, divadlo i škola, je nejlevnější způsob, jak z prázdných měsíců udělat plné.
+V červenci a srpnu se v Třinci nehraje ani jedno divadlo — sezóna končí v červnu a kultura se stěhuje ven. Jenže ven nemá kam. Pódium, na které dosáhne kapela, divadlo i škola, je nejlevnější způsob, jak z prázdných měsíců udělat plné. Velký potenciál má i areál Javorového na místě lyžařské chaty.
 
 *(Náměstí T. G. Masaryka. Foto: Ondřej Žváček, Wikimedia Commons, CC BY 2.5.)*
 
@@ -182,7 +184,7 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ## POZNÁMKY (v0.7)
 
-- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07.
+- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07. Stručně z ní do kap. 02 přešel odstavec o složení obyvatel. Kap. 07: nadpis „Co s tím chceme udělat?“, bez průvodu v Gutech, odkaz na místo k setkávání (casti.html), „prostor, ne scénář“, bod „Nová letní scéna“ s Javorovým. Z výčtu akcí vypadla INVENT ARENA.
 
 - v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 

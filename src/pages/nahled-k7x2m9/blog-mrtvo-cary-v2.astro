@@ -22,7 +22,7 @@ const obsah = [
   { id: 'bydleni',   num: '04', title: 'Bydlení bez mýtů' },
   { id: 'zivo',      num: '05', title: 'Jinak živo' },
   { id: 'snaha',     num: '06', title: 'Co jsme udělali my' },
-  { id: 'reseni',    num: '07', title: 'Co s tím chceme dělat' },
+  { id: 'reseni',    num: '07', title: 'Co s tím chceme udělat' },
 ];
 ---
 <Base
@@ -425,6 +425,12 @@ const obsah = [
     </table>
 
     <p>
+      Město se přitom nevylidnilo — obyvatel ubylo od roku 2001 o 14 procent,
+      z 38&nbsp;953 na 33&nbsp;523. Změnilo se hlavně složení: dětí je
+      o třetinu méně, seniorů o polovinu víc. <strong>Každý čtvrtý Třinečan
+      je dnes senior</strong>, v roce 2001 to byl každý sedmý.
+    </p>
+    <p>
       Třinec tedy neselhal. Zestárnul přesně tak, jak zestárla celá země.
       Zpětně s tím žádná radnice nic neudělá. Dopředu ano.
     </p>
@@ -596,7 +602,6 @@ const obsah = [
       <span class="art-tag"><b>Festyn Majowy na Osůvce</b> — 1. ročník</span>
       <span class="art-tag"><b>120 let polské školy</b> v Oldřichovicích</span>
       <span class="art-tag"><b>Třinecké kulturní léto</b> — 3 večery zdarma</span>
-      <span class="art-tag"><b>INVENT ARENA</b></span>
       <span class="art-tag"><b>6 swapů a blešáků</b></span>
       <span class="art-tag"><b>Starlight Party</b> na Karpentné</span>
     </div>
@@ -690,7 +695,7 @@ const obsah = [
   <!-- ================= 06 · CO S TÍM ================= -->
   <section class="art art-section" id="reseni">
     <p class="art-kicker"><span>07</span></p>
-    <h2>Nevrátíme rok 2005. Postavíme rok 2026.</h2>
+    <h2>Co s tím chceme udělat?</h2>
     <p>
       Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu —
       vycházejí přímo z čísel výše.
@@ -703,8 +708,7 @@ const obsah = [
           <h3>Aktivní jednotlivci. Ti to vždy zachrání.</h3>
           <p>
             Živé město nedělá radnice. Dělají ho lidé, kteří něco uspořádají:
-            trenér, kapelník, farář, holka, co dá dohromady swap, chlap, co
-            obnoví průvod v Gutech. Úloha města je najít je a nebrzdit je.
+            trenér, kapelník, farář, holka, co dá dohromady swap. Úloha města je najít je a nebrzdit je.
           </p>
         </div>
       </div>
@@ -715,14 +719,16 @@ const obsah = [
           <p>
             Guty, Karpentná, Oldřichovice, Nebory — tam dnes komunitní život
             reálně funguje. Chceme pro něj místa a peníze: opravené kulturáky,
-            hřiště, podporu spolků. [DOPLNIT konkrétní závazky z programu]
+            hřiště, podporu spolků. A v každé části{' '}
+            <a href={u('casti.html#zavazky')}>nové místo, kde se lidé potkají</a>{' '}
+            — s jasnými pravidly, jak město pomůže s pozemkem i penězi.
           </p>
         </div>
       </div>
       <div class="art-step">
         <div class="art-step-num">03</div>
         <div>
-          <h3>Klub pro mladé? Město připraví hřiště, ne scénář.</h3>
+          <h3>Klub pro mladé? Město připraví prostor, ne scénář.</h3>
           <p>
             Město nemá provozovat diskotéku. Může nabídnout prostor,
             zjednodušit podmínky a nechat vzniknout to, co si mladí sami
@@ -769,15 +775,13 @@ const obsah = [
       <div class="art-step">
         <div class="art-step-num">07</div>
         <div>
-          <h3>Místa, kde se akce dají dělat.</h3>
+          <h3>Nová letní scéna.</h3>
           <p>
-            Akce potřebují prostor, ne razítko. Otevřené náměstí TGM je
-            první krok — chceme k tomu, aby ani Javorový nebyl jen sjezdovka.
-            A hlavně: aby Třinec měl <strong>letní scénu</strong>.
-            V červenci a srpnu se tu nehraje ani jedno divadlo — sezóna končí
-            v červnu a kultura se stěhuje ven. Jenže ven nemá kam. Pódium,
-            na které dosáhne kapela, divadlo i škola, je nejlevnější způsob,
-            jak z prázdných měsíců udělat plné.
+            V červenci a srpnu se v Třinci nehraje ani jedno divadlo — sezóna
+            končí v červnu a kultura se stěhuje ven. Jenže ven nemá kam.
+            Pódium, na které dosáhne kapela, divadlo i škola, je nejlevnější
+            způsob, jak z prázdných měsíců udělat plné. Velký potenciál má
+            i <strong>areál Javorového na místě lyžařské chaty</strong>.
           </p>
         </div>
       </div>
