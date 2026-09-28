@@ -68,17 +68,7 @@ A velké akce smějí běžet déle. Noční klid začíná normálně ve 22:00,
 | Dolní Líštná | Den obce s hasiči |
 | 31. 12. | Silvestr — noční klid neplatí vůbec |
 
-## 04 · Třinec se nevylidnil. Přestavěl se.
-
-Zatím to zní jako příběh o mizení. Není. Obyvatel ubylo od roku 2001 o čtrnáct procent — z 38 953 na 33 523. To samo o sobě nezní dramaticky. Dramatická je změna uvnitř.
-
-Dětí do čtrnácti let ubylo o třicet procent. Seniorů nad pětašedesát let naopak přibylo o sedmačtyřicet procent — z 5 238 na 7 698. Každý čtvrtý Třinečan je dnes senior. V roce 2001 to byl každý sedmý. Průměrný věk ve městě je pětačtyřicet let.
-
-Nejsilnější ročníky jsou dnes lidé mezi pětačtyřiceti a čtyřiašedesáti lety — je jich skoro deset tisíc. Dětí do čtyř let je 1 350. Tahle přestavba tedy zdaleka neskončila.
-
-Takové město nepotřebuje jen klub pro mladé. Potřebuje obojí — a hlavně potřebuje, aby spolu ty generace mluvily.
-
-## 05 · Bydlení: méně mýtů, víc čísel.
+## 04 · Bydlení: méně mýtů, víc čísel.
 
 Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív nebo později přijde řeč na bydlení. A s ním tři tvrzení, která se opakují tak často, že jim lidé věří. Čísla je ale nepotvrzují.
 
@@ -98,7 +88,7 @@ Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív
 
 **−14 % · Nájem je levnější než v Ostravě** — průměrná nabídka v srpnu 2026: Třinec 220 Kč/m², Ostrava 257 Kč/m² (Sreality).
 
-## 06 · Takže mrtvo? Ne. Jen jinak živo.
+## 05 · Takže mrtvo? Ne. Jen jinak živo.
 
 Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežije míň. Žije jinak — přes den, venku, s rodinami, napříč generacemi.
 
@@ -128,7 +118,7 @@ Nezapočítali jsme akce bez události na Facebooku — jako dožínky v Gutech.
 | 33 | divadelních představení — nejsilnější kategorie. Hudba 25, besedy a dílny 24, komunitní akce 20. |
 | 0 | divadelních titulů v červenci a srpnu — sezóna končí v červnu, kultura se stěhuje ven |
 
-## 07 · Co jsme s tím udělali my?
+## 06 · Co jsme s tím udělali my?
 
 Občas zazní, že se za poslední čtyři roky v kultuře nic neudělalo. S tím nesouhlasíme. Tři věci už běží — a píšeme o nich ne proto, abychom se chlubili, ale protože slibům se líp věří, když za nimi je vidět práce.
 
@@ -144,7 +134,7 @@ Podpořili jsme výrazné navýšení rozpočtu na městské akce — Třinecké
 
 Aby akce měly kde být. Náměstí T. G. Masaryka se nově zpřístupnilo pro akce — centrum města tak má místo, kde se dá potkat pod širým nebem.
 
-## 08 · Nevrátíme rok 2005. Postavíme rok 2026.
+## 07 · Nevrátíme rok 2005. Postavíme rok 2026.
 
 Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu — vycházejí přímo z čísel výše.
 
@@ -192,7 +182,7 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ## POZNÁMKY (v0.7)
 
-- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen.
+- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07.
 
 - v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
