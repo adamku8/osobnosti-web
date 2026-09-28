@@ -16,13 +16,12 @@ const reels = [
 const obsah = [
   { id: 'widle',     num: '01', title: 'Widle se nevrátí' },
   { id: 'proc',      num: '02', title: 'Utekli? Chyba lávky' },
-  { id: 'porodnost', num: '03', title: 'Kolik dětí se rodilo' },
-  { id: 'alkohol',   num: '04', title: 'Přestalo se pít' },
-  { id: 'prestavba', num: '05', title: 'Město se přestavělo' },
-  { id: 'bydleni',   num: '06', title: 'Bydlení bez mýtů' },
-  { id: 'zivo',      num: '07', title: 'Jinak živo' },
-  { id: 'snaha',     num: '08', title: 'Co jsme udělali my' },
-  { id: 'reseni',    num: '09', title: 'Co s tím chceme dělat' },
+  { id: 'alkohol',   num: '03', title: 'Přestalo se pít' },
+  { id: 'prestavba', num: '04', title: 'Město se přestavělo' },
+  { id: 'bydleni',   num: '05', title: 'Bydlení bez mýtů' },
+  { id: 'zivo',      num: '06', title: 'Jinak živo' },
+  { id: 'snaha',     num: '07', title: 'Co jsme udělali my' },
+  { id: 'reseni',    num: '08', title: 'Co s tím chceme dělat' },
 ];
 ---
 <Base
@@ -378,21 +377,15 @@ const obsah = [
     </div>
   </section>
 
-  <!-- ================= 02 · UTEKLI? ================= -->
+  <!-- ================= 02 · UTEKLI? NENARODILI SE ================= -->
   <section class="art art-section" id="proc">
     <p class="art-kicker"><span>02</span>Proč jich je míň</p>
     <h2>Utekli? Chyba lávky. Nenarodili se.</h2>
     <p>
-      „Mladí z Třince utíkají" — to slyšíme pořád. Jenže data říkají
-      něco jiného. Dá se to spočítat úplně jednoduše.
-    </p>
-    <p>
-      Rozdíl je <strong>necelých devět set lidí za dvacet ročníků</strong> —
-      a to včetně těch, kdo se nedožili. Žádný exodus.
-    </p>
-    <p>
-      Chybějící čtyři tisícovky mladých se nikam neodstěhovaly.
-      {' '}<strong>Ony se nenarodily.</strong>
+      „Mladí z Třince utíkají" — to slyšíme pořád. Data říkají něco jiného.
+      Rozdíl mezi narozenými a dnešními obyvateli těch ročníků je{' '}
+      <strong>necelých devět set lidí za dvacet let</strong> — a to včetně
+      těch, kdo se nedožili. Žádný exodus.
     </p>
 
     <div class="art-pull">
@@ -402,10 +395,13 @@ const obsah = [
       </p>
     </div>
 
-    <figure class="art-fig">
-      <img src={u('assets/img/blog/ai-hriste.jpg')} alt="Prázdné dětské hřiště mezi panelovými domy na podzim" style="max-height: 420px; object-fit: cover;">
-      <figcaption class="art-cap">Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní místo v Třinci.</figcaption>
-    </figure>
+    <p>
+      Chybějící tisícovky mladých se neodstěhovaly. <strong>Ony se
+      nenarodily.</strong> V roce 1980 přišlo na svět <strong>693 dětí</strong>,
+      v roce 2004 jen <strong>305</strong> — o víc než polovinu méně. A Třinec
+      v tom není výjimka: porodnost tu mezi generacemi klesla o 35 procent,
+      v celé republice o 34.
+    </p>
 
     <table class="dtab">
       <caption>Rozklad — <b>kam se poděli chybějící mladí</b></caption>
@@ -415,41 +411,17 @@ const obsah = [
       </tbody>
     </table>
 
-  </section>
-
-  <!-- ================= 03 · PORODNOST ================= -->
-  <section class="art art-section" id="porodnost">
-    <p class="art-kicker"><span>03</span>Kolik dětí se rodilo</p>
-    <h2>V roce 1980 se tu narodilo dvakrát tolik dětí co v roce 2004.</h2>
     <p>
-      Vrchol přišel v roce 1980 — <strong>693 narozených dětí</strong>.
-      Dno v roce 2004 — <strong>305 dětí</strong>. Propad o šestapadesát
-      procent. Silné ročníky se prostě přestaly rodit.
+      Třinec tedy neselhal. Zestárnul přesně tak, jak zestárla celá země.
+      Zpětně s tím žádná radnice nic neudělá. Dopředu ano.
     </p>
-    <p>
-      A teď to podstatné: <strong>Třinec v tom není výjimka</strong>.
-      Porodnost tu mezi generacemi klesla o 35 procent, v celé republice
-      o 34. Rozdíl jednoho procentního bodu — Třinec kopíruje stejnou křivku.
-    </p>
-    <p>
-      Odcházelo se? Ano. Záporné saldo stěhování mělo město ve dvaadvaceti
-      z dvaceti čtyř let — dohromady ale jen 2 585 lidí, asi sto ročně.
-      Takže ne: Třinec neselhal. Zestárnul přesně tak, jak zestárla celá
-      země. S tím žádná radnice zpětně nic neudělá. Dopředu ano.
-    </p>
-
 
     <div class="art-note">
       <p class="art-note-label">Poctivě k číslům</p>
       <p>
-        Pevné číslo je jen to za rok 2025. Údaj za rok 2001 je kvalifikovaný
-        odhad ze sčítání lidu — ČSÚ tehdy věkové skupiny za jednotlivá města
-        nezveřejňoval. „15–35" je ve skutečnosti 15–34 let.
-      </p>
-      <p>
-        A sedm set je <em>čistý</em> odchod: odešlo jich víc, část nahradili
-        přistěhovalí. Nízká porodnost je navíc zčásti důsledkem toho, že
-        mladé rodiny odcházely už dřív — ta dvě čísla nejdou oddělit.
+        Údaj za rok 2001 je odhad ze sčítání lidu — ČSÚ tehdy věkové skupiny
+        za města nezveřejňoval; „15–35" je přesně 15–34 let. Sedm set je
+        <em>čistý</em> odchod: odešlo jich víc, část nahradili přistěhovalí.
       </p>
     </div>
 
@@ -459,9 +431,9 @@ const obsah = [
     </figure>
   </section>
 
-  <!-- ================= 04 · ALKOHOL ================= -->
+  <!-- ================= 03 · ALKOHOL ================= -->
   <section class="art art-section" id="alkohol">
-    <p class="art-kicker"><span>04</span>Druhá změna</p>
+    <p class="art-kicker"><span>03</span>Druhá změna</p>
     <h2>Od covidu se navíc přestalo pít.</h2>
     <p>Druhá věc, která změnila večerní ulice: pije se míň. V celé zemi.</p>
     <p>
@@ -510,9 +482,9 @@ const obsah = [
 
   </section>
 
-  <!-- ================= 05 · PŘESTAVBA ================= -->
+  <!-- ================= 04 · PŘESTAVBA ================= -->
   <section class="art art-section" id="prestavba">
-    <p class="art-kicker"><span>05</span>Co se s městem stalo</p>
+    <p class="art-kicker"><span>04</span>Co se s městem stalo</p>
     <h2>Třinec se nevylidnil. Přestavěl se.</h2>
     <p>
       Zatím to zní jako příběh o mizení. Není. Obyvatel ubylo od roku 2001
@@ -537,9 +509,9 @@ const obsah = [
 
   </section>
 
-  <!-- ================= 06 · BYDLENÍ ================= -->
+  <!-- ================= 05 · BYDLENÍ ================= -->
   <section class="art art-section" id="bydleni">
-    <p class="art-kicker"><span>06</span>Kde a za kolik se tu bydlí</p>
+    <p class="art-kicker"><span>05</span>Kde a za kolik se tu bydlí</p>
     <h2>Bydlení: méně mýtů, víc čísel.</h2>
     <p>
       Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí,
@@ -588,9 +560,9 @@ const obsah = [
     </div>
   </section>
 
-  <!-- ================= 07 · JINAK ŽIVO ================= -->
+  <!-- ================= 06 · JINAK ŽIVO ================= -->
   <section class="art art-section" id="zivo">
-    <p class="art-kicker"><span>07</span>A teď ta dobrá zpráva</p>
+    <p class="art-kicker"><span>06</span>A teď ta dobrá zpráva</p>
     <h2>Takže mrtvo? Ne. Jen <span class="hl">jinak živo</span>.</h2>
     <p>
       Tady se povídání u piva a realita rozcházejí podruhé. Město totiž
@@ -687,9 +659,9 @@ const obsah = [
     </figure>
   </section>
 
-  <!-- ================= 07 · CO JSME ZKUSILI MY ================= -->
+  <!-- ================= 06 · CO JSME ZKUSILI MY ================= -->
   <section class="art art-section" id="snaha">
-    <p class="art-kicker"><span>08</span>Začínáme prací, ne sliby</p>
+    <p class="art-kicker"><span>07</span>Začínáme prací, ne sliby</p>
     <h2>Co jsme s tím udělali my?</h2>
     <p>
       Občas zazní, že se za poslední čtyři roky v kultuře nic neudělalo.
@@ -740,9 +712,9 @@ const obsah = [
     </div>
   </section>
 
-  <!-- ================= 08 · CO S TÍM ================= -->
+  <!-- ================= 07 · CO S TÍM ================= -->
   <section class="art art-section" id="reseni">
-    <p class="art-kicker"><span>09</span>Co s tím chceme dělat</p>
+    <p class="art-kicker"><span>08</span>Co s tím chceme dělat</p>
     <h2>Nevrátíme rok 2005. Postavíme rok 2026.</h2>
     <p>
       Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu —

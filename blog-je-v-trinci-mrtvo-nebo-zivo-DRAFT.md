@@ -1,6 +1,6 @@
 # Je v Třinci mrtvo, nebo živo?
 
-> **DRAFT v0.6 · 2026-09-27 · doplněno o čísla z FB příspěvku (bydlení, vyhláška, výdaje na akce)**
+> **DRAFT v0.7 · 2026-09-28 · kapitoly 02 a 03 sloučeny a zkráceny**
 > Zdroj pravdy: `WEB/src/pages/blog-je-v-trinci-mrtvo-nebo-zivo.astro`. Tento soubor byl 14. 8. znovu
 > vygenerován z buildu — předchozí kopie se (patrně při přejmenování složky projektu) vrátila na v0.1.
 
@@ -26,15 +26,11 @@ Třinečanů ve věku 15–35 let bylo v roce 2001 zhruba 11 800. Na konci roku 
 
 ## 02 · Utekli? Chyba lávky. Nenarodili se.
 
-„Mladí z Třince utíkají" — to slyšíme pořád. Jenže data říkají něco jiného. Dá se to spočítat úplně jednoduše.
-
-Rozdíl je necelých devět set lidí za dvacet ročníků — a to včetně těch, kdo se nedožili. Žádný exodus.
-
-Chybějící čtyři tisícovky mladých se nikam neodstěhovaly. Ony se nenarodily.
+„Mladí z Třince utíkají" — to slyšíme pořád. Data říkají něco jiného. Rozdíl mezi narozenými a dnešními obyvateli těch ročníků je necelých devět set lidí za dvacet let — a to včetně těch, kdo se nedožili. Žádný exodus.
 
 V letech 1991–2010 se v Třinci narodilo 7 969 dětí. Dnes tu žije 7 079 lidí právě těch ročníků.
 
-*(Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní místo v Třinci.)*
+Chybějící tisícovky mladých se neodstěhovaly. Ony se nenarodily. V roce 1980 přišlo na svět 693 dětí, v roce 2004 jen 305 — o víc než polovinu méně. A Třinec v tom není výjimka: porodnost tu mezi generacemi klesla o 35 procent, v celé republice o 34.
 
 **Rozklad — kam se poděli chybějící mladí**
 
@@ -43,23 +39,15 @@ V letech 1991–2010 se v Třinci narodilo 7 969 dětí. Dnes tu žije 7 079 lid
 | ≈ 4 000 | se jich už nenarodilo — slabé ročníky devadesátých let. To je 85 % celého úbytku. |
 | ≈ 700 | čistý odchod z města za 24 let — asi třicet mladých ročně, tedy 15 % úbytku |
 
-## 03 · V roce 1980 se tu narodilo dvakrát tolik dětí co v roce 2004.
-
-Vrchol přišel v roce 1980 — 693 narozených dětí. Dno v roce 2004 — 305 dětí. Propad o šestapadesát procent. Silné ročníky se prostě přestaly rodit.
-
-A teď to podstatné: Třinec v tom není výjimka. Porodnost tu mezi generacemi klesla o 35 procent, v celé republice o 34. Rozdíl jednoho procentního bodu — Třinec kopíruje stejnou křivku.
-
-Odcházelo se? Ano. Záporné saldo stěhování mělo město ve dvaadvaceti z dvaceti čtyř let — dohromady ale jen 2 585 lidí, asi sto ročně. Takže ne: Třinec neselhal. Zestárnul přesně tak, jak zestárla celá země. S tím žádná radnice zpětně nic neudělá. Dopředu ano.
+Třinec tedy neselhal. Zestárnul přesně tak, jak zestárla celá země. Zpětně s tím žádná radnice nic neudělá. Dopředu ano.
 
 Poctivě k číslům
 
-Pevné číslo je jen to za rok 2025. Údaj za rok 2001 je kvalifikovaný odhad ze sčítání lidu — ČSÚ tehdy věkové skupiny za jednotlivá města nezveřejňoval. „15–35" je ve skutečnosti 15–34 let.
-
-A sedm set je čistý odchod: odešlo jich víc, část nahradili přistěhovalí. Nízká porodnost je navíc zčásti důsledkem toho, že mladé rodiny odcházely už dřív — ta dvě čísla nejdou oddělit.
+Údaj za rok 2001 je odhad ze sčítání lidu — ČSÚ tehdy věkové skupiny za města nezveřejňoval; „15–35" je přesně 15–34 let. Sedm set je čistý odchod: odešlo jich víc, část nahradili přistěhovalí.
 
 *(Celý příběh v jednom obrázku. Ke stažení a sdílení.)*
 
-## 04 · Od covidu se navíc přestalo pít.
+## 03 · Od covidu se navíc přestalo pít.
 
 Druhá věc, která změnila večerní ulice: pije se míň. V celé zemi.
 
@@ -84,7 +72,7 @@ A velké akce smějí běžet déle. Noční klid začíná normálně ve 22:00,
 | Dolní Líštná | Den obce s hasiči |
 | 31. 12. | Silvestr — noční klid neplatí vůbec |
 
-## 05 · Třinec se nevylidnil. Přestavěl se.
+## 04 · Třinec se nevylidnil. Přestavěl se.
 
 Zatím to zní jako příběh o mizení. Není. Obyvatel ubylo od roku 2001 o čtrnáct procent — z 38 953 na 33 523. To samo o sobě nezní dramaticky. Dramatická je změna uvnitř.
 
@@ -94,7 +82,7 @@ Nejsilnější ročníky jsou dnes lidé mezi pětačtyřiceti a čtyřiašedes�
 
 Takové město nepotřebuje jen klub pro mladé. Potřebuje obojí — a hlavně potřebuje, aby spolu ty generace mluvily.
 
-## 06 · Bydlení: méně mýtů, víc čísel.
+## 05 · Bydlení: méně mýtů, víc čísel.
 
 Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív nebo později přijde řeč na bydlení. A s ním tři tvrzení, která se opakují tak často, že jim lidé věří. Čísla je ale nepotvrzují.
 
@@ -114,7 +102,7 @@ Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív
 
 **−14 % · Nájem je levnější než v Ostravě** — průměrná nabídka v srpnu 2026: Třinec 220 Kč/m², Ostrava 257 Kč/m² (Sreality).
 
-## 07 · Takže mrtvo? Ne. Jen jinak živo.
+## 06 · Takže mrtvo? Ne. Jen jinak živo.
 
 Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežije míň. Žije jinak — přes den, venku, s rodinami, napříč generacemi.
 
@@ -144,7 +132,7 @@ Nezapočítali jsme akce bez události na Facebooku — jako dožínky v Gutech.
 | 33 | divadelních představení — nejsilnější kategorie. Hudba 25, besedy a dílny 24, komunitní akce 20. |
 | 0 | divadelních titulů v červenci a srpnu — sezóna končí v červnu, kultura se stěhuje ven |
 
-## 08 · Co jsme s tím udělali my?
+## 07 · Co jsme s tím udělali my?
 
 Občas zazní, že se za poslední čtyři roky v kultuře nic neudělalo. S tím nesouhlasíme. Tři věci už běží — a píšeme o nich ne proto, abychom se chlubili, ale protože slibům se líp věří, když za nimi je vidět práce.
 
@@ -160,7 +148,7 @@ Podpořili jsme výrazné navýšení rozpočtu na městské akce — Třinecké
 
 Aby akce měly kde být. Náměstí T. G. Masaryka se nově zpřístupnilo pro akce — centrum města tak má místo, kde se dá potkat pod širým nebem.
 
-## 09 · Nevrátíme rok 2005. Postavíme rok 2026.
+## 08 · Nevrátíme rok 2005. Postavíme rok 2026.
 
 Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu — vycházejí přímo z čísel výše.
 
@@ -206,7 +194,9 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ---
 
-## POZNÁMKY (v0.6)
+## POZNÁMKY (v0.7)
+
+- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08.
 
 - v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
