@@ -12,7 +12,7 @@
 
 ---
 
-## 01 · Widle se nevrátí.
+## 01 · Staré časy už jsou pryč.
 
 Časy, kdy nám bylo dvacet a chodili jsme večer po Třinci od Relaxu přes Čarodějky do Widlí, se už nevrátí. Alespoň ne v dohledné době.
 
@@ -49,7 +49,7 @@ Druhá věc, která změnila večerní ulice: pije se míň. V celé zemi.
 
 Spotřeba alkoholu v Česku vrcholila v roce 2019 na 173 litrech na osobu ročně. V roce 2024 klesla na 156 litrů — nejméně za celé sledované období. Pivo je na historickém minimu. A nejvíc ubrali právě mladí: pro generaci dnešních dvacátníků už alkohol není hlavní program večera. Sociologové mluví o generační změně, ne o výkyvu.
 
-Není to třinecká specialita. Podívejte se na Stodolní v Ostravě — ulici, kam jezdil pařit celý kraj. Dnes tam zejí prázdné výlohy a zavřené bary. Když nestačí poptávka ani v třísettisícovém městě, v třiatřicetitisícovém to nezachrání žádné úřední rozhodnutí.
+Není to třinecká specialita. Podívejte se na Stodolní v Ostravě — ulici, kam jezdil pařit celý kraj. Dnes tam zejí prázdné výlohy a zavřené bary. Když nestačí poptávka ani v desetkrát větším městě, v Třinci to nezachrání žádné úřední rozhodnutí.
 
 Často taky slyšíme, že město vyhláškou zavřelo hospody v deset večer. Tak to není. Vyhláška z roku 2021 omezuje provozní dobu hospod a klubů **do půlnoci, ne do deseti** — a navíc jen na sídlišti Terasa. Ve zbytku města žádné takové omezení neplatí.
 
