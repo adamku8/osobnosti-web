@@ -112,14 +112,6 @@ Nezapočítali jsme akce bez události na Facebooku — jako dožínky v Gutech.
 
 *(Ke stažení a sdílení.)*
 
-**Akce — leden až 10. srpna 2026**
-
-| | |
-|---|---|
-| ~21 | kulturně-společenských akcí měsíčně — 150 za sedm a půl měsíce |
-| 33 | divadelních představení — nejsilnější kategorie. Hudba 25, besedy a dílny 24, komunitní akce 20. |
-| 0 | divadelních titulů v červenci a srpnu — sezóna končí v červnu, kultura se stěhuje ven |
-
 ## 06 · Co jsme s tím udělali my?
 
 Občas zazní, že se za poslední čtyři roky v kultuře nic neudělalo. S tím nesouhlasíme. Tři věci už běží — a píšeme o nich ne proto, abychom se chlubili, ale protože slibům se líp věří, když za nimi je vidět práce.
@@ -162,7 +154,7 @@ Trisia není doplněk kulturního života — je to jeho páteř. Otázka tedy n
 
 **Centrum pro aktivní seniory.**
 
-Seniorů je dnes v Třinci skoro čtvrtina města — a jsou aktivní: Mozková posilovna, jazykové kurzy v knihovně, Senioři za volantem. Tyhle programy běží roztroušeně po institucích. Chceme pro ně jedno důstojné zázemí. [DOPLNIT místo a formu]
+Seniorů je dnes v Třinci skoro čtvrtina města — a jsou aktivní: Mozková posilovna, jazykové kurzy v knihovně, Senioři za volantem. Tyhle programy běží roztroušeně po institucích. Proto na ulici Smetanově otevřeme Nové centrum aktivních seniorů (odkaz /program.html#projekt-centrum-senioru) — místo, kde se senioři potkají, vzdělají i zasportují.
 
 **Nová letní scéna.**
 
@@ -184,7 +176,7 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ## POZNÁMKY (v0.7)
 
-- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07. Stručně z ní do kap. 02 přešel odstavec o složení obyvatel. Kap. 07: nadpis „Co s tím chceme udělat?“, bez průvodu v Gutech, odkaz na místo k setkávání (casti.html), „prostor, ne scénář“, bod „Nová letní scéna“ s Javorovým. Z výčtu akcí vypadla INVENT ARENA.
+- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07. Stručně z ní do kap. 02 přešel odstavec o složení obyvatel. Kap. 07: nadpis „Co s tím chceme udělat?“, bez průvodu v Gutech, odkaz na místo k setkávání (casti.html), „prostor, ne scénář“, bod „Nová letní scéna“ s Javorovým. Z výčtu akcí vypadla INVENT ARENA. V kap. 05 zrušena tabulka „Akce — leden až 10. srpna“; bod Centrum seniorů odkazuje na projekt z programu.
 
 - v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
