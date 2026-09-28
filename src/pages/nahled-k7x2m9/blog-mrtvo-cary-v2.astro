@@ -1,6 +1,8 @@
 ---
-import Base from '../layouts/Base.astro';
-import { u } from '../lib/url.js';
+// NÁHLED: varianta linek (čar) pro blog Mrtvo/živo — ke srovnání s ostrou stránkou.
+// Po schválení se blok „ČÁRY v2" přenese do blog-je-v-trinci-mrtvo-nebo-zivo.astro a tento soubor zmizí.
+import Base from '../../layouts/Base.astro';
+import { u } from '../../lib/url.js';
 
 // DRAFT — před publikací: 1) doplnit [DOPLNIT] bloky, 2) přepnout draft na false.
 const draft = true;
@@ -27,9 +29,9 @@ const obsah = [
 <Base
   title="Je v Třinci mrtvo, nebo živo? | Osobnosti pro Třinec"
   description="Za 24 let ubylo v Třinci 4 700 mladých. Neutekli — z velké části se nenarodili. Co to znamená pro večerní ulice a co s tím chceme dělat."
-  path="blog-je-v-trinci-mrtvo-nebo-zivo.html"
+  path="nahled-k7x2m9/blog-mrtvo-cary-v2.html"
   active=""
-  noindex={draft}
+  noindex={true}
 >
   <style is:inline>
     /* ==========================================================
@@ -304,6 +306,18 @@ const obsah = [
       .art > p,
       .art > .art-lead { text-align: left; hyphens: manual; }
     }
+    /* --- ČÁRY v2 — tři úrovně ----------------------------------
+       2px antracit  = začátek kapitoly (a konec článku)
+       1px antracit  = začátek datového bloku (tabulka, citát, velké číslo)
+       1px šedá      = řádky uvnitř bloku; blok končí vzduchem, ne čárou */
+    .art-section { border-top: 2px solid var(--anthracite); padding-top: var(--s-24); }
+    .art-kicker { border-bottom: none; padding-bottom: 0; margin-bottom: var(--s-24) !important; }
+    .art-kicker span { font-size: 14px; }
+    .art-pull { border-top: 1px solid var(--anthracite); border-bottom: none; padding-bottom: 0; }
+    .art-band { border-top: 1px solid var(--anthracite); border-bottom: none; padding-bottom: 0; }
+    .art-facts { border-bottom: none; }
+    .dtab caption { border-bottom: 1px solid var(--anthracite); }
+    .dtab tr:last-child td { border-bottom: 1px solid var(--border); }
   </style>
 
   <!-- ================= COVER ================= -->
