@@ -187,17 +187,17 @@ const obsah = [
 
     /* --- Velké číslo ------------------------------------------ */
     .art-band {
-      display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--s-40);
-      align-items: center; padding: var(--s-40) 0;
-      border-top: 2px solid var(--anthracite); border-bottom: 2px solid var(--anthracite);
+      display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--s-24);
+      align-items: center; margin: var(--s-64) 0; padding: var(--s-24) 0;
+      border-top: 2px solid var(--anthracite); border-bottom: 1px solid var(--border);
     }
     .art-bignum {
       font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(56px, 7vw, 92px); line-height: 0.84;
+      font-size: clamp(40px, 4.5vw, 56px); line-height: 0.9;
       color: var(--brand-red); letter-spacing: -0.03em; white-space: nowrap;
     }
-    .art-band h2 { font-size: 22px !important; margin-bottom: var(--s-8); }
-    .art-band p { font-size: 15px !important; color: var(--text-muted) !important; margin: 0 !important; }
+    .art-band h2 { font-size: 18px !important; line-height: 1.15 !important; margin: 0 0 var(--s-4) !important; }
+    .art-band p { font-size: 14px !important; line-height: 1.45 !important; color: var(--text-muted) !important; margin: 0 !important; }
 
     /* --- Sloupcový graf --------------------------------------- */
     .art-bars { display: flex; align-items: flex-end; gap: var(--s-40); margin: var(--s-40) 0; }
