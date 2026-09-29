@@ -24,7 +24,7 @@ const rozdelNove = (nazev) => {
 // Odkazy z projektů na podstránky (např. Javorový) vedou na stránky, které zatím
 // nejsou veřejné (src/pages/nahled-k7x2m9/). Dokud nejsou venku, veřejný program
 // je nevykresluje. Až bude podstránka veřejná, přepni na true.
-const ODKAZY_PROJEKTU = false;
+const ODKAZY_PROJEKTU = true;   // od 29. 9. je Javorový veřejný
 
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 const PDF = 'assets/program-osobnosti-pro-trinec-2026.pdf';
@@ -47,6 +47,14 @@ const temata = [
     alt: 'Kresba lesoparku s psí loučkou, posilovnou pro seniory, hřištěm s WC a cestou do lesa',
     text: 'Klenot Třince, do kterého jsme investovali a chceme ho rozvíjet dál: oplocená psí loučka, posilovna pro seniory, WC u hřiště a cesta do lesa nad Kanadou.',
     cta: 'Program pro lesopark',
+  },
+  {
+    nazev: 'Javorový',
+    href: 'javorovy.html',
+    obrazek: 'assets/img/projekty/javorovy-kresba.png',
+    alt: 'Kresba Javorového s chatou, rozhlednou, lanovkou a turisty na cestě nahoru',
+    text: 'Rok jsme se ptali, poslouchali a počítali. Chata zůstane městu a vrátí se k původní podobě, na místě starých chat vznikne zázemí pro spolky a Mamlas plac ožije po celý rok.',
+    cta: 'Vize pro Javorový',
   },
 ];
 ---

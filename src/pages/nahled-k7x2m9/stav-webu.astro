@@ -29,8 +29,10 @@ const priprava = kandidati.filter(k => !k.detail && k.detailPriprava).length;
 const VEREJNE = [
   { cesta: '/',                  nazev: 'Úvod',                 menu: 'Úvod',         od: '19. 8.', zmena: '7. 9.',
     stav: 'ok',   pozn: 'Billboard, datum voleb, banner s číslem, v textu odkazy na program a kandidátku. Sekce program a kandidáti tu zatím nejsou.' },
+  { cesta: '/javorovy',          nazev: 'Javorový — vize',      menu: 'z programu',   od: '29. 9.', zmena: '29. 9.',
+    stav: 'ok',   pozn: 'Dřív skrytý náhled (od 19. 8.). Dlaždice v Témata programu, odkaz z projektu 05, leták A4 ke stažení (/assets/javorovy-osobnosti-pro-trinec-2026.pdf).' },
   { cesta: '/program',           nazev: 'Program — kompletní',  menu: 'Program',      od: '26. 8.', zmena: '7. 9.',
-    stav: 'ok',   pozn: `Od 7. 9. plná verze: ${oblasti.length} oblasti se závazky, ${projekty.length} projektů a PDF ke stažení (/assets/program-osobnosti-pro-trinec-2026.pdf, verze z 2. 9.). Odkaz z Javorového na podstránku se zatím nevykresluje.` },
+    stav: 'ok',   pozn: `Od 7. 9. plná verze: ${oblasti.length} oblasti se závazky, ${projekty.length} projektů a PDF ke stažení (/assets/program-osobnosti-pro-trinec-2026.pdf, verze z 2. 9.). Od 29. 9. v Témata tři dlaždice (příměstské části, lesopark, Javorový) a projekt 05 odkazuje na /javorovy.` },
   { cesta: '/kandidati',         nazev: 'Kandidáti — plná listina', menu: 'Kandidáti', od: '19. 8.', zmena: '26. 8.',
     stav: 'ok',   pozn: `Všech ${kandidati.length} jmen s fotkami. Od 26. 8. jsou venku i medailonky.` },
   { cesta: '/podporte-nas',      nazev: 'Podpořte nás',         menu: 'Podpořte nás', od: '19. 8.', zmena: '19. 8.',
@@ -46,13 +48,13 @@ const NEPROLINKOVANE = [
 
 const SKRYTE = [
   { cesta: '/nahled-k7x2m9/',                    nazev: 'Rozcestník náhledu',            od: '19. 8.', zmena: '7. 9.',
-    stav: 'ok',    pozn: 'Jen nepublikované stránky: Javorový a draft článku o sdílených kancelářích.' },
+    stav: 'ok',    pozn: 'Jen nepublikované stránky: draft článku o sdílených kancelářích. Javorový je od 29. 9. veřejný.' },
   { cesta: '/nahled-k7x2m9/kandidati',           nazev: 'Kandidáti — plná listina',      od: '19. 8.', zmena: '26. 8.',
     stav: 'shoda', pozn: 'Dnes shodné s veřejnou verzí — od zveřejnění plné listiny se neliší.' },
   { cesta: '/nahled-k7x2m9/kandidat-<slug>',     nazev: `Medailonky (${verejnychMedailonku}×)`, od: '19. 8.', zmena: '1. 9.',
     stav: 'shoda', pozn: 'Také shodné s veřejnými — režim medailonků je „vše".' },
-  { cesta: '/nahled-k7x2m9/javorovy',            nazev: 'Javorový 2.0 — celá vize',      od: '19. 8.', zmena: '17. 9.',
-    stav: 'ceka',  pozn: '17. 9. sladěno s textem do novin (8-E1): čísla podle přepisu průzkumu, ceny variant podle studie, parkoviště, pátý krok. Ven zatím nejde, z veřejného webu na ni nevede odkaz.' },
+  { cesta: '/nahled-k7x2m9/javorovy',            nazev: 'Javorový — stará skrytá adresa',      od: '19. 8.', zmena: '29. 9.',
+    stav: 'ok',    pozn: 'Od 29. 9. jen přesměrování na veřejnou /javorovy (dlaždice v Témata programu, odkaz z projektu 05, QR z letáku A4).' },
   { cesta: '/nahled-k7x2m9/medailonky-prehled',  nazev: 'Přehled medailonků a fotek',    od: '20. 8.', zmena: '20. 8.',
     stav: 'ok',    pozn: 'Kontrolní tabulka všech 27 — dotazník, foto, medailonek.' },
   { cesta: '/nahled-k7x2m9/fotky',               nazev: 'Fotobanka kandidátů',           od: '24. 8.', zmena: '24. 8.',
@@ -69,7 +71,6 @@ const CLANKY = [
 ];
 
 const CEKA = [
-  'Javorový 2.0 — hotová stránka v náhledu, z webu na ni nevede odkaz (ani z projektu v programu — přepínač ODKAZY_PROJEKTU v program.astro).',
   `Medailonky ${bezMedailonku.map(k => `${k.cislo}. ${k.jmeno}`).join(', ')} — karty v listině nejsou proklikatelné.`,
   'Článek „Je v Třinci mrtvo, nebo živo?" — nasazený, ale jako draft bez odkazu.',
   'Článek „Deset kilometrů" — existuje jen jako text, webová verze zatím nevznikla.',

@@ -5,7 +5,7 @@
   display: grid;
   /* dlaždice zhruba poloviční proti oblastem/projektům — dvě vedle sebe
      zaberou cca polovinu kontejneru */
-  grid-template-columns: repeat(2, minmax(0, 300px));
+  grid-template-columns: repeat(3, minmax(0, 300px));   /* příměstské části, lesopark, Javorový */
   width: fit-content;
   max-width: 100%;
   gap: 1px;
@@ -34,6 +34,9 @@
   margin-top: auto; padding-top: var(--s-8);
   font-family: var(--font-display); font-weight: 700; font-size: 13px;
   color: var(--signal-blue);
+}
+@media (max-width: 960px) {
+  .temata-list { grid-template-columns: repeat(2, minmax(0, 300px)); }
 }
 @media (max-width: 720px) {
   .temata-list { grid-template-columns: minmax(0, 360px); }
