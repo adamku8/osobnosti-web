@@ -94,21 +94,21 @@ Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív
 
 Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežije míň. Žije jinak — přes den, venku, s rodinami, napříč generacemi.
 
-A není to dojem. Spočítali jsme to: od ledna do 10. srpna 2026 se v Třinci konalo 150 kulturně-společenských akcí, tedy jednadvacet měsíčně — nová akce každý den a půl. A to bez sportu, hokeje, pravidelných kurzů i běžného programu kina Kosmos.
+A není to dojem. Spočítali jsme to: od ledna do září 2026 se v Třinci konalo 187 kulturně-společenských akcí, tedy jednadvacet měsíčně — nová akce každý den a půl. A to bez sportu, hokeje, pravidelných kurzů i běžného programu kina Kosmos.
 
 *(Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní akci v Třinci.)*
 
-Největší pořadatel je Trisia se 61 akcemi — čtyři z deseti. Knihovna má pětatřicet. Ale pozor na to třetí místo: čtyřiačtyřicet akcí uspořádali lidé a podniky mimo instituce. Samotný klub U Matesa jich má patnáct — víc než leckterá městská organizace.
+Největší pořadatel je Trisia se 76 akcemi — čtyři z deseti. Knihovna má jednačtyřicet. Ale pozor na to třetí místo: čtyřiapadesát akcí uspořádali lidé a podniky mimo instituce. Samotný klub U Matesa jich má osmnáct — víc než leckterá městská organizace.
 
 A svoje akce si rozjíždějí i mladí sami. Na Třinecku je dělají třeba TANCUJ.CZ a TRAYTO — party a večery, které nevznikly v žádné kanceláři. Přesně tohle máme na mysli, když říkáme, že mladí si poradí.
 
 Co se letos v Třinci dělo
 
-Festyn Majowy na Osůvce je první ročník — uspořádala ho tři třinecká kola PZKO, bez rozpočtu radnice. Swapů proběhlo šest; před pár lety takový formát v Třinci neexistoval. To není město, kde se nic neděje. Je to město, kde se děje něco jiného než dřív.
+Festyn Majowy na Osůvce je první ročník — uspořádala ho tři třinecká kola PZKO, bez rozpočtu radnice. Swapů proběhlo sedm; před pár lety takový formát v Třinci neexistoval. To není město, kde se nic neděje. Je to město, kde se děje něco jiného než dřív.
 
-150 je podlaha, ne strop
+187 je podlaha, ne strop
 
-Nezapočítali jsme akce bez události na Facebooku — jako dožínky v Gutech. Nedohledali jsme ani zhruba patnáct letních akcí z participativního rozpočtu: jejich seznam není nikde veřejně k mání. Město žije tak decentralizovaně, že to jeho vlastní kalendáře nestíhají zachytit.
+Nezapočítali jsme akce, o kterých se nedá dohledat žádná zmínka v kalendářích ani na Facebooku. Nedohledali jsme ani zhruba patnáct letních akcí z participativního rozpočtu: jejich seznam není nikde veřejně k mání. Město žije tak decentralizovaně, že to jeho vlastní kalendáře nestíhají zachytit.
 
 *(Ke stažení a sdílení.)*
 
@@ -176,7 +176,7 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ## POZNÁMKY (v0.7)
 
-- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07. Stručně z ní do kap. 02 přešel odstavec o složení obyvatel. Kap. 07: nadpis „Co s tím chceme udělat?“, bez průvodu v Gutech, odkaz na místo k setkávání (casti.html), „prostor, ne scénář“, bod „Nová letní scéna“ s Javorovým. Z výčtu akcí vypadla INVENT ARENA. V kap. 05 zrušena tabulka „Akce — leden až 10. srpna“; bod Centrum seniorů odkazuje na projekt z programu. Bod „Všude je blíž“ nahrazen bodem „Přilákat turisty“.
+- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07. Stručně z ní do kap. 02 přešel odstavec o složení obyvatel. Kap. 07: nadpis „Co s tím chceme udělat?“, bez průvodu v Gutech, odkaz na místo k setkávání (casti.html), „prostor, ne scénář“, bod „Nová letní scéna“ s Javorovým. Z výčtu akcí vypadla INVENT ARENA. V kap. 05 zrušena tabulka „Akce — leden až 10. srpna“; bod Centrum seniorů odkazuje na projekt z programu. Akce aktualizovány na leden–září (187, analyzy/trinec-zije-akce-srpen-zari-2026.md), nová infografika v2.0. Bod „Všude je blíž“ nahrazen bodem „Přilákat turisty“.
 
 - v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
