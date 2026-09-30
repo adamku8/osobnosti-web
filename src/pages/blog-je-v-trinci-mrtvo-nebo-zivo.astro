@@ -2,8 +2,8 @@
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url.js';
 
-// DRAFT — před publikací: 1) doplnit [DOPLNIT] bloky, 2) přepnout draft na false.
-const draft = true;
+// Publikováno 30. 9. 2026 (draft = true znovu ukáže žlutý box s poznámkami a zapne noindex).
+const draft = false;
 
 // Instagram reels k odstavci o TANCUJ.CZ a TRAYTO (sekce 06).
 // Vyplň URL ve tvaru https://www.instagram.com/reel/XXXXXXXX/ — dokud je pole
@@ -14,13 +14,10 @@ const reels = [
 ];
 
 const obsah = [
-  { id: 'widle',     num: '01', title: 'Staré časy už jsou pryč' },
-  { id: 'proc',      num: '02', title: 'Utekli? Chyba lávky' },
-  { id: 'alkohol',   num: '03', title: 'Přestalo se pít' },
-  { id: 'bydleni',   num: '04', title: 'Bydlení bez mýtů' },
-  { id: 'zivo',      num: '05', title: 'Jinak živo' },
-  { id: 'snaha',     num: '06', title: 'Co jsme udělali my' },
-  { id: 'reseni',    num: '07', title: 'Co s tím chceme udělat' },
+  { id: 'widle',  num: '01', title: 'Staré časy jsou pryč' },
+  { id: 'zivo',   num: '02', title: 'V Třinci je živo' },
+  { id: 'snaha',  num: '03', title: 'Jak jsme k tomu přispěli' },
+  { id: 'reseni', num: '04', title: 'Jak podpoříme Akční Třinec v budoucnu' },
 ];
 ---
 <Base
@@ -535,9 +532,9 @@ const obsah = [
       Kosmos.
     </p>
 
-    <figure class="full art-fig">
+    <figure class="art-fig">
       <img src={u('assets/img/blog/ai-komunitni-akce.jpg')} alt="Komunitní letní akce pod Beskydami, lidé více generací pohromadě" style="max-height: 480px; object-fit: cover;">
-      <figcaption class="art-cap" style="max-width: 1152px; margin: var(--s-8) auto 0; padding: 0 var(--s-24);">
+      <figcaption class="art-cap">
         Ilustrační obrázek vygenerovaný AI. Nejde o konkrétní akci v Třinci.
       </figcaption>
     </figure>
@@ -711,7 +708,6 @@ const obsah = [
             Otázka tedy nezní, jestli ji
             podporovat, ale kam ji posunout. Chceme dramaturgii, která vedle
             stálého publika osloví i lidi kolem třicítky.
-            [DOPLNIT konkrétní závazek]
           </p>
         </div>
       </div>
