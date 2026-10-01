@@ -70,27 +70,7 @@ A velké akce smějí běžet déle. Noční klid začíná normálně ve 22:00,
 | Dolní Líštná | Den obce s hasiči |
 | 31. 12. | Silvestr — noční klid neplatí vůbec |
 
-## 04 · Bydlení: méně mýtů, víc čísel.
-
-Když se mluví o tom, proč mladí odcházejí nebo proč se nevracejí, dřív nebo později přijde řeč na bydlení. A s ním tři tvrzení, která se opakují tak často, že jim lidé věří. Čísla je ale nepotvrzují.
-
-**„Nájmy jsou tu stejné jako v Ostravě."** Nejsou. Průměrný nabízený nájem byl v srpnu 2026 v Třinci **220 Kč za metr čtvereční**, v Ostravě 257 Kč. Třinec je o **14 procent levnější**. U bytu o 60 metrech je to přes dva tisíce korun měsíčně. Za celé jaro a léto je rozdíl menší, osm procent — ale Třinec je levnější v každé velikosti bytu.
-
-**„Většina Třinečanů bydlí v rodinných domech."** Také ne. Podle sčítání lidu z roku 2021 žije **55 procent** obyvatel v bytových domech a 45 procent v rodinných. Třinec je pořád hlavně město bytů — a bytová politika se tak týká většiny lidí.
-
-**„Byty tu vlastní CPI."** Jen zčásti. V bytových domech patří CPI zhruba 3 600 bytů a od jara 2025 jich asi 270 rozprodává. Město vlastní 870 bytů. Největší skupina jsou ale bytová družstva a společenství vlastníků: **5 300 bytů**, víc než polovina. Kdo chce mluvit o bydlení v Třinci, musí mluvit hlavně s nimi.
-
-**Kdo vlastní obydlené byty v bytových domech — sčítání 2021**
-
-| | |
-|---|---|
-| 5 300 | bytová družstva a společenství vlastníků (SVJ) — víc než polovina |
-| ≈ 3 600 | CPI — od jara 2025 z nich asi 270 rozprodává |
-| 870 | město Třinec |
-
-**−14 % · Nájem je levnější než v Ostravě** — průměrná nabídka v srpnu 2026: Třinec 220 Kč/m², Ostrava 257 Kč/m² (Sreality).
-
-## 05 · Takže mrtvo? Ne. Jen jinak živo.
+## 04 · Takže mrtvo? Ne. Jen jinak živo.
 
 Tady se povídání u piva a realita rozcházejí podruhé. Město totiž nežije míň. Žije jinak — přes den, venku, s rodinami, napříč generacemi.
 
@@ -108,7 +88,7 @@ Festyn Majowy na Osůvce je první ročník — uspořádala ho tři třinecká 
 
 *(Ke stažení a sdílení.)*
 
-## 06 · Co jsme s tím udělali my?
+## 05 · Co jsme s tím udělali my?
 
 Občas zazní, že se za poslední čtyři roky v kultuře nic neudělalo. S tím nesouhlasíme. Tři věci už běží — a píšeme o nich ne proto, abychom se chlubili, ale protože slibům se líp věří, když za nimi je vidět práce.
 
@@ -124,7 +104,7 @@ Podpořili jsme výrazné navýšení rozpočtu na městské akce — Třinecké
 
 Aby akce měly kde být. Náměstí T. G. Masaryka se nově zpřístupnilo pro akce — centrum města tak má místo, kde se dá potkat pod širým nebem.
 
-## 07 · Co s tím chceme udělat?
+## 06 · Co s tím chceme udělat?
 
 Sedm věcí, na kterých chceme pracovat. Poslední tři nevznikly u stolu — vycházejí přímo z čísel výše.
 
@@ -172,7 +152,7 @@ Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dob
 
 ## POZNÁMKY (v0.7)
 
-- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07. Stručně z ní do kap. 02 přešel odstavec o složení obyvatel. Kap. 07: nadpis „Co s tím chceme udělat?“, bez průvodu v Gutech, odkaz na místo k setkávání (casti.html), „prostor, ne scénář“, bod „Nová letní scéna“ s Javorovým. Z výčtu akcí vypadla INVENT ARENA. V kap. 05 zrušena tabulka „Akce — leden až 10. srpna“; bod Centrum seniorů odkazuje na projekt z programu. Akce aktualizovány na leden–září (187, analyzy/trinec-zije-akce-srpen-zari-2026.md), nová infografika v2.0. Box „podlaha, ne strop“ zrušen. Bod „Všude je blíž“ nahrazen bodem „Přilákat turisty“.
+- v0.7 (28. 9.): kapitoly 02 (Utekli?) a 03 (Porodnost) sloučeny do jedné; vypadla AI ilustrace hřiště a věta o celkovém saldu stěhování (2 585 lidí). Kapitoly přečíslovány na 01–08. Box „Poctivě k číslům" v kap. 02 zrušen. Kapitola „Třinec se nevylidnil. Přestavěl se." (demografie, senioři) vypuštěna, kapitoly nyní 01–07. Stručně z ní do kap. 02 přešel odstavec o složení obyvatel. Kap. 07: nadpis „Co s tím chceme udělat?“, bez průvodu v Gutech, odkaz na místo k setkávání (casti.html), „prostor, ne scénář“, bod „Nová letní scéna“ s Javorovým. Z výčtu akcí vypadla INVENT ARENA. V kap. 05 zrušena tabulka „Akce — leden až 10. srpna“; bod Centrum seniorů odkazuje na projekt z programu. Akce aktualizovány na leden–září (187, analyzy/trinec-zije-akce-srpen-zari-2026.md), nová infografika v2.0. Box „podlaha, ne strop“ zrušen. Kapitola Bydlení vypuštěna (1. 10.). Bod „Všude je blíž“ nahrazen bodem „Přilákat turisty“.
 
 - v0.6 (27. 9.): kapitoly 04, 06 (nová, bydlení) a 08 doplněny o čísla z Adamova FB příspěvku; zdroje dohledány (Sreality, Sčítání 2021, OZV 6/2021, OZV o nočním klidu 2026). Výdaje na akce 1,6 → 6,9 mil. Kč = tytéž čtyři akce KVM (adventní podvečery, TKL, dva jarmarky) 2022 vs 2025, smlouvy v registru smluv.
 
