@@ -8,7 +8,7 @@
 
 **Perex:** Večerní Třinec už nevypadá jako před dvaceti lety. Čísla ale říkají něco jiného než povídání u piva. Mladí neutekli — hlavně se nenarodili. A město mezitím žije jinak, než jsme bývali zvyklí.
 
-*Adam Křenek · srpen 2026 · čtení na 8 minut*
+*Adam Křenek · září 2026 · čtení na 7 minut*
 
 ---
 
@@ -162,7 +162,7 @@ V červenci a srpnu se v Třinci nehraje ani jedno divadlo — sezóna končí v
 
 ## Závěr — Živo je tam, kde jsou lidi.
 
-Třinec není mrtvý. Je jiný, než byl v roce 2005 — menší, starší a střízlivější. Přesně jako celá země. Sto padesát akcí za sedm měsíců není město, které usnulo.
+Třinec není mrtvý. Je jiný, než byl v roce 2005 — menší, starší a střízlivější. Přesně jako celá země. Sto osmdesát sedm akcí za devět měsíců není město, které usnulo.
 
 Můžeme u piva vzpomínat na Widle. Nebo můžeme postavit město, kde bude dobře těm, kdo tady jsou dnes: dětem, rodinám, mladým i seniorům. My jsme pro to druhé.
 
