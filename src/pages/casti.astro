@@ -11,10 +11,7 @@
 // Licence vyžaduje uvedení autora — popisek v .panorama-caption smazat nelze.
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url.js';
-import {
-  souhrn, zavazky, casti, SKOLY, OBDOBI,
-  CELOMESTSKE, CELOMESTSKE_STAVBY, CELOMESTSKE_POLOZKY,
-} from '../data/casti.js';
+import { souhrn, zavazky, SKOLY, OBDOBI } from '../data/casti.js';
 import { oblasti } from '../data/oblasti.js';
 
 const cislo = new Intl.NumberFormat('cs-CZ');
@@ -22,11 +19,6 @@ const cislo = new Intl.NumberFormat('cs-CZ');
 // Přesná čísla na haléře drží casti.js a analýza.
 const procenta = (x) => `${Math.round(x * 100)} %`;
 const miliony = (x) => cislo.format(Math.round(x / 1e6));
-// Rozpis celoměstských položek: jedno desetinné místo, jinak by drobné
-// položky (oplocení, lávka) vyšly na nulu.
-const milionyDes = (x) => new Intl.NumberFormat('cs-CZ', {
-  minimumFractionDigits: 1, maximumFractionDigits: 1,
-}).format(x / 1e6);
 
 // Podíly pro infografiku — obojí z casti.js, ať se to nikdy nerozejde.
 const lidiCasti = souhrn.podilObyvatel;
@@ -138,31 +130,6 @@ const PDF = 'assets/casti-osobnosti-pro-trinec-2026.pdf';
             <li><span class="ig-klic ig-klic-s"></span>Sídliště — Lyžbice, Staré Město, Sosna</li>
             <li><span class="ig-klic ig-klic-c"></span>Příměstské části — Oldřichovice, Nebory a osm dalších</li>
           </ul>
-
-          <details class="ig-rozpis">
-            <summary>
-              <span class="ig-rozpis-plus" aria-hidden="true">+</span>
-              Co počítáme pro celé město — {miliony(CELOMESTSKE)} mil. Kč
-            </summary>
-            <div class="ig-rozpis-body">
-              <p class="ig-rozpis-uvod">
-                Stojí většinou na sídlištích, ale používá je celý Třinec včetně příměstských
-                částí. Proto je nepřičítáme žádné části. Částky v milionech korun, {OBDOBI}.
-              </p>
-              <h4>Celoměstské stavby — {miliony(CELOMESTSKE_STAVBY)} mil. Kč</h4>
-              <ul class="ig-rozpis-list">
-                {CELOMESTSKE_POLOZKY.map(p => (
-                  <li><span>{p.ucel}</span><b>{milionyDes(p.kc)}</b></li>
-                ))}
-              </ul>
-              <h4>Školy — {miliony(SKOLY)} mil. Kč</h4>
-              <ul class="ig-rozpis-list">
-                {casti.filter(c => c.skoly > 0).map(c => (
-                  <li><span>Školy v části {c.nazev}</span><b>{milionyDes(c.skoly)}</b></li>
-                ))}
-              </ul>
-            </div>
-          </details>
         </div>
       </div>
 
