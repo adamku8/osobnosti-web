@@ -293,6 +293,10 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   color: var(--anthracite);
   border-bottom-color: var(--brand-red);
 }
+/* Zvýrazněná položka menu (Javorový) */
+.nav a.nav-red,
+.nav a.nav-red:hover,
+.nav a.nav-red.active { color: var(--brand-red); }
 
 .header-right {
   display: flex;
@@ -1600,6 +1604,7 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
 
 .nav a:visited { color: var(--text-secondary); }
 .nav a.active:visited { color: var(--anthracite); }
+.nav a.nav-red:visited { color: var(--brand-red); }
 .site-footer a:visited { color: rgba(255, 255, 255, 0.72); }
 .site-footer a:visited:hover { color: #ffffff; }
 
