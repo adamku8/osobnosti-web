@@ -485,6 +485,9 @@ const PDF = 'assets/javorovy-osobnosti-pro-trinec-2026.pdf';
                   transform 360ms cubic-bezier(0.4, 0, 0.2, 1),
                   visibility 0s linear 360ms;
     }
+    .jv-video .section-head, .jv-video .section-head h2 { text-align: center; }
+    .jv-video .section-head .eyebrow { justify-content: center; }
+    .jv-video-wrap { max-width: 340px; margin-inline: auto; }
     .quote-slide.is-active {
       opacity: 1;
       visibility: visible;
@@ -953,6 +956,22 @@ const PDF = 'assets/javorovy-osobnosti-pro-trinec-2026.pdf';
       <div class="jv-viz" style="margin-top: var(--s-64);">
         <img src={u('assets/img/javorovy/vizualizace-kania.jpg')} alt="Vizualizace rekonstruované chaty Javorový — varianta 2" loading="lazy">
         <p class="jv-caption">Vizualizace: KANIA a.s. — studie proveditelnosti zpracovaná pro město, květen 2024, varianta 2. Ukazuje záměr, ne finální podobu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIDEO (REEL) ================= -->
+  <section class="section jv-video" id="video">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Video</p>
+        <h2>Naše vize za minutu.</h2>
+      </div>
+      <div class="video-wrap is-vertical is-instagram jv-video-wrap">
+        <iframe class="video-frame" src="https://www.instagram.com/reel/Dd8d1NKAvfg/embed/"
+                title="Video — naše vize pro Javorový" frameborder="0"
+                scrolling="no" loading="lazy" allowtransparency
+                allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </section>
