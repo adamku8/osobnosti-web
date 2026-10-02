@@ -135,21 +135,27 @@ const temata = [
         </p>
       </div>
 
-      <ul class="temata-list">
-        {temata.map(t => (
-          <li class="tema-karta">
-            <a href={u(t.href)}>
-              <img class="tema-obraz" src={u(t.obrazek)} alt={t.alt} loading="lazy">
-              <div class="tema-body">
-                <span class="tema-stitek">Téma</span>
-                <h3>{t.nazev}</h3>
-                <p class="tema-text">{t.text}</p>
-                <span class="tema-odkaz">{t.cta} →</span>
-              </div>
-            </a>
-          </li>
-        ))}
-      </ul>
+      {/* Dvě řady: stránky s tématy (3) a články (4) — každá zaplní svou mřížku bez prázdných polí. */}
+      {[
+        { list: temata.filter(t => !t.href.startsWith('blog-')), stitek: 'Téma', cls: 'temata-list' },
+        { list: temata.filter(t => t.href.startsWith('blog-')), stitek: 'Článek', cls: 'temata-list temata-list--clanky' },
+      ].map(r => (
+        <ul class={r.cls}>
+          {r.list.map(t => (
+            <li class="tema-karta">
+              <a href={u(t.href)}>
+                <img class="tema-obraz" src={u(t.obrazek)} alt={t.alt} loading="lazy">
+                <div class="tema-body">
+                  <span class="tema-stitek">{r.stitek}</span>
+                  <h3>{t.nazev}</h3>
+                  <p class="tema-text">{t.text}</p>
+                  <span class="tema-odkaz">{t.cta} →</span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ))}
     </div>
   </section>
 

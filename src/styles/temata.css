@@ -35,9 +35,17 @@
   font-family: var(--font-display); font-weight: 700; font-size: 13px;
   color: var(--signal-blue);
 }
+/* Druhá řada — články (Akční Třinec + tři z volebních novin): čtyři vedle sebe */
+.temata-list--clanky {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  margin-top: var(--s-40);
+}
 @media (max-width: 960px) {
-  .temata-list { grid-template-columns: repeat(2, minmax(0, 300px)); }
+  .temata-list,
+  .temata-list--clanky { grid-template-columns: repeat(2, minmax(0, 300px)); width: fit-content; }
 }
 @media (max-width: 720px) {
-  .temata-list { grid-template-columns: minmax(0, 360px); }
+  .temata-list,
+  .temata-list--clanky { grid-template-columns: minmax(0, 360px); }
 }
