@@ -47,6 +47,7 @@ const zNovin = novaGenerace[slug]
   title={`${k.jmeno} — Osobnosti pro Třinec`}
   description={`${k.jmeno}, ${k.poradiSlovem} na kandidátce Osobnosti pro Třinec. ${k.profese}. Proč kandiduje a co chce v Třinci posunout.`}
   path={`kandidat-${slug}.html`}
+  og={k.foto ? `assets/og/kandidat-${slug}.jpg` : undefined}
   ogType="profile"
   active="kandidati"
 >

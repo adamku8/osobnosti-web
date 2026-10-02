@@ -11,6 +11,7 @@ const {
   active = '',            // zvýrazněná položka v menu
   bodyClass = '',
   noindex = false,        // vynucený noindex i na ostré doméně (skryté stránky)
+  og = 'assets/img/og-image.jpg', // náhled pro sdílení — vlastní obrázky generuje scripts/make_og.py do assets/og/
 } = Astro.props;
 
 import { isLive } from '../lib/site.js';
@@ -18,7 +19,7 @@ import { isLive } from '../lib/site.js';
 const site = String(Astro.site ?? '').replace(/\/$/, '');
 const live = isLive(site);
 const canonical = `${site}/${path}`;
-const ogImage = `${site}/assets/img/og-image.jpg`;
+const ogImage = `${site}/${og}`;
 // Na náhledové doméně měření nespouštíme, ať nekazí data z ostrého webu.
 const GTM = live ? 'GTM-N59NJ5Z' : null;
 import { u } from '../lib/url.js';
