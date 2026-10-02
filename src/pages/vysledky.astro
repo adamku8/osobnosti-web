@@ -1,0 +1,124 @@
+---
+// Výsledky 2022–2026 — strany 2 a 3 volebních novin „Nový Třinec“ (říjen 2026).
+// Noviny na tuhle stránku odkazují: „Kompletní přehled výsledků: osobnostiprotrinec.cz“.
+// Data: ../data/noviny.js. Styly: ../styles/noviny.css.
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+import { CISLO, uvodVysledky, slibili, splnili, podarilo } from '../data/noviny.js';
+import { medailonky } from '../data/medailonky.js';
+import '../styles/noviny.css';
+---
+<Base
+  title="Výsledky místo žvanění — Osobnosti pro Třinec"
+  description="Co jsme v Třinci za minulé volební období slíbili a splnili: autobusové stanoviště, kino Kosmos, CirkArena, lesopark, mlžítka, dětská hřiště. Proinvestovali jsme víc než 1,2 miliardy Kč."
+  path="vysledky.html"
+  active="vysledky"
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Volební období 2022–2026</p>
+      <h1>Výsledky místo <span class="hl">žvanění</span>.</h1>
+      <p class="hero-lead">{uvodVysledky.podtitul}</p>
+    </div>
+  </section>
+
+  <!-- ================= Číslo ================= -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="nv-cislo">
+        <div class="nv-cislo-hodnota">{CISLO.hodnota}</div>
+        <div>
+          <span class="nv-cislo-jednotka">{CISLO.jednotka} {CISLO.popis}</span>
+          <p>{uvodVysledky.text}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slíbili jsme — šest příběhů ================= -->
+  <section class="section" style="padding-top:0" id="slibili">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Slíbili jsme</p>
+        <h2>Slíbili jsme. A <span class="hl">dotáhli</span>.</h2>
+        <p class="section-note">
+          Šest věcí, které jsme před čtyřmi lety slíbili — a jak dopadly.
+        </p>
+      </div>
+      <ul class="nv-slibili">
+        {slibili.map(s => (
+          <li class="nv-slib" id={s.id}>
+            <figure>
+              <img src={u(s.foto)} alt={s.alt} loading="lazy">
+              <figcaption class="nv-zdroj">Zdroj: {s.zdroj}</figcaption>
+            </figure>
+            <h3>{s.nazev}</h3>
+            <p><b>SLÍBILI</b> {s.text}</p>
+            {s.odkaz && <a class="link-more" href={u(s.odkaz.href)}>{s.odkaz.text} →</a>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= Splnili jsme — modrý box ================= -->
+  <section class="section" style="padding-top:0" id="splnili">
+    <div class="container">
+      <div class="nv-splnili">
+        <h2>Splnili jsme</h2>
+        <p class="nv-splnili-pozn">Přehled toho, co se za minulé volební období v Třinci povedlo.</p>
+        <ul>
+          {splnili.map(([sloveso, zbytek]) => (
+            <li>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 12.5l5 5L20 6.5"/>
+              </svg>
+              <span><b>{sloveso}</b> {zbytek}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Co se nám podařilo — zastupitelé ================= -->
+  <section class="section" id="zastupitele">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Současní zastupitelé</p>
+        <h2>Co se nám <span class="hl">podařilo</span>.</h2>
+        <p class="section-note">
+          Čtyři z nás, kteří v zastupitelstvu už pracují — každý o tom, čemu se věnuje.
+        </p>
+      </div>
+      <ul class="nv-lide">
+        {podarilo.map(c => (
+          <li class="nv-clovek">
+            <img src={u(c.foto)} alt={c.jmeno} loading="lazy">
+            <div>
+              <h3>{c.jmeno}</h3>
+              <p class="nv-funkce">{c.funkce}</p>
+              <span class="nv-let">{c.let} let v zastupitelstvu</span>
+              <p><strong>{c.perex}</strong> {c.text}</p>
+              {medailonky[c.slug] && (
+                <a class="link-more" href={u(`kandidat-${c.slug}.html`)}>Medailonek →</a>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-cta-band">
+    <div class="container">
+      <h2>Navazujeme na to <span class="hl">dobré</span>.</h2>
+      <p class="section-note">Co chceme udělat dál, najdete v programu. Volby jsou 9.–10. října 2026.</p>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href={u('program.html')}>Náš program</a>
+        <a class="btn btn-secondary btn-lg" href={u('doporucuji-nas.html')}>Kdo nás doporučuje</a>
+      </div>
+    </div>
+  </section>
+</Base>

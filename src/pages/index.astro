@@ -15,6 +15,8 @@ import { aktualne, SOCIAL } from '../data/aktualne.js';
 import { verejnySlug } from '../lib/verejne.js';
 import { u } from '../lib/url.js';
 import '../styles/uvod.css';
+import { uvodnik, CISLO, slibili, doporuceni } from '../data/noviny.js';
+import '../styles/noviny.css';
 
 // Na úvodu ukazujeme prvních dvanáct kandidátů s fotkou; proklik na medailonek
 // řídí stejná pravidla jako /kandidati.html (src/lib/verejne.js).
@@ -97,6 +99,28 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
+  <!-- ================= SLOVO LÍDRYNĚ (volební noviny, strana 1) ================= -->
+  <section class="section nv-uvodnik" id="slovo-lidryne">
+    <div class="container nv-uvodnik-grid">
+      <figure class="nv-uvodnik-foto reveal">
+        <img src={u(uvodnik.foto)} alt="Lucie Fremrová se psem na trávníku" loading="lazy">
+      </figure>
+      <div class="nv-uvodnik-text reveal" style="--i:1">
+        <p class="eyebrow" style="margin-bottom:var(--s-16)">Slovo lídryně</p>
+        <h2 style="margin-bottom:var(--s-24)">Stejné hodnoty. <span class="hl">Nové</span> vize.</h2>
+        <p class="nv-osloveni">{uvodnik.osloveni}</p>
+        {uvodnik.odstavce.map((t, i) => (
+          <p class:list={[i === uvodnik.odstavce.length - 1 && 'nv-pointa']}>{t}</p>
+        ))}
+        <div class="nv-podpis">
+          <img src={u(uvodnik.podpis)} alt="" width="220" height="70" loading="lazy">
+          <span>{uvodnik.jmeno}</span>
+          <small>{uvodnik.role}</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TÝMOVÁ FOTKA (Javorový, tym-2026-javorovy-v2.jpg) odstraněna 24. 9. 2026
        na pokyn Adama. Soubory zůstávají v public/assets/img/. -->
 
@@ -125,6 +149,36 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 
   <SekceProjekty cta={{ href: u('program.html#projekty'), text: 'Všechny projekty v programu' }} />
 
+  <!-- ================= VÝSLEDKY — upoutávka na /vysledky.html ================= -->
+  <section class="section" id="vysledky" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head reveal" style="margin-bottom:var(--s-40)">
+        <p class="eyebrow">Výsledky 2022–2026</p>
+        <h2>Výsledky místo žvanění.</h2>
+      </div>
+      <div class="nv-cislo reveal">
+        <div class="nv-cislo-hodnota">{CISLO.hodnota}</div>
+        <div>
+          <span class="nv-cislo-jednotka">{CISLO.jednotka} {CISLO.popis}</span>
+          <p>Autobusové stanoviště, kino Kosmos, CirkArena, lesopark, mlžítka i nová dětská hřiště. Slušně, odborně a bez skandálů.</p>
+        </div>
+      </div>
+      <ul class="nv-teaser-vysledky">
+        {slibili.slice(0, 4).map((s, i) => (
+          <li class="reveal" style={`--i:${i}`}>
+            <a href={u(`vysledky.html#${s.id}`)}>
+              <img src={u(s.foto)} alt={s.alt} loading="lazy">
+              <span>{s.nazev}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div class="section-cta stat-links reveal" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href={u('vysledky.html')}>Co jsme splnili</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= KANDIDÁTI ================= -->
   <section class="section" id="kandidati">
     <div class="container">
@@ -140,6 +194,31 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       </div>
       <div class="cand-cta reveal">
         <a class="btn btn-primary btn-lg" href={u('kandidati.html')}>Všech {kandidati.length} kandidátů</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DOPORUČUJÍ NÁS — upoutávka na /doporucuji-nas.html ================= -->
+  <section class="section" id="doporucuji" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Doporučení</p>
+        <h2>Doporučují nás třinecké <span class="hl">osobnosti</span>.</h2>
+      </div>
+      <ul class="nv-teaser-dop">
+        {doporuceni.slice(0, 3).map((d, i) => (
+          <li class="reveal" style={`--i:${i}`}>
+            <div class="nv-teaser-dop-hlava">
+              <img src={u(d.foto)} alt="" loading="lazy">
+              <b>{d.jmeno}</b>
+            </div>
+            <p>„{d.kratce}“</p>
+            <a class="link-more" href={u(`doporucuji-nas.html#${d.id}`)} style="margin-top:var(--s-16)">Celé doporučení →</a>
+          </li>
+        ))}
+      </ul>
+      <div class="section-cta stat-links reveal" style="justify-content:center">
+        <a class="btn btn-secondary btn-lg" href={u('doporucuji-nas.html')}>Všech {doporuceni.length} doporučení</a>
       </div>
     </div>
   </section>

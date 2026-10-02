@@ -10,6 +10,8 @@ import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
 import { PLNA_KANDIDATKA, verejnySlug } from '../lib/verejne.js';
 import { u } from '../lib/url.js';
+import { kolaz } from '../data/noviny.js';
+import '../styles/noviny.css';
 
 // karta odkazuje na medailonek jen tehdy, když je veřejný a existuje
 const sOdkazem = (k) => {
@@ -62,6 +64,25 @@ const pocetMedailonku = listina.filter(k => k.detail).length;
             <div class="slide-meta">osobnost postupně představíme</div>
           </article>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Koláž ze strany 5 volebních novin (data: ../data/noviny.js) -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="nv-kolaz">
+        <div class="nv-kolaz-text">
+          <h2>My jsme z&nbsp;Třince, žijeme tady spolu.</h2>
+          <p>Na kole, na horách, na závodech i u grilu. Takhle žijí kandidáti Osobností, když zrovna nepracují.</p>
+        </div>
+        <ul class="nv-kolaz-mriz">
+          {kolaz.map(f => (
+            <li class:list={[f.siroka && 'siroka']}>
+              <img src={u(f.foto)} alt="Kandidát Osobností pro Třinec ve volném čase" loading="lazy">
+            </li>
+          ))}
+        </ul>
       </div>
       <div class="section-cta">
         <a class="btn btn-primary btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>

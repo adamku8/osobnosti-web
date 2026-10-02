@@ -29,6 +29,7 @@ const ODKAZY_PROJEKTU = true;   // od 29. 9. je Javorový veřejný
 const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 const PDF = 'assets/program-osobnosti-pro-trinec-2026.pdf';
 import '../styles/temata.css';
+import { clanky } from '../data/noviny.js';
 
 // Témata s vlastní stránkou — pořadí = pořadí boxů.
 const temata = [
@@ -64,6 +65,15 @@ const temata = [
     text: 'Mladí neutekli, hlavně se nenarodili. A město mezitím žije jinak: 187 akcí za devět měsíců. Co s tím chceme udělat — od letní scény po centrum pro seniory.',
     cta: 'Číst článek',
   },
+  // Tři články z volebních novin (src/data/noviny.js → /blog-<slug>.html)
+  ...clanky.map(c => ({
+    nazev: c.nazev,
+    href: `blog-${c.slug}.html`,
+    obrazek: c.cover.foto,
+    alt: c.cover.alt,
+    text: c.popis,
+    cta: 'Číst článek',
+  })),
 ];
 ---
 <Base

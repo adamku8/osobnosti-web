@@ -1,0 +1,111 @@
+---
+// Články ze strany 6 volebních novin „Nový Třinec“ → /blog-<slug>.html.
+// Data: ../data/noviny.js (clanky). Ručně psaný longform (blog-je-v-trinci-…)
+// má vlastní soubor a statická routa má přednost.
+import Base from '../layouts/Base.astro';
+import ProjektKarta from '../components/ProjektKarta.astro';
+import { u } from '../lib/url.js';
+import { clanky } from '../data/noviny.js';
+import { projekty } from '../data/projekty.js';
+import '../styles/noviny.css';
+
+export function getStaticPaths() {
+  return clanky.map(c => ({ params: { slug: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props;
+const souvisejici = c.projekty.map(s => projekty.find(p => p.slug === s)).filter(Boolean);
+const dalsi = clanky.filter(x => x.slug !== c.slug);
+
+// Červený box za jedním slovem nadpisu (princip 03).
+const i = c.nazev.lastIndexOf(c.hl);
+const pred = i < 0 ? c.nazev : c.nazev.slice(0, i);
+const box = i < 0 ? null : c.hl;
+const za = i < 0 ? '' : c.nazev.slice(i + c.hl.length);
+---
+<Base
+  title={`${c.nazev} | Osobnosti pro Třinec`}
+  description={c.popis}
+  path={`blog-${c.slug}.html`}
+  ogType="article"
+  active=""
+>
+  <section class="nv-cover">
+    <img src={u(c.cover.foto)} alt={c.cover.alt}>
+    <div class="nv-cover-shade"></div>
+    <div class="container">
+      <p class="nv-cover-kicker">Blog · Osobnosti pro Třinec</p>
+      <h1>{pred}{box && <span class="hl">{box}</span>}{za}</h1>
+      <p class="nv-cover-lead">{c.podtitul}</p>
+      <p class="nv-cover-meta">Osobnosti pro Třinec · říjen 2026 · z volebních novin Nový Třinec</p>
+    </div>
+    <span class="nv-cover-zdroj">Foto: {c.cover.zdroj}</span>
+  </section>
+
+  <article class="nv-clanek">
+    {c.odstavce.map(o => (
+      o.foto ? (
+        <figure>
+          <img src={u(o.foto)} alt={o.alt} loading="lazy">
+          <figcaption class="nv-zdroj">Zdroj: {o.zdroj}</figcaption>
+        </figure>
+      ) : o.zaver && !o.t ? (
+        <div class="nv-zaver"><p>{o.zaver}</p></div>
+      ) : (
+        <Fragment>
+          <p class:list={[o.lead && 'nv-lead']}>
+            {o.b && <strong>{o.b}</strong>}{o.b && o.t && ' '}{o.t}{o.b2 && <Fragment> <strong>{o.b2}</strong></Fragment>}
+          </p>
+          {o.zaver && <div class="nv-zaver"><p>{o.zaver}</p></div>}
+        </Fragment>
+      )
+    ))}
+    <p class="nv-clanek-pata">
+      Článek vyšel ve volebních novinách Osobnosti pro Třinec „Nový Třinec“ (říjen 2026).
+    </p>
+  </article>
+
+  {souvisejici.length > 0 && (
+    <section class="section" style="padding-top:var(--s-40)">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">V programu</p>
+          <h2>Co konkrétně postavíme.</h2>
+        </div>
+        <div class="projects">
+          {souvisejici.map(p => <ProjektKarta p={p} />)}
+        </div>
+        <div class="section-cta">
+          <a class="btn btn-secondary btn-lg" href={u('program.html')}>Celý program</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Další články</p>
+        <h2>Čtěte dál.</h2>
+      </div>
+      <ul class="nv-dalsi">
+        {dalsi.map(d => (
+          <li>
+            <a href={u(`blog-${d.slug}.html`)}>
+              <img src={u(d.cover.foto)} alt={d.cover.alt} loading="lazy">
+              <b>{d.nazev}</b>
+              <span>{d.podtitul}</span>
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href={u('blog-je-v-trinci-mrtvo-nebo-zivo.html')}>
+            <img src={u('assets/img/blog/ai-vecerni-ulice.jpg')} alt="Večerní ulice menšího města pod Beskydami" loading="lazy">
+            <b>Je v Třinci mrtvo, nebo živo?</b>
+            <span>Mladí neutekli, hlavně se nenarodili.</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Base>

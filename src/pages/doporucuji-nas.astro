@@ -1,0 +1,54 @@
+---
+// Doporučují nás třinecké osobnosti — strana 8 volebních novin „Nový Třinec“.
+// Data: ../data/noviny.js (doporuceni). Styly: ../styles/noviny.css.
+import Base from '../layouts/Base.astro';
+import { u } from '../lib/url.js';
+import { doporuceni } from '../data/noviny.js';
+import '../styles/noviny.css';
+
+const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
+---
+<Base
+  title="Doporučují nás třinecké osobnosti — Osobnosti pro Třinec"
+  description="Jiří Zabystrzan, Martin Vaňka, Libuše Koppová, Marek Mokrosz, Petr Šiška a Věra Palkovská o tom, proč v komunálních volbách 2026 dávají hlas Osobnostem pro Třinec."
+  path="doporucuji-nas.html"
+  active=""
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Doporučení</p>
+      <h1>Doporučují nás třinecké <span class="hl">osobnosti</span>.</h1>
+      <p class="hero-lead">
+        Lidé, které v Třinci znáte. Proč letos dávají hlas Osobnostem — a co
+        svému městu přejí.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <ul class="nv-dop">
+        {doporuceni.map(d => (
+          <li class="nv-dop-karta" id={d.id}>
+            <img src={u(d.foto)} alt={d.jmeno} loading="lazy">
+            <h3>{d.jmeno}</h3>
+            <blockquote>
+              {d.text.map(t => <p>{t}</p>)}
+            </blockquote>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-cta-band">
+    <div class="container">
+      <h2>Posuňme společně Třinec <span class="hl">dál</span>.</h2>
+      <p class="section-note">Přijďte k volbám 9.–10. října 2026.</p>
+      <div class="section-cta stat-links" style="justify-content:center">
+        <a class="btn btn-blue btn-lg" href={u('index.html#jak-volit')}>Jak volit</a>
+        <a class="btn btn-secondary btn-lg" href={udalostFB} target="_blank" rel="noopener">Událost na Facebooku</a>
+      </div>
+    </div>
+  </section>
+</Base>

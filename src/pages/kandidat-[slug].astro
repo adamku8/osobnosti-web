@@ -32,6 +32,16 @@ const dalsi = i < kandidati.length - 1 ? kandidati[i + 1] : null;
 const { tituly, krestni, prijmeni } = rozdelJmeno(k.jmeno);
 import { u } from '../lib/url.js';
 import { rozdelJmeno } from '../lib/jmeno.js';
+
+// Blok „Z volebních novin“ (říjen 2026): Nová generace (Sirotová, Štěrba)
+// nebo „Co se nám podařilo“ (současní zastupitelé). Data: ../data/noviny.js.
+import { novaGenerace, podarilo } from '../data/noviny.js';
+import '../styles/noviny.css';
+const zNovin = novaGenerace[slug]
+  ?? (() => {
+    const p = podarilo.find(x => x.slug === slug);
+    return p && { nadpis: `${p.let} let v zastupitelstvu`, foto: p.foto, perex: p.perex, text: [p.text], vysledky: true };
+  })();
 ---
 <Base
   title={`${k.jmeno} — Osobnosti pro Třinec`}
@@ -119,6 +129,22 @@ import { rozdelJmeno } from '../lib/jmeno.js';
 
     </div>
   </section>
+
+  <!-- ================= Z VOLEBNÍCH NOVIN ================= -->
+  {zNovin && (
+    <section class="section nv-medailonek">
+      <div class="container nv-medailonek-grid">
+        <img src={u(zNovin.foto)} alt={k.jmeno} loading="lazy">
+        <div>
+          <p class="eyebrow" style="margin-bottom:var(--s-16)">Z volebních novin</p>
+          <h2>{zNovin.nadpis}</h2>
+          <p class="nv-perex">{zNovin.perex}</p>
+          {zNovin.text.map(t => <p>{t}</p>)}
+          {zNovin.vysledky && <a class="link-more" href={u('vysledky.html#zastupitele')}>Co se nám podařilo →</a>}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- ================= RYCHLÉ OTÁZKY ================= -->
   {m.rychleOtazky?.length > 0 && (
