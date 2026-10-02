@@ -69,13 +69,16 @@ def pill(d, text, x, y):
 
 
 def red_box(d, f, text, x, y, size):
-    """Červený highlight box za textem (princip 03) — výška podle velikosti písma."""
+    """Červený highlight box za textem (princip 03). Horní okraj je větší kvůli české
+    diakritice — háček/čárka nad verzálkou (Š, Ř, Č, Í) jinak vyleze nad box a bílá na bílé zmizí."""
     pad_x = round(size * 0.18)
     bb = f.getbbox(text)
-    bh = round(size * 0.98)
-    d.rectangle((x - pad_x, y, x + bb[2] - bb[0] + pad_x, y + bh), fill=RED)
     cap = f.getbbox('H')
-    d.text((x - bb[0], y + (bh - (cap[3] - cap[1])) // 2 - cap[1]), text, font=f, fill=WHITE)
+    pad_top = round(size * 0.26)
+    pad_bot = round(size * 0.12)
+    bh = pad_top + (cap[3] - cap[1]) + pad_bot
+    d.rectangle((x - pad_x, y, x + bb[2] - bb[0] + pad_x, y + bh), fill=RED)
+    d.text((x - bb[0], y + pad_top - cap[1]), text, font=f, fill=WHITE)
 
 
 def sablona_pas(radky, box, fotky, fy=0.5, pill_text='VOLBY 9.–10. ŘÍJNA 2026'):
@@ -161,7 +164,7 @@ def sablona_portret(k):
     d.text((X0 - f.getbbox(krestni)[0], y - cap[1]), krestni, font=f, fill=ANTH)
     y += round(size * 1.12)
     red_box(d, f, prijmeni, X0 + round(size * 0.18), y - round(size * 0.18), size)
-    y += round(size * 1.1)
+    y += round(size * 1.24)
     f_p = font('Inter-Regular.ttf', 26)
     for r in zalom(f_p, f'{k["vek"]} let · {k["profese"]}', sirka)[:2]:
         d.text((X0, y), r, font=f_p, fill=(107, 107, 107))   # antracit 72 % na bílé

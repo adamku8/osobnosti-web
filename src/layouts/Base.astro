@@ -19,7 +19,9 @@ import { isLive } from '../lib/site.js';
 const site = String(Astro.site ?? '').replace(/\/$/, '');
 const live = isLive(site);
 const canonical = `${site}/${path}`;
-const ogImage = `${site}/${og}`;
+// ?v= mění URL obrázku po přegenerování — FB/Slack si náhledy cachují podle URL.
+const OG_VERZE = '2026-10-02b';
+const ogImage = `${site}/${og}?v=${OG_VERZE}`;
 // Na náhledové doméně měření nespouštíme, ať nekazí data z ostrého webu.
 const GTM = live ? 'GTM-N59NJ5Z' : null;
 import { u } from '../lib/url.js';
