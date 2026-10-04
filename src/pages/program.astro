@@ -58,23 +58,17 @@ const temata = [
     cta: 'Vize pro Javorový',
   },
   {
-    nazev: 'Akční Třinec',
+    nazev: 'Živý Třinec',
     href: 'blog-je-v-trinci-mrtvo-nebo-zivo.html',
     obrazek: 'assets/img/akcni-trinec-kresba.jpg',   // náčrt ve stylu programu (TISK/program-2026/kresby/OPT-akcni-trinec-kresba.svg)
     alt: 'Kresba letní akce na náměstí pod Beskydami: kapela na pódiu, stánky, rodiny s dětmi, mladí i senioři na lavičce, dítě s červeným balónkem ve tvaru srdce',
     text: 'Mladí neutekli, hlavně se nenarodili. A město mezitím žije jinak: 187 akcí za devět měsíců. Co s tím chceme udělat — od letní scény po centrum pro seniory.',
     cta: 'Číst článek',
   },
-  // Tři články z volebních novin (src/data/noviny.js → /blog-<slug>.html)
-  ...clanky.map(c => ({
-    nazev: c.nazev,
-    href: `blog-${c.slug}.html`,
-    obrazek: c.cover.foto,
-    alt: c.cover.alt,
-    text: c.popis,
-    cta: 'Číst článek',
-  })),
+  // Tři články z volebních novin se tu nevypisují — odkazují na ně oblasti
+  // (pole `clanky` v oblasti.js, odkaz pod závazky).
 ];
+const clanekPodleSlugu = slug => clanky.find(c => c.slug === slug);
 ---
 <Base
   title="Program 2026 — Osobnosti pro Třinec"
@@ -115,6 +109,12 @@ const temata = [
             <ul class="area-list">
               {o.body.map(b => <li set:html={b} />)}
             </ul>
+            {(o.clanky ?? []).map(clanekPodleSlugu).filter(Boolean).map(c => (
+              <p class="area-clanek">
+                <span class="area-clanek-stitek">Článek</span>
+                <a href={u(`blog-${c.slug}.html`)}>{c.nazev} →</a>
+              </p>
+            ))}
           </div>
         </div>
       </section>
@@ -136,27 +136,22 @@ const temata = [
         </p>
       </div>
 
-      {/* Dvě řady: stránky s tématy (3) a články (4) — každá zaplní svou mřížku bez prázdných polí. */}
-      {[
-        { list: temata.filter(t => !t.href.startsWith('blog-')), stitek: 'Téma', cls: 'temata-list' },
-        { list: temata.filter(t => t.href.startsWith('blog-')), stitek: 'Článek', cls: 'temata-list temata-list--clanky' },
-      ].map(r => (
-        <ul class={r.cls}>
-          {r.list.map(t => (
-            <li class="tema-karta">
-              <a href={u(t.href)}>
-                <img class="tema-obraz" src={u(t.obrazek)} alt={t.alt} loading="lazy">
-                <div class="tema-body">
-                  <span class="tema-stitek">{r.stitek}</span>
-                  <h3>{t.nazev}</h3>
-                  <p class="tema-text">{t.text}</p>
-                  <span class="tema-odkaz">{t.cta} →</span>
-                </div>
-              </a>
-            </li>
-          ))}
-        </ul>
-      ))}
+      {/* Jedna řada: stránky s tématy + článek Živý Třinec (štítek podle typu odkazu). */}
+      <ul class="temata-list">
+        {temata.map(t => (
+          <li class="tema-karta">
+            <a href={u(t.href)}>
+              <img class="tema-obraz" src={u(t.obrazek)} alt={t.alt} loading="lazy">
+              <div class="tema-body">
+                <span class="tema-stitek">{t.href.startsWith('blog-') ? 'Článek' : 'Téma'}</span>
+                <h3>{t.nazev}</h3>
+                <p class="tema-text">{t.text}</p>
+                <span class="tema-odkaz">{t.cta} →</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
