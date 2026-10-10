@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Sčítání Třinec 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Sčítací arch: hlavička s postupem → vlevo mřížka 38 okrsků, vpravo průběžný výsledek → tabulka okrsků.
+   Brand OPT v2.0: bílá jediná plocha, antracit přes alfu, Signal Blue pro data, Brand Red jen sloupec OPT. */
+:root {
+  color-scheme: light;
+  --paper: #FFFFFF;
+  --ink: #323232;
+  --ink-72: rgba(50, 50, 50, .72);
+  --ink-55: rgba(50, 50, 50, .55);
+  --ink-14: rgba(50, 50, 50, .14);
+  --ink-34: rgba(50, 50, 50, .34);
+  --ink-20: rgba(50, 50, 50, .2);
+  --ink-06: rgba(50, 50, 50, .05);
+  --blue: #003B8E;
+  --blue-08: rgba(0, 59, 142, .07);
+  --blue-20: rgba(0, 59, 142, .22);
+  --red: #FF2D2D;
+  --warn-bg: #FFF4E0;
+  --warn-ink: #7A4600;
+  --display: "Montserrat", "Avenir Next", "Segoe UI", Arial, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 15px/1.5 var(--body);
+  font-variant-numeric: tabular-nums;
+}
+.wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 32px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+.eyebrow { font: 600 12px/1.3 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-55); }
+
+/* Hlavička */
+header { display: grid; gap: 14px; }
+h1 { font-weight: 800; font-size: clamp(30px, 5vw, 52px); line-height: 1; text-transform: uppercase; letter-spacing: -.01em; }
+.status { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 22px; }
+.count { font: 800 clamp(34px, 6vw, 48px)/1 var(--display); color: var(--blue); letter-spacing: -.01em; }
+.count small { font: 600 clamp(13px, 1.6vw, 16px)/1.3 var(--body); color: var(--ink-72); letter-spacing: 0; }
+.meta { color: var(--ink-72); font-size: 13.5px; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.live { display: inline-flex; align-items: center; gap: 7px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 0 var(--blue-20); animation: pulse 2.4s ease-out infinite; }
+.dot.off { background: var(--ink-55); animation: none; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--blue-20); } 70% { box-shadow: 0 0 0 8px rgba(0,59,142,0); } 100% { box-shadow: 0 0 0 0 rgba(0,59,142,0); } }
+@media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
+.progress { display: grid; grid-template-columns: repeat(38, minmax(0, 1fr)); gap: 2px; height: 10px; }
+.progress i { background: var(--ink-06); border-radius: 1px; }
+.progress i.on { background: var(--blue); }
+.notice { background: var(--warn-bg); color: var(--warn-ink); padding: 10px 14px; border-radius: 6px; font-size: 14px; }
+
+/* Hlavní dvousloupec */
+.main { display: grid; gap: 32px; }
+@media (min-width: 940px) { .main { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: start; } }
+section { display: grid; gap: 14px; min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+h2 { font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: .04em; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--ink-72); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.sw.done { background: var(--blue-08); border: 2px solid var(--blue); }
+.sw.wait { border: 1px dashed var(--ink-55); }
+.sw.scale { width: 36px; background: linear-gradient(90deg, rgba(50, 50, 50, .06), rgba(50, 50, 50, .46)); border: 1px dashed var(--ink-34); }
+
+/* Mřížka okrsků */
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.tile { border: 1px dashed var(--ink-14); border-radius: 6px; padding: 8px 9px 9px; display: grid; gap: 2px; min-height: 104px; align-content: start; position: relative; min-width: 0; max-width: 100%; }
+.tile .vol { font-size: 11px; color: var(--ink-72); margin-top: auto; padding-top: 3px; }
+.tile:not(.done) .d { color: var(--ink); }
+.tile .n { font: 800 34px/1 var(--display); color: var(--ink); letter-spacing: -.01em; }
+.tile .l { font-size: 14.5px; line-height: 1.25; font-weight: 700; color: #000; overflow-wrap: anywhere; margin-top: 2px; }
+.tile .v { font: 600 14px/1.2 var(--body); }
+.tile .d { font-size: 12px; color: var(--ink-72); }
+.tile.done { border: 2px solid var(--blue); background: var(--blue-08); padding: 7px 8px 8px; }
+.tile { cursor: pointer; transition: box-shadow .12s; }
+.tile:hover { box-shadow: 0 0 0 2px var(--ink-34); }
+.tile.sel { box-shadow: 0 0 0 3px var(--ink); }
+.chip.back { border-color: var(--ink); }
+/* režim vybraného okrsku: panel výsledků výrazně odlišený */
+.res.sel-mode { background: var(--blue-08); border: 2px solid var(--blue); border-radius: 12px; padding: 0 16px 16px; }
+.res.sel-mode .sec-head { background: var(--blue); color: var(--paper); margin: 0 -16px; padding: 14px 16px; border-radius: 9px 9px 0 0; border-bottom: 0; align-items: center; }
+.res.sel-mode .sec-head h2 { font-size: clamp(18px, 2.4vw, 24px); letter-spacing: .02em; }
+.res.sel-mode .sec-head .selbadge { display: block; font: 600 11px/1.2 var(--display); letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: 4px; }
+.res.sel-mode .chip.back { background: var(--paper); color: var(--blue); border: 0; font-size: 14px; padding: 11px 16px; }
+.float-back { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 11; font: 800 14px/1 var(--display); letter-spacing: .03em; text-transform: uppercase;
+  background: var(--ink); color: var(--paper); border: 0; border-radius: 999px; padding: 14px 18px; box-shadow: 0 6px 20px rgba(0, 0, 0, .22); cursor: pointer; }
+.float-back:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+body.has-sel .toast { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+.tile.done .n { color: var(--blue); }
+.tile.done .l { color: #000; }
+.tile .new { position: absolute; top: 7px; right: 7px; font: 600 9.5px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--paper); background: var(--blue); padding: 3px 5px; border-radius: 3px; }
+
+/* Výsledek stran */
+.parties { display: grid; gap: 12px; }
+.prow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; align-items: baseline; }
+.pname { font-weight: 600; font-size: 14.5px; min-width: 0; }
+.pname small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-55); }
+.pnum { display: flex; align-items: center; justify-content: flex-end; gap: 10px; white-space: nowrap; }
+.pnum b { font: 800 18px/1 var(--display); min-width: 4.2em; text-align: right; }
+.seat { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--blue); color: var(--paper); font: 800 16px/1 var(--display); flex: none; }
+.seat.zero { background: none; color: var(--ink-55); border: 1.5px solid var(--ink-14); }
+.bar { grid-column: 1 / -1; position: relative; height: 12px; background: var(--ink-06); border-radius: 2px; }
+.bar i { position: absolute; inset: 0 auto 0 0; background: var(--ink-55); border-radius: 2px; transition: width .6s ease; }
+.bar i.opt { background: var(--red); }
+.bar .thr { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1.5px dashed var(--ink); }
+.seats-note, .fine { font-size: 12.5px; color: var(--ink-55); }
+.empty { border: 1px dashed var(--ink-14); border-radius: 6px; padding: 18px; color: var(--ink-72); font-size: 14px; }
+
+.est { border-top: 2px solid var(--blue); padding-top: 12px; display: grid; gap: 6px; }
+.est .big { font: 800 30px/1 var(--display); color: var(--blue); }
+.estrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.seat.big-seat { width: 44px; height: 44px; font-size: 21px; }
+.estseats { font: 600 15px/1.25 var(--body); }
+.estseats small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-55); }
+.est p { margin: 0; font-size: 13.5px; color: var(--ink-72); max-width: 60ch; }
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px 16px; }
+.kv div { display: grid; gap: 2px; }
+.kv dt { font-size: 12px; color: var(--ink-55); }
+.kv dd { margin: 0; font: 600 16px/1.2 var(--body); }
+
+/* Tabulka */
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 12.5px/1 var(--body); border: 1px solid var(--ink-14); background: var(--paper); color: var(--ink); padding: 7px 12px; border-radius: 999px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+.chip:focus-visible, .tile:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.tablebox { overflow-x: auto; border-top: 1px solid var(--ink-14); }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 13.5px; }
+th { text-align: left; font: 600 11.5px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-55); padding: 10px 8px; border-bottom: 1px solid var(--ink-14); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--ink-06); vertical-align: top; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.c { font: 800 15px/1.3 var(--display); }
+tr.done td.c { color: var(--blue); }
+tr.wait td { color: var(--ink-55); }
+.pill { display: inline-block; font: 600 11px/1 var(--body); padding: 4px 7px; border-radius: 999px; white-space: nowrap; }
+.pill.done { background: var(--blue); color: var(--paper); }
+.pill.wait { border: 1px dashed var(--ink-55); color: var(--ink-55); }
+
+.elected { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px 28px; }
+.elected h3 { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; margin-bottom: 6px; }
+.elected ol { margin: 0; padding-left: 1.4em; font-size: 13.5px; }
+.elected li span { color: var(--ink-55); }
+
+/* Záložky */
+.tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 900px; }
+.tab { font: 800 clamp(14px, 3.6vw, 17px)/1.15 var(--display); letter-spacing: .04em; text-transform: uppercase; background: var(--paper); color: var(--blue);
+  border: 2px solid var(--blue); border-radius: 10px; padding: 16px 12px; min-height: 58px; cursor: pointer; text-align: center; transition: background .15s, color .15s; }
+.tab:hover { background: var(--blue-08); }
+.tab[aria-selected="true"] { background: var(--blue); color: var(--paper); }
+.tab:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.panel { display: grid; gap: 32px; }
+
+/* OPT 2022 × 2026: každý okrsek = dva pruhy na škále 0–100 % */
+.cmp { display: grid; }
+.orow { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(0, 3.2fr); gap: 6px 18px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--ink-06); }
+.orow.total { border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
+.orow.head { padding: 0 0 4px; border-bottom: 0; }
+.olab { min-width: 0; display: flex; gap: 10px; align-items: baseline; }
+.olab b { font: 800 28px/1 var(--display); color: var(--ink-55); min-width: 1.6em; }
+.orow.done .olab b, .orow.total .olab b { color: var(--blue); }
+.olab span { font-size: 13px; line-height: 1.3; font-weight: 600; }
+.olab small { display: block; font-size: 11.5px; font-weight: 400; color: var(--ink-55); }
+.olab small.delta { font: 500 11px/1.3 var(--body); color: var(--ink-72); margin-top: 2px; }
+.obars { display: grid; gap: 5px; min-width: 0; }
+.oline { display: grid; grid-template-columns: 34px minmax(0, 1fr) 58px; gap: 8px; align-items: center; }
+.oline .yr { font-size: 11.5px; color: var(--ink-55); }
+.oline .val { text-align: right; font-size: 13px; white-space: nowrap; }
+.oline.y26 .val { font-weight: 600; }
+.t100 { position: relative; height: 16px; background: var(--ink-06); border-radius: 2px; overflow: hidden; display: flex; }
+.oline.y22 .t100 { height: 10px; }
+.t100 .seg { height: 100%; flex: none; border-right: 1.5px solid var(--paper); }
+.t100 .seg:last-child { border-right: 0; }
+.t100 .s22 { background: var(--ink-72); }
+.t100 .opt { background: var(--red); }
+.t100 .o1 { background: var(--ink-34); }
+.t100 .o2 { background: var(--ink-20); }
+.t100.wait { background: none; border: 1px dashed var(--ink-14); align-items: center; padding-left: 8px; font-size: 11px; color: var(--ink-55); }
+.t100 .g { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1px solid rgba(255, 255, 255, .7); pointer-events: none; }
+.t100 .g.half { border-left: 1px dashed var(--ink-34); }
+.axis100 { position: relative; height: 14px; }
+.axis100 span { position: absolute; transform: translateX(-50%); font-size: 11px; color: var(--ink-55); white-space: nowrap; }
+.axis100 span:first-child { transform: none; }
+.axis100 span:last-child { transform: translateX(-100%); }
+.sw.s22 { background: var(--ink-72); }
+.sw.opt { background: var(--red); }
+.sw.oth { background: var(--ink-34); }
+@media (max-width: 640px) {
+  .orow { grid-template-columns: 1fr; }
+}
+/* Fanfára a oznámení o novém okrsku */
+.hbtns { margin-left: auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip.refresh { background: var(--paper); border-color: var(--blue); color: var(--blue); }
+.chip.refresh:disabled { opacity: .55; cursor: default; }
+.refresh-note { font-size: 12px; color: var(--ink-55); }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 10;
+  background: var(--blue); color: var(--paper); padding: 12px 18px; border-radius: 8px; max-width: calc(100% - 32px); width: max-content;
+  font: 600 14px/1.4 var(--body); box-shadow: 0 6px 24px rgba(0, 0, 0, .18); }
+.toast b { font-family: var(--display); font-weight: 800; letter-spacing: .02em; }
+@media (prefers-reduced-motion: no-preference) { .toast:not([hidden]) { animation: rise .35s ease-out; } }
+@keyframes rise { from { transform: translate(-50%, 12px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+
+/* Preferenční hlasy */
+.pref { display: grid; }
+.prefrow { display: grid; grid-template-columns: 2.2em minmax(140px, 1.2fr) minmax(0, 2fr) 56px 84px 200px; gap: 6px 14px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--ink-06); }
+.prefrow.head { border-bottom: 1px solid var(--ink-14); padding-top: 0; }
+.prefrow.head span { font: 600 11.5px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-55); }
+.prefrow .por { font: 800 15px/1 var(--display); color: var(--ink-55); }
+.prefrow .jm { font-weight: 600; font-size: 14px; min-width: 0; }
+.prefrow .num { text-align: right; white-space: nowrap; }
+.prefrow .rel { font-size: 12.5px; color: var(--ink-72); }
+.ptrack { position: relative; height: 12px; background: var(--ink-06); border-radius: 2px; }
+.ptrack i.v { position: absolute; inset: 0 auto 0 0; background: var(--ink-34); border-radius: 2px; }
+.prefrow.jump .ptrack i.v { background: var(--blue); }
+.ptrack .thr { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 2px dashed var(--ink); }
+.prefrow.elected .jm::after { content: ""; }
+.pill.jump { background: var(--blue); color: var(--paper); }
+.pill.el { border: 1.5px solid var(--blue); color: var(--blue); }
+.pills { display: flex; flex-wrap: wrap; gap: 4px; }
+@media (max-width: 700px) {
+  .prefrow { grid-template-columns: 2em minmax(0, 1fr) 52px 60px; grid-template-areas: "por jm hl rel" ". trk trk trk" ". pil pil pil"; }
+  .prefrow .por { grid-area: por; } .prefrow .jm { grid-area: jm; } .prefrow .ptrack { grid-area: trk; }
+  .prefrow .hl { grid-area: hl; } .prefrow .rel { grid-area: rel; } .prefrow .pills { grid-area: pil; }
+  .prefrow.head .ptrack, .prefrow.head .pills { display: none; }
+}
+
+.okpref { display: grid; gap: 2px; }
+.okp { display: grid; grid-template-columns: 2em minmax(0, 1.6fr) minmax(60px, 1fr) 3em; gap: 8px; align-items: center; font-size: 13px; padding: 2px 0; }
+.okp .r { color: var(--ink-55); font-variant-numeric: tabular-nums; }
+.okp .j { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.okp .j small { color: var(--ink-55); font-size: 11px; }
+.okp .t { height: 8px; background: var(--ink-06); border-radius: 2px; position: relative; }
+.okp .t i { position: absolute; inset: 0 auto 0 0; background: var(--ink-34); border-radius: 2px; }
+.okp.hi .t i { background: var(--blue); }
+.okp.hi .j { font-weight: 600; }
+.okp .h { text-align: right; font-weight: 600; }
+
+footer { font-size: 12.5px; color: var(--ink-55); display: grid; gap: 6px; border-top: 1px solid var(--ink-14); padding-top: 14px; }
+footer p { margin: 0; max-width: 90ch; }
+footer a { color: var(--blue); }
+</style>
+<style>
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img { max-width: 100%; }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Volby do zastupitelstva města · Třinec · 9.–10. 10. 2026 · 27 mandátů</div>
+    <h1>Sčítání Třinec 2026</h1>
+    <div class="status">
+      <div class="count" id="count">0,0 % <small>sečteno · 0 z 38 okrsků</small></div>
+      <div class="meta">
+        <span class="live"><span class="dot off" id="dot"></span><span id="fresh">Čekám na data ČSÚ…</span></span>
+        <span id="cr"></span>
+      </div>
+      <div class="hbtns">
+        <span class="refresh-note" id="refresh-note" aria-live="polite"></span>
+        <button class="chip refresh" id="refresh" type="button">Obnovit data</button>
+        <span class="refresh-note" id="sound-hint" hidden>Fanfára se ozve po prvním klepnutí na stránku</span>
+      </div>
+    </div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+    <div class="notice" id="notice" hidden></div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Pohled">
+    <button class="tab" role="tab" id="t-scitani" aria-controls="p-scitani" aria-selected="true" data-tab="scitani">Sčítání</button>
+    <button class="tab" role="tab" id="t-opt" aria-controls="p-opt" aria-selected="false" data-tab="opt">Srovnání okrsků</button>
+    <button class="tab" role="tab" id="t-pref" aria-controls="p-pref" aria-selected="false" data-tab="pref">Preferenční hlasy</button>
+  </nav>
+
+  <div class="panel" id="p-opt" role="tabpanel" aria-labelledby="t-opt" hidden>
+    <section aria-labelledby="h-opt">
+      <div class="sec-head">
+        <h2 id="h-opt">Osobnosti pro Třinec po okrscích</h2>
+        <div class="legend">
+          <span><i class="sw s22"></i>OPT 2022</span>
+          <span><i class="sw opt"></i>OPT 2026</span>
+        </div>
+      </div>
+      <div class="kv" id="opt-kv"></div>
+      <div class="filters" role="group" aria-label="Řazení okrsků">
+        <button class="chip" id="s-num" aria-pressed="true" data-s="num">Podle čísla</button>
+        <button class="chip" id="s-22" aria-pressed="false" data-s="s22">Nejsilnější 2022</button>
+        <button class="chip" id="s-delta" aria-pressed="false" data-s="delta">Největší propad</button>
+      </div>
+      <div class="cmp" id="cmp"></div>
+    </section>
+  </div>
+
+  <div class="panel" id="p-pref" role="tabpanel" aria-labelledby="t-pref" hidden>
+    <section aria-labelledby="h-pref">
+      <div class="sec-head">
+        <h2 id="h-pref">Preferenční hlasy kandidátů OPT</h2>
+        <span class="fine" id="pref-scope">ze sečtených okrsků</span>
+      </div>
+      <div class="kv" id="pref-kv"></div>
+      <div class="filters" role="group" aria-label="Řazení kandidátů">
+        <button class="chip" id="p-list" aria-pressed="true" data-p="list">Podle listiny</button>
+        <button class="chip" id="p-votes" aria-pressed="false" data-p="votes">Podle hlasů</button>
+      </div>
+      <div class="pref" id="pref"></div>
+      <p class="fine">Kdo získá aspoň o 10 % víc hlasů, než je průměr na kandidáta listiny, posouvá se na první místa (víc takových podle počtu hlasů); ostatní mandáty obsazují kandidáti podle pořadí na listině. Do dosčítání jde o průběžný stav a orientační počet mandátů.</p>
+    </section>
+  </div>
+
+  <div class="panel" id="p-scitani" role="tabpanel" aria-labelledby="t-scitani">
+  <div class="main">
+    <section aria-labelledby="h-okrsky">
+      <div class="sec-head">
+        <h2 id="h-okrsky">Okrsky</h2>
+        <div class="legend">
+          <span><i class="sw done"></i>sečteno: OPT 2026 a rozdíl proti 2022</span>
+          <span><i class="sw wait"></i>čeká: OPT v roce 2022</span>
+          <span>šířka dlaždice = počet voličů v seznamu</span>
+          <span><b>klepni na okrsek</b> = jeho účast a výsledky stran</span>
+          <span><i class="sw scale"></i>čekající: tmavší = víc voličů</span>
+        </div>
+      </div>
+      <div class="tiles" id="tiles"></div>
+    </section>
+
+    <section aria-labelledby="h-vysledek" id="res" class="res">
+      <div class="sec-head">
+        <h2 id="h-vysledek">Průběžný výsledek</h2>
+        <span class="fine" id="res-scope">ze sečtených okrsků</span>
+      </div>
+      <div id="parties"></div>
+      <div class="kv" id="kv"></div>
+      <div class="est" id="est"></div>
+    </section>
+  </div>
+
+  <section aria-labelledby="h-zvoleni" id="zvoleni-sec" hidden>
+    <div class="sec-head"><h2 id="h-zvoleni">Zvolení zastupitelé</h2><span class="fine">oficiální výsledek ČSÚ</span></div>
+    <div class="elected" id="zvoleni"></div>
+  </section>
+
+  <section aria-labelledby="h-tab">
+    <div class="sec-head">
+      <h2 id="h-tab">Okrsky v tabulce</h2>
+      <div class="filters" role="group" aria-label="Filtr okrsků">
+        <button class="chip" id="f-all" aria-pressed="true" data-f="all">Všechny</button>
+        <button class="chip" id="f-done" aria-pressed="false" data-f="done">Sečtené</button>
+        <button class="chip" id="f-wait" aria-pressed="false" data-f="wait">Čekající</button>
+      </div>
+    </div>
+    <div class="tablebox">
+      <table>
+        <thead>
+          <tr>
+            <th>Okrsek</th><th id="th-misto">Volební místnost</th><th>Stav</th><th class="num">Sečteno</th>
+            <th class="num">Účast</th><th class="num">OPT 2026</th><th class="num">OPT 2022</th><th class="num">Rozdíl</th><th>Vede v okrsku</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+  </div>
+
+  <footer>
+    <p>Zdroj: otevřená data ČSÚ (volby.gov.cz, okrskové dávky a souhrn za zastupitelstvo 598810). Stránka si data stahuje přímo z ČSÚ každou minutu; když se nedaří, objeví se nahoře upozornění.</p>
+    <p>Mandáty jsou do dosčítání orientační: d'Hondt na 27 míst, práh 5 % z platných hlasů, počítáno jen ze sečtených okrsků. Odhad OPT přenáší poměr výsledku 2026/2022 ze sečtených okrsků na nesečtené podle výsledků roku 2022 (okrsky 1–38 mají stejná čísla jako v roce 2022, hranice se ale mohly posunout).</p>
+    <p>Oficiální výsledky: <a href="https://volby.gov.cz/app/kv2026/cs/20261009/home" target="_blank" rel="noopener">volby.gov.cz</a></p>
+  </footer>
+</div>
+
+<script>
+const OPT = 3;
+const PARTIES = {
+  1: { short: "Volte Třinec", sub: "Volt + NK" },
+  2: { short: "Společná levice", sub: "KSČM + ČSSD" },
+  3: { short: "Osobnosti pro Třinec", sub: "NG + NK" },
+  4: { short: "KDU-ČSL", sub: "" },
+  5: { short: "ANO 2011", sub: "" },
+  6: { short: "Společně pro Třinec", sub: "ODS + TOP 09" },
+  7: { short: "Nezávislí Třinec", sub: "NEZ + NK" }
+};
+// 2022 po okrscích: [voliči, odevzdané obálky, platné hlasy, hlasy OPT] — ČSÚ KV2022 (33 mandátů)
+const B22 = {"1":[554,138,3988,1089],"2":[726,251,7257,2262],"3":[802,260,7508,1915],"4":[794,250,7069,2072],"5":[623,288,8362,2826],"6":[654,302,8882,3690],"7":[843,376,11002,4423],"8":[717,245,7290,2654],"9":[907,256,7390,2728],"10":[749,271,8564,2909],"11":[735,270,7866,3246],"12":[647,203,5943,2320],"13":[697,241,7190,2658],"14":[758,216,6555,2453],"15":[726,292,8657,2877],"16":[812,338,10120,4659],"17":[2023,340,9821,2970],"18":[826,348,10161,4673],"19":[585,115,3297,1183],"20":[648,163,4663,1592],"21":[413,95,2710,740],"22":[759,338,8022,1777],"23":[850,350,10035,4555],"24":[918,323,9324,4404],"25":[635,256,7563,2632],"26":[531,153,4173,1488],"27":[980,358,10484,3754],"28":[797,256,7608,3224],"29":[270,106,3241,1524],"30":[316,144,4087,890],"31":[912,396,11420,3443],"32":[899,373,10676,4226],"33":[828,336,9871,3853],"34":[636,248,6695,1511],"35":[394,156,4760,1840],"36":[656,257,7369,2507],"37":[785,240,6831,2251],"38":[682,248,7093,2576]};
+// Volební místnosti: oznámení města o době a místě konání voleb (trinecko.cz, 22. 9. 2026); cast = část obce voličů okrsku
+const MISTA = {"1":{"k":"Gymnázium","m":"Gymnázium Třinec, Komenského 713","cast":"Lyžbice"},"2":{"k":"Kino Kosmos","m":"Městské kino Kosmos Třinec, Dukelská 689","cast":"Lyžbice"},"3":{"k":"ZŠ Zátopkových","m":"Základní škola Dany a Emila Zátopkových Třinec, Jablunkovská 501","cast":"Lyžbice"},"4":{"k":"ZŠ Zátopkových","m":"Základní škola Dany a Emila Zátopkových Třinec, Jablunkovská 501","cast":"Lyžbice"},"5":{"k":"SŠ Jablunkovská","m":"Střední škola, Základní škola a Mateřská škola Třinec, Jablunkovská 241","cast":"Lyžbice"},"6":{"k":"Obchodní akademie","m":"Třinecká obchodní akademie IT a VS, Beskydská 1140","cast":"Lyžbice"},"7":{"k":"Obchodní akademie","m":"Třinecká obchodní akademie IT a VS, Beskydská 1140","cast":"Lyžbice"},"8":{"k":"STaRS Tyršova","m":"STaRS Třinec, Tyršova 275","cast":"Lyžbice"},"9":{"k":"Knihovna","m":"Knihovna Třinec, Lidická 541","cast":"Lyžbice"},"10":{"k":"ZŠ Kopernikova","m":"Základní škola a mateřská škola Třinec, Kopernikova 696","cast":"Lyžbice"},"11":{"k":"Knihovna","m":"Knihovna Třinec, Lidická 541","cast":"Lyžbice"},"12":{"k":"Knihovna","m":"Knihovna Třinec, Lidická 541","cast":"Lyžbice"},"13":{"k":"ZŠ Kopernikova","m":"Základní škola a mateřská škola Třinec, Kopernikova 696","cast":"Lyžbice"},"14":{"k":"ZŠ Slezská","m":"Základní škola Třinec, Slezská 773","cast":"Lyžbice"},"15":{"k":"ZŠ Slezská","m":"Základní škola Třinec, Slezská 773","cast":"Lyžbice"},"16":{"k":"ZŠ Slezská","m":"Základní škola Třinec, Slezská 773","cast":"Lyžbice"},"17":{"k":"Magistrát","m":"Magistrát města Třince, Jablunkovská 160","cast":"Staré Město"},"18":{"k":"ZŠ P. Bezruče","m":"Základní škola Petra Bezruče a mateřská škola Třinec, Bezručova 418","cast":"Staré Město"},"19":{"k":"Gymnázium","m":"Gymnázium Třinec, Komenského 713","cast":"Staré Město"},"20":{"k":"Gymnázium","m":"Gymnázium Třinec, Komenského 713","cast":"Staré Město"},"21":{"k":"Střelnice Borek","m":"Střelnice Borek, Staré Město vedle 865","cast":"Staré Město"},"22":{"k":"ZŠ Osůvky","m":"Základní škola Třinec, Osůvky 48","cast":"Konská"},"23":{"k":"MŠ Konská","m":"Mateřská škola Třinec, Konská 419","cast":"Konská"},"24":{"k":"ZŠ Míru","m":"Základní škola a mateřská škola Třinec, Míru 247","cast":"Kanada"},"25":{"k":"TJ Beskyd Líštná","m":"Budova \"TJ Beskyd Líštná\", Dolní Líštná 328","cast":"Dolní Líštná"},"26":{"k":"Klub důchodců TŽ","m":"Klub důchodců TŽ Třinec, Dolní Líštná 2","cast":"Dolní Líštná"},"27":{"k":"ZŠ Kaštanová","m":"Základní škola a mateřská škola Třinec, Kaštanová 412","cast":"Dolní Líštná"},"28":{"k":"Domov Sosna","m":"Domov Sosna, Habrová 302","cast":"Dolní Líštná"},"29":{"k":"KD Kojkovice","m":"Kulturní dům, Kojkovice 36","cast":"Kojkovice"},"30":{"k":"Farní sbor Líštná","m":"Farní sbor SCEAV v Třinci, Horní Líštná 10","cast":"Horní Líštná"},"31":{"k":"ZŠ Oldřichovice","m":"Základní škola a mateřská škola Třinec, Oldřichovice 275","cast":"Oldřichovice"},"32":{"k":"Domov Oldřichovice","m":"Pečovatelská služba, Domov Oldřichovice, Oldřichovice 783","cast":"Oldřichovice"},"33":{"k":"Domov Oldřichovice","m":"Pečovatelská služba, Domov Oldřichovice, Oldřichovice 783","cast":"Oldřichovice"},"34":{"k":"ZŠ Karpentná","m":"Základní škola a mateřská škola Karpentná, Karpentná 91","cast":"Karpentná"},"35":{"k":"MŠ Tyra","m":"Mateřská škola Tyra, Tyra 80","cast":"Tyra"},"36":{"k":"Hasičárna Guty","m":"Hasičská zbrojnice Guty, Guty 175","cast":"Guty"},"37":{"k":"ZŠ Nebory","m":"Základní škola Nebory, Nebory 165","cast":"Nebory"},"38":{"k":"ZŠ Nebory","m":"Základní škola Nebory, Nebory 165","cast":"Nebory"}};
+
+const SEATS = 27, THR = 0.05, STALE_MIN = 8;
+const VOT22_ALL = Object.values(B22).reduce((a, b) => a + b[0], 0);
+const seatWordCz = n => n === 1 ? "mandát" : n >= 2 && n <= 4 ? "mandáty" : "mandátů";
+let state = null;
+let filter = "all";
+
+const $ = id => document.getElementById(id);
+const nf1 = new Intl.NumberFormat("cs-CZ", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const nf0 = new Intl.NumberFormat("cs-CZ");
+const pct = x => nf1.format(x * 100) + " %";
+const pp = x => (x > 0 ? "+" : x < 0 ? "−" : "±") + nf1.format(Math.abs(x * 100));
+const hhmm = iso => iso ? iso.slice(11, 16) : "–";
+const parseIso = iso => iso ? new Date(iso.replace(" ", "T")) : null;
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function dhondt(votes) {
+  const total = Object.values(votes).reduce((a, b) => a + b, 0);
+  const ok = Object.keys(votes).filter(k => total > 0 && votes[k] / total >= THR);
+  const seats = Object.fromEntries(Object.keys(votes).map(k => [k, 0]));
+  if (!ok.length) return seats;
+  for (let s = 0; s < SEATS; s++) {
+    let best = null, bq = -1;
+    for (const k of ok) { const q = votes[k] / (seats[k] + 1); if (q > bq) { bq = q; best = k; } }
+    seats[best]++;
+  }
+  return seats;
+}
+
+function derive() {
+  const done = new Map();
+  for (const o of (state?.okrsky || [])) done.set(o.c, o);
+  const votes = Object.fromEntries(Object.keys(PARTIES).map(k => [k, 0]));
+  let valid = 0, env = 0, voters = 0, v22 = 0, opt22 = 0, env22 = 0, vot22 = 0;
+  for (const o of done.values()) {
+    o.hlasy.forEach((h, i) => { votes[i + 1] += h; });
+    valid += o.platne || 0; env += o.obalky || 0; voters += o.volici || 0;
+    const b = B22[o.c];
+    if (b) { vot22 += b[0]; env22 += b[1]; v22 += b[2]; opt22 += b[3]; }
+  }
+  const official = !!state?.obec?.je_spocteno && (state?.strany || []).length;
+  let rows;
+  if (official) {
+    rows = state.strany.map(s => ({ c: s.c, votes: s.hlasy, share: s.proc / 100, seats: s.mandaty, zvoleni: s.zvoleni || [] }));
+  } else {
+    const seats = dhondt(votes);
+    rows = Object.keys(PARTIES).map(k => ({ c: +k, votes: votes[k], share: valid ? votes[k] / valid : 0, seats: valid ? seats[k] : null }));
+  }
+  rows.sort((a, b) => b.votes - a.votes || a.c - b.c);
+
+  // Odhad OPT: poměr 2026/2022 ze sečtených okrsků přenesený na nesečtené
+  let est = null;
+  if (done.size >= 3 && v22 > 0 && valid > 0 && !official) {
+    const s26 = votes[OPT] / valid, s22 = opt22 / v22, ratio = s26 / s22, t = valid / v22;
+    let restOpt22 = 0, restValid22 = 0;
+    for (let c = 1; c <= 38; c++) if (!done.has(c)) { restOpt22 += B22[c][3]; restValid22 += B22[c][2]; }
+    const share = (votes[OPT] + ratio * t * restOpt22) / (valid + t * restValid22);
+    est = { s26, s22, ratio, share };
+    // mandáty podle trendu: OPT = odhadnutý podíl, ostatní strany si drží vzájemný poměr ze sečtených okrsků
+    const others = valid - votes[OPT];
+    const seatsAt = s => {
+      const sh = {};
+      for (const k of Object.keys(votes)) sh[k] = Number(k) === OPT ? s : (others ? votes[k] / others * (1 - s) : 0);
+      return dhondt(sh)[OPT];
+    };
+    est.seats = seatsAt(share);
+    est.lo = seatsAt(Math.max(0, share - 0.02));
+    est.hi = seatsAt(Math.min(1, share + 0.02));
+  }
+  return { done, votes, valid, env, voters, env22, vot22, rows, official, est };
+}
+
+function renderHeader(d) {
+  const n = d.done.size;
+  const offN = state?.obec?.okrsky_zprac;
+  const votersPct = d.voters && VOT22_ALL ? ` · ≈ ${nf0.format(Math.round(d.voters / VOT22_ALL * 100))} % voličů` : "";
+  $("count").innerHTML = `${nf1.format(n / 38 * 100)} % <small>sečteno · ${n} z 38 okrsků${votersPct}</small>`;
+  $("count").title = "Podíl sečtených okrsků (jak ho uvádí ČSÚ). Podíl voličů je přibližný: voliči v sečtených okrscích vůči seznamům z roku 2022.";
+  const prog = $("progress");
+  prog.innerHTML = "";
+  for (let c = 1; c <= 38; c++) { const i = document.createElement("i"); if (d.done.has(c)) i.className = "on"; prog.appendChild(i); }
+
+  const dot = $("dot"), notice = $("notice");
+  if (!state) { $("fresh").textContent = "Čekám na data ČSÚ…"; dot.className = "dot off"; notice.hidden = true; return; }
+  const got = parseIso(state.stazeno);
+  const ageMin = got ? (Date.now() - got.getTime()) / 60000 : null;
+  const finished = !!state.obec?.je_spocteno;
+  const parts = state.davka == null ? [`data ČSÚ ${hhmm(state.obec?.cas)}`, `kontrola ${hhmm(state.stazeno)}`] : [`data ČSÚ ${hhmm(state.cr?.cas)} (dávka ${state.davka})`, `staženo ${hhmm(state.stazeno)}`];
+  if (offN != null && offN !== n) parts.push(`souhrn ČSÚ ${offN}/38 k ${hhmm(state.obec?.cas)}`);
+  $("fresh").textContent = finished ? `Sečteno, oficiální výsledek · ${parts.join(" · ")}` : parts.join(" · ");
+  dot.className = finished || (ageMin != null && ageMin > STALE_MIN) ? "dot off" : "dot";
+  if (state.cr?.okrsky_celkem) $("cr").textContent = `ČR: ${pct(state.cr.okrsky_zprac / state.cr.okrsky_celkem)} okrsků`;
+  if (!finished && ageMin != null && ageMin > STALE_MIN) {
+    notice.hidden = false;
+    notice.textContent = `Poslední aktualizace před ${Math.round(ageMin)} min. Přenos dat se možná zastavil; aktuální stav ověř na volby.gov.cz.`;
+  } else notice.hidden = true;
+}
+
+function renderTiles(d) {
+  const latest = parseIso(state?.stazeno);
+  const tiles = $("tiles");
+  tiles.innerHTML = "";
+  for (let c = 1; c <= 38; c++) {
+    const o = d.done.get(c), b = B22[c], m = MISTA[c];
+    const el = document.createElement("div");
+    el.dataset.c = c; el.tabIndex = 0; el.setAttribute("role", "button");
+    el.setAttribute("aria-pressed", String(selOk === c));
+    const s22 = b[3] / b[2];
+    let html = `<span class="n">${c}</span>`;
+    if (m) html += `<span class="l">${esc(m.k)}</span>`;
+    if (o) {
+      const s = o.platne ? o.hlasy[OPT - 1] / o.platne : 0;
+      const isNew = latest && o.cas && (latest - parseIso(o.cas)) / 60000 <= 10;
+      el.className = "tile done";
+      html += `<span class="v">OPT ${pct(s)}</span><span class="d">${pp(s - s22)} % · ${hhmm(o.cas)}</span>`;
+      if (isNew) html += `<span class="new">nové</span>`;
+      el.title = `Okrsek ${c}: OPT ${pct(s)} (2022: ${pct(s22)}), sečteno ${hhmm(o.cas)}`;
+    } else {
+      el.className = "tile";
+      // lehké podbarvení podle velikosti okrsku (voliči 2022): 270 → nejsvětlejší, 1 000 a víc → nejtmavší
+      const k = Math.min(1, Math.max(0, (b[0] - 270) / (1000 - 270)));
+      el.style.background = `rgba(50, 50, 50, ${(0.06 + 0.40 * k).toFixed(3)})`;
+      el.style.borderColor = "var(--ink-34)";
+      html += `<span class="d">2022: ${pct(s22)}</span>`;
+      el.title = `Okrsek ${c}: zatím nesečteno; OPT 2022 ${pct(s22)}`;
+    }
+    // šířka úměrná voličům: 2026 u sečtených, jinak seznam 2022; nejmenší okrsky mají minimum kvůli čitelnosti
+    const vol = o?.volici || b[0];
+    el.style.flex = `${(vol / 1000).toFixed(3)} 1 ${Math.max(78, Math.round(vol / 5.2))}px`; // řádek se dorovná úměrně voličům
+    html += `<span class="vol">${nf0.format(vol)} voličů${o?.volici ? "" : " (2022)"}</span>`;
+    el.innerHTML = html;
+    if (selOk === c) el.classList.add("sel");
+    tiles.appendChild(el);
+  }
+  const fill = document.createElement("i"); // poslední řádek se nenatahuje
+  fill.style.flex = "1000 1 0"; fill.setAttribute("aria-hidden", "true");
+  tiles.appendChild(fill);
+}
+
+function renderOkrsek(d, c) {
+  const box = $("parties"), o = d.done.get(c), b = B22[c], m = MISTA[c];
+  const s22 = b[3] / b[2];
+  $("h-vysledek").innerHTML = `<span class="selbadge">Vybraný okrsek${o ? "" : " · zatím nesečtený"}</span>Okrsek ${c}${m ? " · " + esc(m.k) : ""}`;
+  $("res-scope").innerHTML = `<button class="chip back" id="res-back" type="button">← Zpět na celé město</button>`;
+  setSelMode(true);
+  const kv = [];
+  if (o) {
+    const rows = o.hlasy.map((v, i) => ({ c: i + 1, votes: v, share: o.platne ? v / o.platne : 0 })).sort((a, z) => z.votes - a.votes || a.c - z.c);
+    const scale = Math.ceil(Math.max(0.3, ...rows.map(r => r.share)) * 10) / 10;
+    box.className = "parties";
+    box.innerHTML = rows.map(r => {
+      const p = PARTIES[r.c] || { short: "Strana " + r.c, sub: "" };
+      return `<div class="prow">
+        <div class="pname">${esc(p.short)}<small>${p.sub ? esc(p.sub) + " · " : ""}${nf0.format(r.votes)} hlasů</small></div>
+        <div class="pnum"><b>${pct(r.share)}</b></div>
+        <div class="bar" role="img" aria-label="${esc(p.short)} ${pct(r.share)}"><i class="${r.c === OPT ? "opt" : ""}" style="width:${(r.share / scale * 100).toFixed(2)}%"></i><span class="thr" style="left:${(THR / scale * 100).toFixed(2)}%" title="5 %"></span></div>
+      </div>`;
+    }).join("") + `<div class="seats-note">Výsledek jen tohoto okrsku (sečteno ${hhmm(o.cas)}). Mandáty se počítají za celé město.</div>`;
+    const s = o.platne ? o.hlasy[OPT - 1] / o.platne : 0;
+    kv.push(["Volební účast", o.volici ? pct(o.obalky / o.volici) : "–", `2022: ${pct(b[1] / b[0])}`]);
+    kv.push(["Voliči v seznamu", nf0.format(o.volici || 0), `2022: ${nf0.format(b[0])}`]);
+    kv.push(["Odevzdané obálky", nf0.format(o.obalky || 0), `2022: ${nf0.format(b[1])}`]);
+    kv.push(["OPT", pct(s), `2022: ${pct(s22)} · ${pp(s - s22)} %`]);
+  } else {
+    box.className = "";
+    box.innerHTML = `<div class="empty">Okrsek ${c} ještě není sečtený. Výsledky se tu ukážou hned, jak ho ČSÚ zpracuje.</div>`;
+    kv.push(["Volební účast 2022", pct(b[1] / b[0]), ""]);
+    kv.push(["Voliči v seznamu 2022", nf0.format(b[0]), ""]);
+    kv.push(["OPT 2022", pct(s22), ""]);
+  }
+  $("kv").innerHTML = kv.map(([k, v, s]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd>${s ? `<dt>${esc(s)}</dt>` : ""}</div>`).join("");
+  const place = m ? `<p>Volební místnost: ${esc(m.m)}${m.cast ? `<br>Voliči z části: ${esc(m.cast)}` : ""}</p>` : "";
+  let prefHtml = "";
+  if (o && Array.isArray(o.pref_opt) && o.pref_opt.length) {
+    const names = new Map((state?.pref?.kandidati || []).map(([por, jm]) => [por, jm]));
+    const list = o.pref_opt.map((v, i) => ({ por: i + 1, jm: names.get(i + 1) || "Kandidát č. " + (i + 1), v }));
+    const tot = list.reduce((a, x) => a + x.v, 0), avg = tot / list.length, max = Math.max(1, ...list.map(x => x.v));
+    list.sort((a, z) => z.v - a.v || a.por - z.por);
+    prefHtml = `<span class="eyebrow">Preferenční hlasy OPT v okrsku</span>
+      <div class="okpref">${list.map((x, i) => `<div class="okp${x.v >= avg * 1.1 ? " hi" : ""}">
+        <span class="r">${i + 1}.</span><span class="j">${esc(x.jm)} <small>č. ${x.por}</small></span>
+        <span class="t"><i style="width:${(x.v / max * 100).toFixed(1)}%"></i></span><span class="h">${nf0.format(x.v)}</span></div>`).join("")}</div>
+      <p class="fine">Seřazeno podle hlasů v okrsku. Modře kandidáti aspoň o 10 % nad průměrem listiny v tomto okrsku (${nf1.format(avg)} hlasu). Posun na listině se ale počítá jen za celé město.</p>`;
+  }
+  $("est").innerHTML = prefHtml + place;
+}
+
+function setSelMode(on) {
+  $("res").classList.toggle("sel-mode", on);
+  document.body.classList.toggle("has-sel", on);
+  let fb = document.getElementById("float-back");
+  if (on && !fb) {
+    fb = document.createElement("button");
+    fb.id = "float-back"; fb.className = "float-back"; fb.type = "button"; fb.textContent = "← Celé město";
+    fb.addEventListener("click", () => { selectOkrsek(selOk); });
+    document.body.appendChild(fb);
+  }
+  if (fb) fb.hidden = !on;
+}
+
+function renderParties(d) {
+  if (selOk) return renderOkrsek(d, selOk);
+  setSelMode(false);
+  const box = $("parties");
+  $("h-vysledek").textContent = "Průběžný výsledek";
+  $("res-scope").textContent = d.official ? "oficiální výsledek ČSÚ" : "ze sečtených okrsků";
+  if (!d.done.size && !d.official) {
+    box.innerHTML = `<div class="empty">Zatím není sečtený žádný třinecký okrsek. Výsledek se tu objeví s první dávkou ČSÚ, která Třinec obsahuje.</div>`;
+    $("kv").innerHTML = ""; $("est").innerHTML = "";
+    return;
+  }
+  const max = Math.max(0.3, ...d.rows.map(r => r.share));
+  const scale = Math.ceil(max * 10) / 10;
+  box.className = "parties";
+  box.innerHTML = d.rows.map(r => {
+    const p = PARTIES[r.c] || { short: "Strana " + r.c, sub: "" };
+    const seatWord = n => n === 1 ? "mandát" : n >= 2 && n <= 4 ? "mandáty" : "mandátů";
+    const seats = r.seats == null ? "" : `<span class="seat${r.seats ? "" : " zero"}" title="${r.seats} ${seatWord(r.seats)}${d.official ? "" : " (orientačně)"}" aria-label="${r.seats} ${seatWord(r.seats)}">${r.seats}</span>`;
+    return `<div class="prow">
+      <div class="pname">${esc(p.short)}${p.sub ? `<small>${esc(p.sub)} · ${nf0.format(r.votes)} hlasů</small>` : `<small>${nf0.format(r.votes)} hlasů</small>`}</div>
+      <div class="pnum">${seats}<b>${pct(r.share)}</b></div>
+      <div class="bar" role="img" aria-label="${esc(p.short)} ${pct(r.share)}"><i class="${r.c === OPT ? "opt" : ""}" style="width:${(r.share / scale * 100).toFixed(2)}%"></i><span class="thr" style="left:${(THR / scale * 100).toFixed(2)}%" title="práh 5 %"></span></div>
+    </div>`;
+  }).join("") + `<div class="seats-note">Číslo v kolečku = počet mandátů z 27${d.official ? "" : " (orientační přepočet ze sečtených okrsků)"}. Čárkovaná čára = práh 5 %.</div>`;
+
+  const kv = [];
+  if (d.voters) kv.push(["Účast v sečtených okrscích", pct(d.env / d.voters), d.vot22 ? `2022 tamtéž ${pct(d.env22 / d.vot22)}` : ""]);
+  if (d.voters) kv.push(["Voliči v sečtených okrscích", nf0.format(d.voters), `2022 v celém městě ${nf0.format(VOT22_ALL)}`]);
+  if (d.official && state.obec?.ucast_proc != null) kv.splice(0, kv.length, ["Účast", nf1.format(state.obec.ucast_proc) + " %", ""], ["Voliči v seznamu", nf0.format(state.obec.volici || 0), ""]);
+  $("kv").innerHTML = kv.map(([k, v, s]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd>${s ? `<dt>${esc(s)}</dt>` : ""}</div>`).join("");
+
+  const est = $("est");
+  if (d.official) { est.innerHTML = ""; return; }
+  if (!d.est) {
+    est.innerHTML = `<span class="eyebrow">Odhad OPT po dosčítání</span><p>Odhad se ukáže po třech sečtených okrscích.</p>`;
+    return;
+  }
+  est.innerHTML = `<span class="eyebrow">Odhad OPT po dosčítání</span>
+    <div class="estrow"><span class="big">≈ ${pct(d.est.share)}</span><span class="seat big-seat" title="odhad mandátů OPT">${d.est.seats}</span><span class="estseats">${seatWordCz(d.est.seats)} z 27<small>rozpětí ${d.est.lo === d.est.hi ? d.est.lo : d.est.lo + "–" + d.est.hi} při odchylce ±2 % hlasů</small></span></div>
+    <p>Sečtené okrsky dávaly OPT v roce 2022 ${pct(d.est.s22)}, letos ${pct(d.est.s26)} (poměr ${nf1.format(d.est.ratio * 100)} % původní síly). Stejný poměr přenesený na ${38 - d.done.size} nesečtených okrsků podle výsledků 2022. Mandáty: ostatní strany si drží vzájemný poměr ze sečtených okrsků, d'Hondt na 27 míst s prahem 5 %.</p>`;
+}
+
+function renderElected(d) {
+  const sec = $("zvoleni-sec");
+  const withList = d.official ? d.rows.filter(r => r.zvoleni && r.zvoleni.length) : [];
+  if (!withList.length) { sec.hidden = true; return; }
+  sec.hidden = false;
+  $("zvoleni").innerHTML = withList.map(r => {
+    const p = PARTIES[r.c] || { short: "Strana " + r.c };
+    return `<div><h3>${esc(p.short)} · ${r.seats}</h3><ol>${r.zvoleni.map(z => `<li>${esc(z.jmeno)} <span>(č. ${z.poradi}, ${nf0.format(z.hlasy)} hl.)</span></li>`).join("")}</ol></div>`;
+  }).join("");
+}
+
+function renderTable(d) {
+  const hasMista = Object.keys(MISTA).length > 0;
+  $("th-misto").hidden = !hasMista;
+  const rows = [];
+  for (let c = 1; c <= 38; c++) {
+    const o = d.done.get(c), b = B22[c], s22 = b[3] / b[2];
+    if (filter === "done" && !o) continue;
+    if (filter === "wait" && o) continue;
+    const m = MISTA[c];
+    const misto = hasMista ? `<td>${m ? esc(m.m) + (m.cast ? `<br><span class="fine">voliči: ${esc(m.cast)}</span>` : "") : ""}</td>` : "";
+    if (o) {
+      const s = o.platne ? o.hlasy[OPT - 1] / o.platne : 0;
+      let wi = 0; o.hlasy.forEach((h, i) => { if (h > o.hlasy[wi]) wi = i; });
+      const win = PARTIES[wi + 1]?.short || "";
+      const winPct = o.platne ? o.hlasy[wi] / o.platne : 0;
+      rows.push(`<tr class="done"><td class="c">${c}</td>${misto}<td><span class="pill done">sečteno</span></td><td class="num">${hhmm(o.cas)}</td>
+        <td class="num">${o.volici ? pct(o.obalky / o.volici) : "–"}</td><td class="num"><b>${pct(s)}</b></td><td class="num">${pct(s22)}</td><td class="num">${pp(s - s22)} %</td>
+        <td>${wi + 1 === OPT ? "<b>" + esc(win) + "</b>" : esc(win)} <span class="fine">${pct(winPct)}</span></td></tr>`);
+    } else {
+      rows.push(`<tr class="wait"><td class="c">${c}</td>${misto}<td><span class="pill wait">čeká</span></td><td class="num">–</td>
+        <td class="num">2022: ${pct(b[1] / b[0])}</td><td class="num">–</td><td class="num">${pct(s22)}</td><td class="num">–</td><td></td></tr>`);
+    }
+  }
+  $("tbody").innerHTML = rows.join("") || `<tr><td colspan="9" class="fine">Žádné okrsky v tomto filtru.</td></tr>`;
+}
+
+let selOk = null;
+function selectOkrsek(c) {
+  selOk = selOk === c ? null : c;
+  const d = derive();
+  renderTiles(d); renderParties(d);
+  if (selOk && window.innerWidth < 940) $("h-vysledek").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+$("tiles").addEventListener("click", e => { const t = e.target.closest(".tile"); if (t) selectOkrsek(Number(t.dataset.c)); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && selOk) selectOkrsek(selOk); });
+$("tiles").addEventListener("keydown", e => {
+  const t = e.target.closest(".tile");
+  if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); selectOkrsek(Number(t.dataset.c)); }
+});
+document.addEventListener("click", e => { if (e.target.closest("#res-back")) { const back = selOk; selectOkrsek(back); if (window.innerWidth < 940) $("h-okrsky").scrollIntoView({ behavior: "smooth", block: "start" }); } });
+
+let sortMode = "num";
+function renderOpt(d) {
+  const all22 = Object.values(B22).reduce((a, b) => [a[0] + b[2], a[1] + b[3]], [0, 0]);
+  let v26 = 0, o26 = 0, v22 = 0, o22 = 0;
+  for (const o of d.done.values()) { v26 += o.platne || 0; o26 += o.hlasy[OPT - 1]; v22 += B22[o.c][2]; o22 += B22[o.c][3]; }
+  const kv = [["OPT 2022, celé město", pct(all22[1] / all22[0]), "13 mandátů z 33"]];
+  if (d.done.size) {
+    kv.push([`Sečtené okrsky (${d.done.size}) letos`, pct(o26 / v26), `tytéž okrsky 2022: ${pct(o22 / v22)}`]);
+    kv.push(["Rozdíl ve sečtených", pp(o26 / v26 - o22 / v22) + " %", `z ${pct(o22 / v22)} na ${pct(o26 / v26)}`]);
+  } else kv.push(["Letos", "–", "zatím nic sečteno"]);
+  if (d.official) {
+    const r = d.rows.find(x => x.c === OPT);
+    if (r) kv.push(["OPT 2026, oficiálně", pct(r.share), `${r.seats} mandátů z 27`]);
+  } else {
+    kv.push(["Odhad po dosčítání", d.est ? "≈ " + pct(d.est.share) : "–", d.est ? "poměr k 2022 přenesený na zbytek" : "ukáže se po 3 okrscích"]);
+    if (d.est) kv.push(["Odhad mandátů OPT", `≈ ${d.est.seats} z 27`, `rozpětí ${d.est.lo === d.est.hi ? d.est.lo : d.est.lo + "–" + d.est.hi} (±2 % hlasů)`]);
+  }
+  $("opt-kv").innerHTML = kv.map(([k, v, s]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd>${s ? `<dt>${esc(s)}</dt>` : ""}</div>`).join("");
+
+  const rows = [];
+  for (let c = 1; c <= 38; c++) {
+    const b = B22[c], o = d.done.get(c);
+    const s22 = b[3] / b[2], s26 = o && o.platne ? o.hlasy[OPT - 1] / o.platne : null;
+    rows.push({ c, s22, s26, delta: s26 == null ? null : s26 - s22 });
+  }
+  // sečtené okrsky vždy nahoře, uvnitř skupin podle zvoleného řazení
+  const second = sortMode === "s22" ? (a, b) => b.s22 - a.s22
+    : sortMode === "delta" ? (a, b) => (a.delta ?? 0) - (b.delta ?? 0) || a.c - b.c
+    : (a, b) => a.c - b.c;
+  rows.sort((a, b) => (a.s26 == null) - (b.s26 == null) || second(a, b));
+
+  // celé město nahoře: 2022 celkem vs. 2026 ze sečtených (po dosčítání oficiálně)
+  const tot = Object.keys(PARTIES).map(k => d.votes[k]);
+  const totValid = d.official ? null : d.valid;
+  const cityRow = {
+    c: "Σ", total: true,
+    label: "Celé město", sub: d.official ? "2026 oficiální výsledek" : d.done.size ? `2026 jen ze ${d.done.size} sečtených okrsků` : "2026 zatím nic sečteno",
+    s22: all22[1] / all22[0],
+    shares: d.official ? Object.fromEntries(d.rows.map(r => [r.c, r.share])) : (totValid ? Object.fromEntries(tot.map((v, i) => [i + 1, v / totValid])) : null)
+  };
+  cityRow.s26 = cityRow.shares ? cityRow.shares[OPT] : null;
+  cityRow.delta = cityRow.s26 == null ? null : cityRow.s26 - (d.done.size && !d.official ? o22 / v22 : cityRow.s22);
+  if (cityRow.delta != null && !d.official) cityRow.deltaNote = "proti týmž okrskům 2022";
+
+  const bar100 = shares => {
+    if (!shares) return `<div class="t100 wait">čeká na sečtení</div>`;
+    return `<div class="t100"><i class="seg opt" style="width:${(shares[OPT] * 100).toFixed(2)}%" title="OPT 2026 ${pct(shares[OPT])}"></i><i class="g half" style="left:50%"></i></div>`;
+  };
+  const bar22 = s => `<div class="t100"><i class="seg s22" style="width:${(s * 100).toFixed(2)}%" title="OPT 2022 ${pct(s)}"></i><i class="g half" style="left:50%"></i></div>`;
+  const rowHtml = r => {
+    const delta = r.delta != null ? `<small class="delta">${pp(r.delta)} %${r.deltaNote ? ` <span class="fine">${esc(r.deltaNote)}</span>` : ""}</small>` : "";
+    return `<div class="orow ${r.total ? "total" : r.s26 != null ? "done" : "wait"}">
+      <div class="olab"><b>${r.c}</b><span>${esc(r.label)}<small>${esc(r.sub)}</small>${delta}</span></div>
+      <div class="obars">
+        <div class="oline y22"><span class="yr">2022</span>${bar22(r.s22)}<span class="val">${pct(r.s22)}</span></div>
+        <div class="oline y26"><span class="yr">2026</span>${bar100(r.shares)}<span class="val">${r.s26 != null ? pct(r.s26) : "–"}</span></div>
+      </div></div>`;
+  };
+  const rowsOut = rows.map(r => {
+    const o = d.done.get(r.c), m = MISTA[r.c];
+    return {
+      ...r, label: m ? m.k : "Okrsek " + r.c, sub: m ? "voliči: " + (m.cast || "") : "",
+      shares: o && o.platne ? Object.fromEntries(o.hlasy.map((h, i) => [i + 1, h / o.platne])) : null
+    };
+  });
+  const axis = `<div class="orow head"><span></span><div class="oline"><span></span><div class="axis100">${[0, 25, 50, 75, 100].map(t => `<span style="left:${t}%">${t} %</span>`).join("")}</div><span></span></div></div>`;
+  $("cmp").innerHTML = axis + rowHtml(cityRow) + rowsOut.map(rowHtml).join("");
+}
+
+let prefSort = "list";
+function renderPref(d) {
+  const p = state?.pref, box = $("pref");
+  const cands = (p?.kandidati || []).map(([poradi, jmeno, hlasy]) => ({ poradi, jmeno, hlasy }));
+  const total = cands.reduce((a, c) => a + c.hlasy, 0);
+  if (!cands.length || !total) {
+    $("pref-kv").innerHTML = "";
+    box.innerHTML = `<div class="empty">Preferenční hlasy se ukážou s prvním sečteným okrskem.</div>`;
+    return;
+  }
+  const avg = total / cands.length, thr = avg * 1.1;
+  const optRow = d.rows.find(r => r.c === OPT);
+  const seats = optRow?.seats ?? null;
+  // posun: kdo má ≥ 110 % průměru, jde dopředu podle hlasů; zbytek podle listiny
+  const jumpers = cands.filter(c => c.hlasy >= thr).sort((a, b) => b.hlasy - a.hlasy || a.poradi - b.poradi);
+  const order = jumpers.concat(cands.filter(c => c.hlasy < thr).sort((a, b) => a.poradi - b.poradi));
+  const officialNames = d.official ? new Set((optRow?.zvoleni || []).map(z => z.poradi)) : null;
+  const elected = officialNames || new Set(seats ? order.slice(0, seats).map(c => c.poradi) : []);
+
+  $("pref-scope").textContent = d.official ? "oficiální výsledek ČSÚ" : `ze sečtených okrsků · stav ČSÚ ${hhmm(p.cas)}`;
+  $("pref-kv").innerHTML = [
+    ["Hlasy pro OPT", nf0.format(total), ""],
+    ["Průměr na kandidáta", nf1.format(avg), `${cands.length} kandidátů`],
+    ["Hranice pro posun", nf1.format(thr), "průměr + 10 %"],
+    ["Mandáty OPT", seats == null ? "–" : String(seats), d.official ? "oficiálně" : "ze sečtených okrsků"],
+    ...(d.official || !d.est ? [] : [["Odhad mandátů podle 2022", `≈ ${d.est.seats}`, `rozpětí ${d.est.lo === d.est.hi ? d.est.lo : d.est.lo + "–" + d.est.hi}`]])
+  ].map(([k, v, s]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd>${s ? `<dt>${esc(s)}</dt>` : ""}</div>`).join("");
+
+  const list = prefSort === "votes" ? [...cands].sort((a, b) => b.hlasy - a.hlasy || a.poradi - b.poradi) : cands;
+  const maxV = Math.max(thr, ...cands.map(c => c.hlasy)) * 1.05;
+  const head = `<div class="prefrow head"><span>Č.</span><span>Kandidát</span><span class="ptrack" aria-hidden="true" style="background:none"></span><span class="num">Hlasy</span><span class="num">Vs. průměr</span><span>Stav</span></div>`;
+  box.innerHTML = head + list.map(c => {
+    const jump = c.hlasy >= thr, el = elected.has(c.poradi);
+    const rank = order.findIndex(o => o.poradi === c.poradi) + 1;
+    const pills = [jump ? `<span class="pill jump">posun dopředu</span>` : "", el ? `<span class="pill el">${d.official ? "zvolen/a" : "mandát"} · ${rank}.</span>` : ""].join("");
+    return `<div class="prefrow${jump ? " jump" : ""}${el ? " elected" : ""}">
+      <span class="por">${c.poradi}</span><span class="jm">${esc(c.jmeno)}</span>
+      <span class="ptrack" aria-hidden="true"><i class="v" style="width:${(c.hlasy / maxV * 100).toFixed(2)}%"></i><i class="thr" style="left:${(thr / maxV * 100).toFixed(2)}%"></i></span>
+      <span class="num hl"><b>${nf0.format(c.hlasy)}</b></span><span class="num rel">${pp(c.hlasy / avg - 1)} %</span>
+      <span class="pills">${pills}</span></div>`;
+  }).join("");
+}
+document.querySelectorAll(".chip[data-p]").forEach(btn => btn.addEventListener("click", () => {
+  prefSort = btn.dataset.p;
+  document.querySelectorAll(".chip[data-p]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+  renderPref(derive());
+}));
+
+function render() {
+  const d = derive();
+  renderHeader(d); renderTiles(d); renderParties(d); renderElected(d); renderTable(d); renderOpt(d); renderPref(d);
+}
+
+document.querySelectorAll(".chip[data-f]").forEach(btn => btn.addEventListener("click", () => {
+  filter = btn.dataset.f;
+  document.querySelectorAll(".chip[data-f]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+  renderTable(derive());
+}));
+document.querySelectorAll(".chip[data-s]").forEach(btn => btn.addEventListener("click", () => {
+  sortMode = btn.dataset.s;
+  document.querySelectorAll(".chip[data-s]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+  renderOpt(derive());
+}));
+function showTab(name) {
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
+  $("p-scitani").hidden = name !== "scitani";
+  $("p-opt").hidden = name !== "opt";
+  $("p-pref").hidden = name !== "pref";
+  try { localStorage.setItem("tab", name); } catch (e) {}
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+{
+  let start = "scitani";
+  try { start = localStorage.getItem("tab") || start; } catch (e) {}
+  if (location.hash === "#opt") start = "opt";
+  if (location.hash === "#pref") start = "pref";
+  if (!["opt", "pref"].includes(start)) start = "scitani";
+  showTab(start);
+}
+setInterval(() => renderHeader(derive()), 30000);
+render();
+
+// Fanfára hraje automaticky při nových datech z Třince. Prohlížeč ale pustí zvuk až po první
+// interakci se stránkou, takže do té doby visí nahoře nenápadná poznámka.
+let audioCtx = null;
+const soundOn = true;
+function unlockAudio() {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return null;
+  if (!audioCtx) { try { audioCtx = new AC(); } catch (e) { return null; } }
+  if (audioCtx.state === "suspended") audioCtx.resume().then(updateSoundHint, () => {});
+  return audioCtx;
+}
+function updateSoundHint() {
+  $("sound-hint").hidden = !!(audioCtx && audioCtx.state === "running");
+}
+function fanfare() {
+  const ctx = unlockAudio();
+  if (!ctx) return;
+  const t0 = ctx.currentTime + 0.05;
+  const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2600; lp.Q.value = 0.8;
+  const master = ctx.createGain(); master.gain.value = 0.16;
+  lp.connect(master); master.connect(ctx.destination);
+  const note = (f, start, dur, vol = 1) => {
+    for (const det of [-7, 7]) { // dva rozladěné pilové tóny přes filtr = žesťová barva
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = "sawtooth"; o.frequency.value = f; o.detune.value = det;
+      const a = t0 + start, e = a + dur;
+      g.gain.setValueAtTime(0.0001, a);
+      g.gain.linearRampToValueAtTime(0.5 * vol, a + 0.025);
+      g.gain.setValueAtTime(0.42 * vol, Math.max(a + 0.03, e - 0.08));
+      g.gain.exponentialRampToValueAtTime(0.0001, e);
+      o.connect(g); g.connect(lp); o.start(a); o.stop(e + 0.02);
+    }
+  };
+  // ta-ta-ta-táá: G4 G4 G4, pak akord C dur s vrcholem na C6
+  note(392.0, 0, 0.12); note(392.0, 0.15, 0.12); note(392.0, 0.30, 0.12);
+  note(523.25, 0.46, 0.95); note(659.25, 0.46, 0.95, 0.7); note(783.99, 0.46, 0.95, 0.6);
+  note(1046.5, 0.70, 0.75, 0.45);
+}
+const onGesture = () => {
+  unlockAudio(); updateSoundHint();
+  if (audioCtx && audioCtx.state === "running") ["pointerdown", "keydown", "touchend"].forEach(ev => document.removeEventListener(ev, onGesture));
+};
+["pointerdown", "keydown", "touchend"].forEach(ev => document.addEventListener(ev, onGesture));
+updateSoundHint();
+
+let toastTimer = null;
+function announce(fresh, next, finished) {
+  const map = new Map((next.okrsky || []).map(o => [o.c, o]));
+  const parts = fresh.slice(0, 3).map(c => {
+    const o = map.get(c), m = MISTA[c];
+    const s = o && o.platne ? pct(o.hlasy[OPT - 1] / o.platne) : "";
+    return `okrsek <b>${c}</b>${m ? " " + esc(m.k) : ""}${s ? " · OPT " + s : ""}`;
+  });
+  if (fresh.length > 3) parts.push(`a další ${fresh.length - 3}`);
+  let t = finished ? "Sečteno všech 38 okrsků, oficiální výsledek je tady" : `Sečteno: ${parts.join(" · ")}`;
+  let el = document.getElementById("toast");
+  if (!el) { el = document.createElement("div"); el.id = "toast"; el.className = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); }
+  el.innerHTML = t;
+  el.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.hidden = true; }, 9000);
+  if (soundOn) fanfare();
+}
+
+const DATA = "https://volby.gov.cz/appdata/kv2026/20261009";
+const KOD = "598810", OKRES = "8102", NS = "http://www.volby.cz/kv/";
+const okCache = new Map(); // okrsek → {sig, okrsek}; okrsek se stahuje znovu jen při změně řádku účasti
+const pad = n => String(n).padStart(2, "0");
+const localIso = t => `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}T${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(t.getSeconds())}`;
+async function getJSON(path) {
+  const r = await fetch(`${DATA}/${path}`, { cache: "no-store" });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+async function souhrnXml() {
+  const r = await fetch(`${DATA}/odata/zastup/vysledky_obec_${KOD}.xml`, { cache: "no-store" });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  const doc = new DOMParser().parseFromString(await r.text(), "application/xml");
+  const ob = doc.getElementsByTagNameNS(NS, "OBEC")[0];
+  if (!ob) throw new Error("bez OBEC");
+  const u = ob.getElementsByTagNameNS(NS, "UCAST")[0];
+  const n = (el, a) => { const v = el && el.getAttribute(a); return v == null || v === "" ? null : Number(v); };
+  const obec = {
+    cas: doc.documentElement.getAttribute("DATUM_CAS_GENEROVANI"),
+    je_spocteno: ob.getAttribute("JE_SPOCTENO") === "1",
+    okrsky_celkem: n(u, "OKRSKY_CELKEM") ?? 38, okrsky_zprac: n(u, "OKRSKY_ZPRAC") ?? 0,
+    volici: n(u, "ZAPSANI_VOLICI"), obalky: n(u, "ODEVZDANE_OBALKY"), ucast_proc: n(u, "UCAST_PROC"), platne: n(u, "PLATNE_HLASY")
+  };
+  const strany = [...ob.getElementsByTagNameNS(NS, "VOLEBNI_STRANA")].map(s => ({
+    c: n(s, "POR_STR_HLAS_LIST"), hlasy: n(s, "HLASY"), proc: Number(s.getAttribute("HLASY_PROC") || 0), mandaty: n(s, "ZASTUPITELE_POCET"),
+    zvoleni: [...s.getElementsByTagNameNS(NS, "ZASTUPITEL")].map(z => ({
+      poradi: n(z, "PORADOVE_CISLO"),
+      jmeno: ["TITULPRED", "JMENO", "PRIJMENI", "TITULZA"].map(a => z.getAttribute(a)).filter(Boolean).join(" "),
+      hlasy: n(z, "HLASY"), proc: Number(z.getAttribute("HLASY_PROC") || 0)
+    }))
+  })).sort((a, b) => a.c - b.c);
+  return [obec, strany];
+}
+async function fetchState() {
+  const u = await getJSON(`ucast/obec/${OKRES}/${KOD}.json`);
+  const okrsky = await Promise.all((u.okrsky || []).map(async row => {
+    // řádek: [okrsek, voliči, vydané obálky, účast %, VP, odevzdané obálky, platné lístky, % platných, platné hlasy]
+    const c = Number(row[0]), sig = JSON.stringify(row);
+    let hit = okCache.get(c);
+    if (!hit || hit.sig !== sig) {
+      let o;
+      try { o = await getJSON(`vysled/okrsek/${OKRES}/${KOD}_${c}.json`); }
+      catch (e) { return hit ? hit.okrsek : null; } // výpadek jednoho souboru: dotáhne se v dalším kole
+      const hl = new Map((o.vysledky || []).map(v => [Number(v[0]), Number(v[2])]));
+      const pref = ((o.hlasy || {})["3"] || []).map(r => [Number(r[0]), Number(r[3] || 0)]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+      hit = { sig, okrsek: { c, cas: o.generovano, volici: +row[1], obalky: +row[5], platne_listky: +row[6], platne: +row[8],
+        hlasy: [1, 2, 3, 4, 5, 6, 7].map(k => hl.get(k) || 0), pref_opt: pref } };
+      okCache.set(c, hit);
+    }
+    return hit.okrsek;
+  })).then(list => list.filter(Boolean));
+  okrsky.sort((a, b) => a.c - b.c);
+  let pref = state?.pref || null;
+  try {
+    const z = await getJSON(`vysled/${OKRES}/${KOD}.json`);
+    pref = { cas: z.generovano, kandidati: ((z.hlasy || {})["3"] || []).map(r => [Number(r[0]), r[1], Number(r[3] || 0)]) };
+  } catch (e) {}
+  let obec = state?.obec || {}, strany = state?.strany || [];
+  try { [obec, strany] = await souhrnXml(); } catch (e) {}
+  return { cr: {}, davka: null, obec, strany, okrsky, pref, stazeno: localIso(new Date()) };
+}
+
+let known = null, knownDone = false;
+function apply(next) {
+  const nowSet = new Set((next.okrsky || []).map(o => o.c));
+  const finished = !!next.obec?.je_spocteno;
+  if (known) {
+    const fresh = [...nowSet].filter(c => !known.has(c)).sort((a, b) => a - b);
+    if (fresh.length || (finished && !knownDone)) announce(fresh, next, finished && !knownDone);
+  }
+  known = nowSet; knownDone = finished;
+  state = next; render();
+}
+let fails = 0, busy = false;
+async function tick(manual) {
+  if (busy) return;
+  busy = true;
+  const b = $("refresh"), note = $("refresh-note");
+  if (manual) { b.disabled = true; note.textContent = "Načítám…"; }
+  try {
+    apply(await fetchState());
+    fails = 0;
+    if (manual) note.textContent = `Načteno ${new Date().toLocaleTimeString("cs-CZ")}`;
+  } catch (e) {
+    fails++;
+    setTimeout(() => tick(false), 10000); // po chybě zkusit dřív než za minutu
+    if (manual) note.textContent = "Načtení se nepovedlo, zkus to znovu.";
+    if (fails >= 3) { const n = $("notice"); n.hidden = false; n.textContent = "Data ČSÚ se teď nedaří načíst. Zkusím to znovu za minutu; aktuální stav je i na volby.gov.cz."; }
+  } finally {
+    busy = false;
+    if (manual) b.disabled = false;
+  }
+}
+$("refresh").addEventListener("click", () => tick(true));
+tick(false);
+setInterval(() => tick(false), 60000);
+</script>
+</body>
+</html>
