@@ -70,6 +70,7 @@ h2 { font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacin
 .sw { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
 .sw.done { background: var(--blue-08); border: 2px solid var(--blue); }
 .sw.wait { border: 1px dashed var(--ink-55); }
+.sw.rg { width: 44px; border-radius: 3px; background: linear-gradient(90deg, hsl(0, 75%, 82%), hsl(55, 75%, 82%), hsl(120, 55%, 80%)); border: 1px solid var(--ink-34); }
 .sw.scale { width: 36px; background: linear-gradient(90deg, rgba(50, 50, 50, .06), rgba(50, 50, 50, .46)); border: 1px dashed var(--ink-34); }
 
 /* Mřížka okrsků */
@@ -406,7 +407,7 @@ img { max-width: 100%; }
           <span>šířka dlaždice = počet voličů v seznamu</span>
           <span><b>klepni na okrsek</b> = jeho účast a výsledky stran</span>
           <span><i class="sw scale"></i>čekající: tmavší = víc voličů</span>
-          <span>😀 🙂 😐 🙁 😞 = OPT v okrsku proti průměrnému propadu ve městě</span>
+          <span><i class="sw rg"></i>😞 → 😀 barva a smajlík: OPT v okrsku proti průměrné změně ve městě (červená hůř, zelená lépe)</span>
         </div>
       </div>
       <div class="tiles" id="tiles"></div>
@@ -618,6 +619,13 @@ function renderTiles(d) {
       const s = o.platne ? o.hlasy[OPT - 1] / o.platne : 0;
       const isNew = latest && o.cas && (latest - parseIso(o.cas)) / 60000 <= 10;
       el.className = "tile done";
+      // barva od červené (hůř než průměrná změna ve městě) přes žlutou do zelené (lépe); ±6 bodů = plná barva
+      if (d.done.size >= 2) {
+        const t = Math.max(0, Math.min(1, ((s - s22) - avgDelta + 0.06) / 0.12));
+        const hue = Math.round(120 * t);
+        el.style.background = `hsl(${hue}, ${t > 0.6 ? 55 : 75}%, ${t > 0.6 ? 82 : 84}%)`;
+        el.style.borderColor = `hsl(${hue}, 60%, 34%)`;
+      }
       html += `<span class="v">OPT ${pct(s)}</span><span class="d">${pp(s - s22)} % · ${hhmm(o.cas)}</span>`;
       if (isNew) html += `<span class="new">nové</span>`;
       el.title = `Okrsek ${c}: OPT ${pct(s)} (2022: ${pct(s22)}), sečteno ${hhmm(o.cas)}`;
