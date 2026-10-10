@@ -302,6 +302,7 @@ tr.wait td { color: var(--ink-55); }
 .tl-link:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 2px; }
 .tl .o { font-size: 13px; color: var(--ink-72); grid-column: 2; }
 .tl .opt { white-space: nowrap; font-weight: 600; font-size: 13.5px; text-align: right; }
+.tl .opt small { display: block; font-weight: 400; font-size: 11.5px; color: var(--ink-55); }
 .tl .sum { grid-column: 2 / -1; font-size: 12px; color: var(--ink-55); }
 .tl .sum b { color: var(--ink); font-weight: 600; }
 
@@ -689,7 +690,7 @@ function setSelMode(on) {
   if (fb) fb.hidden = !on;
 }
 
-let tlNewest = false;
+let tlMode = "new"; // výchozí: nejnovější nahoře; "size" = podle počtu voličů
 function renderTimeline(d) {
   const box = $("timeline");
   if (selOk || !d.done.size) { box.hidden = true; return; }
@@ -701,11 +702,13 @@ function renderTimeline(d) {
     return { o, n, vol, env, sOpt: valid ? opt / valid : 0 };
   });
   const lastC = rows.length ? rows[rows.length - 1].o.c : null;
-  const shown = tlNewest ? [...rows].reverse() : rows;
+  const shown = tlMode === "size"
+    ? [...rows].sort((a, b) => (b.o.volici || 0) - (a.o.volici || 0) || a.o.c - b.o.c)
+    : [...rows].reverse();
   box.innerHTML = `<div class="tl-head"><h3>Jak přibývaly okrsky</h3>
       <div class="filters" role="group" aria-label="Řazení časové osy">
-        <button class="chip" type="button" data-tl="old" aria-pressed="${!tlNewest}">Od prvního</button>
-        <button class="chip" type="button" data-tl="new" aria-pressed="${tlNewest}">Nejnovější nahoře</button>
+        <button class="chip" type="button" data-tl="new" aria-pressed="${tlMode === "new"}">Nejnovější nahoře</button>
+        <button class="chip" type="button" data-tl="size" aria-pressed="${tlMode === "size"}">Dle největších</button>
       </div></div>
     <ol class="tl">${shown.map(r => {
       const o = r.o, m = MISTA[o.c];
@@ -713,7 +716,7 @@ function renderTimeline(d) {
       return `<li class="${o.c === lastC ? "last" : ""}">
         <span class="t">${hhmm(o.cas)}</span>
         <button class="tl-link" type="button" data-c="${o.c}">Okrsek ${o.c}${m ? " · " + esc(m.k) : ""}</button>
-        <span class="opt">OPT ${pct(s)}</span>
+        <span class="opt">OPT ${pct(s)}<small>2022: ${pct(B22[o.c][3] / B22[o.c][2])}</small></span>
         <span class="o">${nf0.format(o.obalky || 0)} voličů volilo z ${nf0.format(o.volici || 0)} · účast ${o.volici ? pct(o.obalky / o.volici) : "–"}</span>
         <span class="sum">Průběžně: <b>${r.n} z 38</b> okrsků · <b>${nf0.format(r.env)}</b> voličů z ${nf0.format(r.vol)} · OPT <b>${pct(r.sOpt)}</b></span>
       </li>`;
@@ -723,7 +726,7 @@ $("timeline").addEventListener("click", e => {
   const t = e.target.closest(".tl-link");
   if (t) { selectOkrsek(Number(t.dataset.c)); $("res").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
   const ch = e.target.closest("[data-tl]");
-  if (ch) { tlNewest = ch.dataset.tl === "new"; renderTimeline(derive()); }
+  if (ch) { tlMode = ch.dataset.tl; renderTimeline(derive()); }
 });
 
 function renderParties(d) {
