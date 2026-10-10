@@ -79,6 +79,7 @@ h2 { font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacin
 .tile:not(.done) .d { color: var(--ink); }
 .tile .n { font: 800 34px/1 var(--display); color: var(--ink); letter-spacing: -.01em; }
 .tile .l { font-size: 14.5px; line-height: 1.25; font-weight: 700; color: #000; overflow-wrap: anywhere; margin-top: 2px; }
+.tile .smile { font-size: 18px; line-height: 1; margin-left: 4px; vertical-align: -2px; }
 .tile .v { font: 600 14px/1.2 var(--body); }
 .tile .d { font-size: 12px; color: var(--ink-72); }
 .tile.done { border: 2px solid var(--blue); background: var(--blue-08); padding: 7px 8px 8px; }
@@ -405,6 +406,7 @@ img { max-width: 100%; }
           <span>šířka dlaždice = počet voličů v seznamu</span>
           <span><b>klepni na okrsek</b> = jeho účast a výsledky stran</span>
           <span><i class="sw scale"></i>čekající: tmavší = víc voličů</span>
+          <span>😀 🙂 😐 🙁 😞 = OPT v okrsku proti průměrnému propadu ve městě</span>
         </div>
       </div>
       <div class="tiles" id="tiles"></div>
@@ -588,8 +590,19 @@ function renderHeader(d) {
   } else notice.hidden = true;
 }
 
+// smajlík: o kolik je změna OPT v okrsku lepší/horší než průměrná změna ve všech sečtených okrscích
+function smileFor(diff) {
+  if (diff >= 0.04) return ["😀", "výrazně lépe"];
+  if (diff >= 0.015) return ["🙂", "lépe"];
+  if (diff > -0.015) return ["😐", "zhruba stejně"];
+  if (diff > -0.04) return ["🙁", "hůř"];
+  return ["😞", "výrazně hůř"];
+}
 function renderTiles(d) {
   const latest = parseIso(state?.stazeno);
+  let o26 = 0, v26 = 0, o22 = 0, v22 = 0;
+  for (const o of d.done.values()) { o26 += o.hlasy[OPT - 1] || 0; v26 += o.platne || 0; o22 += B22[o.c][3]; v22 += B22[o.c][2]; }
+  const avgDelta = v26 && v22 ? o26 / v26 - o22 / v22 : 0;
   const tiles = $("tiles");
   tiles.innerHTML = "";
   for (let c = 1; c <= 38; c++) {
@@ -599,7 +612,8 @@ function renderTiles(d) {
     el.setAttribute("aria-pressed", String(selOk === c));
     const s22 = b[3] / b[2];
     let html = `<span class="n">${c}</span>`;
-    if (m) html += `<span class="l">${esc(m.k)}</span>`;
+    const sm = o && o.platne && d.done.size >= 2 ? smileFor((o.hlasy[OPT - 1] / o.platne - s22) - avgDelta) : null;
+    if (m) html += `<span class="l">${esc(m.k)}${sm ? `<span class="smile" title="OPT tu ${sm[1]} než průměr města (změna proti 2022 o ${pp((o.hlasy[OPT - 1] / o.platne - s22) - avgDelta)} b. jinak)">${sm[0]}</span>` : ""}</span>`;
     if (o) {
       const s = o.platne ? o.hlasy[OPT - 1] / o.platne : 0;
       const isNew = latest && o.cas && (latest - parseIso(o.cas)) / 60000 <= 10;
