@@ -373,8 +373,8 @@ img { max-width: 100%; }
       </div>
       <div class="kv" id="pref-kv"></div>
       <div class="filters" role="group" aria-label="Řazení kandidátů">
-        <button class="chip" id="p-list" aria-pressed="true" data-p="list">Podle listiny</button>
-        <button class="chip" id="p-votes" aria-pressed="false" data-p="votes">Podle hlasů</button>
+        <button class="chip" id="p-votes" aria-pressed="true" data-p="votes">Podle preferenčních hlasů</button>
+        <button class="chip" id="p-list" aria-pressed="false" data-p="list">Podle listiny</button>
       </div>
       <div class="pref" id="pref"></div>
       <p class="fine">Kdo získá aspoň o 10 % víc hlasů, než je průměr na kandidáta listiny, posouvá se na první místa (víc takových podle počtu hlasů); ostatní mandáty obsazují kandidáti podle pořadí na listině. Do dosčítání jde o průběžný stav a orientační počet mandátů.</p>
@@ -985,7 +985,10 @@ function renderZastNow(d, lists) {
     <p class="fine">Seznam podle webu města (zastupitelé k 10. 10. 2026). Stav je ${d.official ? "podle oficiálního výsledku ČSÚ" : "orientační: mandáty ze sečtených okrsků, pořadí podle preferenčních hlasů ze stejných okrsků"}.</p>`;
 }
 
-let prefSort = "list";
+// výchozí řazení podle preferenčních hlasů; volba se pamatuje v tomto prohlížeči
+let prefSort = "votes";
+try { if (localStorage.getItem("prefSort") === "list") prefSort = "list"; } catch (e) {}
+document.querySelectorAll(".chip[data-p]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.p === prefSort)));
 function renderPref(d) {
   const p = state?.pref, box = $("pref");
   const cands = (p?.kandidati || []).map(([poradi, jmeno, hlasy]) => ({ poradi, jmeno, hlasy }));
@@ -1029,6 +1032,7 @@ function renderPref(d) {
 }
 document.querySelectorAll(".chip[data-p]").forEach(btn => btn.addEventListener("click", () => {
   prefSort = btn.dataset.p;
+  try { localStorage.setItem("prefSort", prefSort); } catch (e) {}
   document.querySelectorAll(".chip[data-p]").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
   renderPref(derive());
 }));
