@@ -350,6 +350,10 @@ tr.wait td { color: var(--ink-55); }
 .mapcard .voted span { font-size: 13px; color: var(--ink-72); }
 .mapcard .chip { justify-self: start; }
 
+/* Srovnání okrsků: řádky okrsků se dají rozkliknout do detailu jako dlaždice */
+.cmp [data-okc] { cursor: pointer; border-radius: 6px; transition: background .12s; }
+.cmp [data-okc]:hover { background: var(--blue-08); }
+.cmp [data-okc]:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 /* Srovnání okrsků: jeden kandidát proti průměru listiny v každém okrsku */
 .candbox { border: 2px solid var(--blue); border-radius: 12px; background: var(--blue-08); padding: 18px 20px 20px; display: grid; gap: 12px; min-width: 0; }
 .candbox label { font: 800 clamp(15px, 2vw, 18px)/1.25 var(--display); letter-spacing: .04em; text-transform: uppercase; color: var(--blue); }
@@ -437,6 +441,7 @@ img { max-width: 100%; }
         <div class="legend">
           <span><i class="sw s22"></i>OPT 2022</span>
           <span><i class="sw opt"></i>OPT 2026</span>
+          <span><b>klepni na okrsek</b> = jeho detail</span>
         </div>
       </div>
       <div class="candbox" id="candbox">
@@ -761,7 +766,7 @@ function renderOkrsek(d, c) {
   const box = $("parties"), o = d.done.get(c), b = B22[c], m = MISTA[c];
   const s22 = b[3] / b[2];
   $("h-vysledek").innerHTML = `<span class="selbadge">Vybraný okrsek${o ? "" : " · zatím nesečtený"}</span>Okrsek ${c}${m ? " · " + esc(m.k) : ""}`;
-  $("res-scope").innerHTML = `<button class="chip back" id="res-back" type="button">← Zpět na celé město</button>`;
+  $("res-scope").innerHTML = `<button class="chip back" id="res-back" type="button">${selFrom === "opt" ? "← Zpět na srovnání okrsků" : "← Zpět na celé město"}</button>`;
   setSelMode(true);
   const kv = [];
   if (o) {
@@ -815,7 +820,7 @@ function setSelMode(on) {
     fb.addEventListener("click", () => { selectOkrsek(selOk); });
     document.body.appendChild(fb);
   }
-  if (fb) fb.hidden = !on;
+  if (fb) { fb.hidden = !on; fb.textContent = selFrom === "opt" ? "← Srovnání okrsků" : "← Celé město"; }
 }
 
 let tlMode = "new"; // výchozí: nejnovější nahoře; "size" = podle počtu voličů
@@ -938,13 +943,31 @@ function renderTable(d) {
 }
 
 let selOk = null;
+let selFrom = null; // odkud byl detail okrsku otevřen ("opt" = Srovnání okrsků)
+function openOkrsek(c, from) {
+  selFrom = from || null;
+  showTab("scitani");
+  if (selOk !== c) selectOkrsek(c); else renderParties(derive());
+  $("res").scrollIntoView({ behavior: "smooth", block: "start" });
+}
 function selectOkrsek(c) {
   selOk = selOk === c ? null : c;
   const d = derive();
   renderTiles(d); renderParties(d);
+  if (!selOk && selFrom) { // zpět tam, odkud uživatel přišel
+    const from = selFrom; selFrom = null;
+    showTab(from);
+    requestAnimationFrame(() => document.querySelector(`#cmp [data-okc="${c}"]`)?.scrollIntoView({ behavior: "smooth", block: "center" }));
+    return;
+  }
   if (selOk && window.innerWidth < 940) $("h-vysledek").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 $("tiles").addEventListener("click", e => { const t = e.target.closest(".tile"); if (t) selectOkrsek(Number(t.dataset.c)); });
+$("cmp").addEventListener("click", e => { if (e.target.closest("[data-cs]")) return; const r = e.target.closest("[data-okc]"); if (r) openOkrsek(Number(r.dataset.okc), "opt"); });
+$("cmp").addEventListener("keydown", e => {
+  const r = e.target.closest("[data-okc]");
+  if (r && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openOkrsek(Number(r.dataset.okc), "opt"); }
+});
 document.addEventListener("keydown", e => { if (e.key === "Escape" && selOk) selectOkrsek(selOk); });
 $("tiles").addEventListener("keydown", e => {
   const t = e.target.closest(".tile");
@@ -1066,7 +1089,7 @@ function renderCandCmp(d) {
   else rows.sort((a, b) => b.v - a.v || b.rel - a.rel);
   const SCALE = 0.6; // ±60 % proti průměru = plná délka
   const bar = rel => `<div class="dtrack" aria-hidden="true"><i class="${rel >= 0 ? "up" : "down"}" style="width:${(Math.min(1, Math.abs(rel) / SCALE) * 50).toFixed(1)}%"></i><span class="mid"></span></div>`;
-  const row = (r, label, sub, cls) => `<div class="crow2 ${cls || ""}" title="${esc(label)}: ${nf0.format(r.v)} hlasů, průměr kandidáta listiny ${nf1.format(r.avg)}">
+  const row = (r, label, sub, cls) => `<div class="crow2 ${cls || ""}"${cls === "total" ? "" : ` data-okc="${r.c}" tabindex="0" role="button"`} title="${esc(label)}: ${nf0.format(r.v)} hlasů, průměr kandidáta listiny ${nf1.format(r.avg)} · klepni pro detail okrsku">
       <div class="olab"><b>${r.c}</b><span>${esc(label)}<small>${esc(sub)}</small>${partyLine(r)}</span></div>${bar(r.rel)}
       <div class="cval${r.rel >= 0 ? " up" : ""}"><b>${nf0.format(r.v)} hl.</b><small>${pp(r.rel)} % proti průměru ${nf1.format(r.avg)}</small></div></div>`;
   const chips = `<div class="filters" role="group" aria-label="Řazení okrsků kandidáta">
@@ -1148,7 +1171,8 @@ function renderOpt(d) {
     const lossCell = sortMode !== "delta" ? "" : r.loss == null ? `<div class="lossval wait">–<small>nesečteno</small></div>`
       : `<div class="lossval ${r.loss < 0 ? "minus" : "plus"}" title="2026: ${nf0.format(r.v26)} hl. · 2022: ${nf0.format(r.v22)} hl. (přepočet na 27 mandátů ${nf0.format(Math.round(r.v22 * 27 / 33))})">
           <b>${r.loss < 0 ? "−" : "+"}${nf0.format(Math.abs(Math.round(r.loss)))}</b><small>hlasů · ≈ ${r.lossVol < 0 ? "−" : "+"}${nf0.format(Math.abs(Math.round(r.lossVol)))} voličů</small></div>`;
-    return `<div class="orow ${r.total ? "total" : r.s26 != null ? "done" : "wait"}">
+    const clk = r.total ? "" : ` data-okc="${r.c}" tabindex="0" role="button" aria-label="Detail okrsku ${r.c}"`;
+    return `<div class="orow ${r.total ? "total" : r.s26 != null ? "done" : "wait"}"${clk}>
       <div class="olab"><b>${r.c}</b><span>${esc(r.label)}<small>${esc(r.sub)}</small>${delta}</span></div>
       <div class="obars">
         <div class="oline y22"><span class="yr">2022</span>${bar22(r.s22)}<span class="val">${pct(r.s22)}<small>${nf0.format(r.v22)} hl.</small></span></div>
