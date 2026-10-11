@@ -358,6 +358,9 @@ tr.wait td { color: var(--ink-55); }
 .cval b { font: 800 17px/1 var(--display); }
 .cval.up b { color: var(--blue); }
 .cval small { display: block; font-size: 11.5px; color: var(--ink-55); margin-top: 3px; }
+.crow2 .olab small.ol { color: var(--ink); font-size: 12px; margin-top: 3px; }
+.crow2 .olab small.ol b { font: 700 13.5px/1.3 var(--body); color: var(--ink); min-width: 0; }
+.crow2 .olab small.ol span { color: var(--ink-55); }
 @media (max-width: 640px) {
   .crow2 { grid-template-columns: minmax(0, 1fr) auto; }
   .crow2 .olab { grid-column: 1; grid-row: 1; } .crow2 .cval { grid-column: 2; grid-row: 1; }
@@ -971,9 +974,14 @@ function renderCandCmp(d) {
     if (!arr || !arr.length) continue;
     const v = (arr.find(x => x[0] === p) || [0, 0])[1], tot = arr.reduce((a, x) => a + x[1], 0), avg = tot / arr.length;
     cv += v; ct += tot;
-    rows.push({ c: o.c, v, avg, rel: avg ? v / avg - 1 : 0 });
+    rows.push({ c: o.c, v, avg, rel: avg ? v / avg - 1 : 0,
+      optV: o.hlasy[OPT - 1] || 0, optS: o.platne ? (o.hlasy[OPT - 1] || 0) / o.platne : 0, partyS: o.platne ? (o.hlasy[l - 1] || 0) / o.platne : 0 });
   }
   const cityAvg = ct / nK, cityRel = cityAvg ? cv / cityAvg - 1 : 0;
+  // výsledek Osobností (a strany kandidáta) za sečtené okrsky
+  let vAll = 0, optAll = 0, partyAll = 0;
+  for (const o of d.done.values()) { vAll += o.platne || 0; optAll += o.hlasy[OPT - 1] || 0; partyAll += o.hlasy[l - 1] || 0; }
+  const partyLine = r => `<small class="ol">OPT <b>${pct(r.optS)}</b> · ${nf0.format(r.optV)} hl.${l !== OPT ? ` <span>· ${esc(party.short)} ${pct(r.partyS)}</span>` : ""}</small>`;
   const above = rows.filter(r => r.rel > 0).length;
   const best = [...rows].sort((a, b) => b.rel - a.rel)[0], worst = [...rows].sort((a, b) => a.rel - b.rel)[0];
   const zvol = d.official ? (d.rows.find(r => r.c === l)?.zvoleni || []).some(z => z.poradi === p) : null;
@@ -994,14 +1002,14 @@ function renderCandCmp(d) {
   const SCALE = 0.6; // ±60 % proti průměru = plná délka
   const bar = rel => `<div class="dtrack" aria-hidden="true"><i class="${rel >= 0 ? "up" : "down"}" style="width:${(Math.min(1, Math.abs(rel) / SCALE) * 50).toFixed(1)}%"></i><span class="mid"></span></div>`;
   const row = (r, label, sub, cls) => `<div class="crow2 ${cls || ""}" title="${esc(label)}: ${nf0.format(r.v)} hlasů, průměr kandidáta listiny ${nf1.format(r.avg)}">
-      <div class="olab"><b>${r.c}</b><span>${esc(label)}<small>${esc(sub)}</small></span></div>${bar(r.rel)}
+      <div class="olab"><b>${r.c}</b><span>${esc(label)}<small>${esc(sub)}</small>${partyLine(r)}</span></div>${bar(r.rel)}
       <div class="cval${r.rel >= 0 ? " up" : ""}"><b>${nf0.format(r.v)} hl.</b><small>${pp(r.rel)} % proti průměru ${nf1.format(r.avg)}</small></div></div>`;
   const chips = `<div class="filters" role="group" aria-label="Řazení okrsků kandidáta">
       <button class="chip" type="button" data-cs="votes" aria-pressed="${candSort === "votes"}">Nejvíc hlasů</button>
       <button class="chip" type="button" data-cs="rel" aria-pressed="${candSort === "rel"}">Nejvíc nad průměrem</button>
       <button class="chip" type="button" data-cs="num" aria-pressed="${candSort === "num"}">Podle čísla okrsku</button></div>`;
   const axis = `<div class="crow2 head"><span></span><div class="daxis"><span>−60 %</span><span>průměr listiny</span><span>+60 %</span></div><span></span></div>`;
-  const total = row({ c: "Σ", v: cv, avg: cityAvg, rel: cityRel }, "Celé město", `${rows.length} sečtených okrsků`, "total");
+  const total = row({ c: "Σ", v: cv, avg: cityAvg, rel: cityRel, optV: optAll, optS: vAll ? optAll / vAll : 0, partyS: vAll ? partyAll / vAll : 0 }, "Celé město", `${rows.length} sečtených okrsků`, "total");
   $("cmp").innerHTML = chips + axis + total + rows.map(r => {
     const m = MISTA[r.c];
     return row(r, m ? m.k : "Okrsek " + r.c, m ? "voliči: " + (m.cast || "") : "");
