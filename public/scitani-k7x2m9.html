@@ -1050,14 +1050,22 @@ function candSplit(d, l, p, v) {
   const pos = [...new Set(lists.flatMap(a => a.map(x => x[0])))].sort((a, b) => a - b);
   const r = pos.indexOf(p) + 1;
   if (!r) return null;
-  const U = k => lists.reduce((s, a) => s + Math.min(...a.slice(0, k).map(x => x[1])), 0);
-  const n = pos.length, cross = U(n), floor = U(Math.max(r, Math.min(15, n)));
-  return { cross, bonus: Math.max(0, floor - cross), pers: Math.max(0, v - floor) };
+  const n = pos.length, Uk = [0];
+  for (let k = 1; k <= n; k++) Uk.push(lists.reduce((s, a) => s + Math.min(...a.slice(0, k).map(x => x[1])), 0));
+  const fl = k => Uk[Math.max(k, Math.min(15, n))]; // podlaha pozice k
+  const cross = Uk[n], floor = fl(r), pers = Math.max(0, v - floor);
+  // osobní hlasy ostatních kandidátů listiny stejnou metodou → srovnání s jejich průměrem
+  const tot = new Map();
+  for (const a of lists) for (const [q, h] of a) tot.set(q, (tot.get(q) || 0) + h);
+  const others = pos.filter(q => q !== p).map((q) => Math.max(0, (tot.get(q) || 0) - fl(pos.indexOf(q) + 1)));
+  const avgO = others.length ? others.reduce((s, x) => s + x, 0) / others.length : 0;
+  return { cross, bonus: Math.max(0, floor - cross), pers, relO: avgO > 0 ? pers / avgO - 1 : null };
 }
 function splitSentence(sp, cv, p, l, partyShort) {
   if (!sp) return "";
   const rr = x => nf0.format(x >= 100 ? Math.round(x / 10) * 10 : Math.round(x / 5) * 5);
-  const persT = sp.pers >= 5 ? `zhruba ${rr(sp.pers)} osobních preferenčních` : "skoro žádné osobní preferenční";
+  const relT = sp.relO == null ? "" : ` (${sp.relO >= 0 ? "+" : "−"}${nf0.format(Math.abs(Math.round(sp.relO * 100)))} % proti ostatním na kandidátce)`;
+  const persT = (sp.pers >= 5 ? `<b>zhruba ${rr(sp.pers)} osobních preferenčních</b>` : "<b>skoro žádné osobní preferenční</b>") + relT;
   const bonT = sp.bonus >= 5 ? `asi ${rr(sp.bonus)} přineslo ${p}. místo na kandidátce` : `${p}. místo na kandidátce nepřineslo skoro nic navíc`;
   return `<b>Odhad:</b> z ${hlasu(cv)} bylo ${persT} a ${bonT}. Zbytek, kolem ${rr(sp.cross)} hlasů, dostal každý kandidát ${l === OPT ? "OPT" : "listiny " + esc(partyShort)} stejně, protože lidé zakřížkovali celou stranu. `;
 }
@@ -1126,7 +1134,7 @@ function renderCandCmp(d) {
     const m = MISTA[r.c];
     return row(r, m ? m.k : "Okrsek " + r.c, m ? "voliči: " + (m.cast || "") : "");
   }).join("") + `<p class="fine">Průměr = hlasy pro listinu ${esc(party.short)} v okrsku děleno ${nK} kandidáty. Pruh doprava (modře) = kandidát dostal víc než průměr, doleva (šedě) = méně; plná délka = ±60 %.</p>
-    <p class="fine">Odhad v hodnocení: v každém okrsku se za hlasy, které by kandidát dostal i bez osobních zaškrtnutí, bere nejnižší počet hlasů mezi kandidáty listiny na pozicích 1–15 (u nižších pozic 1 až pozice kandidáta), na poslední pozici jen křížek celé strany. Rozdíl mezi nimi přinášejí voliči, kteří zakřížkovali stranu a k tomu pár jmen jinde (zbylé hlasy jdou kandidátům strany shora podle pořadí); hlasy nad tímto základem jsou osobní zaškrtnutí. Přesnost je zhruba ± desítky hlasů.</p>`;
+    <p class="fine">Odhad v hodnocení: v každém okrsku se za hlasy, které by kandidát dostal i bez osobních zaškrtnutí, bere nejnižší počet hlasů mezi kandidáty listiny na pozicích 1–15 (u nižších pozic 1 až pozice kandidáta), na poslední pozici jen křížek celé strany. Rozdíl mezi nimi přinášejí voliči, kteří zakřížkovali stranu a k tomu pár jmen jinde (zbylé hlasy jdou kandidátům strany shora podle pořadí); hlasy nad tímto základem jsou osobní zaškrtnutí. Procento v závorce porovnává osobní hlasy kandidáta s průměrem osobních hlasů ostatních kandidátů téže listiny (spočtených stejně). Přesnost je zhruba ± desítky hlasů.</p>`;
 }
 
 let sortMode = "num";
