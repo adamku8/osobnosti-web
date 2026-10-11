@@ -976,7 +976,7 @@ $("tiles").addEventListener("keydown", e => {
 document.addEventListener("click", e => { if (e.target.closest("#res-back")) { const back = selOk; selectOkrsek(back); if (window.innerWidth < 940) $("h-okrsky").scrollIntoView({ behavior: "smooth", block: "start" }); } });
 
 // výběr kandidáta ve Srovnání okrsků: všechny kandidátky, hodnota „listina:pořadí“ (pamatuje se v prohlížeči)
-let selCand = "", candSort = "votes"; // výchozí řazení podle absolutních hlasů, procenta až druhotně
+let selCand = "", candSort = "rel"; // výchozí řazení: nejvíc nad průměrem listiny
 try { selCand = localStorage.getItem("selCand2") || ""; } catch (e) {}
 const candLists = () => {
   const L = state?.pref_vse?.listiny || {};
@@ -1093,8 +1093,8 @@ function renderCandCmp(d) {
       <div class="olab"><b>${r.c}</b><span>${esc(label)}<small>${esc(sub)}</small>${partyLine(r)}</span></div>${bar(r.rel)}
       <div class="cval${r.rel >= 0 ? " up" : ""}"><b>${nf0.format(r.v)} hl.</b><small>${pp(r.rel)} % proti průměru ${nf1.format(r.avg)}</small></div></div>`;
   const chips = `<div class="filters" role="group" aria-label="Řazení okrsků kandidáta">
-      <button class="chip" type="button" data-cs="votes" aria-pressed="${candSort === "votes"}">Nejvíc hlasů</button>
       <button class="chip" type="button" data-cs="rel" aria-pressed="${candSort === "rel"}">Nejvíc nad průměrem</button>
+      <button class="chip" type="button" data-cs="votes" aria-pressed="${candSort === "votes"}">Nejvíc hlasů</button>
       <button class="chip" type="button" data-cs="num" aria-pressed="${candSort === "num"}">Podle čísla okrsku</button></div>`;
   const axis = `<div class="crow2 head"><span></span><div class="daxis"><span>−60 %</span><span>průměr listiny</span><span>+60 %</span></div><span></span></div>`;
   const total = row({ c: "Σ", v: cv, avg: cityAvg, rel: cityRel, optV: optAll, optS: vAll ? optAll / vAll : 0, partyS: vAll ? partyAll / vAll : 0 }, "Celé město", `${rows.length} sečtených okrsků`, "total");
