@@ -336,6 +336,34 @@ tr.wait td { color: var(--ink-55); }
 .mapcard .voted span { font-size: 13px; color: var(--ink-72); }
 .mapcard .chip { justify-self: start; }
 
+/* Srovnání okrsků: jeden kandidát proti průměru listiny v každém okrsku */
+.candpick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.candpick label { font: 600 12px/1.3 var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-55); }
+.candpick select { font: 600 15px/1.2 var(--body); padding: 10px 12px; border: 2px solid var(--blue); border-radius: 8px; background: var(--paper); color: var(--ink); width: min(100%, 420px); }
+.candpick select:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.crow2 { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(0, 2.4fr) 170px; gap: 6px 18px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--ink-06); }
+.crow2.total { border-bottom: 2px solid var(--ink); padding-bottom: 14px; }
+.crow2.head { padding: 4px 0; border-bottom: 0; }
+.crow2.total .olab b, .crow2 .olab b { color: var(--blue); }
+.dtrack { position: relative; height: 16px; background: var(--ink-06); border-radius: 2px; }
+.dtrack .mid { position: absolute; left: 50%; top: -4px; bottom: -4px; border-left: 2px dashed var(--ink); }
+.dtrack i { position: absolute; top: 0; bottom: 0; }
+.dtrack i.up { left: 50%; background: var(--blue); border-radius: 0 2px 2px 0; }
+.dtrack i.down { right: 50%; background: var(--ink-34); border-radius: 2px 0 0 2px; }
+.daxis { position: relative; height: 14px; font-size: 11px; color: var(--ink-55); }
+.daxis span { position: absolute; white-space: nowrap; }
+.daxis span:nth-child(2) { left: 50%; transform: translateX(-50%); }
+.daxis span:nth-child(3) { right: 0; }
+.cval { text-align: right; white-space: nowrap; font-size: 13px; }
+.cval b { font: 800 17px/1 var(--display); }
+.cval.up b { color: var(--blue); }
+.cval small { display: block; font-size: 11.5px; color: var(--ink-55); margin-top: 3px; }
+@media (max-width: 640px) {
+  .crow2 { grid-template-columns: minmax(0, 1fr) auto; }
+  .crow2 .olab { grid-column: 1; grid-row: 1; } .crow2 .cval { grid-column: 2; grid-row: 1; }
+  .crow2 .dtrack, .crow2 .daxis { grid-column: 1 / -1; grid-row: 2; }
+}
+
 footer { font-size: 12.5px; color: var(--ink-55); display: grid; gap: 6px; border-top: 1px solid var(--ink-14); padding-top: 14px; }
 footer p { margin: 0; max-width: 90ch; }
 footer a { color: var(--blue); }
@@ -387,7 +415,11 @@ img { max-width: 100%; }
         </div>
       </div>
       <div class="kv" id="opt-kv"></div>
-      <div class="filters" role="group" aria-label="Řazení okrsků">
+      <div class="candpick">
+        <label for="cand-sel">Kandidát OPT</label>
+        <select id="cand-sel"><option value="0">Celá listina OPT (podíl strany v okrscích)</option></select>
+      </div>
+      <div class="filters" id="opt-sort" role="group" aria-label="Řazení okrsků">
         <button class="chip" id="s-num" aria-pressed="true" data-s="num">Podle čísla</button>
         <button class="chip" id="s-22" aria-pressed="false" data-s="s22">Nejsilnější 2022</button>
         <button class="chip" id="s-delta" aria-pressed="false" data-s="delta">Největší propad</button>
@@ -892,8 +924,81 @@ $("tiles").addEventListener("keydown", e => {
 });
 document.addEventListener("click", e => { if (e.target.closest("#res-back")) { const back = selOk; selectOkrsek(back); if (window.innerWidth < 940) $("h-okrsky").scrollIntoView({ behavior: "smooth", block: "start" }); } });
 
+// výběr kandidáta ve Srovnání okrsků (pamatuje se v prohlížeči)
+let selCand = 0, candSort = "rel";
+try { selCand = Number(localStorage.getItem("selCand")) || 0; } catch (e) {}
+function fillCandSel() {
+  const sel = $("cand-sel"), k = state?.pref?.kandidati || [];
+  if (sel.options.length !== k.length + 1) {
+    sel.innerHTML = `<option value="0">Celá listina OPT (podíl strany v okrscích)</option>` +
+      [...k].sort((a, b) => a[0] - b[0]).map(([p, jm]) => `<option value="${p}">${p}. ${esc(jm)}</option>`).join("");
+  }
+  if (selCand && !k.some(x => x[0] === selCand)) selCand = 0;
+  sel.value = String(selCand);
+}
+$("cand-sel").addEventListener("change", e => {
+  selCand = Number(e.target.value) || 0;
+  try { localStorage.setItem("selCand", String(selCand)); } catch (err) {}
+  renderOpt(derive());
+});
+$("cmp").addEventListener("click", e => {
+  const ch = e.target.closest("[data-cs]");
+  if (ch) { candSort = ch.dataset.cs; renderOpt(derive()); }
+});
+function renderCandCmp(d) {
+  const kand = state?.pref?.kandidati || [];
+  const k = kand.find(x => x[0] === selCand);
+  const jm = k ? k[1] : "Kandidát č. " + selCand;
+  const nK = kand.length || 27;
+  const rows = [];
+  let cv = 0, ct = 0;
+  for (const o of d.done.values()) {
+    const arr = o.pref_opt || [];
+    if (!arr.length) continue;
+    const v = arr[selCand - 1] || 0, tot = arr.reduce((a, b) => a + b, 0), avg = tot / arr.length;
+    cv += v; ct += tot;
+    rows.push({ c: o.c, v, avg, rel: avg ? v / avg - 1 : 0 });
+  }
+  const cityAvg = ct / nK, cityRel = cityAvg ? cv / cityAvg - 1 : 0;
+  const above = rows.filter(r => r.rel > 0).length;
+  const best = [...rows].sort((a, b) => b.rel - a.rel)[0], worst = [...rows].sort((a, b) => a.rel - b.rel)[0];
+  const zvol = d.official ? (d.rows.find(r => r.c === OPT)?.zvoleni || []).some(z => z.poradi === selCand) : null;
+  const okLbl = c => `${c}${MISTA[c] ? " · " + MISTA[c].k : ""}`;
+  $("opt-kv").innerHTML = [
+    ["Kandidát", jm, `č. ${selCand} na listině OPT${zvol === true ? " · zvolen/a" : zvol === false ? " · nezvolen/a" : ""}`],
+    ["Preferenční hlasy", nf0.format(cv), `průměr na kandidáta ${nf0.format(Math.round(cityAvg))}`],
+    ["Proti průměru listiny", rows.length ? pp(cityRel) + " %" : "–", cityRel >= 0.1 ? "nad hranicí posunu (+10 %)" : "hranice posunu je +10 %"],
+    ["Okrsků nad průměrem", rows.length ? `${above} z ${rows.length}` : "–", ""],
+    ["Nejlíp", best ? okLbl(best.c) : "–", best ? pp(best.rel) + " %" : ""],
+    ["Nejslabší", worst ? okLbl(worst.c) : "–", worst ? pp(worst.rel) + " %" : ""]
+  ].map(([a, b, s]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd>${s ? `<dt>${esc(s)}</dt>` : ""}</div>`).join("");
+
+  if (!rows.length) { $("cmp").innerHTML = `<div class="empty">Preferenční hlasy po okrscích se ukážou s prvním sečteným okrskem.</div>`; return; }
+  if (candSort === "num") rows.sort((a, b) => a.c - b.c);
+  else if (candSort === "votes") rows.sort((a, b) => b.v - a.v || a.c - b.c);
+  else rows.sort((a, b) => b.rel - a.rel || a.c - b.c);
+  const SCALE = 0.6; // ±60 % proti průměru = plná délka
+  const bar = rel => `<div class="dtrack" aria-hidden="true"><i class="${rel >= 0 ? "up" : "down"}" style="width:${(Math.min(1, Math.abs(rel) / SCALE) * 50).toFixed(1)}%"></i><span class="mid"></span></div>`;
+  const row = (r, label, sub, cls) => `<div class="crow2 ${cls || ""}" title="${esc(label)}: ${nf0.format(r.v)} hlasů, průměr kandidáta OPT ${nf1.format(r.avg)}">
+      <div class="olab"><b>${r.c}</b><span>${esc(label)}<small>${esc(sub)}</small></span></div>${bar(r.rel)}
+      <div class="cval${r.rel >= 0 ? " up" : ""}"><b>${pp(r.rel)} %</b><small>${nf0.format(r.v)} hl. · průměr ${nf1.format(r.avg)}</small></div></div>`;
+  const chips = `<div class="filters" role="group" aria-label="Řazení okrsků kandidáta">
+      <button class="chip" type="button" data-cs="rel" aria-pressed="${candSort === "rel"}">Nejvíc nad průměrem</button>
+      <button class="chip" type="button" data-cs="votes" aria-pressed="${candSort === "votes"}">Nejvíc hlasů</button>
+      <button class="chip" type="button" data-cs="num" aria-pressed="${candSort === "num"}">Podle čísla okrsku</button></div>`;
+  const axis = `<div class="crow2 head"><span></span><div class="daxis"><span>−60 %</span><span>průměr listiny</span><span>+60 %</span></div><span></span></div>`;
+  const total = row({ c: "Σ", v: cv, avg: cityAvg, rel: cityRel }, "Celé město", `${rows.length} sečtených okrsků`, "total");
+  $("cmp").innerHTML = chips + axis + total + rows.map(r => {
+    const m = MISTA[r.c];
+    return row(r, m ? m.k : "Okrsek " + r.c, m ? "voliči: " + (m.cast || "") : "");
+  }).join("") + `<p class="fine">Průměr = hlasy pro listinu OPT v okrsku děleno ${nK} kandidáty. Pruh doprava (modře) = kandidát dostal víc než průměr, doleva (šedě) = méně; plná délka = ±60 %.</p>`;
+}
+
 let sortMode = "num";
 function renderOpt(d) {
+  fillCandSel();
+  $("opt-sort").hidden = !!selCand;
+  if (selCand) return renderCandCmp(d);
   const all22 = Object.values(B22).reduce((a, b) => [a[0] + b[2], a[1] + b[3]], [0, 0]);
   let v26 = 0, o26 = 0, v22 = 0, o22 = 0;
   for (const o of d.done.values()) { v26 += o.platne || 0; o26 += o.hlasy[OPT - 1]; v22 += B22[o.c][2]; o22 += B22[o.c][3]; }
