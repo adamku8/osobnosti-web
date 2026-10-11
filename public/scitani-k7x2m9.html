@@ -1039,6 +1039,28 @@ function candSummary(jm, rows, cv, all) {
 }
 // preferenční hlasy listiny v okrsku jako [[pořadí, hlasy], …]; starší data mají jen OPT v pref_opt
 const okrsekPref = (o, l) => o.pref_vse?.[String(l)] || (l === OPT && o.pref_opt ? o.pref_opt.map((v, i) => [i + 1, v]) : null);
+// Odhad, odkud má kandidát hlasy: křížek celé strany (dostane každý) / smíšené hlasování (křížek strany + jména jinde,
+// zbylé hlasy jdou kandidátům strany shora podle pořadí) / osobní zaškrtnutí. Kandidát bez osobních zaškrtnutí má
+// v okrsku jen „podlahu" své pozice ≈ nejnižší hlasy mezi kandidáty na pozicích 1…i. Součet přes okrsky:
+// poslední pozice = jen křížek strany, pozice 1–15 = křížek + smíšené hlasy (na hlubší pozice dosáhne málokdo).
+function candSplit(d, l, p, v) {
+  const lists = [];
+  for (const o of d.done.values()) { const a = okrsekPref(o, l); if (a && a.length) lists.push([...a].sort((x, y) => x[0] - y[0])); }
+  if (!lists.length) return null;
+  const pos = [...new Set(lists.flatMap(a => a.map(x => x[0])))].sort((a, b) => a - b);
+  const r = pos.indexOf(p) + 1;
+  if (!r) return null;
+  const U = k => lists.reduce((s, a) => s + Math.min(...a.slice(0, k).map(x => x[1])), 0);
+  const n = pos.length, cross = U(n), floor = U(Math.max(r, Math.min(15, n)));
+  return { cross, bonus: Math.max(0, floor - cross), pers: Math.max(0, v - floor) };
+}
+function splitSentence(sp, cv, p, l, partyShort) {
+  if (!sp) return "";
+  const rr = x => nf0.format(x >= 100 ? Math.round(x / 10) * 10 : Math.round(x / 5) * 5);
+  const persT = sp.pers >= 5 ? `zhruba ${rr(sp.pers)} osobních preferenčních` : "skoro žádné osobní preferenční";
+  const bonT = sp.bonus >= 5 ? `asi ${rr(sp.bonus)} přineslo ${p}. místo na kandidátce` : `${p}. místo na kandidátce nepřineslo skoro nic navíc`;
+  return `<b>Odhad:</b> z ${hlasu(cv)} bylo ${persT} a ${bonT}. Zbytek, kolem ${rr(sp.cross)} hlasů, dostal každý kandidát ${l === OPT ? "OPT" : "listiny " + esc(partyShort)} stejně, protože lidé zakřížkovali celou stranu. `;
+}
 function renderCandCmp(d) {
   const [l, p] = selCand.split(":").map(Number);
   const party = PARTIES[l] || { short: "Listina " + l };
@@ -1068,8 +1090,10 @@ function renderCandCmp(d) {
   const best = [...pool].sort((a, b) => b.rel - a.rel)[0], worst = [...pool].sort((a, b) => a.rel - b.rel)[0];
   const zvol = d.official ? (d.rows.find(r => r.c === l)?.zvoleni || []).some(z => z.poradi === p) : null;
   const okLbl = c => `${c}${MISTA[c] ? " · " + MISTA[c].k : ""}`;
-  const sumEl = $("cand-sum"), sumTxt = candSummary(jm, rows, cv, d.done.size === 38);
-  const sumHtml = sumTxt ? `<span class="eyebrow">Hodnocení · ${esc(party.short)}, č. ${p}</span><p>${sumTxt}</p>` : "";
+  const sumEl = $("cand-sum"), sumBase = candSummary(jm, rows, cv, d.done.size === 38);
+  const sumSplit = sumBase ? splitSentence(candSplit(d, l, p, cv), cv, p, l, party.short).trim() : "";
+  const sumTxt = sumBase;
+  const sumHtml = sumTxt ? `<span class="eyebrow">Hodnocení · ${esc(party.short)}, č. ${p}</span>${sumSplit ? `<p>${sumSplit}</p>` : ""}<p>${sumTxt}</p>` : "";
   if (sumEl.innerHTML !== sumHtml) sumEl.innerHTML = sumHtml; // beze změny nepřekreslovat (animace při každém obnovení dat)
   sumEl.hidden = !sumTxt;
   $("cand-hint").hidden = !!sumTxt;
@@ -1101,7 +1125,8 @@ function renderCandCmp(d) {
   $("cmp").innerHTML = chips + axis + total + rows.map(r => {
     const m = MISTA[r.c];
     return row(r, m ? m.k : "Okrsek " + r.c, m ? "voliči: " + (m.cast || "") : "");
-  }).join("") + `<p class="fine">Průměr = hlasy pro listinu ${esc(party.short)} v okrsku děleno ${nK} kandidáty. Pruh doprava (modře) = kandidát dostal víc než průměr, doleva (šedě) = méně; plná délka = ±60 %.</p>`;
+  }).join("") + `<p class="fine">Průměr = hlasy pro listinu ${esc(party.short)} v okrsku děleno ${nK} kandidáty. Pruh doprava (modře) = kandidát dostal víc než průměr, doleva (šedě) = méně; plná délka = ±60 %.</p>
+    <p class="fine">Odhad v hodnocení: v každém okrsku se za hlasy, které by kandidát dostal i bez osobních zaškrtnutí, bere nejnižší počet hlasů mezi kandidáty listiny na pozicích 1–15 (u nižších pozic 1 až pozice kandidáta), na poslední pozici jen křížek celé strany. Rozdíl mezi nimi přinášejí voliči, kteří zakřížkovali stranu a k tomu pár jmen jinde (zbylé hlasy jdou kandidátům strany shora podle pořadí); hlasy nad tímto základem jsou osobní zaškrtnutí. Přesnost je zhruba ± desítky hlasů.</p>`;
 }
 
 let sortMode = "num";
