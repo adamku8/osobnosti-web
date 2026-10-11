@@ -178,6 +178,19 @@ tr.wait td { color: var(--ink-55); }
 .oline .yr { font-size: 11.5px; color: var(--ink-55); }
 .oline .val { text-align: right; font-size: 13px; white-space: nowrap; }
 .oline .val small { margin-left: 6px; font-size: 11.5px; font-weight: 400; color: var(--ink-55); }
+/* režim Největší propad: třetí sloupec s velkým číslem ztracených hlasů */
+.cmp.loss .orow { grid-template-columns: minmax(150px, 1fr) minmax(0, 2.6fr) 150px; }
+.lossval { text-align: right; white-space: nowrap; }
+.lossval b { display: block; font: 800 30px/1 var(--display); letter-spacing: -.01em; }
+.lossval.minus b { color: var(--red); }
+.lossval.plus b { color: var(--blue); }
+.lossval.wait b, .lossval.wait { color: var(--ink-34); font: 800 22px/1 var(--display); }
+.lossval small { display: block; margin-top: 4px; font: 400 11.5px/1.3 var(--body); color: var(--ink-55); }
+@media (max-width: 640px) {
+  .cmp.loss .orow { grid-template-columns: minmax(0, 1fr) auto; }
+  .cmp.loss .orow .olab { grid-column: 1; grid-row: 1; } .cmp.loss .orow .lossval { grid-column: 2; grid-row: 1; }
+  .cmp.loss .orow .obars { grid-column: 1 / -1; grid-row: 2; }
+}
 .oline.y26 .val { font-weight: 600; }
 .t100 { position: relative; height: 16px; background: var(--ink-06); border-radius: 2px; overflow: hidden; display: flex; }
 .oline.y22 .t100 { height: 10px; }
@@ -1045,12 +1058,15 @@ function renderOpt(d) {
   for (let c = 1; c <= 38; c++) {
     const b = B22[c], o = d.done.get(c);
     const s22 = b[3] / b[2], s26 = o && o.platne ? o.hlasy[OPT - 1] / o.platne : null;
-    rows.push({ c, s22, s26, delta: s26 == null ? null : s26 - s22, v22: b[3], v26: o ? (o.hlasy[OPT - 1] || 0) : null });
+    const v26 = o ? (o.hlasy[OPT - 1] || 0) : null;
+    // ztráta: hlasy 2026 minus hlasy 2022 přepočtené na 27 mandátů (2022 měl volič až 33 hlasů)
+    rows.push({ c, s22, s26, delta: s26 == null ? null : s26 - s22, v22: b[3], v26,
+      loss: v26 == null ? null : v26 - b[3] * 27 / 33, lossVol: v26 == null ? null : v26 / 27 - b[3] / 33 });
   }
   // sečtené okrsky vždy nahoře, uvnitř skupin podle zvoleného řazení
   const second = sortMode === "votes" ? (a, b) => (b.v26 ?? 0) - (a.v26 ?? 0) || b.s26 - a.s26 || a.c - b.c
     : sortMode === "s22" ? (a, b) => b.s22 - a.s22
-    : sortMode === "delta" ? (a, b) => (a.delta ?? 0) - (b.delta ?? 0) || a.c - b.c
+    : sortMode === "delta" ? (a, b) => (a.loss ?? 0) - (b.loss ?? 0) || (a.delta ?? 0) - (b.delta ?? 0) || a.c - b.c
     : (a, b) => a.c - b.c;
   rows.sort((a, b) => (a.s26 == null) - (b.s26 == null) || second(a, b));
 
@@ -1061,6 +1077,8 @@ function renderOpt(d) {
     c: "Σ", total: true,
     label: "Celé město", sub: d.official ? "2026 oficiální výsledek" : d.done.size ? `2026 jen ze ${d.done.size} sečtených okrsků` : "2026 zatím nic sečteno",
     s22: all22[1] / all22[0], v22: all22[1], v26: d.done.size ? d.votes[OPT] : null,
+    loss: d.done.size ? d.votes[OPT] - (d.official ? all22[1] : o22) * 27 / 33 : null,
+    lossVol: d.done.size ? d.votes[OPT] / 27 - (d.official ? all22[1] : o22) / 33 : null,
     shares: d.official ? Object.fromEntries(d.rows.map(r => [r.c, r.share])) : (totValid ? Object.fromEntries(tot.map((v, i) => [i + 1, v / totValid])) : null)
   };
   cityRow.s26 = cityRow.shares ? cityRow.shares[OPT] : null;
@@ -1074,12 +1092,15 @@ function renderOpt(d) {
   const bar22 = s => `<div class="t100"><i class="seg s22" style="width:${(s * 100).toFixed(2)}%" title="OPT 2022 ${pct(s)}"></i><i class="g half" style="left:50%"></i></div>`;
   const rowHtml = r => {
     const delta = r.delta != null ? `<small class="delta">${pp(r.delta)} %${r.deltaNote ? ` <span class="fine">${esc(r.deltaNote)}</span>` : ""}</small>` : "";
+    const lossCell = sortMode !== "delta" ? "" : r.loss == null ? `<div class="lossval wait">–<small>nesečteno</small></div>`
+      : `<div class="lossval ${r.loss < 0 ? "minus" : "plus"}" title="2026: ${nf0.format(r.v26)} hl. · 2022: ${nf0.format(r.v22)} hl. (přepočet na 27 mandátů ${nf0.format(Math.round(r.v22 * 27 / 33))})">
+          <b>${r.loss < 0 ? "−" : "+"}${nf0.format(Math.abs(Math.round(r.loss)))}</b><small>hlasů · ≈ ${r.lossVol < 0 ? "−" : "+"}${nf0.format(Math.abs(Math.round(r.lossVol)))} voličů</small></div>`;
     return `<div class="orow ${r.total ? "total" : r.s26 != null ? "done" : "wait"}">
       <div class="olab"><b>${r.c}</b><span>${esc(r.label)}<small>${esc(r.sub)}</small>${delta}</span></div>
       <div class="obars">
         <div class="oline y22"><span class="yr">2022</span>${bar22(r.s22)}<span class="val">${pct(r.s22)}<small>${nf0.format(r.v22)} hl.</small></span></div>
         <div class="oline y26"><span class="yr">2026</span>${bar100(r.shares)}<span class="val">${r.s26 != null ? `${pct(r.s26)}<small>${nf0.format(r.v26 ?? 0)} hl.</small>` : "–"}</span></div>
-      </div></div>`;
+      </div>${lossCell}</div>`;
   };
   const rowsOut = rows.map(r => {
     const o = d.done.get(r.c), m = MISTA[r.c];
@@ -1089,7 +1110,9 @@ function renderOpt(d) {
     };
   });
   const axis = `<div class="orow head"><span></span><div class="oline"><span></span><div class="axis100">${[0, 25, 50, 75, 100].map(t => `<span style="left:${t}%">${t} %</span>`).join("")}</div><span></span></div></div>`;
+  $("cmp").classList.toggle("loss", sortMode === "delta");
   $("cmp").innerHTML = axis + rowHtml(cityRow) + rowsOut.map(rowHtml).join("") +
+    (sortMode === "delta" ? `<p class="fine">Velké číslo = ztracené hlasy OPT: hlasy 2026 minus hlasy 2022 přepočtené na 27 mandátů (×27/33, v roce 2022 dal volič až 33 hlasů). „Voličů“ = přibližně kolik voličů s plným hlasem pro celou listinu to představuje (hlasy 2026 / 27 minus hlasy 2022 / 33). Seřazeno od největší ztráty hlasů.</p>` : "") +
     `<p class="fine">Hlasy jsou hlasy pro listinu OPT. V roce 2022 měl každý volič až 33 hlasů (33 mandátů), letos 27 – absolutní počty proto nejsou mezi roky přímo srovnatelné, procenta ano.</p>`;
 }
 
