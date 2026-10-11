@@ -174,9 +174,10 @@ tr.wait td { color: var(--ink-55); }
 .olab small { display: block; font-size: 11.5px; font-weight: 400; color: var(--ink-55); }
 .olab small.delta { font: 500 11px/1.3 var(--body); color: var(--ink-72); margin-top: 2px; }
 .obars { display: grid; gap: 5px; min-width: 0; }
-.oline { display: grid; grid-template-columns: 34px minmax(0, 1fr) 58px; gap: 8px; align-items: center; }
+.oline { display: grid; grid-template-columns: 34px minmax(0, 1fr) 132px; gap: 8px; align-items: center; }
 .oline .yr { font-size: 11.5px; color: var(--ink-55); }
 .oline .val { text-align: right; font-size: 13px; white-space: nowrap; }
+.oline .val small { margin-left: 6px; font-size: 11.5px; font-weight: 400; color: var(--ink-55); }
 .oline.y26 .val { font-weight: 600; }
 .t100 { position: relative; height: 16px; background: var(--ink-06); border-radius: 2px; overflow: hidden; display: flex; }
 .oline.y22 .t100 { height: 10px; }
@@ -426,6 +427,7 @@ img { max-width: 100%; }
         <button class="chip" id="s-num" aria-pressed="true" data-s="num">Podle čísla</button>
         <button class="chip" id="s-22" aria-pressed="false" data-s="s22">Nejsilnější 2022</button>
         <button class="chip" id="s-delta" aria-pressed="false" data-s="delta">Největší propad</button>
+        <button class="chip" id="s-votes" aria-pressed="false" data-s="votes">Nejvíc hlasů</button>
       </div>
       <div class="cmp" id="cmp"></div>
     </section>
@@ -1043,10 +1045,11 @@ function renderOpt(d) {
   for (let c = 1; c <= 38; c++) {
     const b = B22[c], o = d.done.get(c);
     const s22 = b[3] / b[2], s26 = o && o.platne ? o.hlasy[OPT - 1] / o.platne : null;
-    rows.push({ c, s22, s26, delta: s26 == null ? null : s26 - s22 });
+    rows.push({ c, s22, s26, delta: s26 == null ? null : s26 - s22, v22: b[3], v26: o ? (o.hlasy[OPT - 1] || 0) : null });
   }
   // sečtené okrsky vždy nahoře, uvnitř skupin podle zvoleného řazení
-  const second = sortMode === "s22" ? (a, b) => b.s22 - a.s22
+  const second = sortMode === "votes" ? (a, b) => (b.v26 ?? 0) - (a.v26 ?? 0) || b.s26 - a.s26 || a.c - b.c
+    : sortMode === "s22" ? (a, b) => b.s22 - a.s22
     : sortMode === "delta" ? (a, b) => (a.delta ?? 0) - (b.delta ?? 0) || a.c - b.c
     : (a, b) => a.c - b.c;
   rows.sort((a, b) => (a.s26 == null) - (b.s26 == null) || second(a, b));
@@ -1057,7 +1060,7 @@ function renderOpt(d) {
   const cityRow = {
     c: "Σ", total: true,
     label: "Celé město", sub: d.official ? "2026 oficiální výsledek" : d.done.size ? `2026 jen ze ${d.done.size} sečtených okrsků` : "2026 zatím nic sečteno",
-    s22: all22[1] / all22[0],
+    s22: all22[1] / all22[0], v22: all22[1], v26: d.done.size ? d.votes[OPT] : null,
     shares: d.official ? Object.fromEntries(d.rows.map(r => [r.c, r.share])) : (totValid ? Object.fromEntries(tot.map((v, i) => [i + 1, v / totValid])) : null)
   };
   cityRow.s26 = cityRow.shares ? cityRow.shares[OPT] : null;
@@ -1074,8 +1077,8 @@ function renderOpt(d) {
     return `<div class="orow ${r.total ? "total" : r.s26 != null ? "done" : "wait"}">
       <div class="olab"><b>${r.c}</b><span>${esc(r.label)}<small>${esc(r.sub)}</small>${delta}</span></div>
       <div class="obars">
-        <div class="oline y22"><span class="yr">2022</span>${bar22(r.s22)}<span class="val">${pct(r.s22)}</span></div>
-        <div class="oline y26"><span class="yr">2026</span>${bar100(r.shares)}<span class="val">${r.s26 != null ? pct(r.s26) : "–"}</span></div>
+        <div class="oline y22"><span class="yr">2022</span>${bar22(r.s22)}<span class="val">${pct(r.s22)}<small>${nf0.format(r.v22)} hl.</small></span></div>
+        <div class="oline y26"><span class="yr">2026</span>${bar100(r.shares)}<span class="val">${r.s26 != null ? `${pct(r.s26)}<small>${nf0.format(r.v26 ?? 0)} hl.</small>` : "–"}</span></div>
       </div></div>`;
   };
   const rowsOut = rows.map(r => {
@@ -1086,7 +1089,8 @@ function renderOpt(d) {
     };
   });
   const axis = `<div class="orow head"><span></span><div class="oline"><span></span><div class="axis100">${[0, 25, 50, 75, 100].map(t => `<span style="left:${t}%">${t} %</span>`).join("")}</div><span></span></div></div>`;
-  $("cmp").innerHTML = axis + rowHtml(cityRow) + rowsOut.map(rowHtml).join("");
+  $("cmp").innerHTML = axis + rowHtml(cityRow) + rowsOut.map(rowHtml).join("") +
+    `<p class="fine">Hlasy jsou hlasy pro listinu OPT. V roce 2022 měl každý volič až 33 hlasů (33 mandátů), letos 27 – absolutní počty proto nejsou mezi roky přímo srovnatelné, procenta ano.</p>`;
 }
 
 // Mapa okrsků: SVG z hranic ČSÚ/RÚIAN (MAPA = {vb:[w,h], ok:{c:{d,x,y,a}}}), barvy jako u dlaždic
