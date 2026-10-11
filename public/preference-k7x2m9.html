@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Posuny na kandidátkách Třinec 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Analytický arch: volba strany → jak funguje pozice → svah posunů (listina → hlasy) → tabulka kandidátů → srovnání stran.
+   Brand OPT v2.0: bílá plocha, antracit přes alfu, Signal Blue pro data a posuny nahoru, Brand Red jen pro OPT. */
+:root {
+  color-scheme: light;
+  --paper: #FFFFFF;
+  --ink: #323232;
+  --ink-72: rgba(50, 50, 50, .72);
+  --ink-55: rgba(50, 50, 50, .55);
+  --ink-34: rgba(50, 50, 50, .34);
+  --ink-14: rgba(50, 50, 50, .14);
+  --ink-06: rgba(50, 50, 50, .05);
+  --blue: #003B8E;
+  --blue-08: rgba(0, 59, 142, .07);
+  --blue-34: rgba(0, 59, 142, .34);
+  --red: #FF2D2D;
+  --display: "Montserrat", "Avenir Next", "Segoe UI", Arial, sans-serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body); font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 34px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+h1 { font-weight: 800; font-size: clamp(30px, 5vw, 50px); line-height: 1.02; text-transform: uppercase; letter-spacing: -.01em; }
+h2 { font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: .04em; }
+h3 { font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; }
+.eyebrow { font: 600 12px/1.3 var(--display); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-55); }
+.lead { margin: 0; font-size: 17px; color: var(--ink-72); max-width: 62ch; }
+header { display: grid; gap: 12px; }
+section { display: grid; gap: 14px; min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+.fine { font-size: 12.5px; color: var(--ink-55); margin: 0; max-width: 90ch; }
+p.txt { margin: 0; font-size: 14.5px; color: var(--ink-72); max-width: 72ch; }
+
+/* volba strany */
+.parties { display: flex; flex-wrap: wrap; gap: 8px; }
+.pchip { font: 800 13px/1.1 var(--display); letter-spacing: .04em; text-transform: uppercase; border: 2px solid var(--blue); color: var(--blue); background: var(--paper); border-radius: 10px; padding: 11px 14px; cursor: pointer; }
+.pchip small { display: block; font: 500 11px/1.2 var(--body); letter-spacing: 0; text-transform: none; color: var(--ink-55); margin-top: 3px; }
+.pchip[aria-pressed="true"] { background: var(--blue); color: var(--paper); }
+.pchip[aria-pressed="true"] small { color: rgba(255, 255, 255, .8); }
+.pchip:focus-visible, .chip:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+/* čísla */
+.kv { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px 22px; }
+.kv div { display: grid; gap: 2px; align-content: start; }
+.kv dt { font-size: 12px; color: var(--ink-55); }
+.kv dd { margin: 0; font: 800 26px/1.1 var(--display); color: var(--blue); }
+.kv dd.ink { color: var(--ink); }
+.kv dt.sub { font-size: 12px; }
+
+/* výsledek pro mandáty */
+.moves { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.move { border-top: 3px solid var(--blue); padding-top: 10px; display: grid; gap: 6px; }
+.move.out { border-top-color: var(--ink-34); }
+.move ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.move li { font-size: 14.5px; }
+.move li b { font-weight: 700; }
+.move li span { color: var(--ink-55); font-size: 13px; }
+
+/* svah */
+.slopebox { overflow-x: auto; }
+.slopebox svg { display: block; width: 100%; min-width: 700px; height: auto; }
+.slopebox text { font-family: var(--body); font-size: 12.5px; fill: var(--ink); }
+.slopebox text.dim { fill: var(--ink-55); }
+.slopebox text.el { font-weight: 700; }
+.slopebox text.hd { font-family: var(--display); font-weight: 600; font-size: 11px; letter-spacing: .1em; fill: var(--ink-55); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12.5px; color: var(--ink-72); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.ln { width: 22px; height: 0; border-top: 3px solid; display: inline-block; }
+
+/* tabulka kandidátů */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 12.5px/1 var(--body); border: 1px solid var(--ink-14); background: var(--paper); color: var(--ink); padding: 7px 12px; border-radius: 999px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: var(--paper); }
+.tbox { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 820px; font-size: 13.5px; }
+th { text-align: left; font: 600 11.5px/1.3 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-55); padding: 9px 8px; border-bottom: 1px solid var(--ink-14); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--ink-06); vertical-align: middle; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+td.por { font: 800 15px/1 var(--display); color: var(--ink-55); }
+td.jm { font-weight: 600; }
+tr.el td.jm { font-weight: 800; }
+tr.el td.por { color: var(--blue); }
+.obar { display: flex; align-items: center; gap: 8px; min-width: 190px; }
+.obar .t { flex: 1; height: 10px; background: var(--ink-06); border-radius: 2px; position: relative; }
+.obar .t i { position: absolute; inset: 0 auto 0 0; background: var(--ink-34); border-radius: 2px; }
+tr.up .obar .t i { background: var(--blue); }
+.obar b { font-weight: 600; min-width: 3.4em; text-align: right; }
+.mv { font: 800 14px/1 var(--display); white-space: nowrap; }
+.mv.up { color: var(--blue); }
+.mv.down { color: var(--ink-55); }
+.pill { display: inline-block; font: 600 10.5px/1 var(--body); padding: 3px 6px; border-radius: 999px; white-space: nowrap; vertical-align: 1px; margin-left: 4px; }
+.pill.inc { background: var(--ink); color: var(--paper); }
+.pill.el { border: 1.5px solid var(--blue); color: var(--blue); }
+.pill.nx { border: 1.5px dashed var(--blue); color: var(--blue); }
+.pill.jump { background: var(--blue); color: var(--paper); }
+
+/* srovnání stran a celkové posuny */
+.cmp { min-width: 760px; }
+.cmp td.party { font-weight: 700; }
+.cmp tr.opt td.party { color: var(--red); }
+.tops { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+.tops ol { margin: 0; padding: 0; list-style: none; display: grid; }
+.tops li { display: grid; grid-template-columns: 3.2em minmax(0, 1fr) auto; gap: 8px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--ink-06); font-size: 13.5px; }
+.tops li .j { font-weight: 600; min-width: 0; }
+.tops li .j small { display: block; font-weight: 400; color: var(--ink-55); font-size: 12px; }
+.tops li .h { color: var(--ink-72); white-space: nowrap; font-size: 12.5px; }
+
+footer { font-size: 12.5px; color: var(--ink-55); display: grid; gap: 6px; border-top: 1px solid var(--ink-14); padding-top: 14px; }
+footer p { margin: 0; max-width: 90ch; }
+footer a { color: var(--blue); }
+@media (max-width: 640px) { .kv dd { font-size: 22px; } }
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Volby do zastupitelstva města · Třinec · 9.–10. 10. 2026 · oficiální výsledek ČSÚ</div>
+    <h1>Kdo vystoupal a kdo propadl</h1>
+    <p class="lead">Preferenční hlasy kandidátů proti jejich pořadí na kandidátce: kolik dělá pozice, kolik osobní křížky a co to udělalo s mandáty.</p>
+    <div class="parties" id="parties" role="group" aria-label="Volba strany"></div>
+  </header>
+
+  <section aria-labelledby="h-zaklad">
+    <div class="sec-head"><h2 id="h-zaklad">Pozice na listině, nebo osobní hlasy?</h2><span class="fine" id="zaklad-scope"></span></div>
+    <div class="kv" id="kv"></div>
+    <p class="txt" id="vyklad"></p>
+  </section>
+
+  <section aria-labelledby="h-mandaty">
+    <div class="sec-head"><h2 id="h-mandaty">Co preferenční hlasy udělaly s mandáty</h2></div>
+    <div class="moves" id="moves"></div>
+  </section>
+
+  <section aria-labelledby="h-svah">
+    <div class="sec-head">
+      <h2 id="h-svah">Pořadí na listině → pořadí podle hlasů</h2>
+      <div class="legend">
+        <span><i class="ln" style="border-color: var(--blue)"></i>vystoupal/a o 2 a víc míst</span>
+        <span><i class="ln" style="border-color: var(--ink-34)"></i>propadl/a o 2 a víc míst</span>
+        <span><i class="ln" style="border-color: var(--ink-14)"></i>zhruba beze změny</span>
+        <span><b>tučně</b> = zvolen/a</span>
+      </div>
+    </div>
+    <div class="slopebox" id="slope"></div>
+  </section>
+
+  <section aria-labelledby="h-kand">
+    <div class="sec-head">
+      <h2 id="h-kand">Kandidáti</h2>
+      <div class="chips" role="group" aria-label="Řazení kandidátů">
+        <button class="chip" type="button" data-s="votes" aria-pressed="true">Podle hlasů</button>
+        <button class="chip" type="button" data-s="move" aria-pressed="false">Podle posunu</button>
+        <button class="chip" type="button" data-s="list" aria-pressed="false">Podle listiny</button>
+      </div>
+    </div>
+    <div class="tbox"><table id="tab"></table></div>
+  </section>
+
+  <section aria-labelledby="h-strany">
+    <div class="sec-head"><h2 id="h-strany">Všechny strany</h2><span class="fine">klepnutím na stranu ji zobrazíš nahoře</span></div>
+    <div class="tbox"><table class="cmp" id="cmp"></table></div>
+  </section>
+
+  <section aria-labelledby="h-top">
+    <div class="sec-head"><h2 id="h-top">Největší posuny ve všech stranách</h2><span class="fine">o kolik míst se kandidát posunul proti svému číslu na listině</span></div>
+    <div class="tops">
+      <div><h3>Vystoupali</h3><ol id="top-up"></ol></div>
+      <div><h3>Propadli</h3><ol id="top-down"></ol></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Zdroj: ČSÚ, volby.gov.cz, oficiální výsledek za zastupitelstvo Třince (<span id="cas"></span>). Preferenční hlasy za celé město.</p>
+    <p>Jak čteme čísla: kdo zakřížkuje celou stranu, dá hlas všem jejím kandidátům stejně, to je společný základ. Ten odhadujeme hlasy nejslabšího kandidáta listiny. „Osobní hlasy“ jsou vše nad tímto základem, tedy křížky u jmen. U kandidátů výš na listině v nich může být i menší mechanický bonus pořadí: když volič zakřížkuje stranu a k tomu kandidáty jiných stran, hlas dostanou jen první kandidáti strany, kolik zbývá do počtu mandátů. Ztrácejí tak poslední místa listiny. „Pořadí vysvětluje“ je podíl rozdílů mezi kandidáty, který odpovídá lineárnímu trendu podle čísla na listině.</p>
+    <p>Mandáty obsazují nejdřív kandidáti, kteří mají aspoň o 10 % víc hlasů, než je průměr listiny (víc takových podle počtu hlasů), pak ostatní podle pořadí na listině. Zvolení jsou podle ČSÚ; 1. náhradník je první další v tomto pořadí. Stávající zastupitelé podle webu města.</p>
+  </footer>
+</div>
+
+<script>
+const DATA = {"cas":"2026-10-11T08:37:45","listiny":{"1":[[1,"Plucnar Marian Mgr.",3260],[2,"Troszok Ewa Mgr.",3121],[3,"Matlák Milan Mgr.",2716],[4,"Staszková Ingrid",2636],[5,"Zbončák Přemysl Mgr.",2868],[6,"Dinh Martin Ing.",2613],[7,"Mec Vlastimil MUDr.",2808],[8,"Humel Franciszek",2619],[9,"Buba Lukáš Ing.",2628],[10,"Galuszková Renáta Mgr.",2588],[11,"Turoň Eduard",2603],[12,"Kučera Jiří",2525],[13,"Bocek Milan",2508],[14,"Kaleta Jan",2577],[15,"Byrtus Marcel",2425],[16,"Žiška Pavel RNDr.",2477],[17,"Běhálková Martina Mgr.",2487],[18,"Vaněk Roman Mgr.",2457],[19,"Mrózek Zdeněk Ing. MBA",2458],[20,"Urbanová Eva Ing.",2346],[21,"Kornutová Lucyna",2336],[22,"Svoboda Marcel",2449],[23,"Brychta Vladimír",2272],[24,"Brancová Denisa Ing. DiS.",2183],[25,"Marosz Dalibor Ing.",2283],[26,"Sikora Michael Mgr.",2053],[27,"Haltofová Pavlína Ing. Ph.D.",2054]],"2":[[1,"Vacek Martin PhDr. MBA",471],[2,"Rusz Marek Ing.",440],[3,"Trávníčková Taťjana",354],[4,"Kufa Rudolf Ing.",335],[5,"Sikora Bogdan Mgr.",571],[7,"Broulíková Hana",377],[8,"Haratyk Miroslav",353],[9,"Skuhra Robert",373],[10,"Vaner Roman Ing.",325],[11,"Jelič Jindřich",315],[12,"Szkandera Vojtěch",328],[13,"Wiesnerová Irena",312],[14,"Kubičinová Martina",317],[15,"Surma Jaroslav",302],[16,"Hálová Irena",318],[17,"Zagóra Roman",308],[18,"Dudová Simona",325],[19,"Funková Jarmila",299],[20,"Skarke Miroslav",359],[21,"Kufová Jana Mgr.",303],[23,"Raszka Henryk",354],[24,"Jarošová Milada",294],[25,"Nieszporek Karel",287],[26,"Trojak Robert",306],[27,"Romanec Pavel",298]],"3":[[1,"Fremrová Lucie Ing.",1411],[2,"Kurzok Adam Mgr.",1509],[3,"Sirotová Erika Mgr. et. Bc.",1281],[4,"Štěrba Marek MUDr.",1643],[5,"Wolna Martina Mgr.",1785],[6,"Miškej Marek MUDr.",1419],[7,"Eichler Regina Bc.",1500],[8,"Antoniadis Thanasis",1297],[9,"Szkandera David",1300],[10,"Chmelařová Veronika Mgr. et. Mgr.",1312],[11,"Tomoszek Adam Mgr.",1419],[12,"Štvrtňa Jakub Mgr.",1321],[13,"Vápeníková Miroslava Mgr.",1312],[14,"Chmielewski Aron Artur Bc.",1496],[15,"Čavoj Patrik",1335],[16,"Kubiková Darina MgA et. BcA",1186],[17,"Figura Michal",1229],[18,"Niemiec Michal Ing.",1274],[19,"Sikora Bohdan Bc. MSc.",1457],[20,"Nový Tomáš  DiS.",1257],[21,"Sajdok Stanislav",1416],[22,"Palicová Lenka",1161],[23,"Žárský Libor",1142],[24,"Kotlár Roman",1123],[25,"Serafin Juraj MUDr.",1301],[26,"Nowak Jakub MVDr.",1170],[27,"Rucki Rudolf",1211]],"4":[[1,"Wania Wiesław Ing.",1221],[2,"Golasowská Pavla Mgr. Bc.",1363],[3,"Turoňová Renáta Mgr.",1093],[4,"Bezecný Roman  DiS.",1202],[5,"Rusnoková Kateřina Ing. MBA",1131],[6,"Gavendová Kateřina Bc. DiS.",1007],[7,"Tolaszová Barbora Mgr.",858],[8,"Czapla Tadeusz Ing.",1052],[9,"Worková Hana Mgr.",855],[10,"Reuter Adéla Mgr.",862],[11,"Cubrová Kateřina Mgr.",844],[12,"Bartnicki Marek",945],[13,"Bezecná Marta Bc.",886],[14,"Mikesková Jitka Mgr.",923],[15,"Kožuch Michał Mgr. DiS.",923],[16,"Samiec Marek Bc.",895],[17,"Kohut Jan",813],[18,"Kyvalská Jitka JUDr.",848],[19,"Brodzki Ondřej Ing.",841],[20,"Pánková Karin Bc.",840],[21,"Toman Tadeusz Ing.",735],[22,"Zawada Ondřej Ing.",724],[23,"Pinkas Tomáš",673],[24,"Javorek Miroslav",658],[25,"Cuber Dalibor",621],[26,"Golasowski Jakub Bc.",653],[27,"Smeliková Danuše",590]],"5":[[1,"Mazoch Jan",1722],[2,"Młynek Stanislav",1678],[3,"Klimek Dominik Mgr.",1718],[4,"Cholewiková Silvie Ing.",1692],[5,"Matušek Zdeněk MUDr. Mgr. MBA",1749],[6,"Kocinec Libor Bc.",1645],[7,"Martinec Miroslav Mgr.",1621],[8,"Kajfosz Radek",1638],[9,"Pielesz Marcel",1642],[10,"Kubná Petra",1558],[11,"Heczko Daniel",1609],[12,"Saran Josef",1612],[13,"Cholewik Michal",1529],[14,"Lanc Henry",1568],[15,"Kaleta Michal Ing.",1555],[16,"Martincová Terezie",1539],[17,"Wantulok Jan Ing.",1513],[18,"Trombik Tomáš",1481],[19,"Molin Petr",1499],[20,"Tomisová Jarmila",1470],[21,"Šlachta Martin",1470],[22,"Bučko Daniel",1425],[23,"Ostruszková Dagmar",1427],[24,"Wawracz Michal",1374],[25,"Tomis Ladislav",1335],[26,"Jurásek Luděk",1323],[27,"Rabinová Barbora",1205]],"6":[[1,"Lotko Robin Bc. DiS.",955],[2,"Kosová Dominika Ing.",1097],[3,"Trojka Michael Ing.",701],[4,"Dal Bogdan",640],[5,"Hamrozi Bohuslav",679],[6,"Marosz Matěj",688],[7,"Sikora Martin Ing.",678],[8,"Habrnálová Andrea",596],[9,"Kantor Ivo Ing.",850],[10,"Kornuta Fryderyk",727],[11,"Sikora Milan Ing.",594],[12,"Branny Lech PharmDr.",798],[13,"Kantorová Marcela Mgr.",612],[14,"Karch Václav Ing.",693],[15,"Stračánek Patrik",620],[16,"Sikora Leszek",661],[17,"Jaroš Jaromír Ing.",569],[18,"Holeksa Roman  DiS.",613],[19,"Ciencialová Marie Mgr.",649],[20,"Jarnotová Pavla",543],[21,"Supik Michal Ing.",588],[22,"Dalová Marta",514],[23,"Lotková Simona",561],[24,"Kos Aleš",644],[25,"Cao Xuan Hoang",555],[26,"Niemiec Rudolf",482],[27,"Piwko Marek Ing.",549]],"7":[[1,"Frőmmer Ivan Ing.",2543],[2,"Turek Radim Mgr.",2304],[3,"Šoltésová Radana MUDr.",2318],[4,"Klepacz Milan Ing.",2128],[5,"Dudková Dagmar Bc.",2105],[6,"Kulendíková Silvie Ing.",2121],[7,"Vondráček Roman Bc.",2341],[8,"Podžorská Šárka Mgr.",2138],[9,"Jančik Silvie Mgr.",2129],[10,"Kaletová Ingrid",2050],[11,"Zwrtková Ivanovová Jana Bc.",2227],[12,"Sikora Martin",2096],[13,"Laššáková Anna MUDr.",2367],[14,"Jurásek Michal",2075],[15,"Kaleta Pavel",2114],[16,"Kollárová Jaroslava Mgr.",2101],[17,"Michna Rostislav Bc. et Bc.",2055],[18,"Krsičková Jindřiška Mgr.",2007],[19,"Haratyk Jiří",1994],[20,"Ferenc Jan Ing.",2166],[21,"Fasuga Jakub",2007],[22,"Chodurová Lenka",1926],[23,"Tonowski Daniel",1949],[24,"Wojtas Lukáš Mgr.",1932],[25,"Janik Jan",1865],[26,"Begalcisová Miluše",1774],[27,"Ježek Miroslav",1810]]},"strany":[{"c":1,"hlasy":68350,"proc":26.97,"mandaty":8,"zvoleni":[1,2,5,7,3,4,6,8]},{"c":2,"hlasy":8624,"proc":3.4,"mandaty":0,"zvoleni":[]},{"c":3,"hlasy":36267,"proc":14.31,"mandaty":4,"zvoleni":[5,4,2,7]},{"c":4,"hlasy":24056,"proc":9.49,"mandaty":2,"zvoleni":[2,1]},{"c":5,"hlasy":41597,"proc":16.42,"mandaty":5,"zvoleni":[5,1,3,2,4]},{"c":6,"hlasy":17856,"proc":7.05,"mandaty":2,"zvoleni":[2,1]},{"c":7,"hlasy":56642,"proc":22.35,"mandaty":6,"zvoleni":[1,13,7,3,2,4]}]};
+const OPT = 3;
+const PARTIES = {
+  1: { short: "Volte Třinec", sub: "Volt + NK" },
+  2: { short: "Společná levice", sub: "KSČM + ČSSD" },
+  3: { short: "Osobnosti pro Třinec", sub: "NG + NK" },
+  4: { short: "KDU-ČSL", sub: "" },
+  5: { short: "ANO 2011", sub: "" },
+  6: { short: "Společně pro Třinec", sub: "ODS + TOP 09" },
+  7: { short: "Nezávislí Třinec", sub: "NEZ + NK" }
+};
+// Stávající zastupitelé 2022–2026 podle webu města (trinecko.cz/zastupitele-mesta-trince, stav 10. 10. 2026)
+const ZAST_NOW = ["Ing. Patrik Bocek","PharmDr. Lech Branny","Mgr. Roman Brzezina","Bc. Vojtěch Dohnal","Bc. Regina Eichler","Ing. Lucie Fremrová","Ing. Ivan Frömmer","Mgr. Bc. Pavla Golasowská, DiS.","Ing. Silvie Cholewiková","Andrzej Kadlubiec","Mgr. Ivo Kaleta","Ing. Ivo Kantor","JUDr. Jana Kantorová","Mgr. Dominik Klimek","Radim Kozlovský","Mgr. Adam Kurzok","Bc. Robin Lotko, DiS.","Mgr. Miroslav Martinec","Stanislav Młynek","RNDr. Věra Palkovská","Mgr. Marian Plucnar","Mgr., Ing. Josef Pukančík","MUDr. Štěpán Rucki, CSc.","Josef Saran","Bc. Bohdan Sikora, MSc.","Martin Sikora","Mgr. Petr Šiška","MUDr. Radana Šoltésová","Mgr. Radim Turek","Ing. Wiesław Wania","Mgr. Martina Wolna","Mgr. Jiří Zabystrzan","Mgr. Přemysl Zbončák"];
+const TITULY = new Set(["mga","bca","dis","csc","msc","phd","mba","ing","mgr","bc","mudr","judr","rndr","phdr","pharmdr","mvdr","et","dr","doc","prof"]);
+const deacc = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/ł/g, "l");
+const normJm = s => deacc(s).split(/[\s,]+/).filter(t => t && !t.includes(".") && !TITULY.has(t)).sort().join(" ");
+const normFull = s => deacc(s).replace(/\./g, " ").split(/[\s,]+/).filter(Boolean).sort().join(" ");
+const ZAST_SET = new Set(ZAST_NOW.map(normJm)), ZAST_FULL = new Set(ZAST_NOW.map(normFull));
+const AMBIG = (() => {
+  const cnt = new Map();
+  for (const rows of Object.values(DATA.listiny)) for (const [, jm] of rows) { const k = normJm(jm); cnt.set(k, (cnt.get(k) || 0) + 1); }
+  return new Set([...cnt].filter(([, v]) => v > 1).map(([k]) => k));
+})();
+const isInc = jm => { const k = normJm(jm); return ZAST_SET.has(k) && (!AMBIG.has(k) || ZAST_FULL.has(normFull(jm))); };
+// „Příjmení Jméno Titul“ → bez titulů; krátce „Příjmení J.“
+const bezTit = jm => String(jm).split(/\s+/).filter(t => t && !t.includes(".") && !TITULY.has(t.toLowerCase())).join(" ");
+const kratce = jm => { const t = bezTit(jm).split(" "); return t.length > 1 ? t.slice(0, -1).join(" ") + " " + t[t.length - 1][0] + "." : t[0]; };
+
+const $ = id => document.getElementById(id);
+const nf0 = new Intl.NumberFormat("cs-CZ"), nf1 = new Intl.NumberFormat("cs-CZ", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const pct = x => nf1.format(x * 100) + " %";
+const pm = x => (x > 0 ? "+" : x < 0 ? "−" : "±") + nf1.format(Math.abs(x * 100)) + " %";
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const plural = (n, a, b, c) => n === 1 ? a : n >= 2 && n <= 4 ? b : c;
+
+// rozbor jedné listiny
+function analyze(c) {
+  const st = DATA.strany.find(x => x.c === c);
+  const cands = (DATA.listiny[String(c)] || []).map(([poradi, jmeno, hlasy]) => ({ poradi, jmeno, hlasy }));
+  const n = cands.length, tot = cands.reduce((a, x) => a + x.hlasy, 0), avg = tot / n, thr = avg * 1.1;
+  const base = Math.min(...cands.map(x => x.hlasy));
+  const byVotes = [...cands].sort((a, b) => b.hlasy - a.hlasy || a.poradi - b.poradi);
+  byVotes.forEach((x, i) => { x.rank = i + 1; });
+  const listOrder = [...cands].sort((a, b) => a.poradi - b.poradi);
+  listOrder.forEach((x, i) => { x.listRank = i + 1; }); // u listin s mezerami (odstoupení) pořadí bez mezer
+  // obsazení mandátů: posun ≥ 110 % průměru podle hlasů, pak zbytek podle listiny
+  const jump = cands.filter(x => x.hlasy >= thr).sort((a, b) => b.hlasy - a.hlasy || a.poradi - b.poradi);
+  const order = jump.concat(listOrder.filter(x => x.hlasy < thr));
+  const seats = st ? st.mandaty : 0;
+  const zv = new Set(st ? st.zvoleni : []);
+  const next = seats ? order.find(x => !zv.has(x.poradi)) : null;
+  for (const x of cands) {
+    x.move = x.listRank - x.rank; x.osobni = x.hlasy - base; x.rel = x.hlasy / avg - 1;
+    x.jump = x.hlasy >= thr; x.el = zv.has(x.poradi); x.next = next && x.poradi === next.poradi; x.inc = isInc(x.jmeno);
+  }
+  // lineární trend hlasů podle pořadí na listině → kolik rozdílů „vysvětluje“ pozice
+  const mx = cands.reduce((a, x) => a + x.listRank, 0) / n;
+  const sxy = cands.reduce((a, x) => a + (x.listRank - mx) * (x.hlasy - avg), 0), sxx = cands.reduce((a, x) => a + (x.listRank - mx) ** 2, 0);
+  const b = sxx ? sxy / sxx : 0;
+  const ssTot = cands.reduce((a, x) => a + (x.hlasy - avg) ** 2, 0);
+  const ssRes = cands.reduce((a, x) => a + (x.hlasy - (avg + b * (x.listRank - mx))) ** 2, 0);
+  const r2 = ssTot ? 1 - ssRes / ssTot : 0;
+  const topList = new Set(listOrder.slice(0, seats).map(x => x.poradi));
+  const inBy = cands.filter(x => x.el && !topList.has(x.poradi)).sort((a, b) => a.rank - b.rank);
+  const outBy = cands.filter(x => !x.el && topList.has(x.poradi)).sort((a, b) => a.poradi - b.poradi);
+  return { c, st, cands, n, tot, avg, thr, base, byVotes, listOrder, seats, r2, slope: b, inBy, outBy, next };
+}
+const ALL = Object.fromEntries(Object.keys(PARTIES).map(c => [c, analyze(Number(c))]));
+
+let sel = OPT, sortBy = "votes";
+try { const v = Number(localStorage.getItem("posunyStrana")); if (ALL[v]) sel = v; } catch (e) {}
+
+function renderParties() {
+  $("parties").innerHTML = Object.keys(PARTIES).map(Number)
+    .sort((a, b) => (ALL[b].st?.hlasy || 0) - (ALL[a].st?.hlasy || 0))
+    .map(c => `<button class="pchip" type="button" data-c="${c}" aria-pressed="${c === sel}">${esc(PARTIES[c].short)}<small>${ALL[c].seats} ${plural(ALL[c].seats, "mandát", "mandáty", "mandátů")}</small></button>`).join("");
+}
+
+function renderKv(A) {
+  const p = PARTIES[A.c];
+  $("zaklad-scope").textContent = `${p.short} · ${A.n} kandidátů · ${nf0.format(A.tot)} hlasů`;
+  $("kv").innerHTML = [
+    ["Společný základ z křížku pro stranu", "≈ " + nf0.format(A.base), "tolik hlasů má i nejslabší kandidát"],
+    ["Osobní hlasy v průměru", "≈ " + nf0.format(Math.round(A.avg - A.base)), `${pct((A.avg - A.base) / A.avg)} z průměrných ${nf0.format(Math.round(A.avg))} hlasů`],
+    ["Pořadí na listině vysvětluje", nf0.format(Math.round(A.r2 * 100)) + " %", "rozdílů mezi kandidáty, zbytek jsou osobní křížky"],
+    ["Hranice pro posun", nf0.format(Math.round(A.thr)), "průměr listiny + 10 %"]
+  ].map(([k, v, s], i) => `<div><dt>${esc(k)}</dt><dd class="${i === 3 ? "ink" : ""}">${esc(v)}</dd><dt class="sub">${esc(s)}</dt></div>`).join("");
+  const top = A.byVotes[0];
+  const others = Object.values(ALL).filter(x => x.c !== A.c && x.seats).sort((a, b) => b.r2 - a.r2);
+  const cmpTxt = others.length ? ` Pro srovnání: ${others.slice(0, 3).map(x => `${PARTIES[x.c].short} ${Math.round(x.r2 * 100)} %`).join(", ")}.` : "";
+  $("vyklad").textContent = `Každý, kdo zakřížkoval celou listinu ${p.short}, dal hlas všem kandidátům stejně. Proto má i nejslabší kandidát kolem ${nf0.format(A.base)} hlasů. Rozdíly mezi kandidáty a tím i pořadí podle preferenčních hlasů dělají křížky u jmen: nejvíc jich má ${bezTit(top.jmeno)} (č. ${top.poradi}), asi ${nf0.format(top.osobni)} nad základem. Číslo na listině samo rozhoduje hlavně o posledních místech. Nahoře pomáhá viditelností, ale pořadí podle hlasů tu odpovídá číslu na listině jen z ${Math.round(A.r2 * 100)} %.${cmpTxt}`;
+}
+
+function renderMoves(A) {
+  const li = x => `<li><b>${esc(bezTit(x.jmeno))}</b>${x.inc ? `<span class="pill inc">stávající</span>` : ""} <span>č. ${x.poradi} → ${x.rank}. podle hlasů · ${nf0.format(x.hlasy)} hl.</span></li>`;
+  if (!A.seats) { $("moves").innerHTML = `<p class="txt">${esc(PARTIES[A.c].short)} nezískala mandát (${nf1.format(A.st?.proc || 0)} %, pod 5% hranicí), preferenční hlasy tu o nikom nerozhodly.</p>`; return; }
+  const ups = A.byVotes.filter(x => x.move >= 1).sort((a, b) => b.move - a.move || a.rank - b.rank).slice(0, 4);
+  const downs = A.byVotes.filter(x => x.move <= -1).sort((a, b) => a.move - b.move || a.poradi - b.poradi).slice(0, 4);
+  $("moves").innerHTML = `
+    <div class="move"><h3>Díky preferenčním hlasům do zastupitelstva</h3>${A.inBy.length ? `<ul>${A.inBy.map(li).join("")}</ul>` : `<p class="txt">Nikdo. Zvoleni jsou přesně první ${A.seats} z kandidátky.</p>`}</div>
+    <div class="move out"><h3>Z volitelných míst vypadli</h3>${A.outBy.length ? `<ul>${A.outBy.map(li).join("")}</ul>` : `<p class="txt">Nikdo.</p>`}</div>
+    <div class="move"><h3>Nejvíc vystoupali</h3><ul>${ups.map(x => li(x).replace("</span></li>", ` · ▲ ${x.move}</span></li>`)).join("")}</ul></div>
+    <div class="move out"><h3>Nejvíc propadli</h3><ul>${downs.map(x => li(x).replace("</span></li>", ` · ▼ ${-x.move}</span></li>`)).join("")}</ul></div>
+    ${A.next ? `<p class="fine">1. náhradník: ${esc(bezTit(A.next.jmeno))} (č. ${A.next.poradi}, ${nf0.format(A.next.hlasy)} hl.)</p>` : ""}`;
+}
+
+function renderSlope(A) {
+  const n = A.n, rowH = 23, top = 46, W = 860, H = top + n * rowH + 14;
+  const xL = 230, xR = 560, y = i => top + (i - 0.5) * rowH;
+  const NS = 'xmlns="http://www.w3.org/2000/svg"';
+  let g = "", labelLater = "";
+  // hranice mandátů
+  if (A.seats && A.seats < n) {
+    const yc = top + A.seats * rowH;
+    g += `<line x1="8" x2="${W - 8}" y1="${yc}" y2="${yc}" stroke="var(--blue)" stroke-dasharray="5 4" stroke-width="1.5"/>`;
+    labelLater = `<rect x="${(xL + xR) / 2 - 74}" y="${yc - 9}" width="148" height="18" rx="9" fill="var(--paper)" stroke="var(--blue)" stroke-width="1"/><text x="${(xL + xR) / 2}" y="${yc + 4}" text-anchor="middle" class="hd" style="fill: var(--blue)">HRANICE ${A.seats}. MANDÁTU</text>`;
+  }
+  g += `<text x="${xL}" y="22" text-anchor="end" class="hd">ČÍSLO NA LISTINĚ</text><text x="${xR}" y="22" class="hd">POŘADÍ PODLE HLASŮ</text>`;
+  const lines = [...A.cands].sort((a, b) => Math.abs(a.move) - Math.abs(b.move)); // výrazné posuny navrch
+  for (const x of lines) {
+    const col = x.move >= 2 ? "var(--blue)" : x.move <= -2 ? "var(--ink-34)" : "var(--ink-14)";
+    const w = x.el ? 3.2 : 1.8;
+    g += `<line x1="${xL + 8}" y1="${y(x.listRank)}" x2="${xR - 8}" y2="${y(x.rank)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"><title>${esc(bezTit(x.jmeno))}: č. ${x.poradi} → ${x.rank}. (${x.move > 0 ? "▲ " + x.move : x.move < 0 ? "▼ " + -x.move : "beze změny"})</title></line>`;
+    g += `<circle cx="${xL + 8}" cy="${y(x.listRank)}" r="3.2" fill="${col}"/><circle cx="${xR - 8}" cy="${y(x.rank)}" r="3.2" fill="${col}"/>`;
+  }
+  for (const x of A.listOrder) g += `<text x="${xL}" y="${y(x.listRank) + 4}" text-anchor="end" class="${x.el ? "el" : ""}">${esc(kratce(x.jmeno))} <tspan class="dim">${x.poradi}</tspan></text>`;
+  for (const x of A.byVotes) {
+    const mv = x.move > 0 ? `▲${x.move}` : x.move < 0 ? `▼${-x.move}` : "";
+    g += `<text x="${xR}" y="${y(x.rank) + 4}" class="${x.el ? "el" : ""}"><tspan class="dim">${x.rank}.</tspan> ${esc(kratce(x.jmeno))} <tspan class="dim">${nf0.format(x.hlasy)}${mv ? " · " + mv : ""}</tspan></text>`;
+  }
+  g += labelLater;
+  $("slope").innerHTML = `<svg ${NS} viewBox="0 0 ${W} ${H}" role="img" aria-label="Posuny kandidátů ${esc(PARTIES[A.c].short)} z čísla na listině na pořadí podle preferenčních hlasů">${g}</svg>`;
+}
+
+function renderTable(A) {
+  const maxO = Math.max(1, ...A.cands.map(x => x.osobni));
+  const rows = sortBy === "list" ? A.listOrder : sortBy === "move" ? [...A.cands].sort((a, b) => b.move - a.move || a.rank - b.rank) : A.byVotes;
+  $("tab").innerHTML = `<thead><tr><th>Č.</th><th>Kandidát</th><th class="num">Hlasy</th><th>Osobní hlasy nad základem</th><th class="num">Vs. průměr</th><th class="num">Pořadí</th><th class="num">Posun</th><th>Stav</th></tr></thead><tbody>` +
+    rows.map(x => `<tr class="${x.el ? "el" : ""} ${x.move >= 2 ? "up" : ""}">
+      <td class="por">${x.poradi}</td>
+      <td class="jm">${esc(bezTit(x.jmeno))}${x.inc ? `<span class="pill inc">stávající</span>` : ""}</td>
+      <td class="num"><b>${nf0.format(x.hlasy)}</b></td>
+      <td><div class="obar"><span class="t"><i style="width:${(x.osobni / maxO * 100).toFixed(1)}%"></i></span><b>${nf0.format(x.osobni)}</b></div></td>
+      <td class="num">${pm(x.rel)}</td>
+      <td class="num">${x.rank}.</td>
+      <td class="num"><span class="mv ${x.move > 0 ? "up" : x.move < 0 ? "down" : ""}">${x.move > 0 ? "▲ " + x.move : x.move < 0 ? "▼ " + -x.move : "–"}</span></td>
+      <td>${x.el ? `<span class="pill el">zvolen/a</span>` : ""}${x.next ? `<span class="pill nx">1. náhradník</span>` : ""}${x.jump ? `<span class="pill jump">nad hranicí posunu</span>` : ""}</td></tr>`).join("") + "</tbody>";
+}
+
+function renderCmp() {
+  const rows = Object.values(ALL).sort((a, b) => (b.st?.hlasy || 0) - (a.st?.hlasy || 0));
+  const nm = x => x ? `${esc(kratce(x.jmeno))} (č. ${x.poradi})` : "–";
+  $("cmp").innerHTML = `<thead><tr><th>Strana</th><th class="num">Hlasy</th><th class="num">Mandáty</th><th>Díky preferencím zvoleni</th><th>Vypadli z volitelných míst</th><th class="num">Pořadí vysvětluje</th><th class="num">Osobní hlasy</th></tr></thead><tbody>` +
+    rows.map(A => `<tr class="${A.c === OPT ? "opt" : ""}" data-c="${A.c}" style="cursor:pointer">
+      <td class="party">${esc(PARTIES[A.c].short)}</td>
+      <td class="num">${nf1.format(A.st?.proc || 0)} %</td>
+      <td class="num"><b>${A.seats}</b></td>
+      <td>${A.inBy.length ? A.inBy.map(nm).join(", ") : "–"}</td>
+      <td>${A.outBy.length ? A.outBy.map(nm).join(", ") : "–"}</td>
+      <td class="num">${Math.round(A.r2 * 100)} %</td>
+      <td class="num">${pct((A.avg - A.base) / A.avg)}</td></tr>`).join("") + "</tbody>";
+}
+
+function renderTops() {
+  const all = Object.values(ALL).flatMap(A => A.cands.map(x => ({ ...x, c: A.c })));
+  const li = x => `<li><span class="mv ${x.move > 0 ? "up" : "down"}">${x.move > 0 ? "▲ " + x.move : "▼ " + -x.move}</span>
+    <span class="j">${esc(bezTit(x.jmeno))}${x.inc ? `<span class="pill inc">stávající</span>` : ""}${x.el ? `<span class="pill el">zvolen/a</span>` : ""}<small>${esc(PARTIES[x.c].short)} · č. ${x.poradi} → ${x.rank}.</small></span>
+    <span class="h">${nf0.format(x.hlasy)} hl.</span></li>`;
+  $("top-up").innerHTML = [...all].sort((a, b) => b.move - a.move || a.rank - b.rank).slice(0, 10).map(li).join("");
+  $("top-down").innerHTML = [...all].sort((a, b) => a.move - b.move || a.poradi - b.poradi).slice(0, 10).map(li).join("");
+}
+
+function render() {
+  const A = ALL[sel];
+  renderParties(); renderKv(A); renderMoves(A); renderSlope(A); renderTable(A);
+  document.querySelectorAll(".chip[data-s]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.s === sortBy)));
+}
+function pick(c) {
+  if (!ALL[c]) return;
+  sel = c;
+  try { localStorage.setItem("posunyStrana", String(c)); } catch (e) {}
+  render();
+}
+$("parties").addEventListener("click", e => { const b = e.target.closest("[data-c]"); if (b) pick(Number(b.dataset.c)); });
+$("cmp").addEventListener("click", e => { const r = e.target.closest("tr[data-c]"); if (r) { pick(Number(r.dataset.c)); $("h-zaklad").scrollIntoView({ behavior: "smooth", block: "start" }); } });
+document.querySelectorAll(".chip[data-s]").forEach(b => b.addEventListener("click", () => { sortBy = b.dataset.s; renderTable(ALL[sel]); document.querySelectorAll(".chip[data-s]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); }));
+$("cas").textContent = String(DATA.cas || "").replace("T", " ").slice(0, 16);
+renderCmp(); renderTops(); render();
+</script>
+
+</body>
+</html>
