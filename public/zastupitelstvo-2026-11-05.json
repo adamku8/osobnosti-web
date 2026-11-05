@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "10:51",
+  "aktualizovano": "10:54",
   "stav": "probiha",
-  "ted": "Rozprava o počtu náměstků trvá už přes dvacet minut. Opozice chce méně náměstků nebo odklad, koalice trvá na svém návrhu. Hlasování teprve přijde.",
+  "ted": "Rozprava o počtu náměstků pokračuje. Koalice vysvětluje, jak budou neuvolnění náměstci pracovat. Hlasování teprve přijde.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -98,12 +98,31 @@
       "cas": "10:47",
       "typ": "bod",
       "nadpis": "Uvolněných náměstků bude o jednoho méně",
-      "text": "V rozpravě zaznělo, že proti minulému období ubude jeden uvolněný náměstek, což je úspora asi 111 tisíc korun měsíčně bez odvodů. O odměnách neuvolněných náměstků rozhodne zastupitelstvo v prosinci. Ivan Frőmmer (NEZÁVISLÍ) trvá na protinávrhu se třemi uvolněnými náměstky.",
+      "text": "Martin Dinh (Volte Třinec) připomněl, že proti minulému období ubude jeden uvolněný náměstek, což je úspora asi 111 tisíc korun měsíčně bez odvodů. O odměnách neuvolněných náměstků rozhodne zastupitelstvo v prosinci. Ivan Frőmmer (NEZÁVISLÍ) trvá na protinávrhu se třemi uvolněnými náměstky, finančně jsou podle něj obě varianty podobné.",
       "citace": [
         {
           "text": "Mně přijde mnohem efektivnější, když někdo dělá práci na plný úvazek, než dva lidé.",
           "kdo": "Ivan Frőmmer",
           "strana": "NEZÁVISLÍ"
+        }
+      ]
+    },
+    {
+      "cas": "10:49",
+      "typ": "bod",
+      "nadpis": "Spor o to, jestli jde o úsporu",
+      "text": "Dominik Klimek (ANO) namítl, že o úspoře nelze mluvit, dokud není známá odměna neuvolněných náměstků: může být od nuly až po zákonné maximum 68 129 Kč měsíčně. Martin Dinh (Volte Třinec) odpověděl, že úspora za uvolněného náměstka je jistá už teď a konečný výsledek bude záležet na odměnách, které zastupitelstvo schválí."
+    },
+    {
+      "cas": "10:52",
+      "typ": "bod",
+      "nadpis": "Jak pracuje neuvolněný náměstek",
+      "text": "Na dotaz opozice, kolik času budou neuvolnění náměstci městu věnovat, odpověděl Marian Plucnar, že si úkoly rozdělí a že práce náměstka je i terén a jednání s organizacemi, které má na starosti. Pavla Golasowská (KDU-ČSL), která funkci v minulém období vykonávala v sociální oblasti, popsala, že většinu práce dělala mimo úřad: v sociálních službách, neziskových organizacích a v ulicích.",
+      "citace": [
+        {
+          "text": "Funkce neuvolněného náměstka, to není o nějakém úvazku.",
+          "kdo": "Pavla Golasowská",
+          "strana": "KDU-ČSL"
         }
       ]
     }
