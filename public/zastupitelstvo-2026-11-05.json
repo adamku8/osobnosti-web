@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "11:17",
+  "aktualizovano": "11:20",
   "stav": "probiha",
-  "ted": "Přestávka skončila, zastupitelé se vracejí na místa. Následuje hlasování o počtu náměstků a uvolněných funkcích.",
+  "ted": "Protinávrh opozice na tři uvolněné náměstky neprošel. Teď se hlasuje o původním návrhu: pět náměstků, z toho dva uvolnění, a devítičlenná rada.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -168,6 +168,13 @@
       "typ": "info",
       "nadpis": "Přestávka",
       "text": "Předsedající vyhlásil pětiminutovou přestávku. Rozprava k bodu o náměstcích a uvolněných funkcích trvala přes čtyřicet minut, hlasovat se bude po přestávce."
+    },
+    {
+      "cas": "11:17",
+      "typ": "hlasovani",
+      "nadpis": "Protinávrh na tři uvolněné náměstky neprošel",
+      "text": "Po přestávce už se do rozpravy nikdo nehlásil. Zastupitelé nejdřív hlasovali o protinávrhu Ivana Frőmmera (NEZÁVISLÍ), aby byli uvolnění primátor a tři náměstci.",
+      "vysledek": "11 pro, 16 proti, nikdo se nezdržel. Protinávrh nebyl přijat."
     }
   ]
 }
