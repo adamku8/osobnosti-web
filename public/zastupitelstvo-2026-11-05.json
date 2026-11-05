@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "12:01",
+  "aktualizovano": "12:02",
   "stav": "probiha",
   "ted": "Na primátora jsou navrženi dva kandidáti: Marian Plucnar (Volte Třinec) za koalici a Jan Mazoch (ANO) za opozici. Rozprava pokračuje, hlasování teprve přijde.",
   "zaznam": [
@@ -313,6 +313,19 @@
           "text": "Koho si pustím domů a s kým budu tvořit a mít odpovědnost, toho si vybírám já. Ale komunikovat chci opravdu na široké bázi. To znamená včetně vás.",
           "kdo": "Marian Plucnar",
           "strana": "Volte Třinec"
+        }
+      ]
+    },
+    {
+      "cas": "11:59",
+      "typ": "info",
+      "nadpis": "Jak se píše Kurzok",
+      "text": "Adam Kurzok (Osobnosti pro Třinec) technickou poznámkou opravil výslovnost svého příjmení, které v rozpravě zaznívalo v různých podobách.",
+      "citace": [
+        {
+          "text": "Moje jméno je Kurzok, psáno s RZ. Můj praděda se narodil ve Visle a v roce 1921 se přistěhoval do Oldřichovic u Třince.",
+          "kdo": "Adam Kurzok",
+          "strana": "Osobnosti pro Třinec"
         }
       ]
     }
