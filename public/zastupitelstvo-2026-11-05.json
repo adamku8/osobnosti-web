@@ -1,0 +1,59 @@
+{
+  "aktualizovano": "10:34",
+  "stav": "probiha",
+  "ted": "Zastupitelé jednají o tom, kolik bude mít město náměstků primátora a které funkce budou uvolněné, tedy vykonávané na plný úvazek.",
+  "zaznam": [
+    {
+      "cas": "10:04",
+      "typ": "info",
+      "nadpis": "Zasedání zahájeno",
+      "text": "Ustavující zasedání začalo státní hymnou. Řídí ho předsedající pověřený dosavadní primátorkou. Přítomno je všech 27 nově zvolených zastupitelů."
+    },
+    {
+      "cas": "10:08",
+      "typ": "info",
+      "nadpis": "Slib zastupitelů",
+      "text": "Zastupitelé jeden po druhém podle abecedy složili slib a potvrdili ho podpisem. Slib skončil v 10:18."
+    },
+    {
+      "cas": "10:19",
+      "typ": "hlasovani",
+      "nadpis": "Program zasedání",
+      "text": "Dominik Klimek (ANO) navrhl rozdělit bod s volbami vedení města a výborů na deset samostatných bodů a doplnit bod Různé. Návrh neprošel, zastupitelé pak schválili původní program.",
+      "vysledek": "Úprava programu: 11 pro, 12 proti, 4 se zdrželi. Původní program: 16 pro, 8 proti, 3 se zdrželi."
+    },
+    {
+      "cas": "10:24",
+      "typ": "bod",
+      "nadpis": "Jednací řád ustavujícího zasedání",
+      "text": "Ivan Frőmmer (NEZÁVISLÍ) upozornil, že v jednacím řádu chybí článek o rozpravě a možnost vystoupení občanů, a navrhl ho doplnit. Zástupce úřadu vysvětlil, že co tento jednací řád neupravuje, řídí se běžným jednacím řádem zastupitelstva. Rozprava i vystoupení občanů jsou tedy možné.",
+      "citace": [
+        {
+          "text": "Ani jsem tam neviděl možnost, že by se mohli vyjádřit občané, což si myslím, že je docela podstatná věc.",
+          "kdo": "Ivan Frőmmer",
+          "strana": "NEZÁVISLÍ"
+        }
+      ]
+    },
+    {
+      "cas": "10:26",
+      "typ": "hlasovani",
+      "nadpis": "Ověřovatelé zápisu",
+      "text": "Ověřovatelkami usnesení a zápisu jsou Ewa Troszok a Ingrid Staszková, náhradníky Pavla Golasowská a Robin Lotko.",
+      "vysledek": "26 pro, 1 se zdržel."
+    },
+    {
+      "cas": "10:27",
+      "typ": "bod",
+      "nadpis": "Kolik náměstků a které funkce budou uvolněné",
+      "text": "Návrh: uvolnění budou primátor a dva náměstci, rada bude mít 9 členů a náměstků bude 5, z toho tři neuvolnění. Ivan Frőmmer (NEZÁVISLÍ) podal protinávrh, aby byli uvolnění primátor a tři náměstci. Dominik Klimek (ANO) se zeptal Mariana Plucnara (Volte Třinec), proč po kritice zvyšování počtu náměstků před čtyřmi lety navrhuje nyní pět. Plucnar odpověděl, že v minulém období byli tři uvolnění a jeden neuvolněný náměstek, nyní mají být dva uvolnění a tři neuvolnění, a že nové vedení nechce tým zužovat.",
+      "citace": [
+        {
+          "text": "Kde došlo k tomu obratu, že teď už jich potřebujeme pět?",
+          "kdo": "Dominik Klimek",
+          "strana": "ANO"
+        }
+      ]
+    }
+  ]
+}
