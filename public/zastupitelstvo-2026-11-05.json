@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "11:20",
+  "aktualizovano": "11:21",
   "stav": "probiha",
-  "ted": "Protinávrh opozice na tři uvolněné náměstky neprošel. Teď se hlasuje o původním návrhu: pět náměstků, z toho dva uvolnění, a devítičlenná rada.",
+  "ted": "Struktura vedení města je schválená. Následuje volba primátora.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -175,6 +175,13 @@
       "nadpis": "Protinávrh na tři uvolněné náměstky neprošel",
       "text": "Po přestávce už se do rozpravy nikdo nehlásil. Zastupitelé nejdřív hlasovali o protinávrhu Ivana Frőmmera (NEZÁVISLÍ), aby byli uvolnění primátor a tři náměstci.",
       "vysledek": "11 pro, 16 proti, nikdo se nezdržel. Protinávrh nebyl přijat."
+    },
+    {
+      "cas": "11:18",
+      "typ": "hlasovani",
+      "nadpis": "Schváleno: pět náměstků, devítičlenná rada",
+      "text": "Zastupitelé schválili původní návrh. Uvolnění budou primátor a dva náměstci, další tři náměstci budou neuvolnění a rada města bude mít devět členů. O odměnách neuvolněných rozhodne zastupitelstvo na dalším zasedání.",
+      "vysledek": "16 pro, 11 proti, nikdo se nezdržel."
     }
   ]
 }
