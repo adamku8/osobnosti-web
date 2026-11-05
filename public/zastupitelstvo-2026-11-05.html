@@ -49,6 +49,18 @@ blockquote footer { margin-top:6px; font-size:14px; color:var(--ink-72); }
 .pata { margin-top:34px; font-size:14px; color:var(--ink-72); }
 .pata p { margin:0 0 8px; }
 #chyba { color:var(--ink-55); font-size:13px; }
+/* Anketa: nemodální karta vpravo dole, objeví se po dvou minutách čtení. */
+#anketa { position:fixed; right:16px; bottom:16px; z-index:10; width:min(380px, calc(100vw - 32px)); background:#fff; border:2px solid var(--blue); padding:16px 16px 18px; box-shadow:0 10px 30px rgba(50,50,50,.2); }
+#anketa .eyebrow { margin:0 28px 6px 0; color:var(--blue); }
+#anketaOtazka { margin:0 0 14px; font:800 20px/1.25 var(--display); text-wrap:balance; }
+#anketaTlacitka { display:flex; gap:10px; }
+#anketaTlacitka button { flex:1; font:600 17px/1 var(--body); padding:13px 10px; border:2px solid var(--blue); background:#fff; color:var(--blue); cursor:pointer; }
+#anketaTlacitka button.ano { background:var(--blue); color:#fff; }
+#anketaTlacitka button:focus-visible, #anketaZavrit:focus-visible, #zvuk:focus-visible { outline:3px solid var(--ink); outline-offset:2px; }
+#anketaZavrit { position:absolute; top:6px; right:6px; width:36px; height:36px; border:0; background:none; font:400 26px/1 var(--body); color:var(--ink-72); cursor:pointer; }
+#vysledky { margin-top:20px; padding:12px 14px; background:var(--blue-08); font-size:15px; }
+#vysledky p { margin:0 0 4px; }
+@media (prefers-reduced-motion: no-preference) { #anketa { animation:vyjed .35s ease-out; } @keyframes vyjed { from { transform:translateY(16px); opacity:0; } } }
 </style>
 </head>
 <body>
@@ -60,6 +72,7 @@ blockquote footer { margin-top:6px; font-size:14px; color:var(--ink-72); }
     <span class="zive" id="stitek">ŽIVĚ</span>
     <span id="aktual">načítám záznam…</span>
     <button id="zvuk" type="button" aria-pressed="false" onclick="prepniZvuk()">Zapnout gong</button>
+    <span id="pocet" hidden></span>
     <span id="chyba" hidden>Nedaří se načíst nová data, zkouším to znovu.</span>
   </div>
 
@@ -74,8 +87,20 @@ blockquote footer { margin-top:6px; font-size:14px; color:var(--ink-72); }
   <div class="pata">
     <p>Neoficiální záznam hnutí Osobnosti pro Třinec. Vzniká z živého poslechu v sále a píše se průběžně, takže může obsahovat nepřesnosti a má pár minut zpoždění. Počty hlasů uvádíme tak, jak zazněly v sále.</p>
     <p>Závazný je zápis a usnesení, které zveřejňuje statutární město Třinec na <a href="https://www.trinecko.cz/">trinecko.cz</a>.</p>
+    <p>Počítadlo čtenářů a anketa jsou anonymní. Ukládá se jen počet návštěv a počet odpovědí, žádné osobní údaje.</p>
+    <div id="vysledky" hidden></div>
   </div>
 </div>
+
+<aside id="anketa" role="dialog" aria-labelledby="anketaOtazka" hidden>
+  <button id="anketaZavrit" type="button" aria-label="Zavřít anketu">×</button>
+  <p class="eyebrow">Krátká anketa</p>
+  <p id="anketaOtazka"></p>
+  <div id="anketaTlacitka">
+    <button type="button" class="ano" data-o="ano">Ano</button>
+    <button type="button" data-o="ne">Ne</button>
+  </div>
+</aside>
 <script>
 // Každých 45 s stáhne datový soubor (dotaz ?t= obchází mezipaměť hostingu) a překreslí záznam. Texty se vkládají jen jako text, ne jako HTML.
 const TYPY = { bod: 'Bod programu', hlasovani: 'Hlasování', citace: 'Citace', info: 'Průběh' };
@@ -133,6 +158,68 @@ async function nacti() {
   } catch (e) { ch.hidden = false; }
 }
 nacti(); setInterval(nacti, 45000);
+
+// Počítadlo čtenářů a anketa. Počty drží veřejná počítací služba Abacus (jen čísla pod klíčem, žádné cookies ani osobní údaje).
+// Prohlížeč se započítá jednou (příznak v localStorage). S ?test v adrese se píše do zkušebních klíčů a příznaky se ignorují.
+const TEST = new URLSearchParams(location.search).has('test');
+const POC = 'https://abacus.jasoncameron.dev', POC_NS = 'osobnostiprotrinec', POC_KL = TEST ? 'test-zm-2026-11-05-' : 'zm-2026-11-05-';
+async function citac(akce, klic) {
+  const r = await fetch(POC + '/' + akce + '/' + POC_NS + '/' + POC_KL + klic, { cache: 'no-store' });
+  if (!r.ok) throw new Error(r.status);
+  return (await r.json()).value;
+}
+function pamet(k, v) {
+  if (TEST) return null;
+  try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {}
+  return null;
+}
+(async () => {
+  try {
+    const uz = pamet('zm1105-navsteva');
+    const n = await citac(uz ? 'get' : 'hit', 'navstevy');
+    if (!uz) pamet('zm1105-navsteva', '1');
+    const p = document.getElementById('pocet');
+    p.textContent = 'Počet čtenářů: ' + n.toLocaleString('cs-CZ'); p.hidden = false;
+  } catch (e) { /* služba nedostupná: počítadlo se prostě neukáže */ }
+})();
+
+const OTAZKY = [
+  { klic: 'libilo', text: 'Líbil se vám tento obsah?' },
+  { klic: 'live', text: 'Chcete sledovat příští zastupitelstvo živě?' },
+];
+let otazkaI = 0;
+function ukazOtazku() {
+  document.getElementById('anketaOtazka').textContent = OTAZKY[otazkaI].text;
+}
+function zavriAnketu() { document.getElementById('anketa').hidden = true; pamet('zm1105-anketa', '1'); }
+function ukazAnketu() {
+  if (pamet('zm1105-anketa')) return;
+  if (document.hidden) { document.addEventListener('visibilitychange', ukazAnketu, { once: true }); return; }
+  otazkaI = 0; ukazOtazku();
+  document.getElementById('anketa').hidden = false;
+}
+document.getElementById('anketaZavrit').addEventListener('click', zavriAnketu);
+document.getElementById('anketaTlacitka').addEventListener('click', e => {
+  const o = e.target.closest('button')?.dataset.o; if (!o) return;
+  citac('hit', OTAZKY[otazkaI].klic + '-' + o).catch(() => {});
+  pamet('zm1105-anketa', '1');          // po první odpovědi už se anketa znovu nenabídne
+  otazkaI += 1;
+  if (otazkaI < OTAZKY.length) { ukazOtazku(); return; }
+  document.getElementById('anketaOtazka').textContent = 'Děkujeme za odpověď.';
+  document.getElementById('anketaTlacitka').hidden = true;
+  setTimeout(() => { document.getElementById('anketa').hidden = true; }, 2500);
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !document.getElementById('anketa').hidden) zavriAnketu(); });
+setTimeout(ukazAnketu, 120000);   // dvě minuty po otevření stránky
+
+// Přehled odpovědí pro autory: přidejte do adresy ?vysledky
+if (new URLSearchParams(location.search).has('vysledky')) (async () => {
+  const box = document.getElementById('vysledky'); box.hidden = false;
+  const cti = async k => { try { return await citac('get', k); } catch (e) { return 0; } };
+  const [n, la, ln, za, zn] = await Promise.all(['navstevy', 'libilo-ano', 'libilo-ne', 'live-ano', 'live-ne'].map(cti));
+  [['Čtenářů', n], ['Líbil se obsah: ano', la], ['Líbil se obsah: ne', ln], ['Sledovat příště živě: ano', za], ['Sledovat příště živě: ne', zn]]
+    .forEach(([t, v]) => box.append(el('p', null, t + ': ' + v)));
+})();
 </script>
 </body>
 </html>
