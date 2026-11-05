@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Ustavující zastupitelstvo Třince 5. 11. 2026 – průběžný záznam</title>
+<meta name="description" content="Stručný průběžný záznam ustavujícího zasedání Zastupitelstva města Třince 5. listopadu 2026.">
+<link rel="icon" href="/assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Průběžný záznam zasedání: hlavička se stavem → rámeček „Právě teď“ → časová osa od nejnovějšího.
+   Brand OPT v2.0: bílá jediná plocha, antracit přes alfu, Signal Blue pro strukturu, Brand Red jen štítek ŽIVĚ. */
+:root {
+  color-scheme: light;
+  --paper:#FFFFFF; --ink:#323232; --ink-72:rgba(50,50,50,.72); --ink-55:rgba(50,50,50,.55); --ink-14:rgba(50,50,50,.14);
+  --blue:#003B8E; --blue-08:rgba(0,59,142,.07); --red:#FF2D2D;
+  --display:"Montserrat","Avenir Next","Segoe UI",Arial,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+* { box-sizing:border-box; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.55 var(--body); font-variant-numeric:tabular-nums; }
+.wrap { max-width:760px; margin:0 auto; padding:24px 16px 64px; }
+a { color:var(--blue); }
+.logo img { height:44px; width:auto; display:block; }
+.eyebrow { font:600 12px/1.3 var(--display); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-55); margin:28px 0 8px; }
+h1 { font:800 clamp(28px,7vw,46px)/1.02 var(--display); text-transform:uppercase; letter-spacing:-.01em; margin:0 0 10px; text-wrap:balance; }
+.sub { color:var(--ink-72); margin:0 0 16px; }
+.stav { display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; font-size:14px; color:var(--ink-72); }
+.zive { background:var(--red); color:#fff; font:800 12px/1 var(--display); letter-spacing:.1em; padding:6px 9px; }
+.zive.konec { background:var(--ink); }
+#ted { margin:22px 0 0; border:2px solid var(--blue); padding:14px 16px; }
+#ted .eyebrow { margin:0 0 6px; color:var(--blue); }
+#ted p { margin:0; font-size:18px; font-weight:500; }
+h2 { font:800 13px/1.2 var(--display); letter-spacing:.08em; text-transform:uppercase; color:var(--blue); margin:34px 0 0; padding-top:14px; border-top:2px solid var(--blue); }
+ol { list-style:none; margin:0; padding:0; }
+li { display:grid; grid-template-columns:58px 1fr; gap:0 12px; padding:16px 0; border-bottom:1px solid var(--ink-14); }
+.cas { font:800 15px/1.5 var(--display); color:var(--blue); }
+.typ { font:600 11px/1.3 var(--display); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-55); margin:0 0 2px; }
+.nadpis { font:800 18px/1.25 var(--display); margin:0 0 4px; }
+.text { margin:0; }
+blockquote { margin:10px 0 0; padding:2px 0 2px 14px; border-left:3px solid var(--blue); font-size:18px; line-height:1.45; }
+blockquote footer { margin-top:6px; font-size:14px; color:var(--ink-72); }
+.vysledek { margin:8px 0 0; padding:8px 10px; background:var(--blue-08); font-weight:600; font-size:15.5px; }
+.pata { margin-top:34px; font-size:14px; color:var(--ink-72); }
+.pata p { margin:0 0 8px; }
+#chyba { color:var(--ink-55); font-size:13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="logo" href="/" aria-label="Osobnosti pro Třinec – úvodní stránka"><img src="/assets/logo.svg" alt="Osobnosti pro Třinec"></a>
+  <p class="eyebrow">Průběžný záznam · Třinec · čtvrtek 5. 11. 2026</p>
+  <h1>Ustavující zastupitelstvo</h1>
+  <p class="sub">Stručně a srozumitelně, co se právě děje na prvním zasedání nového zastupitelstva. Píšeme přímo ze sálu.</p>
+  <div class="stav">
+    <span class="zive" id="stitek">ŽIVĚ</span>
+    <span id="aktual">načítám záznam…</span>
+    <span id="chyba" hidden>Nedaří se načíst nová data, zkouším to znovu.</span>
+  </div>
+
+  <section id="ted" hidden>
+    <p class="eyebrow">Právě teď</p>
+    <p id="tedText"></p>
+  </section>
+
+  <h2>Záznam od nejnovějšího</h2>
+  <ol id="zaznam"></ol>
+
+  <div class="pata">
+    <p>Neoficiální záznam hnutí Osobnosti pro Třinec. Vzniká z živého poslechu v sále a píše se průběžně, takže může obsahovat nepřesnosti a má pár minut zpoždění. Počty hlasů uvádíme tak, jak zazněly v sále.</p>
+    <p>Závazný je zápis a usnesení, které zveřejňuje statutární město Třinec na <a href="https://www.trinecko.cz/">trinecko.cz</a>.</p>
+  </div>
+</div>
+<script>
+// Každých 45 s stáhne datový soubor (dotaz ?t= obchází mezipaměť hostingu) a překreslí záznam. Texty se vkládají jen jako text, ne jako HTML.
+const TYPY = { bod: 'Bod programu', hlasovani: 'Hlasování', citace: 'Citace', info: 'Průběh' };
+let posledni = '';
+function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+function vykresli(d) {
+  document.getElementById('aktual').textContent = 'aktualizováno v ' + d.aktualizovano;
+  const st = document.getElementById('stitek');
+  if (d.stav === 'skoncilo') { st.textContent = 'SKONČILO'; st.classList.add('konec'); } else { st.textContent = 'ŽIVĚ'; st.classList.remove('konec'); }
+  const ted = document.getElementById('ted');
+  ted.hidden = !d.ted; document.getElementById('tedText').textContent = d.ted || '';
+  const ol = document.getElementById('zaznam'); ol.replaceChildren();
+  [...d.zaznam].reverse().forEach(z => {
+    const li = el('li'); li.append(el('div', 'cas', z.cas));
+    const b = el('div');
+    b.append(el('p', 'typ', TYPY[z.typ] || 'Průběh'));
+    if (z.nadpis) b.append(el('p', 'nadpis', z.nadpis));
+    if (z.text) b.append(el('p', 'text', z.text));
+    if (z.vysledek) b.append(el('p', 'vysledek', z.vysledek));
+    (z.citace || []).forEach(c => {
+      const q = el('blockquote', null, '„' + c.text + '“');
+      q.append(el('footer', null, c.kdo + (c.strana ? ' (' + c.strana + ')' : '')));
+      b.append(q);
+    });
+    li.append(b); ol.append(li);
+  });
+}
+async function nacti() {
+  const ch = document.getElementById('chyba');
+  try {
+    const r = await fetch('zastupitelstvo-2026-11-05.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const t = await r.text();
+    if (t !== posledni) { posledni = t; vykresli(JSON.parse(t)); }
+    ch.hidden = true;
+  } catch (e) { ch.hidden = false; }
+}
+nacti(); setInterval(nacti, 45000);
+</script>
+</body>
+</html>
