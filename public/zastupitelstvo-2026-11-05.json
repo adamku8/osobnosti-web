@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "12:14",
+  "aktualizovano": "12:15",
   "stav": "probiha",
-  "ted": "Rozprava před volbou primátora pokračuje. Kandidáti jsou dva: Marian Plucnar (Volte Třinec) a Jan Mazoch (ANO).",
+  "ted": "Třinec má nové vedení. Primátorem byl zvolen Marian Plucnar (Volte Třinec), zasedání pokračuje dalšími body.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -396,6 +396,13 @@
           "strana": "Osobnosti pro Třinec"
         }
       ]
+    },
+    {
+      "cas": "12:12",
+      "typ": "hlasovani",
+      "nadpis": "Třinec má nového primátora: Marian Plucnar",
+      "text": "Zastupitelé nejdřív odmítli protinávrh opozice, aby se primátorem stal Jan Mazoch (ANO). Poté schválili původní návrh. Primátorem je Marian Plucnar (Volte Třinec), uvolněnými náměstkyněmi Ewa Troszok a Ingrid Staszková, neuvolněnými náměstky Pavla Golasowská, Wiesław Wania a Robin Lotko. Radu doplňují Dominika Kosová, Milan Matlák a Přemysl Zbončák. Finanční výbor povede Dominik Klimek (ANO), kontrolní výbor Radim Turek (NEZÁVISLÍ), výbor pro národnostní menšiny Franciszek Humel (Volte Třinec) a výbor pro strategický rozvoj města a urbanistiku Adam Kurzok (Osobnosti pro Třinec).",
+      "vysledek": "Protinávrh (Jan Mazoch): 11 pro, 16 proti. Nové vedení města a výbory: 16 pro, 11 proti. Usnesení bylo přijato."
     }
   ]
 }
