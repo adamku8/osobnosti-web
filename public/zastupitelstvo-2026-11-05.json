@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "11:55",
+  "aktualizovano": "11:58",
   "stav": "probiha",
   "ted": "Na primátora jsou navrženi dva kandidáti: Marian Plucnar (Volte Třinec) za koalici a Jan Mazoch (ANO) za opozici. Rozprava pokračuje, hlasování teprve přijde.",
   "zaznam": [
@@ -289,6 +289,19 @@
       "typ": "bod",
       "nadpis": "Kde je programové prohlášení a co bude v rozpočtu",
       "text": "Radim Turek (NEZÁVISLÍ) vytkl koalici, že nepředstoupila s programovým prohlášením, jak bývalo zvykem, a že program Volte Třinec se podle něj nejvíc shodoval s programem NEZÁVISLÝCH. Ptal se, jestli nové vedení postaví chodník v Oldřichovicích a jestli převezme rozpočet na rok 2027 připravený dosavadním vedením, nebo do něj promítne vlastní priority. Koalice už dříve uvedla, že programové návrhy a rozpočet předloží na prosincovém zasedání."
+    },
+    {
+      "cas": "11:54",
+      "typ": "bod",
+      "nadpis": "Plucnar: bezpečnost má víc rozměrů, chodník v Oldřichovicích má podporu",
+      "text": "Marian Plucnar (Volte Třinec) odpověděl, že bezpečnost zahrnuje chodníky, zklidňování dopravy, měření rychlosti i ochranu před povodněmi. Dopravní bezpečnost bude mít na starosti Robin Lotko. Radima Turka vyzval, aby zkušenosti s bezdomovectvím a kriminalitou uplatnil v odborné komisi; opozici podle něj koalice nechce stavět stranou. S rozpracovaným rozpočtem na rok 2027 se teprve seznámí.",
+      "citace": [
+        {
+          "text": "Co se týká chodníku v Oldřichovicích, tam panuje, myslím, jednomyslná shoda.",
+          "kdo": "Marian Plucnar",
+          "strana": "Volte Třinec"
+        }
+      ]
     }
   ]
 }
