@@ -132,24 +132,31 @@
   text-transform: uppercase;
   color: var(--text);
 }
-.dk-fakta {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-24) var(--s-40);
-  margin-top: var(--s-24);
-  padding-top: var(--s-24);
-  border-top: 1px solid var(--border);
+/* Grafika mandátů: 27 křesel zastupitelstva jako tečky, naše modře (modrá nese data),
+   ostatní jen vlasovou linkou. Devět ve třech řadách. */
+.dk-mandaty { justify-self: end; }
+.dk-kresla {
+  display: grid;
+  grid-template-columns: repeat(9, 32px);
+  gap: 12px;
 }
-.dk-fakta li { display: flex; flex-direction: column; }
-.dk-fakta b {
+.dk-kreslo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+}
+.dk-kreslo-nase { background: var(--signal-blue); border-color: var(--signal-blue); }
+.dk-mandaty-popis { margin-top: var(--s-24); display: flex; flex-direction: column; }
+.dk-mandaty-popis b {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 28px;
   line-height: 1.1;
+  text-transform: uppercase;
   color: var(--text);
 }
-.dk-fakta span { font-size: 14px; color: var(--text-muted); }
+.dk-mandaty-popis span { margin-top: var(--s-4); font-size: 14px; color: var(--text-muted); }
 
 .dk-head { margin: var(--s-96) 0 var(--s-40); }
 .dk-head h3 { font-size: clamp(22px, 2.6vw, 30px); }
@@ -218,12 +225,16 @@
 }
 @media (max-width: 900px) {
   .dk-top { grid-template-columns: 1fr; gap: var(--s-40); }
+  .dk-mandaty { justify-self: start; }
   .dk-zvoleni { grid-template-columns: repeat(2, 1fr); }
   .dk-karta .dk-foto { width: 136px; height: 136px; }
   .dk-head { margin-top: var(--s-64); }
 }
 @media (max-width: 560px) {
   .dk .dk-hlasy { font-size: clamp(72px, 23vw, 104px); }
+  .dk-kresla { grid-template-columns: repeat(9, 26px); gap: 9px; }
+  .dk-kreslo { width: 26px; height: 26px; }
+  .dk-mandaty-popis b { font-size: 24px; }
   .dk-tym { --dk-sl: 3; --dk-mezera: var(--s-8); row-gap: var(--s-24); }
   .dk-clen .dk-foto { width: 88px; height: 88px; }
   .dk-jmeno { font-size: 13px; }

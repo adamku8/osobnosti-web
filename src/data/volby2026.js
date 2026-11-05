@@ -6,6 +6,7 @@ export const VOLBY_2026 = {
   hlasy: 36267,        // kvros HLASY_STR, Osobnosti pro Třinec (volební č. 3)
   procent: '14,31',    // kvros PROCHLSTR
   mandaty: 4,          // kvros MAND_STR (z 27 členů zastupitelstva)
+  kresel: 27,          // počet členů zastupitelstva města Třince
   volicu: 10503,       // kvt3 součet VYD_OBALKY (vydané obálky)
   ucast: '38,3',       // 10 503 / 27 444 zapsaných voličů
 };

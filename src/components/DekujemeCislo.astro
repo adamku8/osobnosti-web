@@ -1,28 +1,27 @@
 ---
-// Horní část děkovného bloku: číslo s počtem hlasů, poděkování a tři fakta.
+// Horní část děkovného bloku: počet hlasů a grafika mandátů (27 křesel, naše modře).
 // Čísla: src/data/volby2026.js (ČSÚ). Styly: src/styles/uvod.css (.dk-top…),
 // musí být uvnitř prvku s třídou .dk. Používá ji úvod (src/pages/index.astro) —
 // v povolebním režimu jako hero, jinak jako první část sekce #dekujeme.
+// Záměrně bez delšího textu: na ploše má být vidět jen číslo (pokyn Adama, 5. 11. 2026).
 import { VOLBY_2026, tisice } from '../data/volby2026.js';
 const { id = undefined, class: extra = '' } = Astro.props;
+const { mandaty, kresel } = VOLBY_2026;
+const kresla = Array.from({ length: kresel }, (_, i) => i < mandaty);
+const slovem = mandaty === 1 ? 'mandát' : mandaty < 5 ? 'mandáty' : 'mandátů';
 ---
 <div class={`dk-top${extra ? ' ' + extra : ''}`} id={id}>
   <div class="dk-cislo">
     <div class="stat-number dk-hlasy">{tisice(VOLBY_2026.hlasy)}</div>
-    <div class="dk-hlasy-popis">hlasů pro Osobnosti</div>
+    <div class="dk-hlasy-popis">hlasů pro Osobnosti. Děkujeme.</div>
   </div>
-  <div class="stat-text">
-    <p class="eyebrow" style="margin-bottom:var(--s-16)">Komunální volby 2026</p>
-    <h2>Děkujeme, že jste šli volit.</h2>
-    <p>
-      K volbám 9. a 10. října přišlo {tisice(VOLBY_2026.volicu)} voličů.
-      Osobnostem jste dali {tisice(VOLBY_2026.hlasy)} hlasů. Každý z nich
-      bereme jako závazek. Pracujeme pro Třinec dál.
-    </p>
-    <ul class="dk-fakta">
-      <li><b>{VOLBY_2026.procent} %</b><span>všech hlasů</span></li>
-      <li><b>{VOLBY_2026.mandaty}</b><span>místa v zastupitelstvu</span></li>
-      <li><b>{VOLBY_2026.ucast} %</b><span>volební účast</span></li>
-    </ul>
+  <div class="dk-mandaty">
+    <div class="dk-kresla" role="img" aria-label={`${mandaty} z ${kresel} křesel v zastupitelstvu města Třince`}>
+      {kresla.map(nase => <span class:list={['dk-kreslo', nase && 'dk-kreslo-nase']}></span>)}
+    </div>
+    <div class="dk-mandaty-popis">
+      <b>{mandaty} {slovem} z {kresel}</b>
+      <span>v zastupitelstvu města Třince</span>
+    </div>
   </div>
 </div>
