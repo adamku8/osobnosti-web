@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "11:02",
+  "aktualizovano": "11:05",
   "stav": "probiha",
   "ted": "Rozprava o počtu náměstků a uvolněných funkcích trvá přes půl hodiny. Opozice zpochybňuje přípravu i rozdělení funkcí, koalice na návrhu trvá. Hlasování teprve přijde.",
   "zaznam": [
@@ -144,6 +144,12 @@
           "strana": "Volte Třinec"
         }
       ]
+    },
+    {
+      "cas": "11:01",
+      "typ": "bod",
+      "nadpis": "Kolik je rozpočet města",
+      "text": "Když v rozpravě zaznělo, že město hospodaří s rozpočtem kolem jedné miliardy, upřesnil Adam Kurzok (Osobnosti pro Třinec), že schválený rozpočet na rok 2026 počítá s výdaji 1 miliarda 260 milionů korun. Odměny náměstků, o které se rozprava vede, jsou podle něj jen nepatrným zlomkem této částky. Milan Klepacz (NEZÁVISLÍ) údaj potvrdil."
     }
   ]
 }
