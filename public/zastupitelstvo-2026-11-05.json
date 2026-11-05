@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "10:54",
+  "aktualizovano": "10:58",
   "stav": "probiha",
-  "ted": "Rozprava o počtu náměstků pokračuje. Koalice vysvětluje, jak budou neuvolnění náměstci pracovat. Hlasování teprve přijde.",
+  "ted": "Opozice navrhuje bod o počtu náměstků stáhnout a vrátit se k němu na příštím zasedání. Koalice chce rozhodnout dnes, protože bez toho nelze zvolit vedení města.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -125,6 +125,12 @@
           "strana": "KDU-ČSL"
         }
       ]
+    },
+    {
+      "cas": "10:55",
+      "typ": "bod",
+      "nadpis": "Návrh odložit rozhodnutí na příští zasedání",
+      "text": "Po krátké výměně o tom, k čemu slouží technické poznámky, navrhl Milan Klepacz (NEZÁVISLÍ) bod stáhnout a projednat ho až na příštím zastupitelstvu, kdy budou známé náklady. Podle něj se schvaluje struktura vedení města na čtyři roky, ne na měsíc."
     }
   ]
 }
