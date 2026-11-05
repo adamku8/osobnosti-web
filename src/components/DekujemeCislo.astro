@@ -1,0 +1,28 @@
+---
+// Horní část děkovného bloku: číslo s počtem hlasů, poděkování a tři fakta.
+// Čísla: src/data/volby2026.js (ČSÚ). Styly: src/styles/uvod.css (.dk-top…),
+// musí být uvnitř prvku s třídou .dk. Používá ji úvod (src/pages/index.astro) —
+// v povolebním režimu jako hero, jinak jako první část sekce #dekujeme.
+import { VOLBY_2026, tisice } from '../data/volby2026.js';
+const { id = undefined, class: extra = '' } = Astro.props;
+---
+<div class={`dk-top${extra ? ' ' + extra : ''}`} id={id}>
+  <div class="dk-cislo">
+    <div class="stat-number dk-hlasy">{tisice(VOLBY_2026.hlasy)}</div>
+    <div class="dk-hlasy-popis">hlasů pro Osobnosti</div>
+  </div>
+  <div class="stat-text">
+    <p class="eyebrow" style="margin-bottom:var(--s-16)">Komunální volby 2026</p>
+    <h2>Děkujeme, že jste šli volit.</h2>
+    <p>
+      K volbám 9. a 10. října přišlo {tisice(VOLBY_2026.volicu)} voličů.
+      Osobnostem jste dali {tisice(VOLBY_2026.hlasy)} hlasů. Každý z nich
+      bereme jako závazek. Pracujeme pro Třinec dál.
+    </p>
+    <ul class="dk-fakta">
+      <li><b>{VOLBY_2026.procent} %</b><span>všech hlasů</span></li>
+      <li><b>{VOLBY_2026.mandaty}</b><span>místa v zastupitelstvu</span></li>
+      <li><b>{VOLBY_2026.ucast} %</b><span>volební účast</span></li>
+    </ul>
+  </div>
+</div>

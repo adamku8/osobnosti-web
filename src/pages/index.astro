@@ -6,10 +6,13 @@
 // Styly jen pro úvod: src/styles/uvod.css.
 // (Do 12. 9. 2026 byl úvod v teaser režimu jen s hero a bannerem — viz git.)
 // (Do 5. 11. 2026 byl místo děkovného bloku blok „27" a níž sekce dvanácti kandidátů.)
-// Co po volbách přestalo platit, schovává přepínač PO_VOLBACH v src/lib/verejne.js.
+// Co po volbách přestalo platit, schovává přepínač PO_VOLBACH v src/lib/verejne.js:
+// billboard s kandidáty (hero je pak děkovné číslo nad panoramatem), slovo lídryně,
+// Jak volit s odpočtem.
 import Base from '../layouts/Base.astro';
 import OblastKarta from '../components/OblastKarta.astro';
 import SekceProjekty from '../components/SekceProjekty.astro';
+import DekujemeCislo from '../components/DekujemeCislo.astro';
 import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
@@ -51,11 +54,17 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
   <script is:inline>document.documentElement.classList.add('js');</script>
 
   <!-- ================= HERO — billboard ================= -->
-  <section class="hero hero-bb" id="uvod">
+  <section class:list={['hero', 'hero-bb', PO_VOLBACH && 'dk']} id="uvod">
     <div class="container">
       {/* Claim nese sám billboard, H1 zůstává jen pro čtečky a vyhledávače. */}
       <h1 class="sr-only">{PO_VOLBACH ? 'Osobnosti pro nový Třinec' : 'Osobnosti pro nový Třinec — komunální volby 9.–10. října 2026'}</h1>
 
+      {PO_VOLBACH ? (
+        /* Po volbách je hero děkovné číslo s panoramatem jako podlahou. Billboard
+           s kandidáty a text pod ním jsou schované (pokyn Adama, 5. 11. 2026). */
+        <DekujemeCislo id="dekujeme" class="dk-hero" />
+      ) : (
+        <Fragment>
       <picture class="hero-billboard">
         <source media="(max-width: 700px)" srcset={u('assets/img/hero-billboard-1200.jpg')}>
         <img
@@ -70,20 +79,16 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
           Osobnosti, které v Třinci doopravdy žijí a pracují.
           Přečtěte si <a href="#program">náš program</a> a poznejte <a href="#kandidati">naše kandidáty</a>.
         </p>
-        {PO_VOLBACH ? (
-          <div class="hero-vote">
-            <a class="btn btn-blue" href="#dekujeme">Výsledek voleb</a>
+        <div class="hero-vote">
+          <div>
+            <div class="hero-date-label">Volby do zastupitelstva</div>
+            <div class="hero-date">9.–10. října 2026</div>
           </div>
-        ) : (
-          <div class="hero-vote">
-            <div>
-              <div class="hero-date-label">Volby do zastupitelstva</div>
-              <div class="hero-date">9.–10. října 2026</div>
-            </div>
-            <a class="btn btn-blue" href="#jak-volit">Jak volit</a>
-          </div>
-        )}
+          <a class="btn btn-blue" href="#jak-volit">Jak volit</a>
+        </div>
       </div>
+        </Fragment>
+      )}
     </div>
 
     <!-- Panorama jako podlaha hera (princip 06) — rotace fotek Třince a Beskyd -->
@@ -100,28 +105,9 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
   <!-- ================= DĚKUJEME — výsledek voleb 2026 (src/data/volby2026.js) =================
        Nahradil blok „27 / Sedmadvacet osobností" a sekci dvanácti kandidátů (5. 11. 2026).
        Jediná červená na ploše je číslo s počtem hlasů; modrá nese štítky zastupitelů. -->
-  <section class="stat dk" id="dekujeme">
+  <section class="stat dk" id={PO_VOLBACH ? 'zastupitele' : 'dekujeme'}>
     <div class="container">
-      <div class="dk-top reveal">
-        <div class="dk-cislo">
-          <div class="stat-number dk-hlasy">{tisice(VOLBY_2026.hlasy)}</div>
-          <div class="dk-hlasy-popis">hlasů pro Osobnosti</div>
-        </div>
-        <div class="stat-text">
-          <p class="eyebrow" style="margin-bottom:var(--s-16)">Komunální volby 2026</p>
-          <h2>Děkujeme, že jste šli volit.</h2>
-          <p>
-            K volbám 9. a 10. října přišlo {tisice(VOLBY_2026.volicu)} voličů.
-            Osobnostem jste dali {tisice(VOLBY_2026.hlasy)} hlasů. Každý z nich
-            bereme jako závazek. Pracujeme pro Třinec dál.
-          </p>
-          <ul class="dk-fakta">
-            <li><b>{VOLBY_2026.procent} %</b><span>všech hlasů</span></li>
-            <li><b>{VOLBY_2026.mandaty}</b><span>místa v zastupitelstvu</span></li>
-            <li><b>{VOLBY_2026.ucast} %</b><span>volební účast</span></li>
-          </ul>
-        </div>
-      </div>
+      {!PO_VOLBACH && <DekujemeCislo class="reveal" />}
 
       <div class="dk-head reveal" id="kandidati">
         <h3>Vaši zastupitelé <span class="dk-roky">2026–2030</span></h3>
@@ -165,6 +151,9 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
+  {/* Slovo lídryně je předvolební úvodník — po volbách schované (pokyn Adama, 5. 11. 2026). */}
+  {!PO_VOLBACH && (
+  <Fragment>
   <!-- ================= SLOVO LÍDRYNĚ (volební noviny, strana 1) ================= -->
   <section class="section nv-uvodnik" id="slovo-lidryne">
     <div class="container nv-uvodnik-grid">
@@ -186,6 +175,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       </div>
     </div>
   </section>
+  </Fragment>
+  )}
 
   <!-- TÝMOVÁ FOTKA (Javorový, tym-2026-javorovy-v2.jpg) odstraněna 24. 9. 2026
        na pokyn Adama. Soubory zůstávají v public/assets/img/. -->

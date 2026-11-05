@@ -228,3 +228,11 @@
   .dk-clen .dk-foto { width: 88px; height: 88px; }
   .dk-jmeno { font-size: 13px; }
 }
+
+/* Povolební hero: děkovné číslo nad panoramatem (místo billboardu s kandidáty).
+   Druhá část bloku (zastupitelé, tým) pak začíná nadpisem — bez dvojitého odsazení. */
+.dk-hero { padding: var(--s-40) 0 var(--s-96); }
+.stat.dk .container > .dk-head:first-child { margin-top: 0; }
+@media (max-width: 900px) {
+  .dk-hero { padding: var(--s-16) 0 var(--s-64); }
+}
