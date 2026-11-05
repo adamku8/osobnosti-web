@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "10:40",
+  "aktualizovano": "10:51",
   "stav": "probiha",
-  "ted": "Pokračuje rozprava o počtu náměstků primátora. Opozice žádá přesné vyčíslení nákladů, koalice návrh hájí.",
+  "ted": "Rozprava o počtu náměstků trvá už přes dvacet minut. Opozice chce méně náměstků nebo odklad, koalice trvá na svém návrhu. Hlasování teprve přijde.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -64,6 +64,45 @@
         {
           "text": "Tak nepřipravené zastupitelstvo už jsem dlouho neviděl.",
           "kdo": "Radim Turek",
+          "strana": "NEZÁVISLÍ"
+        }
+      ]
+    },
+    {
+      "cas": "10:39",
+      "typ": "bod",
+      "nadpis": "Opozice žádá přerušení a platové tabulky",
+      "text": "Radim Turek (NEZÁVISLÍ) navrhl jednání přerušit, dokud zastupitelé nedostanou přehled, kolik budou jednotlivé funkce stát. Marian Plucnar odpověděl, že se oproti minulému období žádný úvazek nenavyšuje a neuvolnění náměstci budou do rozhodnutí zastupitelstva pracovat bez odměny. Koalice slíbila na příští zasedání nové zásady odměňování, včetně výborů a komisí, a chce je předem probrat se všemi zastupiteli.",
+      "citace": [
+        {
+          "text": "Asi to je pro vás nepochopitelné, když někdo pracuje měsíc a půl zdarma.",
+          "kdo": "Marian Plucnar",
+          "strana": "Volte Třinec"
+        }
+      ]
+    },
+    {
+      "cas": "10:44",
+      "typ": "bod",
+      "nadpis": "Bude pět náměstků městu k užitku?",
+      "text": "Jan Mazoch (ANO) se neptal na cenu, ale na to, kolik času budou neuvolnění náměstci městu věnovat. Navrhl začít se třemi náměstky a další přidat, až se nové vedení zapracuje. Koalice odpověděla, že chce nejdřív převzít agendu a podrobnosti předloží na příštím zasedání.",
+      "citace": [
+        {
+          "text": "Nechte nám čas, ať to dokážeme.",
+          "kdo": "Marian Plucnar",
+          "strana": "Volte Třinec"
+        }
+      ]
+    },
+    {
+      "cas": "10:47",
+      "typ": "bod",
+      "nadpis": "Uvolněných náměstků bude o jednoho méně",
+      "text": "V rozpravě zaznělo, že proti minulému období ubude jeden uvolněný náměstek, což je úspora asi 111 tisíc korun měsíčně bez odvodů. O odměnách neuvolněných náměstků rozhodne zastupitelstvo v prosinci. Ivan Frőmmer (NEZÁVISLÍ) trvá na protinávrhu se třemi uvolněnými náměstky.",
+      "citace": [
+        {
+          "text": "Mně přijde mnohem efektivnější, když někdo dělá práci na plný úvazek, než dva lidé.",
+          "kdo": "Ivan Frőmmer",
           "strana": "NEZÁVISLÍ"
         }
       ]
