@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "10:58",
+  "aktualizovano": "11:02",
   "stav": "probiha",
-  "ted": "Opozice navrhuje bod o počtu náměstků stáhnout a vrátit se k němu na příštím zasedání. Koalice chce rozhodnout dnes, protože bez toho nelze zvolit vedení města.",
+  "ted": "Rozprava o počtu náměstků a uvolněných funkcích trvá přes půl hodiny. Opozice zpochybňuje přípravu i rozdělení funkcí, koalice na návrhu trvá. Hlasování teprve přijde.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -131,6 +131,19 @@
       "typ": "bod",
       "nadpis": "Návrh odložit rozhodnutí na příští zasedání",
       "text": "Po krátké výměně o tom, k čemu slouží technické poznámky, navrhl Milan Klepacz (NEZÁVISLÍ) bod stáhnout a projednat ho až na příštím zastupitelstvu, kdy budou známé náklady. Podle něj se schvaluje struktura vedení města na čtyři roky, ne na měsíc."
+    },
+    {
+      "cas": "10:57",
+      "typ": "bod",
+      "nadpis": "Spor o zkušenosti nového vedení",
+      "text": "Radim Turek (NEZÁVISLÍ) se ptal, proč mají být zkušenější členové koalice neuvolněnými náměstky a méně zkušení uvolněnými. Marian Plucnar (Volte Třinec) odpověděl, že rozpočet města sleduje roky, s rozpočtem pracuje i jako zástupce ředitelky školy a rozdělení funkcí je věcí dohody koalice a odbornosti jejích lidí. Jan Mazoch (ANO) se zeptal, zda neuvolnění náměstci zvládnou funkci vedle svého zaměstnání. Podle předsedajícího na to odpoví samostatný bod programu.",
+      "citace": [
+        {
+          "text": "Beru za to veškerou zodpovědnost.",
+          "kdo": "Marian Plucnar",
+          "strana": "Volte Třinec"
+        }
+      ]
     }
   ]
 }
