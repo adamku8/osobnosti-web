@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "12:12",
+  "aktualizovano": "12:14",
   "stav": "probiha",
   "ted": "Rozprava před volbou primátora pokračuje. Kandidáti jsou dva: Marian Plucnar (Volte Třinec) a Jan Mazoch (ANO).",
   "zaznam": [
@@ -376,6 +376,24 @@
           "text": "Bojíte se něčeho? Pokud se nemáte čeho bát, tak řeknete: ano, já jsem pro.",
           "kdo": "Radim Turek",
           "strana": "NEZÁVISLÍ"
+        }
+      ]
+    },
+    {
+      "cas": "12:10",
+      "typ": "bod",
+      "nadpis": "Kurzok: o členech výborů rozhoduje zastupitelstvo, ne primátor",
+      "text": "Adam Kurzok (Osobnosti pro Třinec) uvedl na pravou míru tři věci z rozpravy. Usnesení výboru nebo komise nemůže rada ani zastupitelstvo zrušit, má doporučující povahu. Členy výborů schvaluje zastupitelstvo, nikoli primátor. A o složení výborů má podle něj smysl jednat, až bude předloženo, ne v bodě o volbě vedení města.",
+      "citace": [
+        {
+          "text": "Nemyslím si, že rada nebo zastupitelstvo může shodit jakékoliv usnesení komise nebo výboru. Má doporučující charakter pro nás zastupitele i pro radu.",
+          "kdo": "Adam Kurzok",
+          "strana": "Osobnosti pro Třinec"
+        },
+        {
+          "text": "Členy výboru schvaluje zastupitelstvo. O tom rozhoduje zastupitelstvo, ne primátor.",
+          "kdo": "Adam Kurzok",
+          "strana": "Osobnosti pro Třinec"
         }
       ]
     }
