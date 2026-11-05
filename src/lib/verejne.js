@@ -22,4 +22,4 @@ export const verejnySlug = (k) => {
 // přestalo platit: sekci „Jak volit" s odpočtem, tlačítko „Volte č. 3" v hlavičce,
 // datum voleb s tlačítkem „Jak volit" v hero a odkaz „Jak volit" v závěrečném rozcestníku.
 // Děkovný blok s výsledkem (src/data/volby2026.js) je na úvodu vždy. Zpět = false.
-export const PO_VOLBACH = false;
+export const PO_VOLBACH = true;
