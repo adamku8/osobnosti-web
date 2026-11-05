@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "12:34",
+  "aktualizovano": "12:35",
   "stav": "probiha",
-  "ted": "Zastupitelé jednají o termínu druhého zasedání. Opozice ho chce o týden dřív kvůli nájemní smlouvě na chatě Javorový.",
+  "ted": "Přestávka. Po ní zastupitelé rozhodnou o termínu druhého zasedání, tím ustavující zasedání skončí.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -415,7 +415,13 @@
       "cas": "12:29",
       "typ": "bod",
       "nadpis": "Termín dalšího zasedání a Javorový",
-      "text": "Posledním bodem je termín druhého zasedání, navrženo je úterý 15. prosince ve 12 hodin. Radim Turek (NEZÁVISLÍ) navrhl sejít se o týden dřív. Chce, aby zastupitelé včas projednali výpověď nájemní smlouvy na chatě Javorový; podle něj nejde o okamžitý odchod nájemce, ale o právní narovnání, aby se s Javorovým dalo začít pracovat. Úřad požádal o potvrzení lhůty, do kdy musí být výpověď doručena."
+      "text": "Posledním bodem je termín druhého zasedání, navrženo je úterý 15. prosince ve 12 hodin. Radim Turek (NEZÁVISLÍ) navrhl sejít se o týden dřív. Chce, aby zastupitelé včas projednali výpověď nájemní smlouvy na chatě Javorový; podle něj nejde o okamžitý odchod nájemce, ale o právní narovnání, aby se s Javorovým dalo začít pracovat. Úřad požádal o potvrzení lhůty, do kdy musí být výpověď doručena. Ivan Frőmmer (NEZÁVISLÍ) se zeptal, jestli bude před projednáním rozpočtu seminář pro zastupitele a jestli ho půjde sledovat na dálku. Vedení města odpovědělo, že se seminářem počítá a možnost online přenosu prověří."
+    },
+    {
+      "cas": "12:32",
+      "typ": "info",
+      "nadpis": "Krátká přestávka",
+      "text": "Předsedající vyhlásil pětiminutovou přestávku, aby se dal probrat termín dalšího zasedání."
     }
   ]
 }
