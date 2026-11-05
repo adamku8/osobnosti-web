@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "12:31",
+  "aktualizovano": "12:34",
   "stav": "probiha",
-  "ted": "Zasedání se chýlí ke konci. Posledním bodem je termín druhého zasedání zastupitelstva, navrženo je úterý 15. prosince ve 12 hodin.",
+  "ted": "Zastupitelé jednají o termínu druhého zasedání. Opozice ho chce o týden dřív kvůli nájemní smlouvě na chatě Javorový.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -410,6 +410,12 @@
       "nadpis": "Kdo má ve vedení města co na starosti",
       "text": "Po přestávce zastupitelé bez rozpravy schválili rozdělení úseků mezi primátora a náměstky. Podle primátora Mariana Plucnara rozdělení částečně navazuje na minulé vedení a případné úpravy předloží na dalším zasedání.",
       "vysledek": "17 pro, nikdo proti, 10 se zdrželo."
+    },
+    {
+      "cas": "12:29",
+      "typ": "bod",
+      "nadpis": "Termín dalšího zasedání a Javorový",
+      "text": "Posledním bodem je termín druhého zasedání, navrženo je úterý 15. prosince ve 12 hodin. Radim Turek (NEZÁVISLÍ) navrhl sejít se o týden dřív. Chce, aby zastupitelé včas projednali výpověď nájemní smlouvy na chatě Javorový; podle něj nejde o okamžitý odchod nájemce, ale o právní narovnání, aby se s Javorovým dalo začít pracovat. Úřad požádal o potvrzení lhůty, do kdy musí být výpověď doručena."
     }
   ]
 }
