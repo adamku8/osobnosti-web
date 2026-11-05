@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "12:09",
+  "aktualizovano": "12:12",
   "stav": "probiha",
   "ted": "Rozprava před volbou primátora pokračuje. Kandidáti jsou dva: Marian Plucnar (Volte Třinec) a Jan Mazoch (ANO).",
   "zaznam": [
@@ -363,6 +363,19 @@
           "text": "Nikomu tady nic nedlužím. Já beru Třinec jako celek.",
           "kdo": "Jan Mazoch",
           "strana": "ANO"
+        }
+      ]
+    },
+    {
+      "cas": "12:07",
+      "typ": "bod",
+      "nadpis": "Kdo bude mít většinu ve výborech",
+      "text": "Marian Plucnar (Volte Třinec) řekl, že složení finančního výboru probere s jeho navrženým předsedou Dominikem Klimkem, a připomněl, že koalice je v zastupitelstvu v menšině. Radim Turek (NEZÁVISLÍ) ho vyzval, aby jasně slíbil opozici většinu ve finančním a kontrolním výboru. Za skutečnou opozici přitom označil jen NEZÁVISLÉ a ANO; Osobnosti pro Třinec podle něj opozicí nejsou.",
+      "citace": [
+        {
+          "text": "Bojíte se něčeho? Pokud se nemáte čeho bát, tak řeknete: ano, já jsem pro.",
+          "kdo": "Radim Turek",
+          "strana": "NEZÁVISLÍ"
         }
       ]
     }
