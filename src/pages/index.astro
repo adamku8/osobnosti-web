@@ -9,7 +9,8 @@
 // Co po volbách přestalo platit, schovává přepínač PO_VOLBACH v src/lib/verejne.js:
 // billboard s kandidáty (hero je pak jen děkovné číslo, panorama se stěhuje pod
 // zastupitele), slovo lídryně, program a projekty (jsou v menu pod „Volby 2026"),
-// „Co se děje v kampani" a Jak volit s odpočtem. Místo nich přibývají priority
+// „Co se děje v kampani", upoutávka Doporučují nás, tlačítko Podpořte nás v závěru
+// a Jak volit s odpočtem. Místo nich přibývají priority
 // „Na čem nám záleží" (src/data/priority.js) a „Ze zastupitelstva" (src/lib/zapisy.js).
 import Base from '../layouts/Base.astro';
 import OblastKarta from '../components/OblastKarta.astro';
@@ -299,6 +300,9 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
+  {/* Předvolební doporučení jsou po volbách z úvodu pryč (pokyn Adama, 5. 11. 2026); stránka zůstává. */}
+  {!PO_VOLBACH && (
+  <Fragment>
   <!-- ================= DOPORUČUJÍ NÁS — upoutávka na /doporucuji-nas.html ================= -->
   <section class="section" id="doporucuji" style="border-top:1px solid var(--border)">
     <div class="container">
@@ -323,6 +327,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       </div>
     </div>
   </section>
+  </Fragment>
+  )}
 
   {/* „Co se děje v kampani" je předvolební — po volbách schované (pokyn Adama, 5. 11. 2026). */}
   {!PO_VOLBACH && (
@@ -439,9 +445,12 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
           {!PO_VOLBACH && <a href="#jak-volit">Jak volit</a>}
           <a href="#kontakt">Kontakt</a>
         </nav>
-        <div class="closing-cta reveal" style="--i:3">
-          <a class="btn btn-blue btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
-        </div>
+        {/* Výzva k podpoře kampaně jen před volbami. */}
+        {!PO_VOLBACH && (
+          <div class="closing-cta reveal" style="--i:3">
+            <a class="btn btn-blue btn-lg" href={u('podporte-nas.html')}>Podpořte nás</a>
+          </div>
+        )}
       </div>
     </div>
   </section>

@@ -5,7 +5,8 @@ import { u } from '../lib/url.js';
 import { PO_VOLBACH } from '../lib/verejne.js';
 
 // Před volbami ploché menu; po volbách (PO_VOLBACH) jsou program a kandidátka schované
-// pod skupinou „Volby 2026" a přibyla položka „Zastupitelstvo" (zápisy ze zasedání).
+// pod skupinou „Volby 2026", přibyla položka „Zastupitelstvo" (zápisy ze zasedání)
+// a z menu vypadlo kampaňové „Podpořte nás" (stránka zůstává, odkaz je v patičce).
 // Položka s "deti" je rozbalovací skupina; aktivní je, když je aktivní některé její dítě.
 const menu = PO_VOLBACH ? [
   { id: 'uvod',      text: 'Úvod',         href: u('index.html') },
@@ -16,7 +17,6 @@ const menu = PO_VOLBACH ? [
   { id: 'vysledky',  text: 'Výsledky',     href: u('vysledky.html') },
   { id: 'zastupitelstvo', text: 'Zastupitelstvo', href: u('zastupitelstvo.html') },
   { id: 'javorovy',  text: '⛰️ Javorový',  href: u('javorovy.html'), cervena: true },
-  { id: 'podporte',  text: 'Podpořte nás', href: u('podporte-nas.html') },
 ] : [
   { id: 'uvod',      text: 'Úvod',         href: u('index.html') },
   { id: 'program',   text: 'Program',      href: u('program.html') },
