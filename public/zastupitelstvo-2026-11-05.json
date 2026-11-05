@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "12:04",
+  "aktualizovano": "12:06",
   "stav": "probiha",
   "ted": "Rozprava před volbou primátora pokračuje. Kandidáti jsou dva: Marian Plucnar (Volte Třinec) a Jan Mazoch (ANO).",
   "zaznam": [
@@ -346,6 +346,12 @@
           "strana": "Osobnosti pro Třinec"
         }
       ]
+    },
+    {
+      "cas": "12:01",
+      "typ": "bod",
+      "nadpis": "Otázky na kandidáta opozice a jeho odpověď",
+      "text": "Adam Kurzok (Osobnosti pro Třinec) se Jana Mazocha (ANO) zeptal na dvě věci z loňského novinového rozhovoru: že už několik let bydlí v Ropici a že řekl, že do dalšího volebního období kandidovat nebude. Jan Mazoch odpověděl, že v Ropici bydlí sedm let a že výrok o nekandidování se týkal Frenštátu pod Radhoštěm, kde byl osm let zastupitelem."
     }
   ]
 }
