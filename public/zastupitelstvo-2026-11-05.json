@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "12:07",
+  "aktualizovano": "12:09",
   "stav": "probiha",
   "ted": "Rozprava před volbou primátora pokračuje. Kandidáti jsou dva: Marian Plucnar (Volte Třinec) a Jan Mazoch (ANO).",
   "zaznam": [
@@ -352,6 +352,19 @@
       "typ": "bod",
       "nadpis": "Otázky na kandidáta opozice a jeho odpověď",
       "text": "Adam Kurzok (Osobnosti pro Třinec) se Jana Mazocha (ANO) zeptal na dvě věci z loňského novinového rozhovoru: že už několik let bydlí v Ropici a že řekl, že do dalšího volebního období kandidovat nebude. Jan Mazoch odpověděl, že v Ropici bydlí sedm let, zákonné podmínky pro kandidaturu v Třinci ale splňuje, protože tu má trvalé bydliště v bytě, který s manželkou vlastní. Výrok o nekandidování se podle něj týkal Frenštátu pod Radhoštěm, kde byl osm let zastupitelem."
+    },
+    {
+      "cas": "12:04",
+      "typ": "bod",
+      "nadpis": "Mazoch: Třinec beru jako celek",
+      "text": "Jan Mazoch (ANO) ke své kandidatuře řekl, že není spojen s žádnou částí města ani skupinou a že to považuje za výhodu. Zeptal se také, jestli opozice dostane ve finančním výboru, kterému má předsedat Dominik Klimek (ANO), většinu členů. Bez ní by podle něj předseda z opozice nemohl ve výboru nic prosadit.",
+      "citace": [
+        {
+          "text": "Nikomu tady nic nedlužím. Já beru Třinec jako celek.",
+          "kdo": "Jan Mazoch",
+          "strana": "ANO"
+        }
+      ]
     }
   ]
 }
