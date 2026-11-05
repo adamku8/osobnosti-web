@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "11:09",
+  "aktualizovano": "11:10",
   "stav": "probiha",
-  "ted": "Rozprava o počtu náměstků a uvolněných funkcích pokračuje, vystoupil i občan z publika. Hlasování teprve přijde.",
+  "ted": "Přestávka. Předsedající přerušil jednání na pět minut, o počtu náměstků a uvolněných funkcích se zatím nehlasovalo.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -156,6 +156,18 @@
       "typ": "bod",
       "nadpis": "Slovo dostal občan",
       "text": "V rozpravě vystoupil občan z publika. Řekl, že struktura vedení se schvaluje na celé volební období, a proto by odměny neuvolněných náměstků měly být známé už dnes. Zeptal se také, jak se bude lišit práce uvolněného náměstka, neuvolněného náměstka a radního a jak ji funkcionáři skloubí se zaměstnáním."
+    },
+    {
+      "cas": "11:06",
+      "typ": "bod",
+      "nadpis": "Odměny zatím nikdo z neuvolněných nedostane",
+      "text": "Martin Dinh (Volte Třinec) upřesnil, že dokud zastupitelstvo neschválí nové zásady odměňování, nemají neuvolnění členové zastupitelstva ani rady žádnou odměnu. Placeni budou jen primátor a uvolnění náměstci. Adam Kurzok (Osobnosti pro Třinec) požádal předsedajícího, aby zastupitelé dostávali v rozpravě slovo před hosty z publika, a zastal se Milana Klepacze (NEZÁVISLÍ), který podle něj jako zastupitel s 2 128 hlasy měl mít přednost."
+    },
+    {
+      "cas": "11:08",
+      "typ": "info",
+      "nadpis": "Přestávka",
+      "text": "Předsedající vyhlásil pětiminutovou přestávku. Rozprava k bodu o náměstcích a uvolněných funkcích trvala přes čtyřicet minut, hlasovat se bude po přestávce."
     }
   ]
 }
