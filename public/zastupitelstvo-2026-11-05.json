@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "11:27",
+  "aktualizovano": "11:29",
   "stav": "probiha",
-  "ted": "Pokračuje rozprava k návrhu vedení města a výborů. Opozice se ptá na nominované a na smysl výboru pro strategický rozvoj a urbanistiku.",
+  "ted": "Nominovaní členové vedení města se postupně představují zastupitelům. Hlasování o vedení a výborech teprve přijde.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -149,7 +149,14 @@
       "cas": "11:01",
       "typ": "bod",
       "nadpis": "Kolik je rozpočet města",
-      "text": "Když v rozpravě zaznělo, že město hospodaří s rozpočtem kolem jedné miliardy, upřesnil Adam Kurzok (Osobnosti pro Třinec), že schválený rozpočet na rok 2026 počítá s výdaji 1 miliarda 260 milionů korun. Pokud by odměny náměstků zůstaly na dosavadní úrovni, jde podle něj asi o 4 miliony korun ročně, tedy 0,3 % rozpočtu. Milan Klepacz (NEZÁVISLÍ) s tímto pohledem nesouhlasil a ptal se, kolik z rozpočtu tvoří mandatorní výdaje. Předsedající odpověděl, že to k projednávanému bodu nepatří."
+      "text": "Když v rozpravě zaznělo, že město hospodaří s rozpočtem kolem jedné miliardy, upřesnil Adam Kurzok (Osobnosti pro Třinec), že schválený rozpočet na rok 2026 počítá s výdaji 1 miliarda 260 milionů korun. Pokud by odměny náměstků zůstaly na dosavadní úrovni, jde podle něj asi o 4 miliony korun ročně, tedy 0,3 % rozpočtu. Milan Klepacz (NEZÁVISLÍ) s tímto pohledem nesouhlasil a ptal se, kolik z rozpočtu tvoří mandatorní výdaje. Předsedající odpověděl, že to k projednávanému bodu nepatří.",
+      "citace": [
+        {
+          "text": "Nerad bych publikum a veřejnost uváděl v omyl o 250 milionů menší částkou.",
+          "kdo": "Adam Kurzok",
+          "strana": "Osobnosti pro Třinec"
+        }
+      ]
     },
     {
       "cas": "11:04",
@@ -161,7 +168,14 @@
       "cas": "11:06",
       "typ": "bod",
       "nadpis": "Odměny zatím nikdo z neuvolněných nedostane",
-      "text": "Martin Dinh (Volte Třinec) upřesnil, že dokud zastupitelstvo neschválí nové zásady odměňování, nemají neuvolnění členové zastupitelstva ani rady žádnou odměnu. Placeni budou jen primátor a uvolnění náměstci. Adam Kurzok (Osobnosti pro Třinec) požádal předsedajícího, aby zastupitelé dostávali v rozpravě slovo před hosty z publika, a zastal se Milana Klepacze (NEZÁVISLÍ), který podle něj jako zastupitel s 2 128 hlasy měl mít přednost."
+      "text": "Martin Dinh (Volte Třinec) upřesnil, že dokud zastupitelstvo neschválí nové zásady odměňování, nemají neuvolnění členové zastupitelstva ani rady žádnou odměnu. Placeni budou jen primátor a uvolnění náměstci. Adam Kurzok (Osobnosti pro Třinec) požádal předsedajícího, aby zastupitelé dostávali v rozpravě slovo před hosty z publika, a zastal se Milana Klepacze (NEZÁVISLÍ), který podle něj jako zastupitel s 2 128 hlasy měl mít přednost.",
+      "citace": [
+        {
+          "text": "Pan Klepacz dostal 2 128 hlasů našich občanů a myslím si, že by měl jako zastupitel těchto občanů mít přednost v diskuzi.",
+          "kdo": "Adam Kurzok",
+          "strana": "Osobnosti pro Třinec"
+        }
+      ]
     },
     {
       "cas": "11:08",
@@ -199,10 +213,15 @@
       "cas": "11:23",
       "typ": "bod",
       "nadpis": "K čemu bude výbor pro strategický rozvoj a urbanistiku",
-      "text": "Milan Klepacz (NEZÁVISLÍ) požádal, aby se nominovaní představili. Zastupitel z opozice, který byl v minulém období členem výboru pro strategický rozvoj, připomněl, že se výbor letos sešel jen jednou a nepřijal žádné usnesení, a zeptal se, co od něj nové vedení čeká. Navržený předseda Adam Kurzok (Osobnosti pro Třinec) odpověděl, že strategický plán platí na celé období a na konci roku se poprvé vyhodnotí jeho akční plán. Výbor chce zaměřit na urbanismus a veřejný prostor a může navrhovat i aktualizace strategického plánu.",
+      "text": "Milan Klepacz (NEZÁVISLÍ) požádal, aby se nominovaní představili. Zastupitel z opozice, který byl v minulém období členem výboru pro strategický rozvoj, připomněl, že se výbor letos sešel jen jednou a nepřijal žádné usnesení, a zeptal se, co od něj nové vedení čeká. Navržený předseda Adam Kurzok (Osobnosti pro Třinec) odpověděl, že strategický plán platí na celé období a na konci roku se poprvé vyhodnotí jeho akční plán. Výbor chce zaměřit na urbanismus a veřejný prostor a může navrhovat i aktualizace strategického plánu. K jedinému letošnímu zasedání uvedl, že hlavní prací výboru v minulém období bylo strategický plán prosadit a že v posledním roce nikdo s návrhem na jeho úpravu nepřišel.",
       "citace": [
         {
           "text": "Rád bych tento výbor orientoval do platformy, kde se můžou scházet architekti a lidé, kteří mají co říct k veřejnému prostoru.",
+          "kdo": "Adam Kurzok",
+          "strana": "Osobnosti pro Třinec"
+        },
+        {
+          "text": "Nechceme řešit jenom strategický plán. Chceme zařadit jako poradní orgán města strategické urbanistické uvažování.",
           "kdo": "Adam Kurzok",
           "strana": "Osobnosti pro Třinec"
         }
