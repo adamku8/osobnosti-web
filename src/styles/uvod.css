@@ -107,3 +107,124 @@
 @media (prefers-reduced-motion: reduce) {
   .js .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ---------- Děkujeme — výsledek voleb 2026 (sekce #dekujeme) ----------
+   Číslo s počtem hlasů je jediná červená na ploše. „36 267" je pětimístné, proto má
+   menší clamp než .stat-number (200 px by přeteklo mřížku i mobil). Štítky zastupitelů
+   jsou modré (modrá nese strukturu), fotky mají vlasovou linku místo červeného kruhu. */
+.dk-top {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-64);
+  align-items: center;
+}
+.dk .dk-hlasy {
+  font-size: clamp(72px, 13vw, 168px);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+.dk-hlasy-popis {
+  margin-top: var(--s-16);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.dk-fakta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-24) var(--s-40);
+  margin-top: var(--s-24);
+  padding-top: var(--s-24);
+  border-top: 1px solid var(--border);
+}
+.dk-fakta li { display: flex; flex-direction: column; }
+.dk-fakta b {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--text);
+}
+.dk-fakta span { font-size: 14px; color: var(--text-muted); }
+
+.dk-head { margin: var(--s-96) 0 var(--s-40); }
+.dk-head h3 { font-size: clamp(22px, 2.6vw, 30px); }
+
+.dk-zvoleni {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-40) var(--s-24);
+}
+.dk-karta, .dk-clen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--s-4);
+  color: inherit;
+  text-decoration: none;
+}
+.dk-foto {
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  transition: transform 240ms var(--ease-ui), border-color 240ms var(--ease-ui);
+}
+.dk-karta .dk-foto { width: 168px; height: 168px; margin-bottom: var(--s-8); }
+.dk-stitek {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--signal-blue);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: var(--s-4);
+}
+/* Flex místo mřížky: 23 lidí nedá plný poslední řádek, takže se vycentruje
+   a nezůstane v něm prázdné pole. --dk-sl = počet sloupců. */
+.dk-tym {
+  --dk-sl: 6;
+  --dk-mezera: var(--s-16);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-40) var(--dk-mezera);
+}
+.dk-clen { width: calc((100% - (var(--dk-sl) - 1) * var(--dk-mezera)) / var(--dk-sl)); }
+.dk-roky { white-space: nowrap; }
+.dk-clen .dk-foto { width: 104px; height: 104px; margin-bottom: var(--s-4); }
+.dk-jmeno {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.3;
+}
+@media (hover: hover) {
+  a.dk-karta:hover .dk-foto, a.dk-clen:hover .dk-foto {
+    transform: scale(1.05);
+    border-color: var(--signal-blue);
+  }
+}
+@media (max-width: 1100px) {
+  .dk-tym { --dk-sl: 4; }
+}
+@media (max-width: 900px) {
+  .dk-top { grid-template-columns: 1fr; gap: var(--s-40); }
+  .dk-zvoleni { grid-template-columns: repeat(2, 1fr); }
+  .dk-karta .dk-foto { width: 136px; height: 136px; }
+  .dk-head { margin-top: var(--s-64); }
+}
+@media (max-width: 560px) {
+  .dk .dk-hlasy { font-size: clamp(72px, 23vw, 104px); }
+  .dk-tym { --dk-sl: 3; --dk-mezera: var(--s-8); row-gap: var(--s-24); }
+  .dk-clen .dk-foto { width: 88px; height: 88px; }
+  .dk-jmeno { font-size: 13px; }
+}

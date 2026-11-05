@@ -17,3 +17,9 @@ export const verejnySlug = (k) => {
   if (!PLNA_KANDIDATKA || REZIM_MEDAILONKU === 'zadne') return null;
   return REZIM_MEDAILONKU === 'vse' ? (k.detail ?? k.detailPriprava ?? null) : (k.detail ?? null);
 };
+
+// Povolební režim úvodu a hlavičky. true = schová, co po volbách 9.–10. 10. 2026
+// přestalo platit: sekci „Jak volit" s odpočtem, tlačítko „Volte č. 3" v hlavičce,
+// datum voleb s tlačítkem „Jak volit" v hero a odkaz „Jak volit" v závěrečném rozcestníku.
+// Děkovný blok s výsledkem (src/data/volby2026.js) je na úvodu vždy. Zpět = false.
+export const PO_VOLBACH = false;

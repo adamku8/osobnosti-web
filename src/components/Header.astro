@@ -2,6 +2,7 @@
 const { active = '' } = Astro.props;
 
 import { u } from '../lib/url.js';
+import { PO_VOLBACH } from '../lib/verejne.js';
 
 const menu = [
   { id: 'uvod',      text: 'Úvod',         href: u('index.html') },
@@ -24,7 +25,10 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       ))}
     </nav>
     <div class="header-right">
-      <a class="btn btn-blue header-cta" href={udalostFB} target="_blank" rel="noopener">Volte č. 3</a>
+      {/* Po volbách (PO_VOLBACH v src/lib/verejne.js) místo výzvy k volbě odkaz na děkovný blok. */}
+      {PO_VOLBACH
+        ? <a class="btn btn-blue header-cta" href={u('index.html#dekujeme')}>Děkujeme</a>
+        : <a class="btn btn-blue header-cta" href={udalostFB} target="_blank" rel="noopener">Volte č. 3</a>}
       <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>

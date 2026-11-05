@@ -1,30 +1,37 @@
 ---
-// Úvod: hero s billboardem a pod ním plný rozcestník webu — blok „27", týmovka
-// přes celou šířku s claimem, čtyři programové oblasti s prokliky do
-// /program.html, sedm projektů, dvanáct kandidátů, Aktuálně ze sítí, Jak volit
-// s odpočtem a závěrečný rozcestník. Styly jen pro úvod: src/styles/uvod.css.
+// Úvod: hero s billboardem a pod ním plný rozcestník webu — děkovný blok po volbách
+// (počet hlasů, čtyři zvolení zastupitelé a celá kandidátka), slovo lídryně, čtyři
+// programové oblasti s prokliky do /program.html, sedm projektů, výsledky, doporučení,
+// Aktuálně ze sítí, Jak volit s odpočtem a závěrečný rozcestník.
+// Styly jen pro úvod: src/styles/uvod.css.
 // (Do 12. 9. 2026 byl úvod v teaser režimu jen s hero a bannerem — viz git.)
+// (Do 5. 11. 2026 byl místo děkovného bloku blok „27" a níž sekce dvanácti kandidátů.)
+// Co po volbách přestalo platit, schovává přepínač PO_VOLBACH v src/lib/verejne.js.
 import Base from '../layouts/Base.astro';
 import OblastKarta from '../components/OblastKarta.astro';
-import KandidatKarta from '../components/KandidatKarta.astro';
 import SekceProjekty from '../components/SekceProjekty.astro';
 import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
 import { aktualne, SOCIAL } from '../data/aktualne.js';
-import { verejnySlug } from '../lib/verejne.js';
+import { verejnySlug, PO_VOLBACH } from '../lib/verejne.js';
+import { VOLBY_2026, ZVOLENI, tisice } from '../data/volby2026.js';
 import { u } from '../lib/url.js';
 import '../styles/uvod.css';
 import { uvodnik, CISLO, slibili, doporuceni } from '../data/noviny.js';
 import '../styles/noviny.css';
 
-// Na úvodu ukazujeme prvních dvanáct kandidátů s fotkou; proklik na medailonek
-// řídí stejná pravidla jako /kandidati.html (src/lib/verejne.js).
+// Proklik na medailonek řídí stejná pravidla jako /kandidati.html (src/lib/verejne.js).
 const sOdkazem = (k) => {
   const slug = verejnySlug(k);
   return { ...k, detail: slug && medailonky[slug] ? slug : null };
 };
-const naUvodu = kandidati.filter(k => k.foto).slice(0, 12).map(sOdkazem);
+// Děkovný blok: nahoře čtyři zvolení (pořadí mandátů podle ČSÚ), pod nimi zbytek
+// kandidátky v pořadí z hlasovacího lístku.
+const zvoleni = ZVOLENI.map(z => ({ ...sOdkazem(kandidati.find(k => k.cislo === z.cislo)), role: z.role }));
+const zvolenaCisla = new Set(ZVOLENI.map(z => z.cislo));
+const ostatni = kandidati.filter(k => !zvolenaCisla.has(k.cislo)).map(sOdkazem);
+const hrefKandidata = (k) => k.detail ? u(`kandidat-${k.detail}.html`) : null;
 
 // Volby do zastupitelstva: pátek 9. 10. 14:00–22:00, sobota 10. 10. 8:00–14:00.
 // Odpočet dnů se dopočítá v prohlížeči; tady jen hodnota pro build (fallback).
@@ -35,7 +42,9 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
 ---
 <Base
   title="Osobnosti pro Třinec — Nové vize. Nový Třinec. Osobnosti."
-  description="Lokální občanské hnutí Osobnosti pro Třinec. Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují. Komunální volby 9.–10. října 2026."
+  description={PO_VOLBACH
+    ? `Lokální občanské hnutí Osobnosti pro Třinec. V komunálních volbách 2026 jsme získali ${tisice(VOLBY_2026.hlasy)} hlasů a čtyři místa v zastupitelstvu. Děkujeme.`
+    : 'Lokální občanské hnutí Osobnosti pro Třinec. Sedmadvacet osobností, které v Třinci doopravdy žijí a pracují. Komunální volby 9.–10. října 2026.'}
   path=""
   active="uvod"
 >
@@ -45,7 +54,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
   <section class="hero hero-bb" id="uvod">
     <div class="container">
       {/* Claim nese sám billboard, H1 zůstává jen pro čtečky a vyhledávače. */}
-      <h1 class="sr-only">Osobnosti pro nový Třinec — komunální volby 9.–10. října 2026</h1>
+      <h1 class="sr-only">{PO_VOLBACH ? 'Osobnosti pro nový Třinec' : 'Osobnosti pro nový Třinec — komunální volby 9.–10. října 2026'}</h1>
 
       <picture class="hero-billboard">
         <source media="(max-width: 700px)" srcset={u('assets/img/hero-billboard-1200.jpg')}>
@@ -61,13 +70,19 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
           Osobnosti, které v Třinci doopravdy žijí a pracují.
           Přečtěte si <a href="#program">náš program</a> a poznejte <a href="#kandidati">naše kandidáty</a>.
         </p>
-        <div class="hero-vote">
-          <div>
-            <div class="hero-date-label">Volby do zastupitelstva</div>
-            <div class="hero-date">9.–10. října 2026</div>
+        {PO_VOLBACH ? (
+          <div class="hero-vote">
+            <a class="btn btn-blue" href="#dekujeme">Výsledek voleb</a>
           </div>
-          <a class="btn btn-blue" href="#jak-volit">Jak volit</a>
-        </div>
+        ) : (
+          <div class="hero-vote">
+            <div>
+              <div class="hero-date-label">Volby do zastupitelstva</div>
+              <div class="hero-date">9.–10. října 2026</div>
+            </div>
+            <a class="btn btn-blue" href="#jak-volit">Jak volit</a>
+          </div>
+        )}
       </div>
     </div>
 
@@ -82,19 +97,70 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
-  <!-- ================= ČÍSLO A TEXT ================= -->
-  <section class="stat">
+  <!-- ================= DĚKUJEME — výsledek voleb 2026 (src/data/volby2026.js) =================
+       Nahradil blok „27 / Sedmadvacet osobností" a sekci dvanácti kandidátů (5. 11. 2026).
+       Jediná červená na ploše je číslo s počtem hlasů; modrá nese štítky zastupitelů. -->
+  <section class="stat dk" id="dekujeme">
     <div class="container">
-      <div class="stat-grid reveal">
-        <div class="stat-number">27</div>
-        <div class="stat-text">
-          <h2>Sedmadvacet osobností. Jeden Třinec.</h2>
-          <p>
-            Naše kandidátka spojuje generace, profese a pohledy.
-            Lidé z Třince, ne z Prahy. Pracujeme, nestěžujeme si.
-            Navazujeme na 20 let dobré práce pro město.
-          </p>
+      <div class="dk-top reveal">
+        <div class="dk-cislo">
+          <div class="stat-number dk-hlasy">{tisice(VOLBY_2026.hlasy)}</div>
+          <div class="dk-hlasy-popis">hlasů pro Osobnosti</div>
         </div>
+        <div class="stat-text">
+          <p class="eyebrow" style="margin-bottom:var(--s-16)">Komunální volby 2026</p>
+          <h2>Děkujeme, že jste šli volit.</h2>
+          <p>
+            K volbám 9. a 10. října přišlo {tisice(VOLBY_2026.volicu)} voličů.
+            Osobnostem jste dali {tisice(VOLBY_2026.hlasy)} hlasů. Každý z nich
+            bereme jako závazek. Pracujeme pro Třinec dál.
+          </p>
+          <ul class="dk-fakta">
+            <li><b>{VOLBY_2026.procent} %</b><span>všech hlasů</span></li>
+            <li><b>{VOLBY_2026.mandaty}</b><span>místa v zastupitelstvu</span></li>
+            <li><b>{VOLBY_2026.ucast} %</b><span>volební účast</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dk-head reveal" id="kandidati">
+        <h3>Vaši zastupitelé <span class="dk-roky">2026–2030</span></h3>
+      </div>
+      <div class="dk-zvoleni">
+        {zvoleni.map((k, i) => {
+          const href = hrefKandidata(k);
+          const Tag = href ? 'a' : 'article';
+          return (
+            <Tag class="dk-karta reveal" href={href} style={`--i:${i}`}>
+              <img class="dk-foto" src={u(`assets/img/kandidati/${k.foto}`)} alt={k.jmeno} loading="lazy">
+              <span class="dk-stitek">{k.role}</span>
+              <span class="slide-name">{k.jmeno}</span>
+              <span class="slide-meta">{k.profese}</span>
+            </Tag>
+          );
+        })}
+      </div>
+
+      <div class="dk-head reveal">
+        <h3>Celý tým, který do toho šel s námi</h3>
+        <p class="section-note">
+          Sedmadvacet osobností na jedné kandidátce. Klepnutím otevřete medailonek.
+        </p>
+      </div>
+      <div class="dk-tym">
+        {ostatni.map((k, i) => {
+          const href = hrefKandidata(k);
+          const Tag = href ? 'a' : 'article';
+          return (
+            <Tag class="dk-clen reveal" href={href} style={`--i:${i % 6}`}>
+              <img class="dk-foto" src={u(`assets/img/kandidati/${k.foto}`)} alt="" loading="lazy">
+              <span class="dk-jmeno">{k.jmeno}</span>
+            </Tag>
+          );
+        })}
+      </div>
+      <div class="cand-cta reveal">
+        <a class="btn btn-secondary btn-lg" href={u('kandidati.html')}>Všech {kandidati.length} kandidátů</a>
       </div>
     </div>
   </section>
@@ -179,25 +245,6 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
-  <!-- ================= KANDIDÁTI ================= -->
-  <section class="section" id="kandidati">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Kandidáti</p>
-        <h2>Poznejte naše <span class="kw-blue">osobnosti</span>.</h2>
-        <p class="section-note">
-          Prvních dvanáct z kandidátky. Kandidáti s medailonkem mají proklik.
-        </p>
-      </div>
-      <div class="cand-grid">
-        {naUvodu.map((k, i) => <KandidatKarta k={k} class="reveal" style={`--i:${i % 4}`} />)}
-      </div>
-      <div class="cand-cta reveal">
-        <a class="btn btn-primary btn-lg" href={u('kandidati.html')}>Všech {kandidati.length} kandidátů</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ================= DOPORUČUJÍ NÁS — upoutávka na /doporucuji-nas.html ================= -->
   <section class="section" id="doporucuji" style="border-top:1px solid var(--border)">
     <div class="container">
@@ -250,6 +297,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
+  {!PO_VOLBACH && (
+  <Fragment>
   <!-- ================= JAK VOLIT + ODPOČET ================= -->
   <section class="section volit" id="jak-volit">
     <div class="container">
@@ -311,6 +360,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       </p>
     </div>
   </section>
+  </Fragment>
+  )}
 
   <!-- ================= CLOSING ================= -->
   <section class="closing" id="podarilo">
@@ -326,7 +377,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
         <nav class="closing-nav reveal" aria-label="Rozcestník" style="--i:2">
           <a href={u('program.html')}>Program</a>
           <a href={u('kandidati.html')}>Kandidáti</a>
-          <a href="#jak-volit">Jak volit</a>
+          {!PO_VOLBACH && <a href="#jak-volit">Jak volit</a>}
           <a href="#kontakt">Kontakt</a>
         </nav>
         <div class="closing-cta reveal" style="--i:3">
