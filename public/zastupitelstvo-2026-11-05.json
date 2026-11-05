@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "11:21",
+  "aktualizovano": "11:24",
   "stav": "probiha",
-  "ted": "Struktura vedení města je schválená. Následuje volba primátora.",
+  "ted": "Zastupitelé projednávají návrh na složení vedení města a předsedy výborů. Hlasování teprve přijde.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -182,6 +182,18 @@
       "nadpis": "Schváleno: pět náměstků, devítičlenná rada",
       "text": "Zastupitelé schválili původní návrh. Uvolnění budou primátor a dva náměstci, další tři náměstci budou neuvolnění a rada města bude mít devět členů. O odměnách neuvolněných rozhodne zastupitelstvo na dalším zasedání.",
       "vysledek": "16 pro, 11 proti, nikdo se nezdržel."
+    },
+    {
+      "cas": "11:19",
+      "typ": "bod",
+      "nadpis": "Návrh nového vedení města",
+      "text": "Byl předložen návrh usnesení. Primátor: Marian Plucnar (Volte Třinec). Uvolněné náměstkyně: Ewa Troszok a Ingrid Staszková (obě Volte Třinec). Neuvolnění náměstci: Pavla Golasowská a Wiesław Wania (oba KDU-ČSL) a Robin Lotko (Společně pro Třinec). Další členové rady: Dominika Kosová (Společně pro Třinec), Milan Matlák a Přemysl Zbončák (oba Volte Třinec). Primátora má v nepřítomnosti zastupovat Ewa Troszok."
+    },
+    {
+      "cas": "11:21",
+      "typ": "bod",
+      "nadpis": "Kdo má vést výbory",
+      "text": "Součástí návrhu je zřízení čtyř výborů a volba jejich předsedů. Finanční výbor: Dominik Klimek (ANO). Kontrolní výbor: Radim Turek (NEZÁVISLÍ). Výbor pro národnostní menšiny: Franciszek Humel (Volte Třinec). Výbor pro strategický rozvoj města a urbanistiku: Adam Kurzok (Osobnosti pro Třinec). Předsedové mají na druhém zasedání předložit složení výborů, každý nejvýš s jedenácti členy."
     }
   ]
 }
