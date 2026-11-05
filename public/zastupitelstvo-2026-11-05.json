@@ -1,13 +1,13 @@
 {
-  "aktualizovano": "10:34",
+  "aktualizovano": "10:40",
   "stav": "probiha",
-  "ted": "Zastupitelé jednají o tom, kolik bude mít město náměstků primátora a které funkce budou uvolněné, tedy vykonávané na plný úvazek.",
+  "ted": "Pokračuje rozprava o počtu náměstků primátora. Opozice žádá přesné vyčíslení nákladů, koalice návrh hájí.",
   "zaznam": [
     {
       "cas": "10:04",
       "typ": "info",
       "nadpis": "Zasedání zahájeno",
-      "text": "Ustavující zasedání začalo státní hymnou. Řídí ho předsedající pověřený dosavadní primátorkou. Přítomno je všech 27 nově zvolených zastupitelů."
+      "text": "Ustavující zasedání začalo státní hymnou. Řídí ho Wiesław Wania (KDU-ČSL), pověřený dosavadní primátorkou. Přítomno je všech 27 nově zvolených zastupitelů."
     },
     {
       "cas": "10:08",
@@ -52,6 +52,19 @@
           "text": "Kde došlo k tomu obratu, že teď už jich potřebujeme pět?",
           "kdo": "Dominik Klimek",
           "strana": "ANO"
+        }
+      ]
+    },
+    {
+      "cas": "10:31",
+      "typ": "bod",
+      "nadpis": "Rozprava: kolik bude vedení města stát",
+      "text": "Milan Klepacz (NEZÁVISLÍ) žádal vyčíslení nákladů včetně odvodů a navrhl vrátit se k věci až s rozpočtem. Marian Plucnar odpověděl, že neuvolnění náměstci zatím nedostanou nic, dokud jim odměnu neschválí zastupitelstvo, a že koalice chce, aby vedení nestálo víc než v minulém období. Mzdové oddělení uvedlo, že neuvolněný náměstek dosud pobíral 36 930 Kč měsíčně a odměny uvolněných určuje zákon. Radim Turek (NEZÁVISLÍ) kritizoval připravenost podkladů.",
+      "citace": [
+        {
+          "text": "Tak nepřipravené zastupitelstvo už jsem dlouho neviděl.",
+          "kdo": "Radim Turek",
+          "strana": "NEZÁVISLÍ"
         }
       ]
     }
