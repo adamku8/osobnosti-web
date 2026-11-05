@@ -240,10 +240,14 @@
   .dk-jmeno { font-size: 13px; }
 }
 
-/* Povolební hero: děkovné číslo nad panoramatem (místo billboardu s kandidáty).
-   Druhá část bloku (zastupitelé, tým) pak začíná nadpisem — bez dvojitého odsazení. */
-.dk-hero { padding: var(--s-40) 0 var(--s-96); }
+/* Povolební hero: jen děkovné číslo s grafikou mandátů; hned pod ním zastupitelé,
+   pak panorama jako předěl a zbytek týmu. Sekce začínají nadpisem — bez dvojitého odsazení. */
+.dk-hero { padding: var(--s-40) 0 0; }
 .stat.dk .container > .dk-head:first-child { margin-top: 0; }
+/* Předvolební režim: tým navazuje na zastupitele bez předělu, stačí jedno odsazení. */
+.stat.dk.dk-navazuje { padding-top: 0; }
+/* Panorama mimo hero: bez zasunutí pod text. */
+.panorama.dk-pano { margin-top: 0; }
 @media (max-width: 900px) {
-  .dk-hero { padding: var(--s-16) 0 var(--s-64); }
+  .dk-hero { padding: var(--s-16) 0 0; }
 }

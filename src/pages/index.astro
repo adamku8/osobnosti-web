@@ -7,12 +7,13 @@
 // (Do 12. 9. 2026 byl úvod v teaser režimu jen s hero a bannerem — viz git.)
 // (Do 5. 11. 2026 byl místo děkovného bloku blok „27" a níž sekce dvanácti kandidátů.)
 // Co po volbách přestalo platit, schovává přepínač PO_VOLBACH v src/lib/verejne.js:
-// billboard s kandidáty (hero je pak děkovné číslo nad panoramatem), slovo lídryně,
-// Jak volit s odpočtem.
+// billboard s kandidáty (hero je pak jen děkovné číslo, panorama se stěhuje pod
+// zastupitele), slovo lídryně, Jak volit s odpočtem.
 import Base from '../layouts/Base.astro';
 import OblastKarta from '../components/OblastKarta.astro';
 import SekceProjekty from '../components/SekceProjekty.astro';
 import DekujemeCislo from '../components/DekujemeCislo.astro';
+import PanoramaUvod from '../components/PanoramaUvod.astro';
 import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
@@ -60,8 +61,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       <h1 class="sr-only">{PO_VOLBACH ? 'Osobnosti pro nový Třinec' : 'Osobnosti pro nový Třinec — komunální volby 9.–10. října 2026'}</h1>
 
       {PO_VOLBACH ? (
-        /* Po volbách je hero děkovné číslo s panoramatem jako podlahou. Billboard
-           s kandidáty a text pod ním jsou schované (pokyn Adama, 5. 11. 2026). */
+        /* Po volbách je hero jen děkovné číslo s grafikou mandátů. Billboard s kandidáty
+           a text pod ním jsou schované, panorama je pod zastupiteli (pokyn Adama, 5. 11. 2026). */
         <DekujemeCislo id="dekujeme" class="dk-hero" />
       ) : (
         <Fragment>
@@ -91,15 +92,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       )}
     </div>
 
-    <!-- Panorama jako podlaha hera (princip 06) — rotace fotek Třince a Beskyd -->
-    <div class="panorama" id="panoRotator">
-      <img class="pano-slide active" src={u('assets/img/panorama.jpg?v=2')} alt="Panorama Třince pod Javorovým">
-      <img class="pano-slide" src={u('assets/img/panorama-rano.jpg')} alt="Ranní pohled na Třinec a údolí Olše" loading="lazy">
-      <img class="pano-slide" src={u('assets/img/panorama-mesto.jpg')} alt="Třinec pod hřebenem Beskyd" loading="lazy">
-      <img class="pano-slide" src={u('assets/img/panorama-zelezarny.jpg')} alt="Třinecké železárny v beskydské krajině" loading="lazy">
-      <img class="pano-slide" src={u('assets/img/panorama-hreben.jpg')} alt="Chata a rozhledna na Javorovém" loading="lazy">
-      <img class="pano-slide" src={u('assets/img/panorama-zapad.jpg')} alt="Západ slunce nad Beskydami" loading="lazy">
-    </div>
+    {/* Panorama jako podlaha hera (princip 06). Po volbách je až pod zastupiteli. */}
+    {!PO_VOLBACH && <PanoramaUvod />}
   </section>
 
   <!-- ================= DĚKUJEME — výsledek voleb 2026 (src/data/volby2026.js) =================
@@ -127,6 +121,14 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
         })}
       </div>
 
+    </div>
+  </section>
+
+  {/* Po volbách předěl s panoramatem mezi zastupiteli a zbytkem týmu. */}
+  {PO_VOLBACH && <PanoramaUvod class="dk-pano" />}
+
+  <section class:list={['stat', 'dk', !PO_VOLBACH && 'dk-navazuje']} id="tym">
+    <div class="container">
       <div class="dk-head reveal">
         <h3>Celý tým, který do toho šel s námi</h3>
         <p class="section-note">
