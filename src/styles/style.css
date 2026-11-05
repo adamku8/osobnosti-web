@@ -1996,3 +1996,106 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
 .casti-odkaz { border-top: 1px solid var(--border); }
 .casti-odkaz h2 { margin-bottom: var(--s-8); }
 .casti-odkaz .section-note { margin-top: 0; max-width: 66ch; }
+
+/* ---------- Menu: rozbalovací skupina („Volby 2026" → Program, Kandidátka) ----------
+   Otevírá se najetím myši, fokusem z klávesnice i klepnutím (třída .open — onclick
+   v Header.astro; Safari tlačítko klepnutím nefokusuje). V mobilním menu je rozbalená vždy. */
+.nav-skupina { position: relative; display: flex; align-items: center; }
+.nav-skupina-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  padding: 6px 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  transition: color 240ms var(--ease-ui), border-color 240ms var(--ease-ui), font-size 240ms var(--ease-ui);
+}
+.nav-skupina-btn:hover,
+.nav-skupina.active .nav-skupina-btn,
+.nav-skupina.open .nav-skupina-btn {
+  color: var(--anthracite);
+  border-bottom-color: var(--brand-red);
+}
+.site-header.scrolled .nav-skupina-btn { font-size: 12px; }
+.nav-pod {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: calc(-1 * var(--s-16));
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 200px;
+  padding: var(--s-16);
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  z-index: 10;
+}
+.nav-skupina:hover .nav-pod,
+.nav-skupina:focus-within .nav-pod,
+.nav-skupina.open .nav-pod { display: flex; }
+.nav-pod a { align-self: flex-start; }
+@media (max-width: 900px) {
+  .nav-skupina { flex-direction: column; align-items: flex-start; }
+  .nav-skupina-btn { cursor: default; }
+  .nav-skupina-btn svg { display: none; }
+  .nav-pod {
+    display: flex;
+    position: static;
+    min-width: 0;
+    padding: var(--s-8) 0 0 var(--s-16);
+    border: none;
+    gap: var(--s-8);
+  }
+}
+
+/* ---------- Zápisy ze zastupitelstva (úvod, /zastupitelstvo.html) ---------- */
+.zapisy { list-style: none; max-width: 900px; }
+.zapis {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--s-40);
+  padding: var(--s-40) 0;
+  border-top: 1px solid var(--border);
+}
+.zapis:last-child { border-bottom: 1px solid var(--border); }
+.zapis-datum {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--signal-blue);
+}
+.zapis-zive {
+  display: inline-block;
+  margin-top: var(--s-8);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--signal-blue);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.zapis-telo h3 { font-size: 22px; margin-bottom: var(--s-8); }
+.zapis-telo p { color: var(--text-secondary); max-width: 62ch; margin-bottom: var(--s-16); }
+@media (max-width: 700px) {
+  .zapis { grid-template-columns: 1fr; gap: var(--s-8); padding: var(--s-24) 0; }
+}
+/* Úzký desktop a tablet na šířku (901–1060 px): menu se skupinou je delší, proto těsnější. */
+@media (min-width: 901px) and (max-width: 1060px) {
+  .nav { gap: var(--s-16); }
+  .nav a, .nav-skupina-btn { font-size: 12px; letter-spacing: 0.06em; }
+  .site-header .container { gap: var(--s-16); }
+  .logo img { height: 56px; }
+}

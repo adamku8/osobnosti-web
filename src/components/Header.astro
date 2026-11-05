@@ -4,7 +4,20 @@ const { active = '' } = Astro.props;
 import { u } from '../lib/url.js';
 import { PO_VOLBACH } from '../lib/verejne.js';
 
-const menu = [
+// Před volbami ploché menu; po volbách (PO_VOLBACH) jsou program a kandidátka schované
+// pod skupinou „Volby 2026" a přibyla položka „Zastupitelstvo" (zápisy ze zasedání).
+// Položka s "deti" je rozbalovací skupina; aktivní je, když je aktivní některé její dítě.
+const menu = PO_VOLBACH ? [
+  { id: 'uvod',      text: 'Úvod',         href: u('index.html') },
+  { id: 'volby',     text: 'Volby 2026',   deti: [
+    { id: 'program',   text: 'Program',    href: u('program.html') },
+    { id: 'kandidati', text: 'Kandidátka', href: u('kandidati.html') },
+  ] },
+  { id: 'vysledky',  text: 'Výsledky',     href: u('vysledky.html') },
+  { id: 'zastupitelstvo', text: 'Zastupitelstvo', href: u('zastupitelstvo.html') },
+  { id: 'javorovy',  text: '⛰️ Javorový',  href: u('javorovy.html'), cervena: true },
+  { id: 'podporte',  text: 'Podpořte nás', href: u('podporte-nas.html') },
+] : [
   { id: 'uvod',      text: 'Úvod',         href: u('index.html') },
   { id: 'program',   text: 'Program',      href: u('program.html') },
   { id: 'vysledky',  text: 'Výsledky',     href: u('vysledky.html') },
@@ -20,7 +33,18 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       <img src={u('assets/logo.svg')} alt="Osobnosti pro Třinec">
     </a>
     <nav class="nav" id="nav">
-      {menu.map(p => (
+      {menu.map(p => p.deti ? (
+        <div class:list={['nav-skupina', { active: p.deti.some(d => d.id === active) }]}>
+          <button type="button" class="nav-skupina-btn" aria-haspopup="true" aria-expanded="false"
+                  onclick="var s=this.parentNode.classList.toggle('open');this.setAttribute('aria-expanded',s)">
+            {p.text}
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>
+          </button>
+          <div class="nav-pod">
+            {p.deti.map(d => <a href={d.href} class:list={[{ active: active === d.id }]}>{d.text}</a>)}
+          </div>
+        </div>
+      ) : (
         <a href={p.href} class:list={[{ active: active === p.id, 'nav-red': p.cervena }]}>{p.text}</a>
       ))}
     </nav>
@@ -35,3 +59,11 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </div>
 </header>
+<script is:inline>
+  // Rozbalovací skupina v menu: klepnutí mimo ni ji zavře (otevření řeší onclick na tlačítku a :hover v CSS).
+  document.addEventListener('click', function (e) {
+    document.querySelectorAll('.nav-skupina.open').forEach(function (s) {
+      if (!s.contains(e.target)) { s.classList.remove('open'); s.querySelector('button').setAttribute('aria-expanded', 'false'); }
+    });
+  });
+</script>

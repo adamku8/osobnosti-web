@@ -5,6 +5,7 @@
 // (SCHUZKY/2026-09-09_schuzka-2). Data drží ../data/lesopark.js.
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url.js';
+import { PO_VOLBACH } from '../lib/verejne.js';
 import { zavazky, mame, INVESTICE, INVESTICE_CELKEM, OBDOBI } from '../data/lesopark.js';
 import { oblasti } from '../data/oblasti.js';
 import '../styles/lesopark.css';
@@ -183,9 +184,12 @@ const PDF = 'assets/lesopark-osobnosti-pro-trinec-2026.pdf';
   <section class="section section-cta-band">
     <div class="container">
       <h2><span class="hl">Nová generace</span>. Nové vize.</h2>
-      <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
+      {!PO_VOLBACH && <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>}
       <div class="section-cta stat-links" style="justify-content:center">
-        <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>
+        {/* Po volbách (PO_VOLBACH) místo výzvy k volbě odkaz na zápisy ze zastupitelstva. */}
+        {PO_VOLBACH
+          ? <a class="btn btn-blue btn-lg" href={u('zastupitelstvo.html')}>Ze zastupitelstva</a>
+          : <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>}
       </div>
     </div>
   </section>

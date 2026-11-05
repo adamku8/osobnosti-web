@@ -4,6 +4,7 @@
 // Data: ../data/noviny.js. Styly: ../styles/noviny.css.
 import Base from '../layouts/Base.astro';
 import { u } from '../lib/url.js';
+import { PO_VOLBACH } from '../lib/verejne.js';
 import { CISLO, uvodVysledky, slibili, splnili, podarilo } from '../data/noviny.js';
 import { medailonky } from '../data/medailonky.js';
 import '../styles/noviny.css';
@@ -115,7 +116,7 @@ import '../styles/noviny.css';
   <section class="section section-cta-band">
     <div class="container">
       <h2>Navazujeme na to <span class="hl">dobré</span>.</h2>
-      <p class="section-note">Co chceme udělat dál, najdete v programu. Volby jsou 9.–10. října 2026.</p>
+      <p class="section-note">Co chceme udělat dál, najdete v programu.{!PO_VOLBACH && ' Volby jsou 9.–10. října 2026.'}</p>
       <div class="section-cta stat-links" style="justify-content:center">
         <a class="btn btn-blue btn-lg" href={u('program.html')}>Náš program</a>
         <a class="btn btn-secondary btn-lg" href={u('doporucuji-nas.html')}>Kdo nás doporučuje</a>

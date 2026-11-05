@@ -1,0 +1,32 @@
+---
+// Ze zastupitelstva — přehled zápisů ze zasedání Zastupitelstva města Třince.
+// Zápisy se berou z public/zastupitelstvo-<datum>.json (src/lib/zapisy.js), nejnovější nahoře.
+import Base from '../layouts/Base.astro';
+import ZapisKarta from '../components/ZapisKarta.astro';
+import { zapisy } from '../lib/zapisy.js';
+const seznam = zapisy();
+---
+<Base
+  title="Ze zastupitelstva — Osobnosti pro Třinec"
+  description="Zápisy ze zasedání Zastupitelstva města Třince, jak je píšeme přímo v sále."
+  path="zastupitelstvo.html"
+  active="zastupitelstvo"
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Zastupitelstvo města Třince</p>
+      <h1>Ze zastupitelstva.</h1>
+      <p class="hero-lead">
+        Zápisy ze zasedání, jak je píšeme přímo v sále. Stručně a bod po bodu.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      {seznam.length
+        ? <ul class="zapisy">{seznam.map(z => <ZapisKarta z={z} />)}</ul>
+        : <p class="section-note">První zápis přidáme po nejbližším zasedání.</p>}
+    </div>
+  </section>
+</Base>

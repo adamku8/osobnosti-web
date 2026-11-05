@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
 import { oblasti } from '../data/oblasti.js';
 import { projekty } from '../data/projekty.js';
 import { u } from '../lib/url.js';
+import { PO_VOLBACH } from '../lib/verejne.js';
 
 // vize navázané na oblast — pořadí drží oblasti.js
 const vizeProOblast = o => o.projekty.map(s => projekty.find(p => p.slug === s)).filter(Boolean);
@@ -204,10 +205,13 @@ const clanekPodleSlugu = slug => clanky.find(c => c.slug === slug);
   <section class="section section-cta-band">
     <div class="container">
       <h2><span class="hl">Srdcem</span> pro Třinec.</h2>
-      <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>
+      {!PO_VOLBACH && <p class="section-note">Volby do zastupitelstva Třince se konají 9.–10. října 2026.</p>}
       <div class="section-cta stat-links" style="justify-content:center">
         <a class="btn btn-secondary btn-lg" href={u('kandidati.html')}>Naše kandidátka</a>
-        <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>
+        {/* Po volbách (PO_VOLBACH) místo výzvy k volbě odkaz na zápisy ze zastupitelstva. */}
+        {PO_VOLBACH
+          ? <a class="btn btn-blue btn-lg" href={u('zastupitelstvo.html')}>Ze zastupitelstva</a>
+          : <a class="btn btn-blue btn-lg" href={udalostFB} target="_blank" rel="noopener">Chci volit!</a>}
       </div>
     </div>
   </section>

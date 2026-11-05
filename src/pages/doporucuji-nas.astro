@@ -46,13 +46,15 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
   <section class="section section-cta-band">
     <div class="container">
       <h2>Posuňme společně Třinec <span class="hl">dál</span>.</h2>
-      <p class="section-note">Přijďte k volbám 9.–10. října 2026.</p>
+      {!PO_VOLBACH && <p class="section-note">Přijďte k volbám 9.–10. října 2026.</p>}
       <div class="section-cta stat-links" style="justify-content:center">
         {/* Sekce „Jak volit" na úvodu je po volbách schovaná (PO_VOLBACH) — tlačítko pak vede na výsledek. */}
         {PO_VOLBACH
           ? <a class="btn btn-blue btn-lg" href={u('index.html#dekujeme')}>Výsledek voleb</a>
           : <a class="btn btn-blue btn-lg" href={u('index.html#jak-volit')}>Jak volit</a>}
-        <a class="btn btn-secondary btn-lg" href={udalostFB} target="_blank" rel="noopener">Událost na Facebooku</a>
+        {PO_VOLBACH
+          ? <a class="btn btn-secondary btn-lg" href={u('zastupitelstvo.html')}>Ze zastupitelstva</a>
+          : <a class="btn btn-secondary btn-lg" href={udalostFB} target="_blank" rel="noopener">Událost na Facebooku</a>}
       </div>
     </div>
   </section>

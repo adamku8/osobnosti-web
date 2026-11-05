@@ -8,12 +8,17 @@
 // (Do 5. 11. 2026 byl místo děkovného bloku blok „27" a níž sekce dvanácti kandidátů.)
 // Co po volbách přestalo platit, schovává přepínač PO_VOLBACH v src/lib/verejne.js:
 // billboard s kandidáty (hero je pak jen děkovné číslo, panorama se stěhuje pod
-// zastupitele), slovo lídryně, Jak volit s odpočtem.
+// zastupitele), slovo lídryně, program a projekty (jsou v menu pod „Volby 2026"),
+// „Co se děje v kampani" a Jak volit s odpočtem. Místo nich přibývají priority
+// „Na čem nám záleží" (src/data/priority.js) a „Ze zastupitelstva" (src/lib/zapisy.js).
 import Base from '../layouts/Base.astro';
 import OblastKarta from '../components/OblastKarta.astro';
 import SekceProjekty from '../components/SekceProjekty.astro';
 import DekujemeCislo from '../components/DekujemeCislo.astro';
 import PanoramaUvod from '../components/PanoramaUvod.astro';
+import ZapisKarta from '../components/ZapisKarta.astro';
+import { PRIORITY } from '../data/priority.js';
+import { zapisy } from '../lib/zapisy.js';
 import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
@@ -36,6 +41,11 @@ const zvoleni = ZVOLENI.map(z => ({ ...sOdkazem(kandidati.find(k => k.cislo === 
 const zvolenaCisla = new Set(ZVOLENI.map(z => z.cislo));
 const ostatni = kandidati.filter(k => !zvolenaCisla.has(k.cislo)).map(sOdkazem);
 const hrefKandidata = (k) => k.detail ? u(`kandidat-${k.detail}.html`) : null;
+
+// Ze zastupitelstva: na úvodu tři nejnovější zápisy, všechny jsou na /zastupitelstvo.html.
+const vsechnyZapisy = zapisy();
+const vsechZapisu = vsechnyZapisy.length;
+const posledniZapisy = vsechnyZapisy.slice(0, 3);
 
 // Volby do zastupitelstva: pátek 9. 10. 14:00–22:00, sobota 10. 10. 8:00–14:00.
 // Odpočet dnů se dopočítá v prohlížeči; tady jen hodnota pro build (fallback).
@@ -183,6 +193,9 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
   <!-- TÝMOVÁ FOTKA (Javorový, tym-2026-javorovy-v2.jpg) odstraněna 24. 9. 2026
        na pokyn Adama. Soubory zůstávají v public/assets/img/. -->
 
+  {/* Program a projekty jsou po volbách jen v menu pod „Volby 2026" (pokyn Adama, 5. 11. 2026). */}
+  {!PO_VOLBACH && (
+  <Fragment>
   <!-- ================= PROGRAM — MŘÍŽKA OBLASTÍ (proklik do /program.html) ================= -->
   <section class="section" id="program">
     <div class="container">
@@ -207,6 +220,54 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
   </section>
 
   <SekceProjekty cta={{ href: u('program.html#projekty'), text: 'Všechny projekty v programu' }} />
+  </Fragment>
+  )}
+
+  <!-- ================= NA ČEM NÁM ZÁLEŽÍ — priority 2026–2030 (src/data/priority.js) ================= -->
+  {PO_VOLBACH && (
+  <section class="section" id="priority" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Naše priority 2026–2030</p>
+        <h2>Na čem nám záleží.</h2>
+      </div>
+      <ul class="priority">
+        {PRIORITY.map((p, i) => (
+          <li class="reveal" style={`--i:${i}`}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 12.5l5 5L20 6.5"/>
+            </svg>
+            <span>{p}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  )}
+
+  <!-- ================= ZE ZASTUPITELSTVA — poslední zápisy (src/lib/zapisy.js) ================= -->
+  {PO_VOLBACH && (
+  <section class="section" id="zastupitelstvo" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Zastupitelstvo města Třince</p>
+        <h2>Ze zastupitelstva.</h2>
+        <p class="section-note">
+          Zápisy ze zasedání, jak je píšeme přímo v sále.
+        </p>
+      </div>
+      {posledniZapisy.length
+        ? <ul class="zapisy">{posledniZapisy.map((z, i) => <ZapisKarta z={z} class="reveal" style={`--i:${i}`} />)}</ul>
+        : <p class="section-note reveal">První zápis přidáme po nejbližším zasedání.</p>}
+      {vsechZapisu > posledniZapisy.length && (
+        <div class="section-cta stat-links reveal" style="justify-content:center">
+          <a class="btn btn-secondary btn-lg" href={u('zastupitelstvo.html')}>Všechny zápisy</a>
+        </div>
+      )}
+    </div>
+  </section>
+  )}
 
   <!-- ================= VÝSLEDKY — upoutávka na /vysledky.html ================= -->
   <section class="section" id="vysledky" style="border-top:1px solid var(--border)">
@@ -263,6 +324,9 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
     </div>
   </section>
 
+  {/* „Co se děje v kampani" je předvolební — po volbách schované (pokyn Adama, 5. 11. 2026). */}
+  {!PO_VOLBACH && (
+  <Fragment>
   <!-- ================= AKTUÁLNĚ — příspěvky ze sítí (src/data/aktualne.js) ================= -->
   <section class="section" id="aktualne">
     <div class="container">
@@ -289,6 +353,8 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       </div>
     </div>
   </section>
+  </Fragment>
+  )}
 
   {!PO_VOLBACH && (
   <Fragment>

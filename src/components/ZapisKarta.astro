@@ -1,0 +1,17 @@
+---
+// Jeden zápis ze zastupitelstva v seznamu (úvod, /zastupitelstvo.html).
+// Data: src/lib/zapisy.js. Styly: src/styles/style.css (.zapis…).
+import { u } from '../lib/url.js';
+const { z, class: extra = '', style = undefined } = Astro.props;
+---
+<li class={`zapis${extra ? ' ' + extra : ''}`} style={style}>
+  <div class="zapis-datum">
+    {z.datum}
+    {z.bezi && <span class="zapis-zive">právě probíhá</span>}
+  </div>
+  <div class="zapis-telo">
+    <h3>{z.nazev}</h3>
+    {z.shrnuti && <p>{z.shrnuti}</p>}
+    <a class="link-more" href={u(z.soubor)}>Celý zápis →</a>
+  </div>
+</li>
