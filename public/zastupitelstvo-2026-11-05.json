@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "12:35",
+  "aktualizovano": "12:40",
   "stav": "probiha",
-  "ted": "Přestávka. Po ní zastupitelé rozhodnou o termínu druhého zasedání, tím ustavující zasedání skončí.",
+  "ted": "Jednání pokračuje posledním bodem, termínem druhého zasedání zastupitelstva. Navrženo je úterý 15. prosince ve 12 hodin.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -422,6 +422,12 @@
       "typ": "info",
       "nadpis": "Krátká přestávka",
       "text": "Předsedající vyhlásil pětiminutovou přestávku, aby se dal probrat termín dalšího zasedání."
+    },
+    {
+      "cas": "12:37",
+      "typ": "bod",
+      "nadpis": "Výpověď na Javorovém může schválit rada",
+      "text": "Po přestávce předsedající oznámil výsledek porady s úřadem: výpověď nájemní smlouvy na Javorovém schvaluje rada města, zastupitelstvo o ní rozhodovat nemusí. Kvůli tomu podle něj není nutné svolávat druhé zasedání dřív."
     }
   ]
 }
