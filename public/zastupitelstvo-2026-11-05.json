@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "11:52",
+  "aktualizovano": "11:55",
   "stav": "probiha",
   "ted": "Na primátora jsou navrženi dva kandidáti: Marian Plucnar (Volte Třinec) za koalici a Jan Mazoch (ANO) za opozici. Rozprava pokračuje, hlasování teprve přijde.",
   "zaznam": [
@@ -283,6 +283,12 @@
           "strana": "NEZÁVISLÍ"
         }
       ]
+    },
+    {
+      "cas": "11:50",
+      "typ": "bod",
+      "nadpis": "Kde je programové prohlášení a co bude v rozpočtu",
+      "text": "Radim Turek (NEZÁVISLÍ) vytkl koalici, že nepředstoupila s programovým prohlášením, jak bývalo zvykem, a že program Volte Třinec se podle něj nejvíc shodoval s programem NEZÁVISLÝCH. Ptal se, jestli nové vedení postaví chodník v Oldřichovicích a jestli převezme rozpočet na rok 2027 připravený dosavadním vedením, nebo do něj promítne vlastní priority. Koalice už dříve uvedla, že programové návrhy a rozpočet předloží na prosincovém zasedání."
     }
   ]
 }
