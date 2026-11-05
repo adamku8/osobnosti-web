@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "11:58",
+  "aktualizovano": "12:01",
   "stav": "probiha",
   "ted": "Na primátora jsou navrženi dva kandidáti: Marian Plucnar (Volte Třinec) za koalici a Jan Mazoch (ANO) za opozici. Rozprava pokračuje, hlasování teprve přijde.",
   "zaznam": [
@@ -294,10 +294,23 @@
       "cas": "11:54",
       "typ": "bod",
       "nadpis": "Plucnar: bezpečnost má víc rozměrů, chodník v Oldřichovicích má podporu",
-      "text": "Marian Plucnar (Volte Třinec) odpověděl, že bezpečnost zahrnuje chodníky, zklidňování dopravy, měření rychlosti i ochranu před povodněmi. Dopravní bezpečnost bude mít na starosti Robin Lotko. Radima Turka vyzval, aby zkušenosti s bezdomovectvím a kriminalitou uplatnil v odborné komisi; opozici podle něj koalice nechce stavět stranou. S rozpracovaným rozpočtem na rok 2027 se teprve seznámí.",
+      "text": "Marian Plucnar (Volte Třinec) odpověděl, že bezpečnost zahrnuje chodníky, zklidňování dopravy, měření rychlosti i ochranu před povodněmi. Dopravní bezpečnost bude mít na starosti Robin Lotko. Radima Turka vyzval, aby zkušenosti s bezdomovectvím a kriminalitou uplatnil v odborné komisi; opozici podle něj koalice nechce stavět stranou. S rozpracovaným rozpočtem na rok 2027 se teprve seznámí. U chodníku v Oldřichovicích chce, aby příští rok vznikla projektová dokumentace; získání povolení podle něj trvá téměř rok.",
       "citace": [
         {
           "text": "Co se týká chodníku v Oldřichovicích, tam panuje, myslím, jednomyslná shoda.",
+          "kdo": "Marian Plucnar",
+          "strana": "Volte Třinec"
+        }
+      ]
+    },
+    {
+      "cas": "11:57",
+      "typ": "bod",
+      "nadpis": "Nejdřív funkce, nebo nejdřív program?",
+      "text": "Radim Turek (NEZÁVISLÍ) vytkl koalici, že jinde se nejdřív hledá programová shoda a teprve potom se rozdělují funkce, kdežto v Třinci to bylo obráceně. Marian Plucnar (Volte Třinec) odpověděl, že programové prohlášení chce koalice promyslet, ne šít horkou jehlou, a že strany mají řadu priorit společných. O tom, s kým ponese odpovědnost za vedení města, rozhoduje podle svých slov on, komunikovat ale chce se všemi včetně opozice.",
+      "citace": [
+        {
+          "text": "Koho si pustím domů a s kým budu tvořit a mít odpovědnost, toho si vybírám já. Ale komunikovat chci opravdu na široké bázi. To znamená včetně vás.",
           "kdo": "Marian Plucnar",
           "strana": "Volte Třinec"
         }
