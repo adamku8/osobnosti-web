@@ -1,5 +1,5 @@
 {
-  "aktualizovano": "11:48",
+  "aktualizovano": "11:52",
   "stav": "probiha",
   "ted": "Na primátora jsou navrženi dva kandidáti: Marian Plucnar (Volte Třinec) za koalici a Jan Mazoch (ANO) za opozici. Rozprava pokračuje, hlasování teprve přijde.",
   "zaznam": [
@@ -270,6 +270,19 @@
       "typ": "bod",
       "nadpis": "Opozice navrhla vlastního kandidáta na primátora",
       "text": "Ivan Frőmmer (NEZÁVISLÍ) navrhl na primátora Jana Mazocha (ANO). Podle něj jde o zkušeného politika, který není zatížen místními vztahy, přináší pohled zvenčí a mohl by třineckou politiku zklidnit."
+    },
+    {
+      "cas": "11:46",
+      "typ": "bod",
+      "nadpis": "Rozpočet bez finančního výboru a otázka bezpečnosti",
+      "text": "Dominik Klimek (ANO), navržený předseda finančního výboru, upozornil, že členové výborů se budou volit až na druhém zasedání, a rozpočet na rok 2027 tak finančním výborem neprojde. Koalice odpověděla, že kvůli krátkému času po volbách chce složení výborů připravit pořádně. Radim Turek (NEZÁVISLÍ) se ptal, kdo v novém vedení odpovídá za bezpečnost a situaci v problémových lokalitách, například na náměstí T. G. Masaryka a v okolí kina Kosmos.",
+      "citace": [
+        {
+          "text": "Já tam nikde nevidím, že bezpečnost je jakási vaše priorita.",
+          "kdo": "Radim Turek",
+          "strana": "NEZÁVISLÍ"
+        }
+      ]
     }
   ]
 }
