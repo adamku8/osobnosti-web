@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "12:40",
-  "stav": "probiha",
-  "ted": "Jednání pokračuje posledním bodem, termínem druhého zasedání zastupitelstva. Navrženo je úterý 15. prosince ve 12 hodin.",
+  "aktualizovano": "12:43",
+  "stav": "skoncilo",
+  "ted": "Ustavující zasedání skončilo ve 12:41. Primátorem Třince je Marian Plucnar (Volte Třinec), další zasedání zastupitelstva bude 15. prosince.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -427,7 +427,14 @@
       "cas": "12:37",
       "typ": "bod",
       "nadpis": "Výpověď na Javorovém může schválit rada",
-      "text": "Po přestávce předsedající oznámil výsledek porady s úřadem: výpověď nájemní smlouvy na Javorovém schvaluje rada města, zastupitelstvo o ní rozhodovat nemusí. Kvůli tomu podle něj není nutné svolávat druhé zasedání dřív."
+      "text": "Po přestávce předsedající oznámil výsledek porady s úřadem: výpověď nájemní smlouvy na Javorovém schvaluje rada města, zastupitelstvo o ní rozhodovat nemusí. Kvůli tomu podle něj není nutné svolávat druhé zasedání dřív. Radim Turek (NEZÁVISLÍ) upozornil, že výpověď musí být nájemci doručena včas před koncem roku. Vedení města odpovědělo, že to bude jeden z prvních bodů jednání rady."
+    },
+    {
+      "cas": "12:40",
+      "typ": "hlasovani",
+      "nadpis": "Druhé zasedání bude 15. prosince, ustavující zasedání skončilo",
+      "text": "Zastupitelé schválili termín druhého zasedání: úterý 15. prosince 2026 ve 12 hodin v zasedací místnosti magistrátu. Na programu má být rozpočet na rok 2027, programové návrhy nového vedení, zásady odměňování a složení výborů. Poté předsedající ustavující zasedání ukončil.",
+      "vysledek": "Termín schválen, jeden zastupitel se zdržel."
     }
   ]
 }
