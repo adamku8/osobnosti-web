@@ -1,7 +1,7 @@
 {
-  "aktualizovano": "11:41",
+  "aktualizovano": "11:45",
   "stav": "probiha",
-  "ted": "Nominovaní členové vedení města se postupně představují zastupitelům. Hlasování o vedení a výborech teprve přijde.",
+  "ted": "Navržení náměstci se představili. Pokračuje rozprava, o vedení města a výborech se bude hlasovat po ní.",
   "zaznam": [
     {
       "cas": "10:04",
@@ -252,6 +252,12 @@
           "strana": "Volte Třinec"
         }
       ]
+    },
+    {
+      "cas": "11:39",
+      "typ": "bod",
+      "nadpis": "Doprava a životní prostředí",
+      "text": "Robin Lotko (Společně pro Třinec), navržený neuvolněný náměstek pro dopravu, chce navázat na čtyři roky v čele dopravní komise. Jeho cílem je bezpečnější, plynulejší a dostupnější doprava, zvlášť v okrajových a příměstských částech. Wiesław Wania (KDU-ČSL), navržený neuvolněný náměstek pro energetiku a životní prostředí, chce snižovat energetickou náročnost městských budov, zavést jejich energetický management a věnovat se zadržování vody v krajině."
     }
   ]
 }
