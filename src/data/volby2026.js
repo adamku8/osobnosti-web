@@ -17,10 +17,10 @@ export const VOLBY_2026 = {
 // "email" = adresa pro formulář „Napište mi" v medailonku. Prázdná = formulář se
 // nezobrazí. Vyplňuj jen adresu, se kterou zastupitel souhlasí (je pak veřejná).
 export const ZVOLENI = [
-  { cislo: 5, role: 'zastupitelka', hlasy: 1785, email: '' },  // Martina Wolna
-  { cislo: 4, role: 'zastupitel',   hlasy: 1643, email: '' },  // Marek Štěrba
-  { cislo: 2, role: 'zastupitel',   hlasy: 1509, email: '' },  // Adam Kurzok
-  { cislo: 7, role: 'zastupitelka', hlasy: 1500, email: '' },  // Regina Eichler
+  { cislo: 5, role: 'zastupitelka', hlasy: 1785, email: 'martina.wolna@gmail.com' },  // Martina Wolna
+  { cislo: 4, role: 'zastupitel',   hlasy: 1643, email: 'mudr.sterbamarek@gmail.com' },  // Marek Štěrba
+  { cislo: 2, role: 'zastupitel',   hlasy: 1509, email: 'adam@kurzok.cz' },  // Adam Kurzok
+  { cislo: 7, role: 'zastupitelka', hlasy: 1500, email: 'reginaszpyrcova@gmail.com' },  // Regina Eichler
 ];
 
 // Číslo s pevnou mezerou mezi tisíci (36 267) — nesmí se zalomit uprostřed.
