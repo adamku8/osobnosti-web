@@ -2171,6 +2171,15 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
 }
 .kdo-plakat img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; }
 .kdo-plakat figcaption { margin-top: var(--s-8); font-size: 14px; color: var(--text-muted); }
+/* Billboardy z minulých kampaní pod osou; široké formáty vedle sebe, na mobilu pod sebou. */
+.kdo-billboardy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-24);
+  margin-bottom: var(--s-24);
+}
+.kdo-billboardy img { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; }
+.kdo-billboardy figcaption { margin-top: var(--s-8); font-size: 14px; color: var(--text-muted); }
 .kdo-osa { list-style: none; }
 .kdo-osa li {
   display: grid;
@@ -2208,6 +2217,7 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
   .kdo-plakat { max-width: 420px; }
 }
 @media (max-width: 760px) {
+  .kdo-billboardy { grid-template-columns: 1fr; }
   .kdo-kresla { gap: 4px; }
   .kdo-kreslo { width: 12px; height: 12px; }
   .kdo-osa li { grid-template-columns: 84px 1fr; gap: var(--s-8) var(--s-24); padding: var(--s-16) 0; }
