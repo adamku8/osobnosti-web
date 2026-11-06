@@ -53,6 +53,8 @@ const zCisla = (n) => [4, 6, 7, 14, 16, 17].includes(n) ? 'ze' : 'z';
           Šestery volby, pokaždé jsme získali mandáty.
         </p>
       </div>
+      {/* Vedle osy plakát kandidátky z voleb 2022 (archiv kampaně, BRAND A GRAFIKA/_archive). */}
+      <div class="kdo-historie">
       <ol class="kdo-osa">
         {HISTORIE.map((h, i) => (
           <li class="reveal" style={`--i:${i}`}>
@@ -70,6 +72,14 @@ const zCisla = (n) => [4, 6, 7, 14, 16, 17].includes(n) ? 'ze' : 'z';
           </li>
         ))}
       </ol>
+      <figure class="kdo-plakat reveal">
+        <a href={u('assets/img/historie/plakat-2022-velky.jpg')} target="_blank" rel="noopener">
+          <img src={u('assets/img/historie/plakat-2022.jpg')} width="800" height="1131" loading="lazy"
+               alt="Plakát Osobností pro Třinec z voleb 2022 s portréty 33 kandidátů">
+        </a>
+        <figcaption>Plakát kandidátky z voleb 2022. Klepnutím zvětšíte.</figcaption>
+      </figure>
+      </div>
       <p class="section-note reveal">
         Zdroj: Český statistický úřad, volby do Zastupitelstva města Třince {prvni}–{posledni.rok}.
         Procenta jsou podíl hlasů pro kandidátku. Od roku {posledni.rok} má zastupitelstvo {posledni.kresel} členů, dříve 33.

@@ -2161,11 +2161,21 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
 }
 /* ---------- Kdo jsme — rozcestník a časová osa voleb 2006–2026 ---------- */
 .kdo-rozcestnik { display: flex; flex-wrap: wrap; gap: var(--s-16) var(--s-24); }
-.kdo-osa { list-style: none; max-width: 1000px; margin-bottom: var(--s-24); }
+/* Osa vlevo, vpravo archivní plakát; pod 1280 px pod sebou. */
+.kdo-historie {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: var(--s-64);
+  align-items: start;
+  margin-bottom: var(--s-24);
+}
+.kdo-plakat img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 8px; }
+.kdo-plakat figcaption { margin-top: var(--s-8); font-size: 14px; color: var(--text-muted); }
+.kdo-osa { list-style: none; }
 .kdo-osa li {
   display: grid;
-  grid-template-columns: 110px 220px 1fr;
-  gap: var(--s-40);
+  grid-template-columns: 100px 190px 1fr;
+  gap: var(--s-24);
   align-items: center;
   padding: var(--s-24) 0;
   border-top: 1px solid var(--border);
@@ -2174,7 +2184,7 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
 .kdo-rok {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(28px, 3.4vw, 40px);
+  font-size: clamp(28px, 3vw, 34px);
   line-height: 1;
   color: var(--signal-blue);
 }
@@ -2188,12 +2198,18 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
 }
 .kdo-vysledek span, .kdo-mandaty > span { font-size: 14px; color: var(--text-muted); }
 .kdo-mandaty { display: grid; gap: var(--s-8); }
-.kdo-kresla { display: flex; flex-wrap: wrap; gap: 4px; }
-.kdo-kreslo { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--border); }
+.kdo-kresla { display: flex; flex-wrap: wrap; gap: 3px; }
+.kdo-kreslo { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--border); }
 .kdo-kreslo-nase { background: var(--signal-blue); border-color: var(--signal-blue); }
 .kdo-splnili { margin-top: var(--s-64); }
 #zastupitele .cand-cta .btn, #kandidati .cand-cta .btn { margin: 0 var(--s-8) var(--s-16); }
+@media (max-width: 1279px) { /* užší okno: tečky mandátů by se vedle plakátu zalomily */
+  .kdo-historie { grid-template-columns: 1fr; gap: var(--s-40); }
+  .kdo-plakat { max-width: 420px; }
+}
 @media (max-width: 760px) {
+  .kdo-kresla { gap: 4px; }
+  .kdo-kreslo { width: 12px; height: 12px; }
   .kdo-osa li { grid-template-columns: 84px 1fr; gap: var(--s-8) var(--s-24); padding: var(--s-16) 0; }
   .kdo-mandaty { grid-column: 1 / -1; }
 }
