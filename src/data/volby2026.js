@@ -13,11 +13,14 @@ export const VOLBY_2026 = {
 
 // Zvolení zastupitelé v pořadí, v jakém jim ČSÚ přidělil mandát (kvrk PORADIMAND).
 // "cislo" = pořadí na kandidátce, páruje se s kandidati.js.
+// "hlasy" = kvrk POCHLASU (hlasy pro kandidáta); ukazují se nahoře v medailonku.
+// "email" = adresa pro formulář „Napište mi" v medailonku. Prázdná = formulář se
+// nezobrazí. Vyplňuj jen adresu, se kterou zastupitel souhlasí (je pak veřejná).
 export const ZVOLENI = [
-  { cislo: 5, role: 'zastupitelka' },  // Martina Wolna
-  { cislo: 4, role: 'zastupitel' },    // Marek Štěrba
-  { cislo: 2, role: 'zastupitel' },    // Adam Kurzok
-  { cislo: 7, role: 'zastupitelka' },  // Regina Eichler
+  { cislo: 5, role: 'zastupitelka', hlasy: 1785, email: '' },  // Martina Wolna
+  { cislo: 4, role: 'zastupitel',   hlasy: 1643, email: '' },  // Marek Štěrba
+  { cislo: 2, role: 'zastupitel',   hlasy: 1509, email: '' },  // Adam Kurzok
+  { cislo: 7, role: 'zastupitelka', hlasy: 1500, email: '' },  // Regina Eichler
 ];
 
 // Číslo s pevnou mezerou mezi tisíci (36 267) — nesmí se zalomit uprostřed.

@@ -38,7 +38,7 @@ const sOdkazem = (k) => {
 };
 // Děkovný blok: nahoře čtyři zvolení (pořadí mandátů podle ČSÚ), pod nimi zbytek
 // kandidátky v pořadí z hlasovacího lístku.
-const zvoleni = ZVOLENI.map(z => ({ ...sOdkazem(kandidati.find(k => k.cislo === z.cislo)), role: z.role }));
+const zvoleni = ZVOLENI.map(z => ({ ...sOdkazem(kandidati.find(k => k.cislo === z.cislo)), role: z.role, email: z.email }));
 const zvolenaCisla = new Set(ZVOLENI.map(z => z.cislo));
 const ostatni = kandidati.filter(k => !zvolenaCisla.has(k.cislo)).map(sOdkazem);
 const hrefKandidata = (k) => k.detail ? u(`kandidat-${k.detail}.html`) : null;
@@ -257,7 +257,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
           Napište svému zastupiteli:{' '}
           {zvoleni.map((k, i) => (
             <Fragment>
-              {hrefKandidata(k) ? <a class="priority-jmeno" href={hrefKandidata(k)}>{bezTitulu(k.jmeno)}</a> : bezTitulu(k.jmeno)}{i < zvoleni.length - 1 ? ', ' : '.'}
+              {hrefKandidata(k) ? <a class="priority-jmeno" href={hrefKandidata(k) + (k.email ? '#napiste' : '')}>{bezTitulu(k.jmeno)}</a> : bezTitulu(k.jmeno)}{i < zvoleni.length - 1 ? ', ' : '.'}
             </Fragment>
           ))}
         </p>

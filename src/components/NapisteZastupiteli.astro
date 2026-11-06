@@ -1,0 +1,48 @@
+---
+// Formulář „Napište mi" v medailonku zvoleného zastupitele (src/pages/kandidat-[slug].astro).
+// Web je statický a nic neodesílá ani neukládá: tlačítko poskládá zprávu a otevře ji
+// v e-mailovém programu čtenáře (mailto:), odešle ji až on. Adresa je v src/data/volby2026.js;
+// do stránky jde rozdělená na dvě části, aby ji nesbírali roboti, a skládá ji až skript.
+const { jmeno, role, email } = Astro.props;
+const [uzivatel, domena] = email.split('@');
+---
+<section class="section napiste" id="napiste" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{role === 'zastupitelka' ? 'Vaše zastupitelka' : 'Váš zastupitel'}</p>
+      <h2>Napište mi.</h2>
+      <p class="section-note">Máte podnět, co by město mělo řešit? Napište, odpovím vám.</p>
+    </div>
+    <form class="napiste-form" data-u={uzivatel} data-d={domena} data-komu={jmeno}>
+      <label>
+        <span>Vaše jméno</span>
+        <input type="text" name="jmeno" autocomplete="name" required>
+      </label>
+      <label>
+        <span>Váš podnět</span>
+        <textarea name="zprava" rows="6" required></textarea>
+      </label>
+      <button class="btn btn-blue btn-lg" type="submit">Napsat e-mail</button>
+      <p class="napiste-pozn">
+        Tlačítko otevře váš e-mailový program s připravenou zprávou, odešlete ji z něj.
+        Web nic neukládá. <span class="napiste-primo" hidden>Nejde to? Napište přímo na <a class="napiste-adresa"></a>.</span>
+      </p>
+      <noscript><p class="napiste-pozn">Formulář potřebuje zapnutý JavaScript.</p></noscript>
+    </form>
+  </div>
+</section>
+<script is:inline>
+  // Složí adresu, vypíše ji jako záložní odkaz a po odeslání otevře e-mailový program.
+  document.querySelectorAll('.napiste-form').forEach(function (f) {
+    var adresa = f.dataset.u + '@' + f.dataset.d;
+    var primo = f.querySelector('.napiste-primo'), a = f.querySelector('.napiste-adresa');
+    a.textContent = adresa; a.href = 'mailto:' + adresa; primo.hidden = false;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var jmeno = f.elements.jmeno.value.trim(), zprava = f.elements.zprava.value.trim();
+      var predmet = 'Podnět pro zastupitele — ' + jmeno;
+      var telo = zprava + '\n\n' + jmeno + '\n\n(Odesláno z osobnostiprotrinec.cz)';
+      location.href = 'mailto:' + adresa + '?subject=' + encodeURIComponent(predmet) + '&body=' + encodeURIComponent(telo);
+    });
+  });
+</script>

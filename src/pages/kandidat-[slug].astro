@@ -4,7 +4,9 @@
 import Base from '../layouts/Base.astro';
 import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
-import { verejnySlug } from '../lib/verejne.js';
+import { verejnySlug, PO_VOLBACH } from '../lib/verejne.js';
+import { ZVOLENI, tisice } from '../data/volby2026.js';
+import NapisteZastupiteli from '../components/NapisteZastupiteli.astro';
 
 const slugKandidata = verejnySlug;
 
@@ -18,6 +20,11 @@ export function getStaticPaths() {
 const { k } = Astro.props;
 const slug = slugKandidata(k);
 const m = medailonky[slug];
+
+// Po volbách mají čtyři zvolení v hero místo pořadí na kandidátce počet hlasů
+// a štítek zastupitele; s vyplněným e-mailem i formulář „Napište mi" (src/data/volby2026.js).
+const zvoleny = PO_VOLBACH ? ZVOLENI.find(z => z.cislo === k.cislo) : null;
+const Role = zvoleny && zvoleny.role.charAt(0).toUpperCase() + zvoleny.role.slice(1);
 
 // sousedé v listině — prev/next
 const i = kandidati.findIndex(x => x.cislo === k.cislo);
@@ -45,7 +52,9 @@ const zNovin = novaGenerace[slug]
 ---
 <Base
   title={`${k.jmeno} — Osobnosti pro Třinec`}
-  description={`${k.jmeno}, ${k.poradiSlovem} na kandidátce Osobnosti pro Třinec. ${k.profese}. Proč kandiduje a co chce v Třinci posunout.`}
+  description={zvoleny
+    ? `${k.jmeno}, ${zvoleny.role} města Třince za Osobnosti pro Třinec. ${k.profese}. Ve volbách 2026 získal${zvoleny.role === 'zastupitelka' ? 'a' : ''} ${tisice(zvoleny.hlasy)} hlasů.`
+    : `${k.jmeno}, ${k.poradiSlovem} na kandidátce Osobnosti pro Třinec. ${k.profese}. Proč kandiduje a co chce v Třinci posunout.`}
   path={`kandidat-${slug}.html`}
   og={k.foto ? `assets/og/kandidat-${slug}.jpg` : undefined}
   ogType="profile"
@@ -64,13 +73,22 @@ const zNovin = novaGenerace[slug]
             : <div class="slide-avatar">{k.iniciraly}</div>}
         </div>
         <div class="cand-hero-info">
-          <div class="cand-hero-index">{k.cislo}.</div>
+          {zvoleny ? (
+            <Fragment>
+              <span class="cand-hero-stitek">{zvoleny.role} 2026–2030</span>
+              <div class="cand-hero-hlasy">
+                <strong>{tisice(zvoleny.hlasy)}</strong>
+                <span>hlasů ve volbách 2026</span>
+              </div>
+            </Fragment>
+          ) : <div class="cand-hero-index">{k.cislo}.</div>}
           <h1>{krestni}<br>{prijmeni}</h1>
           <p class="cand-hero-role">{[tituly, `${k.vek} let`, k.profese].filter(Boolean).join(' · ')}</p>
           <p class="cand-hero-affil">
-            {k.poradiSlovem.charAt(0).toUpperCase() + k.poradiSlovem.slice(1)} na kandidátce{' '}
+            {zvoleny ? `${Role} města Třince za` : `${k.poradiSlovem.charAt(0).toUpperCase() + k.poradiSlovem.slice(1)} na kandidátce`}{' '}
             <a href={u('index.html')}>Osobnosti pro Třinec</a>
           </p>
+          {zvoleny?.email && <a class="btn btn-blue cand-hero-napiste" href="#napiste">Napište mi</a>}
           {m.citace && <blockquote class="cand-quote">„<span set:html={m.citace} />."</blockquote>}
         </div>
       </div>
@@ -166,6 +184,9 @@ const zNovin = novaGenerace[slug]
       </div>
     </section>
   )}
+
+  <!-- ================= NAPIŠTE MI — jen zvolení zastupitelé s vyplněným e-mailem ================= -->
+  {zvoleny?.email && <NapisteZastupiteli jmeno={`${krestni} ${prijmeni}`} role={zvoleny.role} email={zvoleny.email} />}
 
   <!-- ================= PŘEDCHOZÍ / DALŠÍ ================= -->
   <nav class="cand-nav" aria-label="Další kandidáti">

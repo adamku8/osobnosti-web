@@ -1330,6 +1330,44 @@ h3 { font-size: clamp(20px, 2.5vw, 24px); }
   line-height: 1;
   margin-bottom: var(--s-8);
 }
+/* Zvolený zastupitel (po volbách): štítek a počet hlasů místo pořadí na kandidátce. */
+.cand-hero-stitek {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--signal-blue);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: var(--s-16);
+}
+.cand-hero-hlasy {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 var(--s-16);
+  margin-bottom: var(--s-16);
+}
+.cand-hero-hlasy strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(48px, 7vw, 72px);
+  line-height: 1;
+  color: var(--brand-red);
+  white-space: nowrap;
+}
+.cand-hero-hlasy span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.cand-hero-napiste { margin-top: var(--s-24); }
 .cand-hero-info h1 { font-size: clamp(40px, 6vw, 64px); margin-bottom: var(--s-16); }
 .cand-hero-role {
   font-family: var(--font-display);
@@ -2121,6 +2159,47 @@ a.proj-tag:hover { background: var(--signal-blue); color: var(--paper); }
   .zapis-odkaz a { grid-template-columns: 1fr auto; gap: var(--s-4) var(--s-16); padding: var(--s-16) 0; }
   .zapis-odkaz .zapis-datum { grid-column: 1 / -1; font-size: 14px; }
 }
+/* Štítek u položky menu („Aktuální" u Zastupitelstva). */
+.nav-stitek {
+  display: inline-block;
+  margin-left: var(--s-8);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--signal-blue);
+  color: var(--paper);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+/* ---------- Napište mi — formulář v medailonku zastupitele ---------- */
+.napiste-form { max-width: 640px; display: grid; gap: var(--s-24); justify-items: start; }
+.napiste-form label { display: grid; gap: var(--s-8); width: 100%; }
+.napiste-form label span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.napiste-form input,
+.napiste-form textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 16px; /* pod 16 px iOS při zaměření přiblíží stránku */
+  color: var(--text);
+  background: var(--paper);
+  border: 1px solid rgba(50, 50, 50, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: border-color 240ms var(--ease-ui);
+}
+.napiste-form textarea { resize: vertical; min-height: 160px; }
+.napiste-form input:focus,
+.napiste-form textarea:focus { outline: 2px solid var(--signal-blue); outline-offset: 1px; border-color: var(--signal-blue); }
+.napiste-pozn { font-size: 14px; color: var(--text-muted); max-width: 60ch; }
+.napiste-pozn a { color: var(--signal-blue); border-bottom: 1px solid rgba(0, 59, 142, 0.25); }
 /* Úzký desktop a tablet na šířku (901–1060 px): menu se skupinou je delší, proto těsnější. */
 @media (min-width: 901px) and (max-width: 1060px) {
   .nav { gap: var(--s-16); }
