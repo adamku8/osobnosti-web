@@ -273,3 +273,32 @@
   .priority li { gap: var(--s-16); padding: var(--s-16) 0; }
   .priority svg { width: 22px; height: 22px; }
 }
+/* Dvě výzvy pod prioritami: kde sledovat práci a komu napsat podnět. */
+.priority-dal {
+  max-width: 900px;
+  margin-top: var(--s-40);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-40);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.priority-dal strong {
+  display: block;
+  margin-bottom: var(--s-8);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.3;
+}
+.priority-dal a {
+  color: var(--signal-blue);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 59, 142, 0.25);
+  transition: color 240ms var(--ease-ui), border-color 240ms var(--ease-ui);
+}
+.priority-dal a:hover { color: #002a66; border-bottom-color: #002a66; }
+.priority-dal .priority-jmeno { white-space: nowrap; } /* jméno se nesmí zalomit uprostřed */
+@media (max-width: 700px) {
+  .priority-dal { grid-template-columns: 1fr; gap: var(--s-24); margin-top: var(--s-24); }
+}

@@ -22,7 +22,7 @@ export const verejnySlug = (k) => {
 // přestalo platit: sekci „Jak volit" s odpočtem, tlačítko „Volte č. 3" v hlavičce,
 // odkaz „Jak volit" v závěrečném rozcestníku, billboard s kandidáty v hero včetně textu
 // a data voleb pod ním (hero je pak děkovné číslo, panorama pod zastupiteli) a slovo lídryně.
-// Z úvodu dál mizí program s projekty, „Co se děje v kampani", upoutávka Doporučují nás
+// Z úvodu dál mizí program s projekty, „Co se děje v kampani", upoutávky Výsledky 2022–2026 a Doporučují nás
 // a tlačítko Podpořte nás; z menu vypadává Podpořte nás (obě stránky zůstávají). Program a kandidátka
 // jsou v menu pod skupinou „Volby 2026", na úvod přibývají priority a „Ze zastupitelstva".
 // Na podstránkách se schovají výzvy „Chci volit!" a věty o termínu voleb.

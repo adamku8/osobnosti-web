@@ -9,8 +9,8 @@
 // Co po volbách přestalo platit, schovává přepínač PO_VOLBACH v src/lib/verejne.js:
 // billboard s kandidáty (hero je pak jen děkovné číslo, panorama se stěhuje pod
 // zastupitele), slovo lídryně, program a projekty (jsou v menu pod „Volby 2026"),
-// „Co se děje v kampani", upoutávka Doporučují nás, tlačítko Podpořte nás v závěru
-// a Jak volit s odpočtem. Místo nich přibývají priority
+// „Co se děje v kampani", upoutávka Výsledky 2022–2026 (stránka je v menu), upoutávka
+// Doporučují nás, tlačítko Podpořte nás v závěru a Jak volit s odpočtem. Místo nich přibývají priority
 // „Na čem nám záleží" (src/data/priority.js) a „Ze zastupitelstva" (src/lib/zapisy.js).
 import Base from '../layouts/Base.astro';
 import OblastKarta from '../components/OblastKarta.astro';
@@ -42,6 +42,8 @@ const zvoleni = ZVOLENI.map(z => ({ ...sOdkazem(kandidati.find(k => k.cislo === 
 const zvolenaCisla = new Set(ZVOLENI.map(z => z.cislo));
 const ostatni = kandidati.filter(k => !zvolenaCisla.has(k.cislo)).map(sOdkazem);
 const hrefKandidata = (k) => k.detail ? u(`kandidat-${k.detail}.html`) : null;
+// Jméno bez titulů („Mgr. Adam Kurzok" → „Adam Kurzok") pro odkazy v běžném textu.
+const bezTitulu = (jmeno) => jmeno.split(',')[0].split(' ').filter(c => !c.endsWith('.')).join(' ');
 
 // Ze zastupitelstva: na úvodu tři nejnovější zápisy, všechny jsou na /zastupitelstvo.html.
 const vsechnyZapisy = zapisy();
@@ -243,6 +245,23 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
           </li>
         ))}
       </ul>
+      {/* Pod prioritami dvě výzvy: kde sledovat práci (Facebook) a komu napsat podnět
+          (medailonky čtyř zastupitelů). Odkazy modře, červená na úvodu patří počtu hlasů. */}
+      <div class="priority-dal reveal">
+        <p>
+          <strong>Sledujte, jak se nám daří.</strong>
+          Průběžně o tom píšeme na <a href={SOCIAL.facebook} target="_blank" rel="noopener">naší facebookové stránce</a>.
+        </p>
+        <p>
+          <strong>Máte podnět, co by město mělo řešit?</strong>
+          Napište svému zastupiteli:{' '}
+          {zvoleni.map((k, i) => (
+            <Fragment>
+              {hrefKandidata(k) ? <a class="priority-jmeno" href={hrefKandidata(k)}>{bezTitulu(k.jmeno)}</a> : bezTitulu(k.jmeno)}{i < zvoleni.length - 1 ? ', ' : '.'}
+            </Fragment>
+          ))}
+        </p>
+      </div>
     </div>
   </section>
   )}
@@ -270,7 +289,9 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
   </section>
   )}
 
-  <!-- ================= VÝSLEDKY — upoutávka na /vysledky.html ================= -->
+  <!-- ================= VÝSLEDKY — upoutávka na /vysledky.html =================
+       Po volbách z úvodu pryč (6. 11. 2026); stránka Výsledky zůstává v menu. -->
+  {!PO_VOLBACH && (
   <section class="section" id="vysledky" style="border-top:1px solid var(--border)">
     <div class="container">
       <div class="section-head reveal" style="margin-bottom:var(--s-40)">
@@ -299,6 +320,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       </div>
     </div>
   </section>
+  )}
 
   {/* Předvolební doporučení jsou po volbách z úvodu pryč (pokyn Adama, 5. 11. 2026); stránka zůstává. */}
   {!PO_VOLBACH && (
