@@ -80,17 +80,26 @@ const zCisla = (n) => [4, 6, 7, 14, 16, 17].includes(n) ? 'ze' : 'z';
         <figcaption>Plakát kandidátky z voleb 2022. Klepnutím zvětšíte.</figcaption>
       </figure>
       </div>
-      {/* Billboardy z minulých kampaní: 2014 z archivu starého webu (web.archive.org), 2022 z Drive „_ARCHIV/kampaň 2022". */}
+      {/* Materiály z minulých kampaní: billboard 2014 z archivu starého webu (web.archive.org), billboard 2022 z Drive „_ARCHIV/kampaň 2022", plakát 2018 je narovnaná fotka z Adamova Drive (6. 10. 2018; č. 1 sedí s ČSÚ). */}
       <div class="kdo-billboardy">
-        <figure class="reveal">
-          <img src={u('assets/img/historie/billboard-2014.jpg')} width="1600" height="377" loading="lazy"
-               alt="Billboard Osobností pro Třinec z roku 2014 se sedmi portréty a nápisem Děkujeme za 121 431 hlasů">
-          <figcaption>Poděkování voličům po volbách 2014.</figcaption>
-        </figure>
-        <figure class="reveal">
-          <img src={u('assets/img/historie/billboard-2022.jpg')} width="1600" height="333" loading="lazy"
-               alt="Billboard Osobností pro Třinec z kampaně 2022 s pěti lidmi před panoramatem Třince a Javorového">
-          <figcaption>Billboard z kampaně 2022.</figcaption>
+        <div class="kdo-billboardy-sloupec">
+          <figure class="reveal">
+            <img src={u('assets/img/historie/billboard-2014.jpg')} width="1600" height="377" loading="lazy"
+                 alt="Billboard Osobností pro Třinec z roku 2014 se sedmi portréty a nápisem Děkujeme za 121 431 hlasů">
+            <figcaption>Poděkování voličům po volbách 2014.</figcaption>
+          </figure>
+          <figure class="reveal">
+            <img src={u('assets/img/historie/billboard-2022.jpg')} width="1600" height="333" loading="lazy"
+                 alt="Billboard Osobností pro Třinec z kampaně 2022 s pěti lidmi před panoramatem Třince a Javorového">
+            <figcaption>Billboard z kampaně 2022.</figcaption>
+          </figure>
+        </div>
+        <figure class="kdo-plakat reveal">
+          <a href={u('assets/img/historie/plakat-2018.jpg')} target="_blank" rel="noopener">
+            <img src={u('assets/img/historie/plakat-2018.jpg')} width="1000" height="1414" loading="lazy"
+                 alt="Plakát Osobností pro Třinec z voleb 2018 s portréty 33 kandidátů, nápisem Díky! S Vaším hlasem měníme Třinec a volebním číslem 1">
+          </a>
+          <figcaption>Plakát kandidátky z voleb 2018. Klepnutím zvětšíte.</figcaption>
         </figure>
       </div>
       <p class="section-note reveal">
