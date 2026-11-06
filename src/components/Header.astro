@@ -4,13 +4,14 @@ const { active = '' } = Astro.props;
 import { u } from '../lib/url.js';
 import { PO_VOLBACH } from '../lib/verejne.js';
 
-// Před volbami ploché menu; po volbách (PO_VOLBACH) jsou v menu jen dvě položky:
-// skupina „Volby 2026" (program, pod ním Javorový, kandidátka) a „Zastupitelstvo"
+// Před volbami ploché menu; po volbách (PO_VOLBACH) jsou v menu tři položky:
+// „Kdo jsme" (historie, zastupitelé, výsledky, tým), skupina „Volby 2026" (program, pod ním Javorový, kandidátka) a „Zastupitelstvo"
 // (zápisy ze zasedání). Úvod je pod logem, Výsledky v patičce. Položka může nést
 // štítek ("stitek": 'text'), od 6. 11. 2026 ho žádná nemá.
 // Kampaňové „Podpořte nás" v povolebním menu není (stránka zůstává, odkaz je v patičce).
 // Položka s "deti" je rozbalovací skupina; aktivní je, když je aktivní některé její dítě.
 const menu = PO_VOLBACH ? [
+  { id: 'kdo-jsme',  text: 'Kdo jsme',     href: u('kdo-jsme.html') },
   { id: 'volby',     text: 'Volby 2026',   deti: [
     { id: 'program',   text: 'Program',    href: u('program.html') },
     { id: 'javorovy',  text: '⛰️ Javorový', href: u('javorovy.html') },

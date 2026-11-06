@@ -1,0 +1,19 @@
+---
+// Mřížka malých portrétů kandidátů 2026 s proklikem na medailonek (úvod, Kdo jsme).
+// lide = pole z src/lib/tym.js (ostatni nebo vsichni). Styly: src/styles/uvod.css (.dk-tym, .dk-clen).
+import { hrefKandidata } from '../lib/tym.js';
+import { u } from '../lib/url.js';
+const { lide } = Astro.props;
+---
+<div class="dk-tym">
+  {lide.map((k, i) => {
+    const href = hrefKandidata(k);
+    const Tag = href ? 'a' : 'article';
+    return (
+      <Tag class="dk-clen reveal" href={href} style={`--i:${i % 6}`}>
+        <img class="dk-foto" src={u(`assets/img/kandidati/${k.foto}`)} alt="" loading="lazy">
+        <span class="dk-jmeno">{k.jmeno}</span>
+      </Tag>
+    );
+  })}
+</div>

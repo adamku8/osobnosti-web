@@ -1,0 +1,145 @@
+---
+// Kdo jsme — rozcestník o hnutí: krátce kdo jsme, výsledky ve volbách 2006–2026 (src/data/historie.js,
+// čísla z ČSÚ), současní zastupitelé, co se podařilo v období 2022–2026 (src/data/noviny.js)
+// a kdo kandidoval v roce 2026 (src/lib/tym.js). Bloky zastupitelů a týmu sdílí s úvodem.
+// Jediná červená na stránce je číslo proinvestovaných miliard; časová osa je modrá.
+import Base from '../layouts/Base.astro';
+import KartyZastupitelu from '../components/KartyZastupitelu.astro';
+import MrizkaTymu from '../components/MrizkaTymu.astro';
+import { HISTORIE } from '../data/historie.js';
+import { CISLO, splnili } from '../data/noviny.js';
+import { vsichni } from '../lib/tym.js';
+import { u } from '../lib/url.js';
+import '../styles/uvod.css';
+import '../styles/noviny.css';
+
+const prvni = HISTORIE[0].rok;
+const posledni = HISTORIE[HISTORIE.length - 1];
+const kresla = (n) => Array.from({ length: n });
+// Předložka před číslovkou: „ze 7 (sedmi)", ale „z 8 (osmi)".
+const zCisla = (n) => [4, 6, 7, 14, 16, 17].includes(n) ? 'ze' : 'z';
+---
+<Base
+  title="Kdo jsme — Osobnosti pro Třinec"
+  description={`Osobnosti pro Třinec: občanská kandidátka lidí, kteří v Třinci žijí a pracují. V zastupitelstvu města od roku ${prvni}. Naši zastupitelé, výsledky a tým z voleb 2026.`}
+  path="kdo-jsme.html"
+  active="kdo-jsme"
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">Osobnosti pro Třinec</p>
+      <h1>Kdo jsme.</h1>
+      <p class="hero-lead">
+        Občanská kandidátka lidí, kteří v Třinci žijí a pracují.
+        Nejsme závislí na žádné celostátní politické straně ani hnutí.
+      </p>
+      <nav class="kdo-rozcestnik" aria-label="Na této stránce">
+        <a class="link-more" href="#historie">Historie</a>
+        <a class="link-more" href="#zastupitele">Zastupitelé</a>
+        <a class="link-more" href="#podarilo">Co se podařilo</a>
+        <a class="link-more" href="#kandidati">Kdo kandidoval</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ================= HISTORIE — volby 2006–2026 (src/data/historie.js, ČSÚ) ================= -->
+  <section class="section" id="historie" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Historie</p>
+        <h2>V zastupitelstvu od roku {prvni}.</h2>
+        <p class="section-note">
+          Pod jménem Osobnosti pro Třinec kandidujeme do zastupitelstva města od roku {prvni}.
+          Šestery volby, pokaždé jsme získali mandáty.
+        </p>
+      </div>
+      <ol class="kdo-osa">
+        {HISTORIE.map((h, i) => (
+          <li class="reveal" style={`--i:${i}`}>
+            <div class="kdo-rok">{h.rok}</div>
+            <div class="kdo-vysledek">
+              <b>{h.procent} %</b>
+              <span>{h.poradi}. místo {zCisla(h.listin)} {h.listin} kandidátek</span>
+            </div>
+            <div class="kdo-mandaty">
+              <div class="kdo-kresla" role="img" aria-label={`${h.mandaty} mandátů z ${h.kresel}`}>
+                {kresla(h.kresel).map((_, j) => <span class:list={['kdo-kreslo', j < h.mandaty && 'kdo-kreslo-nase']}></span>)}
+              </div>
+              <span>{h.mandaty} {h.mandaty >= 5 ? 'mandátů' : 'mandáty'} z {h.kresel}</span>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="section-note reveal">
+        Zdroj: Český statistický úřad, volby do Zastupitelstva města Třince {prvni}–{posledni.rok}.
+        Procenta jsou podíl hlasů pro kandidátku. Od roku {posledni.rok} má zastupitelstvo {posledni.kresel} členů, dříve 33.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= ZASTUPITELÉ 2026–2030 ================= -->
+  <section class="stat dk" id="zastupitele" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="dk-head reveal">
+        <h3>Vaši zastupitelé <span class="dk-roky">2026–2030</span></h3>
+        <p class="section-note">Klepnutím otevřete medailonek. Každému z nich tam můžete napsat.</p>
+      </div>
+      <KartyZastupitelu />
+      <div class="cand-cta reveal">
+        <a class="btn btn-secondary btn-lg" href={u('zastupitelstvo.html')}>Ze zastupitelstva</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CO SE NÁM PODAŘILO — období 2022–2026 (src/data/noviny.js) ================= -->
+  <section class="section" id="podarilo" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Výsledky 2022–2026</p>
+        <h2>Co se nám podařilo.</h2>
+      </div>
+      <div class="nv-cislo reveal">
+        <div class="nv-cislo-hodnota">{CISLO.hodnota}</div>
+        <div>
+          <span class="nv-cislo-jednotka">{CISLO.jednotka} {CISLO.popis}</span>
+          <p>Autobusové stanoviště, kino Kosmos, CirkArena, lesopark, mlžítka i nová dětská hřiště.</p>
+        </div>
+      </div>
+      <div class="nv-splnili kdo-splnili reveal">
+        <h2>Splnili jsme</h2>
+        <p class="nv-splnili-pozn">Přehled toho, co se v Třinci v letech 2022–2026 povedlo.</p>
+        <ul>
+          {splnili.map(([sloveso, zbytek]) => (
+            <li>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 12.5l5 5L20 6.5"/>
+              </svg>
+              <span><b>{sloveso}</b> {zbytek}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="cand-cta reveal">
+        <a class="btn btn-blue btn-lg" href={u('vysledky.html')}>Výsledky podrobně</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KDO ZA NÁS KANDIDOVAL — volby 2026 ================= -->
+  <section class="stat dk" id="kandidati" style="border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="dk-head reveal">
+        <h3>Kdo za nás kandidoval v roce 2026</h3>
+        <p class="section-note">
+          {vsichni.length} osobností na jedné kandidátce, v pořadí z hlasovacího lístku. Klepnutím otevřete medailonek.
+        </p>
+      </div>
+      <MrizkaTymu lide={vsichni} />
+      <div class="cand-cta reveal">
+        <a class="btn btn-secondary btn-lg" href={u('kandidati.html')}>Kandidátka 2026</a>
+        <a class="btn btn-secondary btn-lg" href={u('program.html')}>Program 2026</a>
+      </div>
+    </div>
+  </section>
+</Base>

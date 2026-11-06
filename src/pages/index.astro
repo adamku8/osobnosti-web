@@ -24,24 +24,18 @@ import { oblasti } from '../data/oblasti.js';
 import { kandidati } from '../data/kandidati.js';
 import { medailonky } from '../data/medailonky.js';
 import { aktualne, SOCIAL } from '../data/aktualne.js';
-import { verejnySlug, PO_VOLBACH } from '../lib/verejne.js';
-import { VOLBY_2026, ZVOLENI, tisice } from '../data/volby2026.js';
+import { PO_VOLBACH } from '../lib/verejne.js';
+import { VOLBY_2026, tisice } from '../data/volby2026.js';
 import { u } from '../lib/url.js';
 import '../styles/uvod.css';
 import { uvodnik, CISLO, slibili, doporuceni } from '../data/noviny.js';
 import '../styles/noviny.css';
 
-// Proklik na medailonek řídí stejná pravidla jako /kandidati.html (src/lib/verejne.js).
-const sOdkazem = (k) => {
-  const slug = verejnySlug(k);
-  return { ...k, detail: slug && medailonky[slug] ? slug : null };
-};
-// Děkovný blok: nahoře čtyři zvolení (pořadí mandátů podle ČSÚ), pod nimi zbytek
-// kandidátky v pořadí z hlasovacího lístku.
-const zvoleni = ZVOLENI.map(z => ({ ...sOdkazem(kandidati.find(k => k.cislo === z.cislo)), role: z.role, email: z.email }));
-const zvolenaCisla = new Set(ZVOLENI.map(z => z.cislo));
-const ostatni = kandidati.filter(k => !zvolenaCisla.has(k.cislo)).map(sOdkazem);
-const hrefKandidata = (k) => k.detail ? u(`kandidat-${k.detail}.html`) : null;
+// Děkovný blok: nahoře čtyři zvolení, pod nimi zbytek kandidátky (src/lib/tym.js;
+// stejné bloky má i stránka Kdo jsme).
+import { zvoleni, ostatni, hrefKandidata } from '../lib/tym.js';
+import KartyZastupitelu from '../components/KartyZastupitelu.astro';
+import MrizkaTymu from '../components/MrizkaTymu.astro';
 // Jméno bez titulů („Mgr. Adam Kurzok" → „Adam Kurzok") pro odkazy v běžném textu.
 const bezTitulu = (jmeno) => jmeno.split(',')[0].split(' ').filter(c => !c.endsWith('.')).join(' ');
 
@@ -119,20 +113,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       <div class="dk-head reveal" id="kandidati">
         <h3>Vaši zastupitelé <span class="dk-roky">2026–2030</span></h3>
       </div>
-      <div class="dk-zvoleni">
-        {zvoleni.map((k, i) => {
-          const href = hrefKandidata(k);
-          const Tag = href ? 'a' : 'article';
-          return (
-            <Tag class="dk-karta reveal" href={href} style={`--i:${i}`}>
-              <img class="dk-foto" src={u(`assets/img/kandidati/${k.foto}`)} alt={k.jmeno} loading="lazy">
-              <span class="dk-stitek">{k.role}</span>
-              <span class="slide-name">{k.jmeno}</span>
-              <span class="slide-meta">{k.profese}</span>
-            </Tag>
-          );
-        })}
-      </div>
+      <KartyZastupitelu />
 
     </div>
   </section>
@@ -148,18 +129,7 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
           Sedmadvacet osobností na jedné kandidátce. Klepnutím otevřete medailonek.
         </p>
       </div>
-      <div class="dk-tym">
-        {ostatni.map((k, i) => {
-          const href = hrefKandidata(k);
-          const Tag = href ? 'a' : 'article';
-          return (
-            <Tag class="dk-clen reveal" href={href} style={`--i:${i % 6}`}>
-              <img class="dk-foto" src={u(`assets/img/kandidati/${k.foto}`)} alt="" loading="lazy">
-              <span class="dk-jmeno">{k.jmeno}</span>
-            </Tag>
-          );
-        })}
-      </div>
+      <MrizkaTymu lide={ostatni} />
       <div class="cand-cta reveal">
         <a class="btn btn-secondary btn-lg" href={u('kandidati.html')}>Všech {kandidati.length} kandidátů</a>
       </div>

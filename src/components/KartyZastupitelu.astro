@@ -1,0 +1,20 @@
+---
+// Čtyři zvolení zastupitelé 2026–2030 jako karty s fotkou a modrým štítkem (úvod, Kdo jsme).
+// Data: src/lib/tym.js. Styly: src/styles/uvod.css (.dk-zvoleni, .dk-karta) — stránka je musí importovat.
+import { zvoleni, hrefKandidata } from '../lib/tym.js';
+import { u } from '../lib/url.js';
+---
+<div class="dk-zvoleni">
+  {zvoleni.map((k, i) => {
+    const href = hrefKandidata(k);
+    const Tag = href ? 'a' : 'article';
+    return (
+      <Tag class="dk-karta reveal" href={href} style={`--i:${i}`}>
+        <img class="dk-foto" src={u(`assets/img/kandidati/${k.foto}`)} alt={k.jmeno} loading="lazy">
+        <span class="dk-stitek">{k.role}</span>
+        <span class="slide-name">{k.jmeno}</span>
+        <span class="slide-meta">{k.profese}</span>
+      </Tag>
+    );
+  })}
+</div>
