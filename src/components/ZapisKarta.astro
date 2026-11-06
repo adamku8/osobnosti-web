@@ -1,9 +1,22 @@
 ---
 // Jeden zápis ze zastupitelstva v seznamu (úvod, /zastupitelstvo.html).
 // Data: src/lib/zapisy.js. Styly: src/styles/style.css (.zapis…).
+// strucne = jen řádek s odkazem (datum, název, šipka) bez shrnutí; tak je to na úvodu.
 import { u } from '../lib/url.js';
-const { z, class: extra = '', style = undefined } = Astro.props;
+const { z, strucne = false, class: extra = '', style = undefined } = Astro.props;
 ---
+{strucne ? (
+<li class={`zapis zapis-odkaz${extra ? ' ' + extra : ''}`} style={style}>
+  <a href={u(z.soubor)}>
+    <span class="zapis-datum">{z.datum}</span>
+    <span class="zapis-nazev">
+      {z.nazev}
+      {z.bezi && <span class="zapis-zive">právě probíhá</span>}
+    </span>
+    <span class="zapis-sipka" aria-hidden="true">→</span>
+  </a>
+</li>
+) : (
 <li class={`zapis${extra ? ' ' + extra : ''}`} style={style}>
   <div class="zapis-datum">
     {z.datum}
@@ -15,3 +28,4 @@ const { z, class: extra = '', style = undefined } = Astro.props;
     <a class="link-more" href={u(z.soubor)}>Celý zápis →</a>
   </div>
 </li>
+)}

@@ -273,12 +273,10 @@ const udalostFB = 'https://www.facebook.com/events/2134356773779029/';
       <div class="section-head reveal">
         <p class="eyebrow">Zastupitelstvo města Třince</p>
         <h2>Ze zastupitelstva.</h2>
-        <p class="section-note">
-          Zápisy ze zasedání, jak je píšeme přímo v sále.
-        </p>
       </div>
+      {/* Na úvodu jen odkazy (datum, název); shrnutí jsou na /zastupitelstvo.html. */}
       {posledniZapisy.length
-        ? <ul class="zapisy">{posledniZapisy.map((z, i) => <ZapisKarta z={z} class="reveal" style={`--i:${i}`} />)}</ul>
+        ? <ul class="zapisy">{posledniZapisy.map((z, i) => <ZapisKarta z={z} strucne class="reveal" style={`--i:${i}`} />)}</ul>
         : <p class="section-note reveal">První zápis přidáme po nejbližším zasedání.</p>}
       {vsechZapisu > posledniZapisy.length && (
         <div class="section-cta stat-links reveal" style="justify-content:center">
